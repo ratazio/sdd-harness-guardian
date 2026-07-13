@@ -1,0 +1,25 @@
+COMMAND: python scripts/smoke_test_scaffolder.py
+WORKING_DIRECTORY: <bundle-root>
+EXIT: 0
+
+PYTHON: 3.10.11
+PLATFORM: Windows-10-10.0.26200-SP0
+TEMP_ROOT: <os-temp>\sdd-guardian-smoke-cijkbsbm
+COMMAND: python scripts/new_initiative.py sample-feature --consumer-root <temp-consumer-root>
+EXIT: 0
+STDOUT: Created feature initiative: <temp-consumer-root>\specs\sample-feature
+Next step: complete spec.md and request Spec Guardian review.
+COMMAND: python scripts/new_initiative.py sample-bug --kind bugfix --consumer-root <temp-consumer-root>
+EXIT: 0
+STDOUT: Created bugfix initiative: <temp-consumer-root>\specs\sample-bug
+Next step: complete spec.md and request Spec Guardian review.
+COMMAND: python scripts/new_initiative.py sample-feature --consumer-root <temp-consumer-root>
+EXIT: 1
+STDERR: Refusing to overwrite existing target: <temp-consumer-root>\specs\sample-feature
+HASH_BEFORE: 15e904629c85610a8879d9c3f1fb3ec8075353d20388254e97e1faa84d1ac74e
+HASH_AFTER: 15e904629c85610a8879d9c3f1fb3ec8075353d20388254e97e1faa84d1ac74e
+RESULT: PASS
+
+The TemporaryDirectory context removed the isolated root after the assertions.
+Machine-specific absolute paths were sanitized before publication; commands,
+exit codes and hashes are unchanged.

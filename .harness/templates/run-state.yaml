@@ -1,0 +1,59 @@
+schema_version: 1
+initiative_id: "<initiative>"
+initiative_kind: "feature"
+status: "draft"
+current_phase: "specify"
+current_task: null
+last_safe_checkpoint: null
+updated_at: null
+updated_by: null
+
+artifacts:
+  spec: "spec.md"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  spec_ready: false
+  impact_mapped: false
+  plan_ready: false
+  validation_ready: false
+  tasks_ready: false
+  implementation_done: false
+  independent_evaluation_done: false
+  evidence_pack_ready: false
+  validation_done: false
+
+execution:
+  builder_id: null
+  evaluator_id: null
+  started_at: null
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint: []
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger: []
+
+approvals:
+  human_required: false
+  pending: []
+  granted: []
+
+risks:
+  level: "unknown"
+  open: []
+
+evidence:
+  latest: null
+  approved: []
+
+next_safe_step: "Complete and review spec.md."

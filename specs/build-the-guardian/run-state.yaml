@@ -1,0 +1,84 @@
+schema_version: 1
+initiative_id: "build-the-guardian"
+initiative_kind: "feature"
+status: "closed"
+current_phase: "closed"
+current_task: null
+last_safe_checkpoint: "Cycle 2 approved; T-001 through T-004 closed in dependency order."
+updated_at: "2026-07-13"
+updated_by: "codex-root / State Keeper role"
+
+artifacts:
+  spec: "spec.md"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+execution:
+  builder_id: "codex-root"
+  evaluator_id: "codex-independent-evaluator-2"
+  started_at: "2026-07-13"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint: []
+  repository_revision: "uncommitted initial source bundle"
+  working_tree_summary: "bundle files are untracked in the current Git worktree"
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    builder_id: "codex-root"
+    evaluator_id: "codex-independent-evaluator-2"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    builder_id: "codex-root"
+    evaluator_id: "codex-independent-evaluator-2"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    builder_id: "codex-root"
+    evaluator_id: "codex-independent-evaluator-2"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    builder_id: "codex-root"
+    evaluator_id: "codex-independent-evaluator-2"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: false
+  pending: []
+  granted: []
+
+risks:
+  level: "medium"
+  open:
+    - "Real remote submodule pilot remains a post-release maintainer check."
+
+evidence:
+  latest: "evidence/T-004.md"
+  approved:
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+    - "evidence/T-004.md"
+
+next_safe_step: "Maintainer may commit/tag v0.1.0, then run a pinned submodule consumer pilot."

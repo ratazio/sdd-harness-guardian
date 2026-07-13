@@ -1,0 +1,33 @@
+# Workflow: SDD Feature
+
+## Entry condition
+
+A consumer wants to add or change observable product behavior.
+
+## Required artifacts
+
+Use every artifact in the Common SDD Lifecycle. Feature acceptance criteria
+must describe observable behavior without embedding unjustified implementation.
+
+## Flow
+
+1. Execute `sdd-lifecycle.md` gates 1–6.
+2. Confirm compatibility, migration and rollout impact where relevant.
+3. For each ready task, Builder implements, drafts evidence and sets
+   `needs_evaluation`; a distinct Evaluator must `approve` before State Keeper
+   records `approved -> done`.
+4. Run feature-level integration/regression checks.
+5. Execute gates 13–15.
+
+## Feature constraints
+
+- contract, data or behavior changes are explicit in spec/plan;
+- rollout and rollback match the impact level;
+- scope discovered during implementation returns to planning;
+- partial feature flags or migrations are documented;
+- no task is `done` before its evidence pack has independent `approve`.
+
+## Exit condition
+
+`validation_done: true`, all tasks `done`, every AC covered, evidence linked,
+decision log current, final handoff written and no blocking risk open.

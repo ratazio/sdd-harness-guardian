@@ -1,0 +1,28 @@
+COMMAND: python scripts/validate_bundle.py
+WORKING_DIRECTORY: <bundle-root>
+EXIT: 0
+OUTPUT: Bundle validation passed: 214 checks.
+
+COMMAND: python scripts/smoke_test_scaffolder.py
+WORKING_DIRECTORY: <bundle-root>
+EXIT: 0
+OUTPUT_SUMMARY:
+  feature scaffold exit 0
+  bugfix scaffold exit 0
+  duplicate scaffold exit 1
+  HASH_BEFORE: 15e904629c85610a8879d9c3f1fb3ec8075353d20388254e97e1faa84d1ac74e
+  HASH_AFTER: 15e904629c85610a8879d9c3f1fb3ec8075353d20388254e97e1faa84d1ac74e
+  RESULT: PASS
+
+COMMAND: Python AST parse of scripts/*.py
+EXIT: 0
+OUTPUT: Python syntax passed: 3 files.
+
+COMMAND: PyYAML safe_load of manifest and two run-state files
+EXIT: 0
+OUTPUT: YAML parse passed: 3 files.
+
+This is the final State Keeper validation after manifest/checklist promotion to
+ready. The 212-check artifact records the release-candidate state reviewed by
+the independent evaluator; the two additional checks enforce ready/checklist
+consistency.

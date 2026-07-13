@@ -1,0 +1,17 @@
+COMMAND: python scripts/validate_bundle.py
+WORKING_DIRECTORY: <bundle-root>
+EXIT: 0
+OUTPUT: Bundle validation passed: 212 checks.
+
+COMMAND: python -c "import ast,pathlib; files=list(pathlib.Path('scripts').glob('*.py')); [ast.parse(p.read_text(encoding='utf-8'), filename=str(p)) for p in files]; print(f'Python syntax passed: {len(files)} files.')"
+WORKING_DIRECTORY: <bundle-root>
+EXIT: 0
+OUTPUT: Python syntax passed: 3 files.
+
+COMMAND: python -c "import yaml,pathlib; files=('manifest.yaml','.harness/templates/run-state.yaml','specs/build-the-guardian/run-state.yaml'); [yaml.safe_load(pathlib.Path(p).read_text(encoding='utf-8')) for p in files]; print(f'YAML parse passed: {len(files)} files.')"
+WORKING_DIRECTORY: <bundle-root>
+EXIT: 0
+OUTPUT: YAML parse passed: 3 files.
+
+Note: PyYAML was used only as an additional maintainer check. Bundle scripts
+remain standard-library-only and YAML parsing is not a consumer prerequisite.

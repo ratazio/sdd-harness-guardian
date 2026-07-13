@@ -1,0 +1,131 @@
+schema_version: 1
+name: sdd-harness-guardian
+display_name: SDD Harness Guardian
+version: 0.1.0
+type: agentic-governance-bundle
+status: ready
+owner: platform-engineering
+license_policy: internal
+install_path: vendor/sdd-harness-guardian
+
+purpose: >
+  Govern Spec Driven Development inside a vendor-neutral Harness Engineering
+  workflow. The bundle defines roles, reusable skills, rules, workflows,
+  templates, state and evidence contracts for resumable software delivery.
+
+entrypoints:
+  primary: .harness/AGENTS.md
+  build_prompt: prompts/build-the-guardian.md
+  consumer_prompt: prompts/use-in-consumer-project.md
+  install_guide: INSTALL.md
+  template_guide: .harness/templates/README.md
+
+principles:
+  - spec_is_source_of_truth_for_intent
+  - harness_is_source_of_truth_for_execution_conditions
+  - builder_and_evaluator_must_be_separated
+  - every_critical_soft_rule_needs_a_hard_mirror
+  - no_task_is_done_without_evidence
+  - all_long_running_work_must_be_resumable
+  - repeated_errors_must_be_converted_into_ratchet_entries
+
+protected_invariants:
+  - safety_and_privacy
+  - permissions_and_destructive_operations
+  - spec_readiness_before_implementation
+  - validation_traceability
+  - evidence_before_done
+  - independent_evaluation
+  - resumable_state
+
+agents:
+  - spec-guardian
+  - delivery-orchestrator
+  - impact-mapper
+  - harness-planner
+  - builder-agent
+  - evaluator-agent
+  - state-keeper
+  - ratchet-maintainer
+
+skills:
+  - spec-review
+  - task-breakdown
+  - impact-analysis
+  - validation-planning
+  - evidence-pack-generation
+  - interruption-recovery
+  - ratchet-learning
+
+workflows:
+  - sdd-lifecycle
+  - sdd-feature
+  - sdd-bugfix
+  - sdd-refactor
+  - interruption-recovery
+
+rules:
+  - sdd-quality
+  - task-readiness
+  - validation-policy
+  - evidence-policy
+  - builder-evaluator-separation
+  - state-and-memory
+  - destructive-operations
+  - instruction-precedence
+  - soft-hard-rules
+
+artifact_templates:
+  spec: .harness/templates/spec.md
+  plan: .harness/templates/plan.md
+  tasks: .harness/templates/tasks.md
+  impact_map: .harness/templates/impact-map.md
+  validation_plan: .harness/templates/validation-plan.md
+  evidence_pack: .harness/templates/evidence-pack.md
+  run_state: .harness/templates/run-state.yaml
+  progress: .harness/templates/progress.md
+  handoff: .harness/templates/handoff.md
+  decision_log: .harness/templates/decision-log.md
+  ratchet_log: .harness/templates/ratchet.md
+  ratchet_entry: .harness/templates/ratchet-entry.md
+  reproduction: .harness/templates/reproduction.md
+
+consumer_contract:
+  initiative_root: specs/<initiative>
+  evidence_directory: evidence
+  handoff_path: handoffs/latest-handoff.md
+  task_terminal_status: done
+  scaffold_command: python vendor/sdd-harness-guardian/scripts/new_initiative.py <initiative>
+
+quality_gates:
+  spec_ready: required
+  impact_mapped: required_for_non_trivial_change
+  plan_ready: required
+  validation_ready: required
+  tasks_ready: required
+  implementation_done: required
+  independent_evaluation_done: required
+  evidence_pack_ready: required
+  validation_done: required
+
+hard_mirror_recommendations:
+  spec_ready: schema_or_structure_validator
+  task_ready: task_contract_validator
+  validation_traceability: acceptance_criteria_mapping_check
+  evidence_before_done: evidence_pack_validator
+  independent_evaluation: builder_evaluator_identity_check
+  resumable_state: run_state_schema_and_transition_check
+  destructive_operations: human_approval_gate
+
+compatibility:
+  vendor_neutral: true
+  workflow_engine_required: false
+  llm_provider_required: false
+  preferred_installation: git_submodule
+  default_path: vendor/sdd-harness-guardian
+
+maintenance:
+  validate_command: python scripts/validate_bundle.py
+  smoke_command: python scripts/smoke_test_scaffolder.py
+  version_file: VERSION
+  changelog: CHANGELOG.md
