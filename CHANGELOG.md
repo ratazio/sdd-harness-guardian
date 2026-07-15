@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.1.1
+
+Evolução pequena de outcome readiness para manter SDD orientado a resultado sem
+transformar o Guardian em Product Owner.
+
+Inclui:
+
+- nova regra `outcome-readiness`;
+- novo gate `Outcome Ready` antes de implementação e expansão de tasks;
+- templates de spec, tasks, progress, evidence pack e run-state com campos de
+  outcome, incremento demonstrável, validação e `why now`;
+- Spec Guardian e Delivery Orchestrator instruídos a pedir esclarecimento quando
+  prioridade ou objetivo de negócio estiverem ausentes;
+- task breakdown bloqueando expansão de processo sem evidência, validação ou
+  redução de risco;
+- manifest atualizado para versionar o contrato como `0.1.1`.
+
 ## 0.1.0
 
 Versão inicial do bundle `sdd-harness-guardian`.

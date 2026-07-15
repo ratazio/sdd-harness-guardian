@@ -3,7 +3,7 @@
 ## Loop central
 
 ```txt
-specify -> spec review -> impact -> plan -> validation plan -> tasks
+specify -> outcome review -> spec review -> impact -> plan -> validation plan -> tasks
 -> implement one task -> evidence draft -> independent evaluation
 -> approved evidence -> done -> initiative validation -> ratchet
 ```
@@ -16,11 +16,12 @@ constraints próprios.
 
 | Gate | Owner | Entrada mínima | Saída verificável |
 |---|---|---|---|
+| Outcome Ready | Spec Guardian/Orchestrator | objetivo inicial | outcome, incremento demonstrável e prioridade/decisão |
 | Spec Ready | Spec Guardian | spec completa | decisão e blockers |
 | Impact Mapped | Impact Mapper | spec ready + contexto | superfícies, risco, unknowns |
 | Plan Ready | Orchestrator | spec + impact | abordagem, decisões, rollback |
 | Validation Ready | Harness Planner | ACs estáveis | cada AC mapeado |
-| Tasks Ready | Orchestrator | plano + validação | tasks atômicas com exit/evidence |
+| Tasks Ready | Orchestrator | plano + validação | tasks atômicas com outcome/exit/evidence |
 | Implementation Done | Builder | uma task ready | mudança + evidence draft |
 | Independent Evaluation | Evaluator | diff + checks + draft | approve/revise/block/escalate |
 | Evidence Pack Ready | Evaluator/State Keeper | avaliação concluída | pack completo e aprovado |
@@ -51,8 +52,9 @@ estado terminal é proibido.
 | unknown | discovery task ou revisão humana antes de implementar |
 | destrutiva/irreversível/sensível | preview, rollback e aprovação humana |
 
-Ambiguidade de produto, mudança de dado de produção, segurança, autorização,
-billing e migração irreversível nunca são resolvidos por suposição do agente.
+Ambiguidade de produto, prioridade de negócio, mudança de dado de produção,
+segurança, autorização, billing e migração irreversível nunca são resolvidos por
+suposição do agente.
 
 ## Sessões e retomada
 

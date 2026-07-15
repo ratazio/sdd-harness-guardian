@@ -15,9 +15,9 @@ Na raiz do projeto consumidor:
 
 ```bash
 git submodule add https://github.com/SUA-ORG/sdd-harness-guardian.git vendor/sdd-harness-guardian
-git -C vendor/sdd-harness-guardian checkout v0.1.0
+git -C vendor/sdd-harness-guardian checkout v0.1.1
 git add .gitmodules vendor/sdd-harness-guardian
-git commit -m "vendor sdd-harness-guardian@0.1.0"
+git commit -m "vendor sdd-harness-guardian@0.1.1"
 ```
 
 Clones posteriores devem inicializar o submódulo:
@@ -47,7 +47,7 @@ Also read `vendor/sdd-harness-guardian/.harness/AGENTS.md`.
 
 Use SDD Harness Guardian for software-delivery initiatives. Local rules may
 adapt bundle defaults but may not weaken safety, destructive-operation
-approval, Spec Ready, validation traceability, evidence-before-done,
+approval, Outcome Ready, Spec Ready, validation traceability, evidence-before-done,
 independent evaluation, or resumable-state invariants.
 ```
 
@@ -115,12 +115,12 @@ No repositório fonte:
 
 ```bash
 git add .
-git commit -m "sdd-harness-guardian 0.1.0"
+git commit -m "sdd-harness-guardian 0.1.1"
 git branch -M main
 git remote add origin https://github.com/SUA-ORG/sdd-harness-guardian.git
 git push -u origin main
-git tag -a v0.1.0 -m "sdd-harness-guardian 0.1.0"
-git push origin v0.1.0
+git tag -a v0.1.1 -m "sdd-harness-guardian 0.1.1"
+git push origin v0.1.1
 ```
 
 Nunca mova uma tag publicada. Correções exigem nova versão SemVer.

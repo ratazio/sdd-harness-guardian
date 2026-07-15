@@ -7,6 +7,14 @@
 **Updated by:**  
 **Run-state:** ./run-state.yaml
 
+## Outcome context
+
+**Product/user outcome:**  
+**Active MVP/slice:**  
+**Active task increment:**  
+**Acceptance criteria in focus:**  
+**Expected validation:**  
+
 ## Task summary
 
 | Status | Task IDs |
@@ -47,6 +55,10 @@
 ## Exact next safe step
 
 Do not use vague text such as “continue implementation”.
+
+Explain why the next step advances the declared outcome, produces evidence or
+reduces a named uncertainty. If that cannot be stated, request clarification
+instead of expanding tasks.
 
 ## Resume instructions
 

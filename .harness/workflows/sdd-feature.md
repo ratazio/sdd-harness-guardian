@@ -11,7 +11,7 @@ must describe observable behavior without embedding unjustified implementation.
 
 ## Flow
 
-1. Execute `sdd-lifecycle.md` gates 1–6.
+1. Execute `sdd-lifecycle.md` gates 1–7.
 2. Confirm compatibility, migration and rollout impact where relevant.
 3. For each ready task, Builder implements, drafts evidence and sets
    `needs_evaluation`; a distinct Evaluator must `approve` before State Keeper
@@ -22,12 +22,18 @@ must describe observable behavior without embedding unjustified implementation.
 ## Feature constraints
 
 - contract, data or behavior changes are explicit in spec/plan;
+- every feature task declares the outcome served, demonstrable increment,
+  expected artifact and validation method;
+- the workflow asks for clarification instead of inferring business priority;
 - rollout and rollback match the impact level;
 - scope discovered during implementation returns to planning;
+- process-only expansion of specs, docs or backlog is blocked unless it
+  produces evidence, validation or named risk reduction;
 - partial feature flags or migrations are documented;
 - no task is `done` before its evidence pack has independent `approve`.
 
 ## Exit condition
 
-`validation_done: true`, all tasks `done`, every AC covered, evidence linked,
-decision log current, final handoff written and no blocking risk open.
+`validation_done: true`, all tasks `done`, every AC covered, outcome linkage
+preserved, evidence linked, decision log current, final handoff written and no
+blocking risk open.

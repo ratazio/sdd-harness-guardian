@@ -41,6 +41,8 @@ artefatos de iniciativa são relativos à raiz do projeto consumidor.
 ## Invariantes protegidas
 
 - nenhuma implementação começa antes de `Spec Ready`;
+- nenhuma implementação ou expansão de tasks começa sem outcome e incremento
+  demonstrável declarados;
 - mudança não trivial exige `impact-map.md`;
 - todo critério de aceite tem validação rastreável;
 - nenhuma task chega a `done` sem evidence pack aprovado;
@@ -86,18 +88,19 @@ As definições completas estão em `.harness/agents/`.
 
 ```txt
 1. Specify
-2. Spec Review -> Gate: Spec Ready
-3. Impact Map
-4. Technical Plan -> Gate: Plan Ready
-5. Validation Plan -> Gate: Validation Ready
-6. Task Breakdown -> Gate: Tasks Ready
-7. Implementation of one ready task
-8. Evidence draft
-9. Independent Evaluation
-10. Evidence approval
-11. Task done + state update
-12. Initiative Validation Done
-13. Ratchet update when triggered
+2. Outcome Review -> Gate: Outcome Ready
+3. Spec Review -> Gate: Spec Ready
+4. Impact Map
+5. Technical Plan -> Gate: Plan Ready
+6. Validation Plan -> Gate: Validation Ready
+7. Task Breakdown -> Gate: Tasks Ready
+8. Implementation of one ready task
+9. Evidence draft
+10. Independent Evaluation
+11. Evidence approval
+12. Task done + state update
+13. Initiative Validation Done
+14. Ratchet update when triggered
 ```
 
 Uma task só pode transicionar:
@@ -140,11 +143,16 @@ Bugfixes também usam `reproduction.md`. Os templates canônicos estão em
 Bloqueie avanço quando:
 
 - objetivo ou não objetivos estão ausentes;
+- outcome de produto/usuário, incremento demonstrável ou incerteza a reduzir
+  não estão declarados;
+- a próxima task não explica por que é o próximo passo seguro rumo ao outcome;
 - critérios de aceite não são testáveis ou não têm validation mapping;
 - impacto de mudança não trivial não foi mapeado;
 - risco `high`/`unknown` não recebeu revisão ou mitigação explícita;
 - plano não possui rollback compatível com o risco;
 - task não é atômica, não tem exit criteria ou evidence requirement;
+- task só expande processo, backlog, docs ou specs sem nova evidência,
+  validação ou redução de risco;
 - builder tenta aprovar o próprio trabalho;
 - evidence pack está ausente, incompleto ou não rastreia o aceite;
 - estado e working tree divergem sem explicação;
@@ -172,6 +180,7 @@ compatível com seu runtime, sem reduzir a invariável.
 
 ```txt
 clareza antes de código
+resultado declarado antes de execução
 impacto antes de alteração
 validação antes de conclusão
 memória antes de retomada

@@ -29,6 +29,14 @@ any non-terminal state -> blocked
 
 **Status:** pending  
 **Objective:**  
+**Requirement IDs:** FR-... | not_applicable  
+**Acceptance criteria IDs:** AC-... | not_applicable  
+**Outcome served:**  
+**Demonstrable increment or reduced uncertainty:**  
+**Expected artifact/behavior:**  
+**Validation method:**  
+**Why now:**  
+**Max subtasks before validation:** 3  
 **Dependencies:**  
 **Risk:** low | medium | high | unknown  
 **Builder:** unassigned  
@@ -40,6 +48,12 @@ any non-terminal state -> blocked
 
 #### Out of scope
 
+#### Outcome linkage
+
+- Requirement/AC/discovery question:
+- Vertical slice relation: delivers | directly enables | bounded discovery
+- Priority source or human decision:
+
 #### Expected files and contracts
 
 #### Implementation constraints
@@ -50,6 +64,7 @@ any non-terminal state -> blocked
 
 #### Exit criteria
 
+- [ ] outcome linkage, demonstrable increment and why-now rationale are recorded;
 - [ ] scoped implementation is complete;
 - [ ] required validation executed or approved exception recorded;
 - [ ] evidence draft covers ACs and exit criteria;

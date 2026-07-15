@@ -3,17 +3,19 @@
 Bundle agêntico, versionado em Git e vendor-neutral para governar Spec Driven
 Development com gates, evidência, memória de execução e retomada.
 
-**Versão:** `0.1.0`  
+**Versão:** `0.1.1`  
 **Entrypoint:** `.harness/AGENTS.md`  
 **Instalação recomendada:** submódulo em
 `vendor/sdd-harness-guardian`  
-**Status:** ready
+**Status:** release_candidate
 
 ## O que este bundle resolve
 
 Ele fornece contratos reutilizáveis para:
 
 - tornar specs claras, limitadas e testáveis;
+- exigir outcome e incremento demonstrável antes de implementar ou expandir
+  tasks;
 - mapear impacto antes de mudanças não triviais;
 - transformar aceite em plano de validação e tasks atômicas;
 - separar implementação de avaliação;
@@ -50,7 +52,7 @@ No projeto consumidor:
 
 ```bash
 git submodule add https://github.com/SUA-ORG/sdd-harness-guardian.git vendor/sdd-harness-guardian
-git -C vendor/sdd-harness-guardian checkout v0.1.0
+git -C vendor/sdd-harness-guardian checkout v0.1.1
 python vendor/sdd-harness-guardian/scripts/new_initiative.py minha-feature
 ```
 
@@ -75,7 +77,7 @@ Adaptadores finos na raiz podem apontar para o entrypoint do bundle.
 ## Precedência e overrides
 
 O consumidor pode adaptar defaults do bundle. Não pode enfraquecer segurança,
-privacidade, aprovação destrutiva, Spec Ready, rastreabilidade de validação,
+privacidade, aprovação destrutiva, Outcome Ready, Spec Ready, rastreabilidade de validação,
 evidência antes de done, avaliação independente ou estado retomável. Conflitos
 devem ser registrados e escalados.
 

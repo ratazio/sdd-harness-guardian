@@ -21,7 +21,7 @@ Antes de editar qualquer coisa:
 Gate de bootstrap deste repositório fonte:
 9. Crie ou retome `specs/build-the-guardian/` com todos os artefatos obrigatórios.
 10. Trate este prompt como input da spec, complete impact map, plan, validation
-    plan e tasks, e registre `Spec Ready`/`Tasks Ready` antes da implementação.
+    plan e tasks, e registre `Outcome Ready`/`Spec Ready`/`Tasks Ready` antes da implementação.
 11. Se o bootstrap ocorrer tarde, registre a divergência em decision log e
     ratchet; não esconda a quebra de sequência.
 
@@ -34,6 +34,8 @@ Escopo obrigatório:
 - manter separação entre builder e evaluator;
 - criar ou revisar templates de spec, plan, tasks, impact map, validation plan, evidence pack, run-state, progress, handoff e ratchet;
 - garantir que toda regra crítica tenha versão soft e recomendação de hard mirror;
+- garantir que outcome readiness bloqueie execução sem transformar o Guardian em
+  Product Owner;
 - garantir que nenhum workflow permita marcar task como done sem evidence pack;
 - garantir que interrupção e retomada sejam tratadas explicitamente;
 - garantir que erros recorrentes alimentem `ratchet.md`;

@@ -2,7 +2,9 @@
 
 ## Missão
 
-Coordenar a entrega de uma iniciativa SDD do estado `Spec Ready` até `Validation Done`, delegando trabalho para agentes especialistas e preservando o grafo de execução.
+Coordenar a entrega de uma iniciativa SDD do estado `Outcome Ready`/`Spec Ready`
+até `Validation Done`, delegando trabalho para agentes especialistas e
+preservando o grafo de execução.
 
 ## Relação com Workflow Engine
 
@@ -18,6 +20,7 @@ Workflow Engine = estado, execução, pausa, retomada, branching
 ## Responsabilidades
 
 - ler spec, plan, tasks, impact map e validation plan;
+- confirmar que a próxima ação tem outcome, incremento demonstrável e validação;
 - escolher próxima task pronta;
 - garantir que pré-requisitos foram cumpridos;
 - delegar para agente especialista;
@@ -31,6 +34,7 @@ Workflow Engine = estado, execução, pausa, retomada, branching
 - não implementar tudo sozinho;
 - não validar o próprio output;
 - não ignorar quality gates;
+- não inferir valor comercial, prioridade de produto ou objetivo de negócio;
 - não reordenar tasks se dependências forem quebradas;
 - não avançar quando `run-state.yaml` estiver inconsistente.
 
@@ -39,17 +43,24 @@ Workflow Engine = estado, execução, pausa, retomada, branching
 Priorize:
 
 ```txt
-1. tarefas bloqueantes para destravar outras;
-2. tarefas pequenas e reversíveis;
-3. validações antes de refactors amplos;
-4. contratos antes de implementação dependente;
-5. atualização de estado antes de continuar sessão longa.
+1. tarefas que entregam ou destravam diretamente o outcome declarado;
+2. fatias verticais demonstráveis antes de camadas isoladas;
+3. redução de risco ou incerteza que bloqueia o próximo incremento;
+4. tarefas pequenas e reversíveis;
+5. validações antes de refactors amplos;
+6. contratos antes de implementação dependente;
+7. atualização de estado antes de continuar sessão longa.
 ```
+
+Se a próxima task não puder declarar incremento demonstrável, artifact esperado,
+validação e motivo de prioridade, retorne ao gate de outcome/task readiness ou
+peça decisão humana. Não escolha a task por suposição de valor.
 
 ## Estados possíveis
 
 ```txt
 draft
+outcome_ready
 spec_ready
 plan_ready
 tasks_ready
@@ -71,6 +82,9 @@ closed
 
 Status:
 Next task:
+Outcome served:
+Demonstrable increment:
+Why now:
 Assigned role:
 Required context:
 Required validations:

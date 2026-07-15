@@ -7,7 +7,7 @@ produzir evidência factual e entregar o resultado para avaliação independente
 
 ## Inputs obrigatórios
 
-- `spec.md` com `Spec Ready: yes`;
+- `spec.md` com `Outcome Ready: yes` e `Spec Ready: yes`;
 - `impact-map.md` e `plan.md`;
 - `validation-plan.md`;
 - task atual em `tasks.md`;
@@ -17,6 +17,7 @@ produzir evidência factual e entregar o resultado para avaliação independente
 ## Responsabilidades
 
 - confirmar readiness, dependências, risco e aprovações;
+- confirmar outcome, incremento demonstrável, validação e `why now` da task;
 - limitar mudanças ao scope da task;
 - preservar comportamento fora do escopo;
 - executar validações previstas;
@@ -39,6 +40,8 @@ produzir evidência factual e entregar o resultado para avaliação independente
 ## Builder Handoff
 
 Task:
+Outcome served:
+Demonstrable increment:
 Implementation status:
 Files changed:
 Validations run:

@@ -1,6 +1,6 @@
 # Spec: <initiative>
 
-**Status:** draft | spec_ready | superseded  
+**Status:** draft | outcome_ready | spec_ready | superseded  
 **Owner:** <name-or-team>  
 **Created:** <YYYY-MM-DD>  
 **Last updated:** <YYYY-MM-DD>  
@@ -14,25 +14,35 @@ Describe the current problem/opportunity and supporting evidence.
 
 State the single condition this initiative must make true.
 
-## 3. Users or actors
+## 3. Delivery outcome
+
+- Product/user outcome:
+- Demonstrable increment:
+- MVP/slice boundary:
+- Priority source: human request | roadmap | incident | risk reduction | human_decision_required
+
+The harness validates that these are declared. It does not decide commercial
+value or product priority.
+
+## 4. Users or actors
 
 - Actor:
 
-## 4. Observable outcomes
+## 5. Observable outcomes
 
 - O-001:
 
-## 5. Non-goals
+## 6. Non-goals
 
 - NG-001:
 
-## 6. Functional requirements
+## 7. Functional requirements
 
 | ID | Requirement | Rationale |
 |---|---|---|
 | FR-001 | WHEN <trigger>, THE SYSTEM SHALL <observable behavior>. | |
 
-## 7. Acceptance criteria
+## 8. Acceptance criteria
 
 Keep one observable claim per row. Validation IDs are finalized in
 `validation-plan.md`.
@@ -41,13 +51,13 @@ Keep one observable claim per row. Validation IDs are finalized in
 |---|---|---|
 | AC-001 | | V-001 |
 
-## 8. Edge cases and failure behavior
+## 9. Edge cases and failure behavior
 
 | ID | Condition | Expected behavior |
 |---|---|---|
 | EC-001 | | |
 
-## 9. Constraints and non-functional requirements
+## 10. Constraints and non-functional requirements
 
 - Architecture:
 - Security/privacy:
@@ -56,30 +66,31 @@ Keep one observable claim per row. Validation IDs are finalized in
 - Compatibility/accessibility:
 - Operational:
 
-## 10. Assumptions
+## 11. Assumptions
 
 | Assumption | Validation/owner |
 |---|---|
 | | |
 
-## 11. Risks
+## 12. Risks
 
 | ID | Risk | Probability | Impact | Mitigation/owner |
 |---|---|---|---|---|
 | R-001 | | | | |
 
-## 12. Dependencies
+## 13. Dependencies
 
 | Dependency | Status | Owner | Blocking? |
 |---|---|---|---|
 | | | | |
 
-## 13. Validation notes
+## 14. Validation notes
 
 Initial expectations only; `validation-plan.md` is authoritative for execution.
 
-## 14. Spec Guardian decision
+## 15. Spec Guardian decision
 
+**Outcome Ready:** no  
 **Spec Ready:** no  
 **Reviewer:**  
 **Reviewed at:**  

@@ -10,6 +10,8 @@ Transformar critérios de aceite em validações objetivas, quality gates, teste
 - definir testes unitários, integração, contrato, E2E ou manuais;
 - definir quais comandos precisam ser rodados;
 - definir evidence pack obrigatório;
+- confirmar que a validação prova o incremento demonstrável declarado, não
+  apenas a existência de artefatos de processo;
 - definir hard mirrors para rules críticas;
 - indicar quando LLM-as-judge pode ser usado;
 - indicar quando validação determinística é obrigatória.

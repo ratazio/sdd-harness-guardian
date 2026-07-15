@@ -1,9 +1,9 @@
 schema_version: 1
 name: sdd-harness-guardian
 display_name: SDD Harness Guardian
-version: 0.1.0
+version: 0.1.1
 type: agentic-governance-bundle
-status: ready
+status: release_candidate
 owner: platform-engineering
 license_policy: internal
 install_path: vendor/sdd-harness-guardian
@@ -23,6 +23,7 @@ entrypoints:
 principles:
   - spec_is_source_of_truth_for_intent
   - harness_is_source_of_truth_for_execution_conditions
+  - outcome_context_required_before_execution
   - builder_and_evaluator_must_be_separated
   - every_critical_soft_rule_needs_a_hard_mirror
   - no_task_is_done_without_evidence
@@ -33,6 +34,7 @@ protected_invariants:
   - safety_and_privacy
   - permissions_and_destructive_operations
   - spec_readiness_before_implementation
+  - outcome_readiness_before_execution
   - validation_traceability
   - evidence_before_done
   - independent_evaluation
@@ -65,6 +67,7 @@ workflows:
   - interruption-recovery
 
 rules:
+  - outcome-readiness
   - sdd-quality
   - task-readiness
   - validation-policy
@@ -98,6 +101,7 @@ consumer_contract:
   scaffold_command: python vendor/sdd-harness-guardian/scripts/new_initiative.py <initiative>
 
 quality_gates:
+  outcome_ready: required
   spec_ready: required
   impact_mapped: required_for_non_trivial_change
   plan_ready: required
@@ -109,6 +113,7 @@ quality_gates:
   validation_done: required
 
 hard_mirror_recommendations:
+  outcome_ready: outcome_contract_validator
   spec_ready: schema_or_structure_validator
   task_ready: task_contract_validator
   validation_traceability: acceptance_criteria_mapping_check

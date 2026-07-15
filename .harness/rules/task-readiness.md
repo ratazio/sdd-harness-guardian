@@ -3,12 +3,14 @@
 ## Soft rule
 
 Only a `ready` task may enter implementation. Tasks must be small, ordered,
-bounded and independently verifiable.
+bounded, outcome-linked and independently verifiable.
 
 ## Required contract
 
-Each task declares ID, objective, scope, out of scope, dependencies, expected
-files/surfaces, risk, builder, evaluator, validation, evidence path and exit
+Each task declares ID, objective, requirement IDs, acceptance criteria IDs,
+delivery outcome, demonstrable increment or reduced uncertainty, scope, out of
+scope, dependencies, expected files/surfaces, expected artifact, risk, builder,
+evaluator, validation method, evidence path, why-now rationale and exit
 criteria. Dependencies must be `done` or explicitly waived with rationale.
 
 A task should fit one focused session. If it cannot, split it or create a
@@ -19,6 +21,11 @@ discovery task with its own evidence.
 Block when the task:
 
 - contains multiple independently releasable outcomes;
+- is not traceable to a requirement, AC, plan step or explicit discovery
+  question;
+- cannot state its demonstrable increment, artifact or reduced uncertainty;
+- exists only to expand process artifacts without new evidence or risk
+  reduction;
 - has unresolved dependency, risk `high`/`unknown` or human approval;
 - lacks objective exit criteria or an evidence destination;
 - expands beyond the approved spec/plan;
@@ -28,6 +35,6 @@ Block when the task:
 
 Use a task contract validator and state-transition guard. Permit
 `ready -> in_progress` only when required fields exist, dependencies are
-terminal and risk approvals are recorded.
+terminal, outcome linkage is recorded and risk approvals are recorded.
 
 Recommended check: `validate-task-readiness`.

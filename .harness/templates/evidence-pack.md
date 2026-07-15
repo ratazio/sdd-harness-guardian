@@ -13,6 +13,10 @@
 
 State what changed and explicitly what did not.
 
+**Outcome served:**  
+**Demonstrable increment or uncertainty reduced:**  
+**Expected artifact/behavior produced:**  
+
 ## 2. Files and contracts changed
 
 | File/contract | Change | Why in scope |
@@ -65,6 +69,7 @@ State what changed and explicitly what did not.
 ## 10. Terminal gate
 
 - [ ] Builder ID and Evaluator ID are present and distinct.
+- [ ] Outcome linkage and demonstrable increment are recorded.
 - [ ] All blocking AC/exit criteria pass.
 - [ ] Exceptions and residual risks are accepted.
 - [ ] Evaluator decision is `approve`.

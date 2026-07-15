@@ -21,6 +21,7 @@ artifacts:
   latest_handoff: "handoffs/latest-handoff.md"
 
 quality_gates:
+  outcome_ready: false
   spec_ready: false
   impact_mapped: false
   plan_ready: false

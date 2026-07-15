@@ -6,6 +6,7 @@ Copy `run-state.yaml`, not this document, into the initiative.
 
 ```txt
 draft
+outcome_ready
 spec_ready
 plan_ready
 tasks_ready
@@ -23,6 +24,8 @@ closed
 
 - `schema_version` and `initiative_id` are present;
 - artifact paths resolve inside the initiative;
+- `outcome_ready` requires declared outcome, demonstrable increment and
+  priority source or human decision;
 - `current_task` matches the task ledger and `tasks.md`;
 - `builder_id != evaluator_id` for an evaluated task;
 - `evidence_pack_ready` requires an existing approved evidence path;

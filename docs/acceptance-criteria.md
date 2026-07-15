@@ -15,11 +15,16 @@ reproduzível; `python scripts/validate_bundle.py` cobre os checks estruturais.
 ## SDD contract
 
 - [x] Implementação é bloqueada antes de Spec Ready.
+- [x] Implementação ou expansão de tasks é bloqueada antes de Outcome Ready.
 - [x] Spec exige objetivo, outcomes, non-goals, riscos e aceite testável.
+- [x] Spec/task exige outcome, incremento demonstrável, prioridade registrada
+      ou decisão humana pendente.
 - [x] Mudança não trivial exige impact map.
 - [x] Todo AC possui validation mapping.
 - [x] Plano possui decisões, impacto e rollback proporcionais ao risco.
 - [x] Toda task é atômica e possui dependências, exit criteria e evidência.
+- [x] Toda task rastreia requirement/AC ou discovery question e explica
+      `why now`.
 - [x] Refactor protege comportamento externo; bugfix exige regressão.
 
 ## Evaluation and evidence
@@ -59,10 +64,12 @@ reproduzível; `python scripts/validate_bundle.py` cobre os checks estruturais.
 
 ## Resultado
 
-**Bundle Ready:** yes  
-**Versão avaliada:** 0.1.0  
-**Evidência:** `specs/build-the-guardian/evidence/T-004.md`  
-**Evaluator:** codex-independent-evaluator-2 (`approve`)
+**Bundle Ready:** no, release candidate pending independent evaluation  
+**Versão avaliada:** 0.1.1  
+**Evidência:** `python scripts/validate_bundle.py` passed, 217 checks;
+`python scripts/smoke_test_scaffolder.py` passed; `git diff --check` passed  
+**Evaluator:** pending
 
-Residual risk: the real pinned submodule consumer pilot requires a published
-commit/tag and remains the first post-publication maintenance action.
+Residual risk: the outcome-readiness contract has structural validation only
+until an independent evaluator reviews the diff and a consumer pilot exercises
+the new prompts/templates.

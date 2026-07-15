@@ -47,5 +47,7 @@ Copy `run-state.yaml` itself.
 ## Template change policy
 
 Update templates, rules and workflows together when a required field changes.
+Outcome-readiness fields are part of the execution contract, not optional
+metadata.
 Run `python scripts/validate_bundle.py` before release. Consumers pin a bundle
 tag, so template evolution must be versioned.

@@ -107,7 +107,7 @@ def main() -> int:
         )
 
     print(f"Created {args.kind} initiative: {target}")
-    print("Next step: complete spec.md and request Spec Guardian review.")
+    print("Next step: complete spec.md and request Outcome/Spec Guardian review.")
     return 0
 
 

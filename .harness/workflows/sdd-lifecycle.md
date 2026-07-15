@@ -12,34 +12,40 @@ An initiative exists under `specs/<initiative>/` using the canonical templates.
 ## Flow
 
 1. **Specify** — create/revise `spec.md`.
-2. **Spec Review** — Spec Guardian records `Spec Ready: yes/no`.
-3. **Impact Map** — map non-trivial surfaces, unknowns and risk.
-4. **Technical Plan** — define approach, decisions and rollback.
-5. **Validation Plan** — map every AC to checks and evidence.
-6. **Task Breakdown** — create atomic tasks with exit/evidence criteria.
-7. **Readiness Gate** — verify dependencies, risk and approvals for one task.
-8. **Implementation** — Builder implements only that task.
-9. **Evidence Draft** — Builder writes `evidence/<task-id>.md` and moves the
+2. **Outcome Review** — confirm outcome, demonstrable increment, priority source
+   or required human decision.
+3. **Spec Review** — Spec Guardian records `Outcome Ready: yes/no` and
+   `Spec Ready: yes/no`.
+4. **Impact Map** — map non-trivial surfaces, unknowns and risk.
+5. **Technical Plan** — define approach, decisions and rollback.
+6. **Validation Plan** — map every AC to checks and evidence.
+7. **Task Breakdown** — create atomic, outcome-linked tasks with exit/evidence
+   criteria.
+8. **Readiness Gate** — verify outcome linkage, dependencies, risk and approvals
+   for one task.
+9. **Implementation** — Builder implements only that task.
+10. **Evidence Draft** — Builder writes `evidence/<task-id>.md` and moves the
    task to `needs_evaluation`.
-10. **Independent Evaluation** — distinct Evaluator returns `approve`,
+11. **Independent Evaluation** — distinct Evaluator returns `approve`,
     `request_revision`, `block` or `escalate_to_human`.
-11. **Revision loop** — `request_revision` returns to the Builder; new evidence
+12. **Revision loop** — `request_revision` returns to the Builder; new evidence
     and evaluation are required.
-12. **Evidence Gate** — on `approve`, State Keeper records the decision and
+13. **Evidence Gate** — on `approve`, State Keeper records the decision and
     changes `needs_evaluation -> approved -> done`.
-13. **Initiative Validation** — after every task is `done`, confirm AC coverage,
+14. **Initiative Validation** — after every task is `done`, confirm AC coverage,
     residual risks and `validation_done: true`.
-14. **Ratchet** — record serious first-time or recurring preventable failures.
-15. **Close/Handoff** — update progress, state, decisions and final handoff.
+15. **Ratchet** — record serious first-time or recurring preventable failures.
+16. **Close/Handoff** — update progress, state, decisions and final handoff.
 
 ## Gate matrix
 
 | Transition | Required evidence | Owner |
 |---|---|---|
-| draft → spec_ready | Spec Guardian decision | Spec Guardian |
+| draft → outcome_ready | outcome, demonstrable increment, priority source or human decision | Spec Guardian/Orchestrator |
+| outcome_ready → spec_ready | Spec Guardian decision | Spec Guardian |
 | spec_ready → plan_ready | impact + plan + rollback | Orchestrator |
 | plan_ready → tasks_ready | validation mapping + atomic tasks | Harness Planner/Orchestrator |
-| ready → in_progress | readiness record | Builder/Orchestrator |
+| ready → in_progress | readiness record with outcome linkage | Builder/Orchestrator |
 | in_progress → needs_evaluation | implementation + evidence draft | Builder |
 | needs_evaluation → approved | independent `approve` | Evaluator |
 | approved → done | approved `evidence/<task-id>.md` + state sync | State Keeper |
@@ -53,7 +59,9 @@ non-terminal.
 
 ## Failure routes
 
-- unclear intent → return to Specify;
+- unclear intent or outcome → return to Specify or request human decision;
+- process-only task expansion without evidence → return to Outcome/Task
+  Readiness;
 - unknown/high impact → discovery or human review;
 - missing validation → return to Validation Plan;
 - oversized task → return to Task Breakdown;

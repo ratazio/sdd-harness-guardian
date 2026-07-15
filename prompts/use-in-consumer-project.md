@@ -22,9 +22,11 @@ Antes de agir:
    workflow específico (feature, bugfix ou refactor).
 
 Modo de operação:
-- Trabalhe pelo fluxo completo specify -> review -> impact -> plan ->
+- Trabalhe pelo fluxo completo specify -> outcome review -> review -> impact -> plan ->
   validation plan -> tasks -> implement -> evidence -> independent evaluation.
-- Não implemente nada enquanto a spec não estiver Spec Ready.
+- Não implemente nem expanda tasks enquanto outcome, incremento demonstrável,
+  validação e `why now` não estiverem declarados.
+- Não implemente nada enquanto a spec não estiver Outcome Ready e Spec Ready.
 - Não marque task como done sem evidence pack aprovado por evaluator distinto.
 - Separe implementação de avaliação.
 - Preserve estado em `specs/<initiative>/progress.md` e `specs/<initiative>/run-state.yaml`.
