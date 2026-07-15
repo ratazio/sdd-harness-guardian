@@ -7,6 +7,8 @@ Garantir que toda iniciativa de Spec Driven Development comece com uma spec clar
 ## Responsabilidades
 
 - validar `spec.md`;
+- validar que `stakeholder-brief.html` existe para iniciativa não trivial e não
+  contradiz a spec;
 - exigir objetivo, contexto, outcome de produto/usuário, outcomes observáveis e
   não objetivos;
 - exigir critérios de aceite testáveis;
@@ -30,6 +32,7 @@ Garantir que toda iniciativa de Spec Driven Development comece com uma spec clar
 
 ```txt
 spec.md
+stakeholder-brief.html
 context.md
 outcomes.md
 non-goals.md
@@ -44,6 +47,7 @@ arquitetura local
 Spec Review Report
 Outcome Ready: yes/no
 Spec Ready: yes/no
+Human Visibility Ready: yes/no
 Blocking Issues
 Required Revisions
 Recommended Clarifications
@@ -68,6 +72,7 @@ A spec só fica **Spec Ready** se:
 - há escopo suficiente para gerar plano e tasks;
 - não há decisão crítica escondida em linguagem vaga.
 - a prioridade necessária está registrada ou marcada para decisão humana.
+- o stakeholder brief existe, é legível para reunião e não contradiz a spec.
 
 ## Frases de bloqueio recomendadas
 
@@ -79,4 +84,5 @@ Bloqueado: a spec mistura requisito com solução técnica sem justificar a deci
 Bloqueado: a spec não declara não objetivos, então o escopo ainda está aberto demais.
 Bloqueado: a spec não declara qual incremento demonstrável esta iniciativa deve produzir.
 Bloqueado: a prioridade depende de decisão de produto não registrada; peça decisão humana.
+Bloqueado: o stakeholder brief está ausente ou contradiz a spec.
 ```

@@ -1,7 +1,7 @@
 schema_version: 1
 name: sdd-harness-guardian
 display_name: SDD Harness Guardian
-version: 0.1.1
+version: 0.1.2
 type: agentic-governance-bundle
 status: release_candidate
 owner: platform-engineering
@@ -24,6 +24,7 @@ principles:
   - spec_is_source_of_truth_for_intent
   - harness_is_source_of_truth_for_execution_conditions
   - outcome_context_required_before_execution
+  - human_visibility_before_non_trivial_execution
   - builder_and_evaluator_must_be_separated
   - every_critical_soft_rule_needs_a_hard_mirror
   - no_task_is_done_without_evidence
@@ -35,6 +36,7 @@ protected_invariants:
   - permissions_and_destructive_operations
   - spec_readiness_before_implementation
   - outcome_readiness_before_execution
+  - human_readable_brief_for_non_trivial_initiatives
   - validation_traceability
   - evidence_before_done
   - independent_evaluation
@@ -67,6 +69,7 @@ workflows:
   - interruption-recovery
 
 rules:
+  - human-visibility
   - outcome-readiness
   - sdd-quality
   - task-readiness
@@ -80,6 +83,7 @@ rules:
 
 artifact_templates:
   spec: .harness/templates/spec.md
+  stakeholder_brief: .harness/templates/stakeholder-brief.html
   plan: .harness/templates/plan.md
   tasks: .harness/templates/tasks.md
   impact_map: .harness/templates/impact-map.md
@@ -106,6 +110,7 @@ quality_gates:
   impact_mapped: required_for_non_trivial_change
   plan_ready: required
   validation_ready: required
+  human_visibility_ready: required_for_non_trivial_change
   tasks_ready: required
   implementation_done: required
   independent_evaluation_done: required
@@ -117,6 +122,7 @@ hard_mirror_recommendations:
   spec_ready: schema_or_structure_validator
   task_ready: task_contract_validator
   validation_traceability: acceptance_criteria_mapping_check
+  human_visibility: stakeholder_brief_validator
   evidence_before_done: evidence_pack_validator
   independent_evaluation: builder_evaluator_identity_check
   resumable_state: run_state_schema_and_transition_check

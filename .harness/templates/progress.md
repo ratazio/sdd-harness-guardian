@@ -6,6 +6,7 @@
 **Last updated:**  
 **Updated by:**  
 **Run-state:** ./run-state.yaml
+**Stakeholder brief:** ./stakeholder-brief.html
 
 ## Outcome context
 
@@ -14,6 +15,7 @@
 **Active task increment:**  
 **Acceptance criteria in focus:**  
 **Expected validation:**  
+**Brief synchronized:** yes/no/not_applicable  
 
 ## Task summary
 

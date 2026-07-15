@@ -43,6 +43,8 @@ artefatos de iniciativa são relativos à raiz do projeto consumidor.
 - nenhuma implementação começa antes de `Spec Ready`;
 - nenhuma implementação ou expansão de tasks começa sem outcome e incremento
   demonstrável declarados;
+- iniciativa não trivial mantém `stakeholder-brief.html` legível e sincronizado
+  com os artefatos fonte;
 - mudança não trivial exige `impact-map.md`;
 - todo critério de aceite tem validação rastreável;
 - nenhuma task chega a `done` sem evidence pack aprovado;
@@ -93,14 +95,15 @@ As definições completas estão em `.harness/agents/`.
 4. Impact Map
 5. Technical Plan -> Gate: Plan Ready
 6. Validation Plan -> Gate: Validation Ready
-7. Task Breakdown -> Gate: Tasks Ready
-8. Implementation of one ready task
-9. Evidence draft
-10. Independent Evaluation
-11. Evidence approval
-12. Task done + state update
-13. Initiative Validation Done
-14. Ratchet update when triggered
+7. Stakeholder Brief -> Gate: Human Visibility Ready
+8. Task Breakdown -> Gate: Tasks Ready
+9. Implementation of one ready task
+10. Evidence draft
+11. Independent Evaluation
+12. Evidence approval
+13. Task done + state update
+14. Initiative Validation Done
+15. Ratchet update when triggered
 ```
 
 Uma task só pode transicionar:
@@ -121,6 +124,7 @@ ou justificadas, `evidence/<task-id>.md` completo, decisão independente
 ```txt
 specs/<initiative>/
   spec.md
+  stakeholder-brief.html
   plan.md
   tasks.md
   impact-map.md
@@ -145,6 +149,8 @@ Bloqueie avanço quando:
 - objetivo ou não objetivos estão ausentes;
 - outcome de produto/usuário, incremento demonstrável ou incerteza a reduzir
   não estão declarados;
+- iniciativa não trivial não possui brief humano ou o brief contradiz spec,
+  impact map, plan ou validation plan;
 - a próxima task não explica por que é o próximo passo seguro rumo ao outcome;
 - critérios de aceite não são testáveis ou não têm validation mapping;
 - impacto de mudança não trivial não foi mapeado;

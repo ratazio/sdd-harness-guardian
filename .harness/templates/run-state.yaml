@@ -10,6 +10,7 @@ updated_by: null
 
 artifacts:
   spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
   impact_map: "impact-map.md"
   plan: "plan.md"
   validation_plan: "validation-plan.md"
@@ -26,6 +27,7 @@ quality_gates:
   impact_mapped: false
   plan_ready: false
   validation_ready: false
+  human_visibility_ready: false
   tasks_ready: false
   implementation_done: false
   independent_evaluation_done: false

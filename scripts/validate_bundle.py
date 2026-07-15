@@ -103,6 +103,7 @@ def main() -> int:
     templates = manifest_mapping(manifest, "artifact_templates")
     required_template_keys = {
         "spec",
+        "stakeholder_brief",
         "plan",
         "tasks",
         "impact_map",

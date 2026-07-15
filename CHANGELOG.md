@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.2
+
+Evolução pequena de visibilidade humana para specs orientadas a resultado.
+
+Inclui:
+
+- nova regra `human-visibility`;
+- novo template `stakeholder-brief.html` para leitura humana em reunião;
+- scaffolder copiando o brief para novas iniciativas;
+- lifecycle com gate `Human Visibility Ready` antes de task breakdown;
+- Spec Guardian, Delivery Orchestrator e task breakdown instruídos a manter o
+  brief sincronizado sem torná-lo fonte de verdade;
+- validação estrutural e smoke test atualizados para cobrir o novo template.
+
 ## 0.1.1
 
 Evolução pequena de outcome readiness para manter SDD orientado a resultado sem

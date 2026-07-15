@@ -3,7 +3,7 @@
 Bundle agêntico, versionado em Git e vendor-neutral para governar Spec Driven
 Development com gates, evidência, memória de execução e retomada.
 
-**Versão:** `0.1.1`  
+**Versão:** `0.1.2`  
 **Entrypoint:** `.harness/AGENTS.md`  
 **Instalação recomendada:** submódulo em
 `vendor/sdd-harness-guardian`  
@@ -16,6 +16,8 @@ Ele fornece contratos reutilizáveis para:
 - tornar specs claras, limitadas e testáveis;
 - exigir outcome e incremento demonstrável antes de implementar ou expandir
   tasks;
+- produzir um `stakeholder-brief.html` conciso para alinhamento humano em
+  iniciativas não triviais;
 - mapear impacto antes de mudanças não triviais;
 - transformar aceite em plano de validação e tasks atômicas;
 - separar implementação de avaliação;
@@ -52,7 +54,7 @@ No projeto consumidor:
 
 ```bash
 git submodule add https://github.com/SUA-ORG/sdd-harness-guardian.git vendor/sdd-harness-guardian
-git -C vendor/sdd-harness-guardian checkout v0.1.1
+git -C vendor/sdd-harness-guardian checkout v0.1.2
 python vendor/sdd-harness-guardian/scripts/new_initiative.py minha-feature
 ```
 
@@ -62,6 +64,7 @@ Depois, o agente deve ler:
 AGENTS.md do projeto consumidor
 vendor/sdd-harness-guardian/.harness/AGENTS.md
 specs/minha-feature/spec.md
+specs/minha-feature/stakeholder-brief.html
 ```
 
 O script de scaffolding é conveniência; os templates também podem ser copiados

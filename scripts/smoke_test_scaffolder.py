@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SCAFFOLDER = ROOT / "scripts" / "new_initiative.py"
 FEATURE_FILES = (
     "spec.md",
+    "stakeholder-brief.html",
     "impact-map.md",
     "plan.md",
     "validation-plan.md",

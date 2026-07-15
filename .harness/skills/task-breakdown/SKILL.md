@@ -1,7 +1,7 @@
 ---
 name: task-breakdown
 description: Use when converting an approved spec and technical plan into small, ordered, testable implementation tasks.
-version: "0.1.1"
+version: "0.1.2"
 owner: platform-engineering
 maturity: stable
 risk_level: medium
@@ -23,15 +23,17 @@ risk_level: medium
 
 ## Procedure
 
-1. Read spec, plan, impact map and validation plan.
+1. Read spec, stakeholder brief, plan, impact map and validation plan.
 2. Identify dependencies, outcome linkage and the next demonstrable increment.
 3. Split into tasks that can be completed and validated independently.
 4. Assign requirement IDs, AC IDs, exit criteria, evidence requirement and
    why-now rationale to each task.
 5. Reject process-only task expansion unless it produces evidence, validation or
    named risk reduction.
-6. Assign distinct builder/evaluator slots and mark required human approval.
-7. Produce the ordered task list and keep tasks pending until readiness is checked.
+6. Confirm the stakeholder brief is updated for the slice before expanding
+   implementation tasks.
+7. Assign distinct builder/evaluator slots and mark required human approval.
+8. Produce the ordered task list and keep tasks pending until readiness is checked.
 
 ## Output contract
 

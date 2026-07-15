@@ -19,23 +19,26 @@ An initiative exists under `specs/<initiative>/` using the canonical templates.
 4. **Impact Map** — map non-trivial surfaces, unknowns and risk.
 5. **Technical Plan** — define approach, decisions and rollback.
 6. **Validation Plan** — map every AC to checks and evidence.
-7. **Task Breakdown** — create atomic, outcome-linked tasks with exit/evidence
+7. **Stakeholder Brief** — update `stakeholder-brief.html` as a concise,
+   human-readable summary of outcome, scope, impact, validation, risks and next
+   safe step.
+8. **Task Breakdown** — create atomic, outcome-linked tasks with exit/evidence
    criteria.
-8. **Readiness Gate** — verify outcome linkage, dependencies, risk and approvals
+9. **Readiness Gate** — verify outcome linkage, dependencies, risk and approvals
    for one task.
-9. **Implementation** — Builder implements only that task.
-10. **Evidence Draft** — Builder writes `evidence/<task-id>.md` and moves the
+10. **Implementation** — Builder implements only that task.
+11. **Evidence Draft** — Builder writes `evidence/<task-id>.md` and moves the
    task to `needs_evaluation`.
-11. **Independent Evaluation** — distinct Evaluator returns `approve`,
+12. **Independent Evaluation** — distinct Evaluator returns `approve`,
     `request_revision`, `block` or `escalate_to_human`.
-12. **Revision loop** — `request_revision` returns to the Builder; new evidence
+13. **Revision loop** — `request_revision` returns to the Builder; new evidence
     and evaluation are required.
-13. **Evidence Gate** — on `approve`, State Keeper records the decision and
+14. **Evidence Gate** — on `approve`, State Keeper records the decision and
     changes `needs_evaluation -> approved -> done`.
-14. **Initiative Validation** — after every task is `done`, confirm AC coverage,
+15. **Initiative Validation** — after every task is `done`, confirm AC coverage,
     residual risks and `validation_done: true`.
-15. **Ratchet** — record serious first-time or recurring preventable failures.
-16. **Close/Handoff** — update progress, state, decisions and final handoff.
+16. **Ratchet** — record serious first-time or recurring preventable failures.
+17. **Close/Handoff** — update progress, state, decisions and final handoff.
 
 ## Gate matrix
 
@@ -44,7 +47,8 @@ An initiative exists under `specs/<initiative>/` using the canonical templates.
 | draft → outcome_ready | outcome, demonstrable increment, priority source or human decision | Spec Guardian/Orchestrator |
 | outcome_ready → spec_ready | Spec Guardian decision | Spec Guardian |
 | spec_ready → plan_ready | impact + plan + rollback | Orchestrator |
-| plan_ready → tasks_ready | validation mapping + atomic tasks | Harness Planner/Orchestrator |
+| validation_ready → human_visibility_ready | synchronized stakeholder brief | Spec Guardian/Orchestrator |
+| human_visibility_ready → tasks_ready | validation mapping + atomic tasks | Harness Planner/Orchestrator |
 | ready → in_progress | readiness record with outcome linkage | Builder/Orchestrator |
 | in_progress → needs_evaluation | implementation + evidence draft | Builder |
 | needs_evaluation → approved | independent `approve` | Evaluator |
@@ -60,6 +64,7 @@ non-terminal.
 ## Failure routes
 
 - unclear intent or outcome → return to Specify or request human decision;
+- missing or stale stakeholder brief → update Human Visibility before tasks;
 - process-only task expansion without evidence → return to Outcome/Task
   Readiness;
 - unknown/high impact → discovery or human review;

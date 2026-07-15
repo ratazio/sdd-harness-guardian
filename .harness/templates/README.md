@@ -8,6 +8,7 @@ repository; never write consumer state inside `vendor/sdd-harness-guardian`.
 ```txt
 specs/<initiative>/
   spec.md
+  stakeholder-brief.html
   impact-map.md
   plan.md
   validation-plan.md
@@ -40,6 +41,8 @@ atomically enough for scaffolding and refuses any existing target.
 Create the target tree, copy each canonical file with its target name, copy
 `handoff.md` as `handoffs/latest-handoff.md` and create an empty `evidence/`.
 Replace `<initiative>`, dates and ownership placeholders before review.
+Keep `stakeholder-brief.html` concise, human-readable and synchronized with the
+source artifacts.
 
 Do not copy `run-state.yaml.md` as state; it documents the contract.
 Copy `run-state.yaml` itself.
@@ -49,5 +52,7 @@ Copy `run-state.yaml` itself.
 Update templates, rules and workflows together when a required field changes.
 Outcome-readiness fields are part of the execution contract, not optional
 metadata.
+The stakeholder brief is a derived visibility artifact and must not become a
+parallel source of truth.
 Run `python scripts/validate_bundle.py` before release. Consumers pin a bundle
 tag, so template evolution must be versioned.

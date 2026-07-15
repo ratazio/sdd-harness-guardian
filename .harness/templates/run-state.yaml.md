@@ -9,6 +9,8 @@ draft
 outcome_ready
 spec_ready
 plan_ready
+validation_ready
+human_visibility_ready
 tasks_ready
 implementation_in_progress
 needs_evaluation
@@ -26,6 +28,8 @@ closed
 - artifact paths resolve inside the initiative;
 - `outcome_ready` requires declared outcome, demonstrable increment and
   priority source or human decision;
+- non-trivial initiatives include `stakeholder-brief.html` synchronized with
+  source artifacts;
 - `current_task` matches the task ledger and `tasks.md`;
 - `builder_id != evaluator_id` for an evaluated task;
 - `evidence_pack_ready` requires an existing approved evidence path;

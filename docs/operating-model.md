@@ -3,7 +3,8 @@
 ## Loop central
 
 ```txt
-specify -> outcome review -> spec review -> impact -> plan -> validation plan -> tasks
+specify -> outcome review -> spec review -> impact -> plan -> validation plan
+-> stakeholder brief -> tasks
 -> implement one task -> evidence draft -> independent evaluation
 -> approved evidence -> done -> initiative validation -> ratchet
 ```
@@ -21,6 +22,7 @@ constraints próprios.
 | Impact Mapped | Impact Mapper | spec ready + contexto | superfícies, risco, unknowns |
 | Plan Ready | Orchestrator | spec + impact | abordagem, decisões, rollback |
 | Validation Ready | Harness Planner | ACs estáveis | cada AC mapeado |
+| Human Visibility Ready | Spec Guardian/Orchestrator | artefatos fonte | brief HTML conciso e sincronizado |
 | Tasks Ready | Orchestrator | plano + validação | tasks atômicas com outcome/exit/evidence |
 | Implementation Done | Builder | uma task ready | mudança + evidence draft |
 | Independent Evaluation | Evaluator | diff + checks + draft | approve/revise/block/escalate |

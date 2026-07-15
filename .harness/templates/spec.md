@@ -24,6 +24,8 @@ State the single condition this initiative must make true.
 The harness validates that these are declared. It does not decide commercial
 value or product priority.
 
+Summarize these fields for human review in `stakeholder-brief.html`.
+
 ## 4. Users or actors
 
 - Actor:

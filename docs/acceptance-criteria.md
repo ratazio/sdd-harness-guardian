@@ -19,6 +19,8 @@ reproduzível; `python scripts/validate_bundle.py` cobre os checks estruturais.
 - [x] Spec exige objetivo, outcomes, non-goals, riscos e aceite testável.
 - [x] Spec/task exige outcome, incremento demonstrável, prioridade registrada
       ou decisão humana pendente.
+- [x] Iniciativa não trivial exige `stakeholder-brief.html` conciso,
+      sincronizado e derivado dos artefatos fonte.
 - [x] Mudança não trivial exige impact map.
 - [x] Todo AC possui validation mapping.
 - [x] Plano possui decisões, impacto e rollback proporcionais ao risco.
@@ -40,6 +42,7 @@ reproduzível; `python scripts/validate_bundle.py` cobre os checks estruturais.
 
 - [x] `run-state.yaml` é copiável e machine-readable.
 - [x] Progress, handoff, decision log, evidence e ratchet têm templates.
+- [x] Stakeholder brief tem template HTML copiável.
 - [x] Pausa e retomada registram checkpoint, trabalho parcial e próximo passo.
 - [x] Estado divergente bloqueia retomada insegura.
 - [x] Falhas sérias ou recorrentes alimentam `ratchet.md`.
@@ -59,17 +62,17 @@ reproduzível; `python scripts/validate_bundle.py` cobre os checks estruturais.
 - [x] `python scripts/validate_bundle.py` termina com exit code 0.
 - [x] O scaffolder foi exercitado em diretório temporário sem sobrescrever dados.
 - [x] Referências de arquivos do manifest apontam para arquivos existentes.
-- [x] Um evaluator independente revisou diff, critérios e evidências.
+- [ ] Um evaluator independente revisou diff, critérios e evidências.
 - [x] Pendências e riscos remanescentes estão registrados.
 
 ## Resultado
 
 **Bundle Ready:** no, release candidate pending independent evaluation  
-**Versão avaliada:** 0.1.1  
-**Evidência:** `python scripts/validate_bundle.py` passed, 217 checks;
+**Versão avaliada:** 0.1.2  
+**Evidência:** `python scripts/validate_bundle.py` passed, 223 checks;
 `python scripts/smoke_test_scaffolder.py` passed; `git diff --check` passed  
 **Evaluator:** pending
 
-Residual risk: the outcome-readiness contract has structural validation only
-until an independent evaluator reviews the diff and a consumer pilot exercises
-the new prompts/templates.
+Residual risk: the outcome-readiness and human-visibility contracts have
+structural validation only until an independent evaluator reviews the diff and a
+consumer pilot exercises the new prompts/templates.

@@ -8,10 +8,11 @@ A consumer wants to add or change observable product behavior.
 
 Use every artifact in the Common SDD Lifecycle. Feature acceptance criteria
 must describe observable behavior without embedding unjustified implementation.
+Non-trivial features also maintain `stakeholder-brief.html` for human review.
 
 ## Flow
 
-1. Execute `sdd-lifecycle.md` gates 1–7.
+1. Execute `sdd-lifecycle.md` gates 1–8.
 2. Confirm compatibility, migration and rollout impact where relevant.
 3. For each ready task, Builder implements, drafts evidence and sets
    `needs_evaluation`; a distinct Evaluator must `approve` before State Keeper
@@ -24,6 +25,8 @@ must describe observable behavior without embedding unjustified implementation.
 - contract, data or behavior changes are explicit in spec/plan;
 - every feature task declares the outcome served, demonstrable increment,
   expected artifact and validation method;
+- stakeholder brief summarizes outcome, scope, impact, validation, risks and
+  next safe step without becoming a source of truth;
 - the workflow asks for clarification instead of inferring business priority;
 - rollout and rollback match the impact level;
 - scope discovered during implementation returns to planning;
@@ -34,6 +37,6 @@ must describe observable behavior without embedding unjustified implementation.
 
 ## Exit condition
 
-`validation_done: true`, all tasks `done`, every AC covered, outcome linkage
-preserved, evidence linked, decision log current, final handoff written and no
-blocking risk open.
+`validation_done: true`, all tasks `done`, every AC covered, stakeholder brief
+synchronized, outcome linkage preserved, evidence linked, decision log current,
+final handoff written and no blocking risk open.

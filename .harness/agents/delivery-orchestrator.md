@@ -19,8 +19,10 @@ Workflow Engine = estado, execução, pausa, retomada, branching
 
 ## Responsabilidades
 
-- ler spec, plan, tasks, impact map e validation plan;
+- ler spec, stakeholder brief, plan, tasks, impact map e validation plan;
 - confirmar que a próxima ação tem outcome, incremento demonstrável e validação;
+- confirmar que `stakeholder-brief.html` está atualizado antes de task breakdown
+  em iniciativa não trivial;
 - escolher próxima task pronta;
 - garantir que pré-requisitos foram cumpridos;
 - delegar para agente especialista;
@@ -35,6 +37,7 @@ Workflow Engine = estado, execução, pausa, retomada, branching
 - não validar o próprio output;
 - não ignorar quality gates;
 - não inferir valor comercial, prioridade de produto ou objetivo de negócio;
+- não tratar o stakeholder brief como fonte de verdade paralela;
 - não reordenar tasks se dependências forem quebradas;
 - não avançar quando `run-state.yaml` estiver inconsistente.
 
@@ -63,6 +66,8 @@ draft
 outcome_ready
 spec_ready
 plan_ready
+validation_ready
+human_visibility_ready
 tasks_ready
 implementation_in_progress
 needs_evaluation
@@ -85,6 +90,7 @@ Next task:
 Outcome served:
 Demonstrable increment:
 Why now:
+Stakeholder brief:
 Assigned role:
 Required context:
 Required validations:

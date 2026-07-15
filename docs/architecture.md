@@ -22,6 +22,7 @@ Consumer repository
 | Camada | Fonte de verdade | Responsabilidade |
 |---|---|---|
 | Intent | `spec.md` | problema, objetivo, escopo e aceite |
+| Visibility | `stakeholder-brief.html` | leitura humana derivada para alinhamento |
 | Design | `impact-map.md` + `plan.md` | superfícies, riscos e estratégia |
 | Validation | `validation-plan.md` | mapeamento AC → check → evidência |
 | Execution | `tasks.md` + `run-state.yaml` | unidades, gates e transições |
@@ -55,9 +56,10 @@ são compatíveis.
 
 ## Estado e atomicidade
 
-`run-state.yaml` contém o estado compacto e machine-readable. `progress.md` e
-`handoffs/latest-handoff.md` explicam o contexto humano. `tasks.md` é o ledger
-de trabalho; `evidence/<task-id>.md` é o ledger de prova.
+`run-state.yaml` contém o estado compacto e machine-readable.
+`stakeholder-brief.html` é o resumo de reunião derivado dos artefatos fonte.
+`progress.md` e `handoffs/latest-handoff.md` explicam o contexto humano.
+`tasks.md` é o ledger de trabalho; `evidence/<task-id>.md` é o ledger de prova.
 
 Atualizações relacionadas devem convergir antes do fim da sessão. Se working
 tree, task status e run-state divergirem, a retomada bloqueia até reconciliação.

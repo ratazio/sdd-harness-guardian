@@ -12,6 +12,7 @@ from pathlib import Path
 
 TEMPLATE_MAP = {
     "spec.md": "spec.md",
+    "stakeholder-brief.html": "stakeholder-brief.html",
     "impact-map.md": "impact-map.md",
     "plan.md": "plan.md",
     "validation-plan.md": "validation-plan.md",
@@ -107,7 +108,10 @@ def main() -> int:
         )
 
     print(f"Created {args.kind} initiative: {target}")
-    print("Next step: complete spec.md and request Outcome/Spec Guardian review.")
+    print(
+        "Next step: complete spec.md, update stakeholder-brief.html, "
+        "and request Outcome/Spec Guardian review."
+    )
     return 0
 
 

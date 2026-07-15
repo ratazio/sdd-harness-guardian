@@ -15,9 +15,9 @@ Na raiz do projeto consumidor:
 
 ```bash
 git submodule add https://github.com/SUA-ORG/sdd-harness-guardian.git vendor/sdd-harness-guardian
-git -C vendor/sdd-harness-guardian checkout v0.1.1
+git -C vendor/sdd-harness-guardian checkout v0.1.2
 git add .gitmodules vendor/sdd-harness-guardian
-git commit -m "vendor sdd-harness-guardian@0.1.1"
+git commit -m "vendor sdd-harness-guardian@0.1.2"
 ```
 
 Clones posteriores devem inicializar o submódulo:
@@ -73,7 +73,9 @@ Ele apenas copia templates e cria `evidence/` e `handoffs/`; não executa o
 workflow.
 
 Sem Python, crie `specs/<initiative>/` e copie os arquivos listados em
-`.harness/templates/README.md`. Substitua os placeholders antes do Spec Review.
+`.harness/templates/README.md`. Substitua os placeholders antes do
+Outcome/Spec Review e mantenha `stakeholder-brief.html` sincronizado para
+iniciativas não triviais.
 
 ## 4. Operar e retomar
 
@@ -115,12 +117,12 @@ No repositório fonte:
 
 ```bash
 git add .
-git commit -m "sdd-harness-guardian 0.1.1"
+git commit -m "sdd-harness-guardian 0.1.2"
 git branch -M main
 git remote add origin https://github.com/SUA-ORG/sdd-harness-guardian.git
 git push -u origin main
-git tag -a v0.1.1 -m "sdd-harness-guardian 0.1.1"
-git push origin v0.1.1
+git tag -a v0.1.2 -m "sdd-harness-guardian 0.1.2"
+git push origin v0.1.2
 ```
 
 Nunca mova uma tag publicada. Correções exigem nova versão SemVer.
@@ -134,6 +136,6 @@ python scripts/validate_bundle.py
 ```
 
 Em um consumidor temporário, valide que um segundo agente consegue: ler o
-entrypoint, criar a iniciativa, completar Spec/Impact/Plan/Validation/Tasks,
+entrypoint, criar a iniciativa, completar Spec/Impact/Plan/Validation/Brief/Tasks,
 implementar uma task, produzir `evidence/<task-id>.md`, obter avaliação
 independente e retomar a partir de `run-state.yaml` sem instruções externas.
