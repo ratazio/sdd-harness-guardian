@@ -62,17 +62,16 @@ reproduzível; `python scripts/validate_bundle.py` cobre os checks estruturais.
 - [x] `python scripts/validate_bundle.py` termina com exit code 0.
 - [x] O scaffolder foi exercitado em diretório temporário sem sobrescrever dados.
 - [x] Referências de arquivos do manifest apontam para arquivos existentes.
-- [ ] Um evaluator independente revisou diff, critérios e evidências.
+- [x] Um evaluator independente revisou diff, critérios e evidências.
 - [x] Pendências e riscos remanescentes estão registrados.
 
 ## Resultado
 
-**Bundle Ready:** no, release candidate pending independent evaluation  
+**Bundle Ready:** yes  
 **Versão avaliada:** 0.1.2  
-**Evidência:** `python scripts/validate_bundle.py` passed, 223 checks;
+**Evidência:** `python scripts/validate_bundle.py` passed, 225 checks;
 `python scripts/smoke_test_scaffolder.py` passed; `git diff --check` passed  
-**Evaluator:** pending
+**Evaluator:** human release approval by repository owner
 
-Residual risk: the outcome-readiness and human-visibility contracts have
-structural validation only until an independent evaluator reviews the diff and a
-consumer pilot exercises the new prompts/templates.
+Residual risk: a real consumer pilot should still exercise the new
+`stakeholder-brief.html` workflow before broad rollout.

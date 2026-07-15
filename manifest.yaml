@@ -3,7 +3,7 @@ name: sdd-harness-guardian
 display_name: SDD Harness Guardian
 version: 0.1.2
 type: agentic-governance-bundle
-status: release_candidate
+status: ready
 owner: platform-engineering
 license_policy: internal
 install_path: vendor/sdd-harness-guardian

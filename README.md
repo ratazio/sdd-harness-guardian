@@ -7,7 +7,7 @@ Development com gates, evidência, memória de execução e retomada.
 **Entrypoint:** `.harness/AGENTS.md`  
 **Instalação recomendada:** submódulo em
 `vendor/sdd-harness-guardian`  
-**Status:** release_candidate
+**Status:** ready
 
 ## O que este bundle resolve
 

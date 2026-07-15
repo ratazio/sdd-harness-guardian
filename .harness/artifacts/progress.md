@@ -8,7 +8,7 @@ This file tracks the evolution of the `sdd-harness-guardian` bundle itself.
 
 ## Current status
 
-release_candidate
+ready
 
 ## Current release evidence
 
@@ -21,7 +21,5 @@ release_candidate
 ## Next maintenance tasks
 
 - Pilot the tagged bundle in a real consumer project.
-- Obtain independent evaluation for the 0.1.2 outcome-readiness and
-  human-visibility diff.
 - Add runtime-specific hard mirrors only in optional integrations.
 - Expand eval fixtures when real false-positive/false-negative cases appear.
