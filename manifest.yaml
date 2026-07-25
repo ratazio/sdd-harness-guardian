@@ -52,6 +52,8 @@ agents:
   - evaluator-agent
   - state-keeper
   - ratchet-maintainer
+  - harness-auditor
+  - harness-graph-mapper
 
 skills:
   - spec-review
@@ -61,6 +63,7 @@ skills:
   - evidence-pack-generation
   - interruption-recovery
   - ratchet-learning
+  - sdd-harness-audit
 
 workflows:
   - sdd-lifecycle
@@ -69,6 +72,7 @@ workflows:
   - sdd-refactor
   - interruption-recovery
   - spec-structure-normalization
+  - sdd-harness-audit
 
 rules:
   - human-visibility
@@ -83,6 +87,7 @@ rules:
   - instruction-precedence
   - soft-hard-rules
   - spec-indexing
+  - audit-policy
 
 artifact_templates:
   spec: .harness/templates/spec.md
@@ -100,6 +105,9 @@ artifact_templates:
   ratchet_entry: .harness/templates/ratchet-entry.md
   reproduction: .harness/templates/reproduction.md
   specs_index: .harness/templates/specs-index.md
+  audit_report: .harness/templates/audit-report.html
+  audit_report_design: .harness/templates/audit-report-design.md
+  audit_report_tabs: .harness/templates/audit-report-tabs.md
 
 consumer_contract:
   initiative_root: specs/NNN-<initiative>
@@ -133,6 +141,7 @@ hard_mirror_recommendations:
   resumable_state: run_state_schema_and_transition_check
   destructive_operations: human_approval_gate
   spec_index: validate_spec_index
+  harness_audit: validate_harness_audit_readiness
 
 compatibility:
   vendor_neutral: true

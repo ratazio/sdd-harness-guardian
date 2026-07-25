@@ -107,3 +107,15 @@ failure -> root cause -> prevention -> artifact owner
 
 Uma entrada só fica `implemented` quando a prevenção e seu regression check
 existem e foram verificados.
+
+## Harness audit
+
+Auditorias seguem `.harness/workflows/sdd-harness-audit.md` e usam
+`.harness/skills/sdd-harness-audit/SKILL.md`. O auditor deve montar o grafo de
+entrypoints, agentes, skills, regras, workflows, templates, scripts, specs,
+estado, memória e evidência; depois julgar SDD, harness, contratos agênicos,
+enforcement e recuperação.
+
+O relatório HTML usa `.harness/templates/audit-report.html`. Ele deve conter
+decisão, maturidade, grafo, achados por severidade, artefatos órfãos ou
+decorativos, roadmap de remediação, assumptions e open questions.

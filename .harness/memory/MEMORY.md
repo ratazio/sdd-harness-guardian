@@ -30,3 +30,5 @@ Use this file only for stable bundle-level memory.
   deterministic index and compact state come before semantic search.
 - Embeddings and memory search are optional harness/retrieval layers, not
   replacements for explicit SDD artifacts.
+- Harness audits judge operational reachability and evidence, not file
+  existence; decorative process files are findings, not maturity.

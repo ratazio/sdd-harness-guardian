@@ -75,6 +75,7 @@ def main() -> int:
         "docs/architecture.md",
         "docs/operating-model.md",
         "docs/acceptance-criteria.md",
+        "docs/harness-audit-framework.md",
         "prompts/build-the-guardian.md",
         "prompts/use-in-consumer-project.md",
         "scripts/new_initiative.py",

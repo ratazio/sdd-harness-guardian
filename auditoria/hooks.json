@@ -1,0 +1,67 @@
+{
+  "audit_id": "sdd-harness-guardian-2026-07-25",
+  "generated_at": "2026-07-25",
+  "status": "none_found",
+  "searched_locations": [
+    ".git/hooks",
+    ".github/workflows",
+    ".gitlab-ci.yml",
+    ".circleci",
+    "ci",
+    "scripts"
+  ],
+  "implemented_hooks": [],
+  "implemented_ci_workflows": [],
+  "script_based_enforcement": [
+    {
+      "path": "scripts/validate_bundle.py",
+      "type": "manual_or_ci_candidate",
+      "enforces": [
+        "manifest required files",
+        "registered agents/skills/workflows/rules exist",
+        "rules contain hard mirror recommendation",
+        "workflow terminal gate tokens",
+        "run-state template keys",
+        "skill frontmatter"
+      ],
+      "gap": "Not wired to a detected Git hook or CI workflow in this repository."
+    },
+    {
+      "path": "scripts/smoke_test_scaffolder.py",
+      "type": "manual_or_ci_candidate",
+      "enforces": [
+        "numbered initiative scaffolding",
+        "bugfix reproduction copy",
+        "duplicate scaffold overwrite refusal",
+        "existing spec hash preservation"
+      ],
+      "gap": "Not wired to a detected Git hook or CI workflow in this repository."
+    }
+  ],
+  "recommended_hooks": [
+    {
+      "name": "pre-commit validate bundle",
+      "trigger": "before commit",
+      "command": "python scripts/validate_bundle.py",
+      "purpose": "Prevent committing a structurally invalid bundle."
+    },
+    {
+      "name": "pre-push smoke scaffolder",
+      "trigger": "before push or CI",
+      "command": "python scripts/smoke_test_scaffolder.py",
+      "purpose": "Prevent publishing broken scaffolding behavior."
+    },
+    {
+      "name": "state consistency check",
+      "trigger": "before commit/CI",
+      "command": "future validate-spec-state",
+      "purpose": "Detect run-state/status/task/index divergence like F-002."
+    },
+    {
+      "name": "audit package completeness check",
+      "trigger": "after audit report generation",
+      "command": "future validate-harness-audit-readiness",
+      "purpose": "Ensure HTML report includes raw artifacts, hooks tab and graph legend."
+    }
+  ]
+}

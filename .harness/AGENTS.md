@@ -85,6 +85,8 @@ invariantes protegidas. Conflitos devem ser registrados no
 | Evaluator Agent | avaliar implementação e evidência | não corrigir durante a avaliação |
 | State Keeper | manter estado, progresso, decisões e handoff | não fabricar conclusão |
 | Ratchet Maintainer | converter falhas em prevenção permanente | exigir regression check |
+| Harness Auditor | auditar SDD, harness, grafo e evidência | não confundir existência com uso |
+| Harness Graph Mapper | mapear artefatos e referências alcançáveis | não inferir edges sem prova |
 
 As definições completas estão em `.harness/agents/`.
 
@@ -107,6 +109,11 @@ As definições completas estão em `.harness/agents/`.
 14. Initiative Validation Done
 15. Ratchet update when triggered
 ```
+
+Auditorias usam o workflow `.harness/workflows/sdd-harness-audit.md` e a skill
+`.harness/skills/sdd-harness-audit/SKILL.md`. O relatório final deve seguir
+`.harness/templates/audit-report.html` e incluir grafo, achados por severidade,
+evidência e roadmap de remediação.
 
 Uma task só pode transicionar:
 

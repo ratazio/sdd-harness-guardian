@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auditoria SDD/Harness - sdd-harness-guardian</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172026;
+      --muted: #5b6770;
+      --line: #ccd5dc;
+      --band: #f5f7f9;
+      --pass: #0f766e;
+      --warn: #b45309;
+      --fail: #b91c1c;
+      --info: #1d4ed8;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+      line-height: 1.5;
+    }
+    header, section {
+      padding: 28px clamp(20px, 5vw, 64px);
+      border-bottom: 1px solid var(--line);
+    }
+    header { background: var(--band); }
+    h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 22px; }
+    h3 { font-size: 16px; margin-top: 18px; }
+    p { margin: 0 0 12px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th { background: var(--band); }
+    code {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.95em;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      padding: 12px;
+      background: #ffffff;
+    }
+    .status-pass { color: var(--pass); font-weight: 700; }
+    .status-warn { color: var(--warn); font-weight: 700; }
+    .status-fail { color: var(--fail); font-weight: 700; }
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      padding: 2px 7px;
+      margin: 0 4px 4px 0;
+      font-size: 12px;
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Auditoria SDD/Harness - sdd-harness-guardian</h1>
+    <p><strong>Repositório:</strong> <code>D:\Projetos\AI\sdd-harness-guardian</code></p>
+    <p><strong>Data da auditoria:</strong> 2026-07-25 · <strong>Auditor:</strong> Codex / Harness Auditor</p>
+    <p><strong>Caminho de saída aprovado pelo usuário:</strong> <code>auditoria/sdd-harness-audit.html</code></p>
+    <div class="meta">
+      <div class="metric"><strong>Decisão</strong><br><span class="status-warn">pass_with_gaps</span></div>
+      <div class="metric"><strong>Maturidade</strong><br>3 - governed, não hardened</div>
+      <div class="metric"><strong>Achados críticos/altos</strong><br>2</div>
+      <div class="metric"><strong>Artefatos órfãos</strong><br>0 críticos; 1 superfície weak</div>
+    </div>
+  </header>
+
+  <section id="executive-summary">
+    <h2>1. Executive Summary</h2>
+    <p>O repositório tem um harness real e utilizável: há entrypoint claro, manifesto, regras, workflows, agentes, skills, templates, specs numeradas, estado retomável, evidência e validação estrutural. A auditoria não encontrou uma pilha decorativa sem ligação; os principais artefatos estão alcançáveis por <code>AGENTS.md</code>, <code>.harness/AGENTS.md</code> e <code>manifest.yaml</code>.</p>
+    <p>O resultado não é <strong>pass</strong> pleno porque o próprio repositório está no meio de uma evolução não fechada: a iniciativa <code>002-sdd-harness-audit-process</code> está em <code>needs_evaluation</code>, mas a metadata de release ainda diz <code>status: ready</code> e versão <code>0.1.2</code>. Além disso, a camada determinística ainda é parcial: existem recomendações de hard mirror, mas muitos checks são recomendações e não hooks/CI/schemas executáveis.</p>
+    <table>
+      <thead><tr><th>Domínio</th><th>Status</th><th>Razão</th></tr></thead>
+      <tbody>
+        <tr><td>SDD</td><td><span class="status-pass">forte</span></td><td>Specs numeradas, índice, artefatos completos por iniciativa, gates e evidência. A iniciativa 002 ainda aguarda avaliação.</td></tr>
+        <tr><td>Harness</td><td><span class="status-pass">governed</span></td><td>Entry, regras, workflows, templates, state, evidence e ratchet estão presentes e registrados.</td></tr>
+        <tr><td>Estrutura agênica</td><td><span class="status-warn">boa com gaps</span></td><td>Agentes e skills existem e são registrados, mas algumas skills antigas não seguem o corpo completo definido pelo novo framework de auditoria.</td></tr>
+        <tr><td>Enforcement</td><td><span class="status-warn">parcial</span></td><td><code>validate_bundle.py</code> cobre estrutura, mas não há CI/hook/schema para todos os hard mirrors recomendados.</td></tr>
+        <tr><td>Memória/retrieval</td><td><span class="status-pass">boa</span></td><td><code>specs/INDEX.md</code>, <code>run-state.yaml</code>, <code>progress.md</code>, handoffs, decision logs e memory index dão contexto compacto.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="scope">
+    <h2>2. Scope And Sources</h2>
+    <p>A auditoria inspecionou o repositório fonte do bundle, incluindo <code>AGENTS.md</code>, <code>.harness/</code>, <code>manifest.yaml</code>, <code>README.md</code>, <code>INSTALL.md</code>, <code>docs/</code>, <code>scripts/</code> e <code>specs/</code>. O relatório considera o estado atual da working tree, incluindo mudanças não commitadas.</p>
+    <p><strong>Baseline usado:</strong> SDD, Agent Skills/SKILL.md, AGENTS.md, MCP, A2A, SemVer, ReAct, Reflexion, Constitutional AI, hard mirrors, ratchet learning e o framework em <code>docs/harness-audit-framework.md</code>.</p>
+    <p><strong>Comandos executados:</strong></p>
+    <table>
+      <thead><tr><th>Comando</th><th>Resultado</th><th>Interpretação</th></tr></thead>
+      <tbody>
+        <tr><td><code>python scripts\validate_bundle.py</code></td><td>Bundle validation passed: 258 checks.</td><td>Estrutura registrada e arquivos obrigatórios passam.</td></tr>
+        <tr><td><code>python scripts\smoke_test_scaffolder.py</code></td><td>RESULT: PASS</td><td>Scaffolder cria specs numeradas e bloqueia slug duplicado sem sobrescrever.</td></tr>
+        <tr><td><code>git status --short</code></td><td>várias mudanças não commitadas e novos artefatos</td><td>Estado atual não é release fechado.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="graph">
+    <h2>3. Harness Graph</h2>
+    <p>O grafo operacional é majoritariamente conectado. O root <code>AGENTS.md</code> delega para <code>.harness/AGENTS.md</code>; o entrypoint direciona leitura de regras, agentes, workflows, templates, specs e auditoria; <code>manifest.yaml</code> registra agentes, skills, workflows, regras e templates; <code>scripts/validate_bundle.py</code> valida a maior parte do registro.</p>
+    <table>
+      <thead><tr><th>Nó</th><th>Tipo</th><th>Reachability</th><th>Inbound</th><th>Outbound</th><th>Risco</th></tr></thead>
+      <tbody>
+        <tr><td><code>AGENTS.md</code></td><td>entrypoint</td><td>reachable</td><td>root</td><td><code>.harness/AGENTS.md</code></td><td>baixo</td></tr>
+        <tr><td><code>.harness/AGENTS.md</code></td><td>entrypoint</td><td>reachable</td><td><code>AGENTS.md</code>, manifest docs</td><td>rules, agents, workflows, templates, specs, audit</td><td>baixo</td></tr>
+        <tr><td><code>manifest.yaml</code></td><td>registry</td><td>reachable</td><td>README/docs/scripts</td><td>agents, skills, workflows, rules, templates</td><td>baixo</td></tr>
+        <tr><td><code>.harness/rules/*.md</code></td><td>rules</td><td>reachable</td><td>AGENTS + manifest</td><td>hard mirror recommendations</td><td>médio: mirrors nem sempre executáveis</td></tr>
+        <tr><td><code>.harness/workflows/*.md</code></td><td>workflows</td><td>reachable</td><td>AGENTS + manifest</td><td>agents, state, evidence</td><td>baixo</td></tr>
+        <tr><td><code>.harness/skills/*/SKILL.md</code></td><td>skills</td><td>reachable</td><td>manifest + workflows/docs</td><td>procedimentos e output contracts</td><td>médio: skills antigas incompletas frente ao novo padrão</td></tr>
+        <tr><td><code>specs/INDEX.md</code></td><td>spec index</td><td>reachable</td><td>AGENTS + state-memory rule</td><td>specs 001 e 002</td><td>baixo</td></tr>
+        <tr><td><code>specs/002-sdd-harness-audit-process/*</code></td><td>active spec</td><td>reachable</td><td>specs index + run-state</td><td>evidence, handoff, progress</td><td>alto: ainda não avaliada</td></tr>
+        <tr><td><code>.harness/templates/audit-report.html</code></td><td>template</td><td>reachable</td><td>manifest + audit skill/workflow</td><td>audit reports</td><td>baixo</td></tr>
+        <tr><td><code>docs/harness-audit-framework.md</code></td><td>knowledge framework</td><td>reachable</td><td>docs references + validator</td><td>audit skill baseline</td><td>baixo</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="findings">
+    <h2>4. Findings</h2>
+    <table>
+      <thead><tr><th>ID</th><th>Severidade</th><th>Domínio</th><th>Evidência</th><th>Impacto</th><th>Remediação obrigatória</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>F-001</td>
+          <td><span class="status-fail">High</span></td>
+          <td>Release / SDD state</td>
+          <td><code>manifest.yaml</code> declara <code>status: ready</code> e <code>version: 0.1.2</code>; <code>specs/INDEX.md</code> mostra <code>002-sdd-harness-audit-process</code> em <code>needs_evaluation</code>; <code>CHANGELOG.md</code> não registra auditoria/numeração.</td>
+          <td>O bundle parece pronto para release enquanto contém mudanças novas sem avaliação independente. Isso quebra a confiança de versionamento e release.</td>
+          <td>Antes de publicar, obter avaliação independente da spec 002, fechar estado/evidência, atualizar changelog/versionamento ou manter manifest fora de <code>ready</code>.</td>
+        </tr>
+        <tr>
+          <td>F-002</td>
+          <td><span class="status-fail">High</span></td>
+          <td>State consistency</td>
+          <td><code>specs/002-sdd-harness-audit-process/run-state.yaml</code> contém <code>status: "draft"</code>, mas <code>current_phase: "needs_evaluation"</code>, <code>current_task: "T-001"</code> e gates até implementation true.</td>
+          <td>Retomada pode interpretar a iniciativa como rascunho apesar de a task estar pronta para avaliação. Esse é exatamente o tipo de divergência que o harness deveria bloquear.</td>
+          <td>Sincronizar <code>status</code> para um valor compatível, por exemplo <code>needs_evaluation</code>, ou ajustar a taxonomia de status se a intenção for separar phase/status.</td>
+        </tr>
+        <tr>
+          <td>F-003</td>
+          <td><span class="status-warn">Medium</span></td>
+          <td>Hard mirrors</td>
+          <td>As regras possuem <code>Recommended check:</code> e o manifest lista <code>validate_spec_index</code>, <code>validate_harness_audit_readiness</code> etc.; não há CI/hook/schema dedicado além de <code>scripts/validate_bundle.py</code>.</td>
+          <td>O harness é governado por markdown e validação estrutural, mas ainda não é hardened. Regras críticas dependem parcialmente do agente lembrar e obedecer.</td>
+          <td>Criar uma camada determinística incremental: validação de índice/spec state, evidência antes de done, evaluator identity, orphan graph e approval gate.</td>
+        </tr>
+        <tr>
+          <td>F-004</td>
+          <td><span class="status-warn">Medium</span></td>
+          <td>Skill contracts</td>
+          <td>Varredura dos <code>SKILL.md</code> mostra que skills antigas não possuem seções explícitas como Inputs, External Knowledge, MCP, Tool Policy e Gotchas. Exemplos: <code>.harness/skills/spec-review/SKILL.md</code>, <code>impact-analysis/SKILL.md</code>, <code>validation-planning/SKILL.md</code>.</td>
+          <td>As skills funcionam como métodos curtos, mas ficam abaixo do padrão de produção que a própria auditoria agora define. Isso reduz portabilidade e precisão de ativação.</td>
+          <td>Normalizar os SKILL.md gradualmente para a anatomia completa: trigger, non-trigger, inputs, workflow, knowledge/MCP/tool policy, output, validation e gotchas.</td>
+        </tr>
+        <tr>
+          <td>F-005</td>
+          <td><span class="status-warn">Medium</span></td>
+          <td>Agent contracts</td>
+          <td>Agentes antigos têm formato heterogêneo. Alguns não têm output contract explícito ou seção de não-responsabilidades normalizada, ao contrário dos novos <code>harness-auditor</code> e <code>harness-graph-mapper</code>.</td>
+          <td>A delegação multiagente fica menos auditável porque o output esperado não é uniforme em todos os papéis.</td>
+          <td>Padronizar agentes com Mission, Responsibilities, Non-responsibilities, Inputs/Context, Output e Escalation/Blocking conditions.</td>
+        </tr>
+        <tr>
+          <td>F-006</td>
+          <td><span class="status-warn">Medium</span></td>
+          <td>Release evidence freshness</td>
+          <td><code>docs/acceptance-criteria.md</code> ainda cita evidência de <code>225 checks</code>, enquanto a validação atual retorna <code>258 checks</code>.</td>
+          <td>A documentação de release está obsoleta em relação ao estado atual. Isso enfraquece rastreabilidade e pode confundir um avaliador.</td>
+          <td>Atualizar acceptance criteria e evidence packs depois da avaliação independente das mudanças recentes.</td>
+        </tr>
+        <tr>
+          <td>F-007</td>
+          <td><span class="status-warn">Low</span></td>
+          <td>Encoding / readability</td>
+          <td>Saídas de terminal exibem mojibake em alguns arquivos portugueses, por exemplo <code>README.md</code> e <code>.harness/AGENTS.md</code>, embora os arquivos sejam legíveis no editor e validador.</td>
+          <td>Baixo risco operacional, mas prejudica auditorias por terminal e automações textuais que procuram cabeçalhos com acento.</td>
+          <td>Confirmar UTF-8 consistente e, se necessário, preferir cabeçalhos ASCII para seções que scripts precisam detectar.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="domain-review">
+    <h2>5. Domain Review</h2>
+    <h3>SDD Contract</h3>
+    <p>O contrato SDD é sólido: <code>specs/INDEX.md</code> existe, iniciativas são numeradas, o scaffolder gera <code>001-*</code>/<code>002-*</code>, e cada iniciativa possui spec, plan, tasks, impact map, validation plan, progress, run-state, decision log, ratchet, evidence e handoff. A spec 001 está fechada; a spec 002 está corretamente aguardando evaluator, mas seu <code>run-state.status</code> ficou divergente.</p>
+
+    <h3>Harness Contract</h3>
+    <p>O harness é real: root adapter, entrypoint, manifest, regras, workflows, agentes, skills, templates, memória e scripts estão conectados. Não há evidência de arquivos críticos completamente excluídos do processo. O bundle respeita isolamento de consumidor e não se comporta como knowledge base viva.</p>
+
+    <h3>Agent And Skill Contracts</h3>
+    <p>Os novos agentes e a skill de auditoria seguem um contrato mais completo. O restante do bundle ainda usa contratos mais curtos, adequados para uma versão inicial, mas abaixo do padrão que agora está documentado em <code>docs/harness-audit-framework.md</code>. Essa diferença é dívida de padronização.</p>
+
+    <h3>Memory And Retrieval</h3>
+    <p>Há boa economia de contexto: <code>specs/INDEX.md</code>, <code>.harness/memory/MEMORY.md</code>, <code>run-state.yaml</code>, <code>progress.md</code> e handoff dão um caminho de leitura compacto. A orientação de embeddings/MCP como camada opcional está correta e não substitui os índices determinísticos.</p>
+
+    <h3>Enforcement And Quality</h3>
+    <p><code>scripts/validate_bundle.py</code> é um hard mirror útil para registro, arquivos obrigatórios, frontmatter de skills, regras com hard mirror recommendation, workflow terminal e run-state template. Ainda faltam hard mirrors específicos para as recomendações listadas, especialmente graph orphan detection, spec index consistency, evaluator identity e approval gates.</p>
+  </section>
+
+  <section id="unused">
+    <h2>6. Unused, Orphaned Or Decorative Artifacts</h2>
+    <table>
+      <thead><tr><th>Artefato</th><th>Por que parece unused/weak/decorativo</th><th>Ação recomendada</th></tr></thead>
+      <tbody>
+        <tr><td><code>.harness/rules/* Recommended check</code></td><td>Todos são alcançáveis e úteis, mas vários checks são nomes recomendados, não automações existentes.</td><td>Manter e implementar incrementalmente hard mirrors reais.</td></tr>
+        <tr><td><code>.harness/skills/*/SKILL.md</code> antigos</td><td>São alcançáveis, mas alguns têm corpo mínimo em comparação com o padrão de skill production-ready.</td><td>Reescrever por lotes; não remover.</td></tr>
+        <tr><td><code>docs/acceptance-criteria.md</code></td><td>Alcançável, mas stale em relação aos checks atuais e mudanças de auditoria.</td><td>Atualizar depois de evaluator approval e antes de release.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="roadmap">
+    <h2>7. Remediation Roadmap</h2>
+    <table>
+      <thead><tr><th>Prioridade</th><th>Ação</th><th>Owner</th><th>Validação</th></tr></thead>
+      <tbody>
+        <tr><td>P0</td><td>Corrigir <code>run-state.status</code> da spec 002 e obter avaliação independente de T-001.</td><td>State Keeper + Evaluator Agent</td><td>Evidence atualizado e task transicionada por <code>needs_evaluation -> approved -> done</code>.</td></tr>
+        <tr><td>P0</td><td>Não publicar release enquanto manifest/changelog/acceptance criteria não refletirem as mudanças novas.</td><td>Release maintainer</td><td><code>CHANGELOG.md</code>, <code>VERSION</code>, <code>manifest.yaml</code> e evidence alinhados.</td></tr>
+        <tr><td>P1</td><td>Criar check determinístico de consistência de spec index/run-state/task ledger.</td><td>Harness maintainer</td><td>Novo validator detecta status divergente como F-002.</td></tr>
+        <tr><td>P1</td><td>Criar hard mirror para graph reachability e artefatos órfãos.</td><td>Harness maintainer</td><td>Check lista nodes/edges e falha em referências faltantes/orphans críticos.</td></tr>
+        <tr><td>P2</td><td>Normalizar skills e agents para os contratos completos definidos pela auditoria.</td><td>Platform engineering</td><td>Validador ou checklist semântico confirma seções obrigatórias por risk level.</td></tr>
+        <tr><td>P2</td><td>Adicionar CI/hook opcional para executar <code>validate_bundle.py</code> e smoke test.</td><td>Release maintainer</td><td>Pipeline ou hook documentado com mensagens agent-readable.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="appendix">
+    <h2>8. Appendix</h2>
+    <p><strong>Assumptions:</strong> O caminho <code>/auditoria</code> pedido pelo usuário foi interpretado como pasta <code>auditoria/</code> na raiz do repositório auditado, não como raiz do drive. A auditoria é read/review + report; não aplica remediações.</p>
+    <p><strong>Open questions:</strong> O projeto quer que hard mirrors virem scripts internos do bundle, CI recomendada para consumidores, ou ambos? O próximo release deve ser <code>0.2.0</code> pelas mudanças de contrato ou <code>0.1.3</code> por compatibilidade aditiva?</p>
+    <p><strong>Independent review:</strong> Este relatório foi produzido pelo Harness Auditor na mesma sessão. Para tratá-lo como final sob as regras do Guardian, um Evaluator Agent distinto deve revisar suporte factual, severidade e remediações.</p>
+  </section>
+</body>
+</html>

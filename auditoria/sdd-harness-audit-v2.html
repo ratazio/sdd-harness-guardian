@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auditoria SDD/Harness v2 - sdd-harness-guardian</title>
+  <style>
+    :root {
+      --bg: #eef2f5;
+      --paper: #ffffff;
+      --ink: #162027;
+      --muted: #62717c;
+      --line: #c9d3db;
+      --strong: #0f3d4a;
+      --blue: #2563eb;
+      --teal: #0f766e;
+      --amber: #b45309;
+      --red: #b91c1c;
+      --violet: #6d28d9;
+      --slate: #334155;
+      --soft-blue: #e7eefc;
+      --soft-teal: #e1f3f1;
+      --soft-amber: #fff3d8;
+      --soft-red: #fde8e8;
+      --soft-violet: #f0e9ff;
+      --shadow: 0 18px 50px rgba(22, 32, 39, .10);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,0) 260px),
+        var(--bg);
+      line-height: 1.55;
+    }
+    header {
+      padding: 34px clamp(18px, 5vw, 64px) 22px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
+    main {
+      width: min(1320px, calc(100% - 32px));
+      margin: 22px auto 56px;
+    }
+    h1, h2, h3 { line-height: 1.16; margin: 0 0 12px; }
+    h1 { font-size: clamp(32px, 5vw, 58px); letter-spacing: 0; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 17px; margin-top: 18px; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: .94em;
+      background: #f4f6f8;
+      border: 1px solid #d8e0e6;
+      padding: 1px 5px;
+    }
+    .eyebrow {
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+    .summary {
+      max-width: 980px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 14px;
+      min-height: 96px;
+    }
+    .metric strong { display: block; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .metric span { display: block; margin-top: 8px; font-size: 21px; font-weight: 800; }
+    .pass { color: var(--teal); }
+    .warn { color: var(--amber); }
+    .fail { color: var(--red); }
+    .info { color: var(--blue); }
+    .layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .tabs {
+      position: sticky;
+      top: 14px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 10px;
+    }
+    input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+    .tab-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 11px;
+      border: 1px solid transparent;
+      color: var(--slate);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .tab-label:hover { background: #f7fafc; border-color: #d9e2e8; }
+    .tab-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      background: var(--muted);
+      flex: 0 0 auto;
+    }
+    .dot-pass { background: var(--teal); }
+    .dot-warn { background: var(--amber); }
+    .dot-info { background: var(--blue); }
+    .dot-fail { background: var(--red); }
+    .content {
+      min-width: 0;
+    }
+    .panel {
+      display: none;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 3vw, 32px);
+    }
+    #tab-summary:checked ~ .layout label[for="tab-summary"],
+    #tab-graph:checked ~ .layout label[for="tab-graph"],
+    #tab-sdd:checked ~ .layout label[for="tab-sdd"],
+    #tab-harness:checked ~ .layout label[for="tab-harness"],
+    #tab-agents:checked ~ .layout label[for="tab-agents"],
+    #tab-enforcement:checked ~ .layout label[for="tab-enforcement"],
+    #tab-memory:checked ~ .layout label[for="tab-memory"],
+    #tab-findings:checked ~ .layout label[for="tab-findings"],
+    #tab-roadmap:checked ~ .layout label[for="tab-roadmap"],
+    #tab-raw:checked ~ .layout label[for="tab-raw"] {
+      background: #edf6f6;
+      border-color: #a9d5d2;
+      color: var(--strong);
+    }
+    #tab-summary:checked ~ .layout #panel-summary,
+    #tab-graph:checked ~ .layout #panel-graph,
+    #tab-sdd:checked ~ .layout #panel-sdd,
+    #tab-harness:checked ~ .layout #panel-harness,
+    #tab-agents:checked ~ .layout #panel-agents,
+    #tab-enforcement:checked ~ .layout #panel-enforcement,
+    #tab-memory:checked ~ .layout #panel-memory,
+    #tab-findings:checked ~ .layout #panel-findings,
+    #tab-roadmap:checked ~ .layout #panel-roadmap,
+    #tab-raw:checked ~ .layout #panel-raw {
+      display: block;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      padding: 15px;
+    }
+    .card h3 { margin-top: 0; font-size: 15px; color: var(--strong); }
+    .score {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+    }
+    .bar {
+      height: 10px;
+      flex: 1;
+      background: #e5eaee;
+      overflow: hidden;
+    }
+    .fill { height: 100%; background: var(--teal); }
+    .fill.warn { background: var(--amber); }
+    .fill.info { background: var(--blue); }
+    .fill.fail { background: var(--red); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 18px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f4f7f9;
+      color: #42505a;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .badge.pass { background: var(--soft-teal); border-color: #98d7d0; color: var(--teal); }
+    .badge.warn { background: var(--soft-amber); border-color: #f2c56d; color: var(--amber); }
+    .badge.fail { background: var(--soft-red); border-color: #f2a3a3; color: var(--red); }
+    .badge.info { background: var(--soft-blue); border-color: #b9cdf8; color: var(--blue); }
+    .diagram {
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid var(--line);
+      background: #fbfcfd;
+      margin: 14px 0 20px;
+    }
+    .note {
+      border-left: 5px solid var(--blue);
+      background: var(--soft-blue);
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+    .risk-high { background: var(--soft-red); }
+    .risk-medium { background: var(--soft-amber); }
+    .risk-low { background: var(--soft-teal); }
+    .raw-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .raw-item {
+      border: 1px solid var(--line);
+      padding: 14px;
+      background: #fff;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .tabs { position: static; }
+      .meta-grid, .card-grid, .raw-list { grid-template-columns: 1fr; }
+      header { padding-top: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Pacote de auditoria SDD/Harness · v2</div>
+    <h1>sdd-harness-guardian</h1>
+    <p class="summary">Relatório navegável com grafo, diagramas SVG, achados por domínio e artefatos brutos preservados em <code>auditoria/</code>. Esta versão amplia o primeiro parecer e torna rastreáveis os insumos usados na síntese.</p>
+    <div class="meta-grid">
+      <div class="metric"><strong>Decisão</strong><span class="warn">pass_with_gaps</span></div>
+      <div class="metric"><strong>Maturidade</strong><span>3 / 4</span></div>
+      <div class="metric"><strong>Achados</strong><span>7</span></div>
+      <div class="metric"><strong>Validação</strong><span class="pass">258 checks</span></div>
+    </div>
+  </header>
+
+  <main>
+    <input checked type="radio" name="tabs" id="tab-summary">
+    <input type="radio" name="tabs" id="tab-graph">
+    <input type="radio" name="tabs" id="tab-sdd">
+    <input type="radio" name="tabs" id="tab-harness">
+    <input type="radio" name="tabs" id="tab-agents">
+    <input type="radio" name="tabs" id="tab-enforcement">
+    <input type="radio" name="tabs" id="tab-memory">
+    <input type="radio" name="tabs" id="tab-findings">
+    <input type="radio" name="tabs" id="tab-roadmap">
+    <input type="radio" name="tabs" id="tab-raw">
+
+    <div class="layout">
+      <nav class="tabs" aria-label="Subpáginas da auditoria">
+        <label class="tab-label" for="tab-summary"><span class="tab-dot dot-warn"></span>Resumo</label>
+        <label class="tab-label" for="tab-graph"><span class="tab-dot dot-info"></span>Harness Graph</label>
+        <label class="tab-label" for="tab-sdd"><span class="tab-dot dot-pass"></span>SDD</label>
+        <label class="tab-label" for="tab-harness"><span class="tab-dot dot-pass"></span>Harness</label>
+        <label class="tab-label" for="tab-agents"><span class="tab-dot dot-warn"></span>Agentes & Skills</label>
+        <label class="tab-label" for="tab-enforcement"><span class="tab-dot dot-warn"></span>Enforcement</label>
+        <label class="tab-label" for="tab-memory"><span class="tab-dot dot-pass"></span>Memória</label>
+        <label class="tab-label" for="tab-findings"><span class="tab-dot dot-fail"></span>Achados</label>
+        <label class="tab-label" for="tab-roadmap"><span class="tab-dot dot-info"></span>Roadmap</label>
+        <label class="tab-label" for="tab-raw"><span class="tab-dot dot-info"></span>Brutos</label>
+      </nav>
+
+      <div class="content">
+        <section class="panel" id="panel-summary">
+          <h2>1. Resumo Executivo</h2>
+          <p>O repositório tem um harness real: entrada raiz, entrypoint canônico, manifesto, regras, workflows, agentes, skills, templates, specs numeradas, estado retomável, evidência e validação estrutural. O grafo não parece decorativo; os nós centrais estão registrados e são alcançáveis.</p>
+          <p>A decisão é <strong>pass_with_gaps</strong> porque há uma evolução relevante ainda aberta na working tree, a iniciativa <code>002-sdd-harness-audit-process</code> aguarda avaliação independente, e o conjunto de hard mirrors ainda não cobre todos os checks que as regras recomendam.</p>
+
+          <div class="card-grid">
+            <div class="card">
+              <h3>SDD</h3>
+              <div class="score"><span>87%</span><div class="bar"><div class="fill" style="width:87%"></div></div></div>
+              <p>Specs numeradas, índice e artefatos completos. Gap principal: estado 002 divergente.</p>
+            </div>
+            <div class="card">
+              <h3>Harness</h3>
+              <div class="score"><span>82%</span><div class="bar"><div class="fill" style="width:82%"></div></div></div>
+              <p>Estrutura passiva e vendor-neutral bem conectada, com validação estrutural.</p>
+            </div>
+            <div class="card">
+              <h3>Hardening</h3>
+              <div class="score"><span>54%</span><div class="bar"><div class="fill warn" style="width:54%"></div></div></div>
+              <p>Há recomendações de hard mirror, mas faltam checks dedicados para invariantes críticas.</p>
+            </div>
+          </div>
+
+          <svg class="diagram" viewBox="0 0 980 230" role="img" aria-label="Mapa de maturidade por domínio">
+            <rect width="980" height="230" fill="#fbfcfd"></rect>
+            <text x="30" y="34" font-size="18" font-weight="700" fill="#162027">Maturidade por domínio</text>
+            <g font-size="13" fill="#334155">
+              <text x="40" y="80">SDD</text>
+              <rect x="180" y="64" width="680" height="18" fill="#e5eaee"></rect>
+              <rect x="180" y="64" width="592" height="18" fill="#0f766e"></rect>
+              <text x="875" y="79">87%</text>
+              <text x="40" y="113">Harness</text>
+              <rect x="180" y="97" width="680" height="18" fill="#e5eaee"></rect>
+              <rect x="180" y="97" width="558" height="18" fill="#0f766e"></rect>
+              <text x="875" y="112">82%</text>
+              <text x="40" y="146">Agentes/Skills</text>
+              <rect x="180" y="130" width="680" height="18" fill="#e5eaee"></rect>
+              <rect x="180" y="130" width="476" height="18" fill="#b45309"></rect>
+              <text x="875" y="145">70%</text>
+              <text x="40" y="179">Enforcement</text>
+              <rect x="180" y="163" width="680" height="18" fill="#e5eaee"></rect>
+              <rect x="180" y="163" width="367" height="18" fill="#b45309"></rect>
+              <text x="875" y="178">54%</text>
+              <text x="40" y="212">Memória</text>
+              <rect x="180" y="196" width="680" height="18" fill="#e5eaee"></rect>
+              <rect x="180" y="196" width="578" height="18" fill="#0f766e"></rect>
+              <text x="875" y="211">85%</text>
+            </g>
+          </svg>
+
+          <table>
+            <thead><tr><th>Elemento</th><th>Leitura</th><th>Decisão</th></tr></thead>
+            <tbody>
+              <tr><td>Release</td><td>Manifest ainda <code>ready</code> enquanto há mudança não avaliada.</td><td><span class="badge fail">bloqueia release</span></td></tr>
+              <tr><td>Operação SDD</td><td>Fluxo e artefatos existem, com specs numeradas e indexadas.</td><td><span class="badge pass">adequado</span></td></tr>
+              <tr><td>Grafo</td><td>Sem órfãos críticos. Hard mirrors são a principal superfície weak.</td><td><span class="badge warn">governed</span></td></tr>
+              <tr><td>Relatório</td><td>Artefatos brutos preservados em JSON/MD nesta pasta.</td><td><span class="badge pass">rastreável</span></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel" id="panel-graph">
+          <h2>2. Harness Graph</h2>
+          <p>O grafo abaixo mostra o caminho operacional principal. As linhas sólidas indicam uso/registro explícito; a linha tracejada mostra o limite onde há recomendação de enforcement, mas não hard mirror completo.</p>
+          <svg class="diagram" viewBox="0 0 1100 560" role="img" aria-label="Grafo operacional do harness">
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#53636f"></path>
+              </marker>
+              <style>
+                .node { fill: #fff; stroke: #9fb0bc; stroke-width: 1.4; }
+                .node-strong { fill: #e1f3f1; stroke: #0f766e; stroke-width: 2; }
+                .node-warn { fill: #fff3d8; stroke: #b45309; stroke-width: 2; }
+                .edge { stroke: #53636f; stroke-width: 1.7; fill: none; marker-end: url(#arrow); }
+                .edge-warn { stroke: #b45309; stroke-dasharray: 7 5; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+                .gtext { font: 13px Inter, sans-serif; fill: #162027; }
+                .small { font: 11px Inter, sans-serif; fill: #62717c; }
+              </style>
+            </defs>
+            <rect width="1100" height="560" fill="#fbfcfd"></rect>
+            <text x="30" y="34" font-size="20" font-weight="800" fill="#162027">Operational Reachability Graph</text>
+
+            <rect class="node-strong" x="40" y="80" width="145" height="58"></rect>
+            <text class="gtext" x="112" y="104" text-anchor="middle">AGENTS.md</text>
+            <text class="small" x="112" y="124" text-anchor="middle">root adapter</text>
+
+            <rect class="node-strong" x="250" y="80" width="170" height="58"></rect>
+            <text class="gtext" x="335" y="104" text-anchor="middle">.harness/AGENTS.md</text>
+            <text class="small" x="335" y="124" text-anchor="middle">primary entrypoint</text>
+
+            <rect class="node-strong" x="500" y="80" width="150" height="58"></rect>
+            <text class="gtext" x="575" y="104" text-anchor="middle">manifest.yaml</text>
+            <text class="small" x="575" y="124" text-anchor="middle">registry</text>
+
+            <rect class="node" x="740" y="45" width="125" height="52"></rect>
+            <text class="gtext" x="802" y="75" text-anchor="middle">Rules</text>
+            <rect class="node" x="910" y="45" width="125" height="52"></rect>
+            <text class="gtext" x="972" y="75" text-anchor="middle">Workflows</text>
+            <rect class="node" x="740" y="126" width="125" height="52"></rect>
+            <text class="gtext" x="802" y="156" text-anchor="middle">Agents</text>
+            <rect class="node" x="910" y="126" width="125" height="52"></rect>
+            <text class="gtext" x="972" y="156" text-anchor="middle">Skills</text>
+            <rect class="node" x="740" y="207" width="125" height="52"></rect>
+            <text class="gtext" x="802" y="237" text-anchor="middle">Templates</text>
+            <rect class="node" x="910" y="207" width="125" height="52"></rect>
+            <text class="gtext" x="972" y="237" text-anchor="middle">Scripts</text>
+
+            <rect class="node-strong" x="250" y="318" width="170" height="58"></rect>
+            <text class="gtext" x="335" y="342" text-anchor="middle">specs/INDEX.md</text>
+            <text class="small" x="335" y="362" text-anchor="middle">context map</text>
+            <rect class="node" x="500" y="290" width="170" height="58"></rect>
+            <text class="gtext" x="585" y="314" text-anchor="middle">001-build</text>
+            <text class="small" x="585" y="334" text-anchor="middle">closed</text>
+            <rect class="node-warn" x="500" y="372" width="210" height="58"></rect>
+            <text class="gtext" x="605" y="396" text-anchor="middle">002-audit-process</text>
+            <text class="small" x="605" y="416" text-anchor="middle">needs_evaluation / status draft</text>
+
+            <rect class="node-warn" x="740" y="350" width="295" height="78"></rect>
+            <text class="gtext" x="887" y="378" text-anchor="middle">Hard mirror recommendations</text>
+            <text class="small" x="887" y="400" text-anchor="middle">partially executable via validate_bundle.py</text>
+
+            <rect class="node-strong" x="740" y="470" width="295" height="58"></rect>
+            <text class="gtext" x="887" y="494" text-anchor="middle">auditoria/ raw + HTML v2</text>
+            <text class="small" x="887" y="514" text-anchor="middle">generated audit package</text>
+
+            <path class="edge" d="M185 109 H250"></path>
+            <path class="edge" d="M420 109 H500"></path>
+            <path class="edge" d="M650 109 C690 109 690 71 740 71"></path>
+            <path class="edge" d="M650 109 C710 109 860 71 910 71"></path>
+            <path class="edge" d="M650 109 C700 109 700 152 740 152"></path>
+            <path class="edge" d="M650 109 C760 109 810 152 910 152"></path>
+            <path class="edge" d="M650 109 C700 109 700 233 740 233"></path>
+            <path class="edge" d="M650 109 C760 109 810 233 910 233"></path>
+            <path class="edge" d="M335 138 V318"></path>
+            <path class="edge" d="M420 347 C450 347 460 319 500 319"></path>
+            <path class="edge" d="M420 347 C455 347 460 401 500 401"></path>
+            <path class="edge-warn" d="M802 259 C805 310 845 322 887 350"></path>
+            <path class="edge" d="M887 428 V470"></path>
+          </svg>
+
+          <table>
+            <thead><tr><th>Classificação</th><th>Quantidade/estado</th><th>Notas</th></tr></thead>
+            <tbody>
+              <tr><td>Reachable</td><td>Entry, manifest, rules, workflows, agents, skills, templates, specs</td><td>Caminhos explícitos por <code>AGENTS.md</code> e <code>manifest.yaml</code>.</td></tr>
+              <tr><td>Weak</td><td>Hard mirrors recomendados</td><td>Nomes existem, mas parte não é executável.</td></tr>
+              <tr><td>Orphan crítico</td><td>0</td><td>Nenhum arquivo central da nova auditoria ficou solto.</td></tr>
+              <tr><td>Stale</td><td>Release evidence</td><td><code>docs/acceptance-criteria.md</code> cita checks antigos.</td></tr>
+            </tbody>
+          </table>
+          <p>Dados brutos: <a href="graph.json">graph.json</a> e <a href="inventory.json">inventory.json</a>.</p>
+        </section>
+
+        <section class="panel" id="panel-sdd">
+          <h2>3. SDD Contract</h2>
+          <p>O contrato SDD está entre os pontos fortes do repositório. Ele define specs como iniciativas completas, não arquivos isolados, e inclui spec, plano, tasks, validação, evidência, decisões, progresso, handoff e ratchet.</p>
+          <div class="card-grid">
+            <div class="card"><h3>Spec Index</h3><p><span class="badge pass">presente</span></p><p><code>specs/INDEX.md</code> lista 001 e 002 com status e resumo.</p></div>
+            <div class="card"><h3>Numeração</h3><p><span class="badge pass">presente</span></p><p>Scaffolder cria <code>NNN-slug</code> e bloqueia duplicidade.</p></div>
+            <div class="card"><h3>Avaliação</h3><p><span class="badge warn">pendente</span></p><p>Spec 002 está corretamente aguardando evaluator, mas o state precisa sincronizar status.</p></div>
+          </div>
+          <table>
+            <thead><tr><th>Artefato</th><th>001</th><th>002</th><th>Observação</th></tr></thead>
+            <tbody>
+              <tr><td><code>spec.md</code></td><td><span class="badge pass">ok</span></td><td><span class="badge pass">ok</span></td><td>002 define ACs e riscos.</td></tr>
+              <tr><td><code>plan.md</code></td><td><span class="badge pass">ok</span></td><td><span class="badge pass">ok</span></td><td>Plano técnico presente.</td></tr>
+              <tr><td><code>tasks.md</code></td><td><span class="badge pass">done</span></td><td><span class="badge warn">needs_evaluation</span></td><td>002 ainda não pode virar done.</td></tr>
+              <tr><td><code>run-state.yaml</code></td><td><span class="badge pass">ok</span></td><td><span class="badge fail">divergente</span></td><td><code>status: draft</code> conflita com fase.</td></tr>
+              <tr><td><code>evidence/</code></td><td><span class="badge pass">aprovado</span></td><td><span class="badge warn">draft</span></td><td>002 tem evidence draft sem evaluator.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel" id="panel-harness">
+          <h2>4. Harness Contract</h2>
+          <p>O harness cumpre o padrão repository-local e vendor-neutral: o bundle é passivo, isolado de consumidores, e usa arquivos para governar agentes. A arquitetura evita transformar o bundle em workflow engine ou knowledge base viva.</p>
+          <svg class="diagram" viewBox="0 0 980 270" role="img" aria-label="Camadas do harness">
+            <rect width="980" height="270" fill="#fbfcfd"></rect>
+            <text x="32" y="34" font-size="19" font-weight="800" fill="#162027">Camadas auditadas</text>
+            <g font-size="13" fill="#162027">
+              <rect x="40" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="105" y="104" text-anchor="middle">Intent</text>
+              <rect x="190" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="255" y="104" text-anchor="middle">Design</text>
+              <rect x="340" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="405" y="104" text-anchor="middle">Validation</text>
+              <rect x="490" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="555" y="104" text-anchor="middle">Execution</text>
+              <rect x="640" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="705" y="104" text-anchor="middle">Proof</text>
+              <rect x="790" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="855" y="104" text-anchor="middle">Memory</text>
+              <path d="M170 99 H190 M320 99 H340 M470 99 H490 M620 99 H640 M770 99 H790" stroke="#53636f"></path>
+              <rect x="190" y="170" width="130" height="58" fill="#fff3d8" stroke="#b45309"></rect><text x="255" y="204" text-anchor="middle">Hard mirrors</text>
+              <rect x="340" y="170" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="405" y="204" text-anchor="middle">Ratchet</text>
+              <rect x="490" y="170" width="130" height="58" fill="#e7eefc" stroke="#2563eb"></rect><text x="555" y="204" text-anchor="middle">Audit</text>
+            </g>
+          </svg>
+          <table>
+            <thead><tr><th>Invariante</th><th>Status</th><th>Evidência</th></tr></thead>
+            <tbody>
+              <tr><td>Spec antes de implementação</td><td><span class="badge pass">presente</span></td><td><code>.harness/AGENTS.md</code>, <code>sdd-quality.md</code>, lifecycle.</td></tr>
+              <tr><td>Outcome antes de tasks/execução</td><td><span class="badge pass">presente</span></td><td><code>outcome-readiness.md</code> e templates.</td></tr>
+              <tr><td>Builder != evaluator</td><td><span class="badge pass">presente</span></td><td>Rules, workflows e evidence templates.</td></tr>
+              <tr><td>Estado retomável</td><td><span class="badge warn">parcial</span></td><td>Arquivos existem; falta validator específico para divergência F-002.</td></tr>
+              <tr><td>Hard mirrors</td><td><span class="badge warn">parcial</span></td><td>Recomendados e estruturalmente validados, mas incompletos como automação.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel" id="panel-agents">
+          <h2>5. Agentes & Skills</h2>
+          <p>A estrutura agênica existe e tem papéis claros. A lacuna é de padronização fina: agentes e skills antigos foram escritos antes do padrão de auditoria mais completo e não expõem todas as seções que agora queremos exigir.</p>
+          <table>
+            <thead><tr><th>Grupo</th><th>Força</th><th>Gap</th><th>Ação</th></tr></thead>
+            <tbody>
+              <tr><td>Novos agentes de auditoria</td><td><span class="badge pass">alto</span></td><td>Sem gap relevante observado.</td><td>Usar como referência para normalização.</td></tr>
+              <tr><td>Agentes centrais antigos</td><td><span class="badge warn">médio</span></td><td>Output/Non-responsibilities heterogêneos.</td><td>Adicionar contrato padronizado por papel.</td></tr>
+              <tr><td>Skill de auditoria</td><td><span class="badge pass">alto</span></td><td>Agora inclui heading explícito de External Knowledge Policy.</td><td>Usar como referência para as demais skills.</td></tr>
+              <tr><td>Skills antigas</td><td><span class="badge warn">médio</span></td><td>Faltam Inputs/MCP/Tool Policy/Gotchas explícitos.</td><td>Refatorar por risco e frequência de uso.</td></tr>
+            </tbody>
+          </table>
+          <div class="note">
+            A auditoria não recomenda remover esses arquivos. Eles são úteis e alcançáveis. O ponto é evoluí-los de "método compacto" para "contrato operacional completo".
+          </div>
+        </section>
+
+        <section class="panel" id="panel-enforcement">
+          <h2>6. Enforcement & Hard Mirrors</h2>
+          <p>O repositório tem uma boa cultura de soft/hard mirror: toda regra crítica tem uma seção de hard mirror recommendation e um nome de check. O que falta é transformar os nomes mais importantes em checks executáveis.</p>
+          <svg class="diagram" viewBox="0 0 980 330" role="img" aria-label="Funil de enforcement">
+            <defs>
+              <marker id="arrow-enforcement" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#53636f"></path>
+              </marker>
+            </defs>
+            <rect width="980" height="330" fill="#fbfcfd"></rect>
+            <text x="32" y="34" font-size="19" font-weight="800" fill="#162027">Soft-to-hard enforcement ladder</text>
+            <g font-size="13" fill="#162027">
+              <rect x="70" y="80" width="180" height="60" fill="#e1f3f1" stroke="#0f766e"></rect>
+              <text x="160" y="106" text-anchor="middle">Markdown rules</text>
+              <text x="160" y="126" text-anchor="middle">13/13 present</text>
+              <rect x="300" y="80" width="180" height="60" fill="#e1f3f1" stroke="#0f766e"></rect>
+              <text x="390" y="106" text-anchor="middle">Recommended checks</text>
+              <text x="390" y="126" text-anchor="middle">13/13 named</text>
+              <rect x="530" y="80" width="180" height="60" fill="#fff3d8" stroke="#b45309"></rect>
+              <text x="620" y="106" text-anchor="middle">Local validators</text>
+              <text x="620" y="126" text-anchor="middle">partial</text>
+              <rect x="760" y="80" width="150" height="60" fill="#fde8e8" stroke="#b91c1c"></rect>
+              <text x="835" y="106" text-anchor="middle">CI/hooks</text>
+              <text x="835" y="126" text-anchor="middle">not found</text>
+              <path d="M250 110 H300 M480 110 H530 M710 110 H760" stroke="#53636f" marker-end="url(#arrow-enforcement)"></path>
+              <rect x="180" y="210" width="620" height="42" fill="#fff" stroke="#c9d3db"></rect>
+              <text x="490" y="236" text-anchor="middle">Current state: governed by validated files, not yet hardened by full deterministic enforcement</text>
+            </g>
+          </svg>
+          <table>
+            <thead><tr><th>Hard mirror recomendado</th><th>Status auditado</th><th>Próximo check</th></tr></thead>
+            <tbody>
+              <tr><td><code>validate-spec-index</code></td><td><span class="badge warn">nomeado</span></td><td>Comparar index, diretório, run-state e tasks.</td></tr>
+              <tr><td><code>validate-independent-evaluation</code></td><td><span class="badge warn">nomeado</span></td><td>Bloquear done se builder=evaluator ou evaluator ausente.</td></tr>
+              <tr><td><code>validate-evidence-before-done</code></td><td><span class="badge warn">nomeado</span></td><td>Checar evidence pack aprovado antes de status terminal.</td></tr>
+              <tr><td><code>validate-harness-audit-readiness</code></td><td><span class="badge warn">nomeado</span></td><td>Detectar ausência de raw artifacts e graph report.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel" id="panel-memory">
+          <h2>7. Memória, Retomada & Retrieval</h2>
+          <p>A memória está bem desenhada para economia de contexto: primeiro índice e estado compacto, depois artefatos detalhados sob demanda. Isso conversa com embedding/search sem transformar a skill em knowledge dump.</p>
+          <table>
+            <thead><tr><th>Camada</th><th>Arquivo/contrato</th><th>Status</th><th>Comentário</th></tr></thead>
+            <tbody>
+              <tr><td>Index</td><td><code>specs/INDEX.md</code></td><td><span class="badge pass">ok</span></td><td>Primeira leitura para iniciativas.</td></tr>
+              <tr><td>Working state</td><td><code>run-state.yaml</code></td><td><span class="badge warn">parcial</span></td><td>Contrato existe; spec 002 mostrou necessidade de validator.</td></tr>
+              <tr><td>Human progress</td><td><code>progress.md</code></td><td><span class="badge pass">ok</span></td><td>Resume instructions presentes.</td></tr>
+              <tr><td>Handoff</td><td><code>handoffs/latest-handoff.md</code></td><td><span class="badge pass">ok</span></td><td>Próximo passo explícito.</td></tr>
+              <tr><td>Learning</td><td><code>ratchet.md</code></td><td><span class="badge pass">ok</span></td><td>Existe por iniciativa e no bundle.</td></tr>
+              <tr><td>Semantic retrieval</td><td>MCP/Second Brain opcional</td><td><span class="badge pass">correto</span></td><td>Não substitui índice determinístico.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel" id="panel-findings">
+          <h2>8. Findings</h2>
+          <p>Os achados completos também estão em <a href="findings.json">findings.json</a>. A tabela abaixo ordena por severidade e impacto operacional.</p>
+          <table>
+            <thead><tr><th>ID</th><th>Severidade</th><th>Domínio</th><th>Evidência</th><th>Impacto</th><th>Remediação</th></tr></thead>
+            <tbody>
+              <tr class="risk-high"><td>F-001</td><td>High</td><td>Release</td><td><code>manifest.yaml</code> ready + spec 002 needs_evaluation + changelog sem entrada.</td><td>Release pode parecer fechado sem avaliação.</td><td>Avaliar spec 002 e atualizar versão/changelog/status.</td></tr>
+              <tr class="risk-high"><td>F-002</td><td>High</td><td>State</td><td><code>run-state.status: draft</code> com fase <code>needs_evaluation</code>.</td><td>Retomada insegura ou confusa.</td><td>Sincronizar status e adicionar validator.</td></tr>
+              <tr class="risk-medium"><td>F-003</td><td>Medium</td><td>Hard mirrors</td><td>Recommended checks sem automação dedicada.</td><td>Governed, não hardened.</td><td>Implementar checks críticos.</td></tr>
+              <tr class="risk-medium"><td>F-004</td><td>Medium</td><td>Skills</td><td>Skills antigas sem seções do novo padrão.</td><td>Menor portabilidade e precisão.</td><td>Normalizar SKILL.md por risco.</td></tr>
+              <tr class="risk-medium"><td>F-005</td><td>Medium</td><td>Agents</td><td>Contratos heterogêneos.</td><td>Delegação menos previsível.</td><td>Padronizar outputs e boundaries.</td></tr>
+              <tr class="risk-medium"><td>F-006</td><td>Medium</td><td>Evidence</td><td>Acceptance criteria cita 225 checks; atual é 258.</td><td>Release evidence stale.</td><td>Atualizar após avaliação.</td></tr>
+              <tr><td>F-007</td><td>Low</td><td>Encoding</td><td>Mojibake no terminal em textos PT.</td><td>Ruído de auditoria CLI.</td><td>Confirmar UTF-8 e anchors ASCII.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel" id="panel-roadmap">
+          <h2>9. Roadmap de Remediação</h2>
+          <table>
+            <thead><tr><th>Prioridade</th><th>Ação</th><th>Owner sugerido</th><th>Validação</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge fail">P0</span></td><td>Corrigir status da spec 002 e executar avaliação independente.</td><td>State Keeper + Evaluator Agent</td><td>Evidence aprovado e task terminal sincronizada.</td></tr>
+              <tr><td><span class="badge fail">P0</span></td><td>Atualizar release metadata antes de publicar.</td><td>Release maintainer</td><td><code>VERSION</code>, <code>manifest.yaml</code>, <code>CHANGELOG.md</code> e acceptance criteria alinhados.</td></tr>
+              <tr><td><span class="badge warn">P1</span></td><td>Criar validator de spec index/run-state/tasks.</td><td>Harness maintainer</td><td>Check detecta F-002 automaticamente.</td></tr>
+              <tr><td><span class="badge warn">P1</span></td><td>Criar graph reachability check.</td><td>Harness maintainer</td><td>Check gera nodes/edges e falha em órfãos críticos.</td></tr>
+              <tr><td><span class="badge info">P2</span></td><td>Normalizar skills para anatomia completa.</td><td>Platform engineering</td><td>Lint semântico por seções e risk level.</td></tr>
+              <tr><td><span class="badge info">P2</span></td><td>Normalizar agent docs.</td><td>Platform engineering</td><td>Todos com Output, Non-responsibilities, Inputs e Escalation.</td></tr>
+              <tr><td><span class="badge info">P2</span></td><td>Adicionar CI/hook opcional.</td><td>Release maintainer</td><td>Pipeline executa validator e smoke.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel" id="panel-raw">
+          <h2>10. Artefatos Brutos</h2>
+          <p>Esta versão preserva os artefatos transitórios dentro da pasta aprovada <code>auditoria/</code>. Eles são parte do pacote de auditoria e permitem revisar a base factual sem depender só da síntese visual.</p>
+          <div class="raw-list">
+            <div class="raw-item"><h3>Inventário</h3><p><a href="inventory.json">inventory.json</a></p><p>Contagem e classificação dos elementos inspecionados.</p></div>
+            <div class="raw-item"><h3>Grafo</h3><p><a href="graph.json">graph.json</a></p><p>Nós, edges, reachability e superfícies weak/stale.</p></div>
+            <div class="raw-item"><h3>Achados</h3><p><a href="findings.json">findings.json</a></p><p>Lista estruturada dos findings com severidade e remediação.</p></div>
+            <div class="raw-item"><h3>Checks</h3><p><a href="checks.md">checks.md</a></p><p>Comandos executados, resultados e checks ausentes.</p></div>
+            <div class="raw-item"><h3>Notas de análise</h3><p><a href="analysis-notes.md">analysis-notes.md</a></p><p>Raciocínio intermediário e observações por domínio.</p></div>
+            <div class="raw-item"><h3>Relatório anterior</h3><p><a href="sdd-harness-audit.html">sdd-harness-audit.html</a></p><p>Primeiro relatório executivo mantido como histórico.</p></div>
+          </div>
+          <div class="note">
+            Assumption: o pedido <code>"/auditoria"</code> foi tratado como pasta <code>auditoria/</code> na raiz do repositório, conforme a primeira execução. Nenhum arquivo fora dessa pasta foi usado para armazenar resultados transitórios desta auditoria.
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

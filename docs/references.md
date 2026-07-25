@@ -6,6 +6,7 @@ This bundle follows the internal standards adopted by the project.
 
 - `harness-engineering 3.html`
 - `harness_multiagent_platform 1.html`
+- `index.html`
 - prior IA Studies documents about skills, agents, harness, Second Brain, MCP, versioning and bundle distribution.
 
 ## Adopted concepts
@@ -53,3 +54,10 @@ Implementation and evaluation must be separate roles for medium/high risk work.
 ### Ratchet principle
 
 Repeated errors must become permanent improvements to the harness.
+
+### Harness audit
+
+Used as the structured review of whether SDD and Harness Engineering are
+operationally wired: entrypoints, artifact graph, specs, agents, skills, rules,
+workflows, memory, evidence, hard mirrors and report quality. See
+`docs/harness-audit-framework.md`.

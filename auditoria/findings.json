@@ -1,0 +1,106 @@
+{
+  "audit_id": "sdd-harness-guardian-2026-07-25",
+  "decision": "pass_with_gaps",
+  "maturity": "3-governed-not-hardened",
+  "findings": [
+    {
+      "id": "F-001",
+      "severity": "high",
+      "domain": "release_state",
+      "title": "Manifest still advertises ready while active bundle changes wait for evaluation",
+      "evidence": [
+        "manifest.yaml: status: ready; version: 0.1.2",
+        "specs/INDEX.md: 002-sdd-harness-audit-process status needs_evaluation",
+        "CHANGELOG.md: no entry for audit/numbering capability"
+      ],
+      "impact": "The source bundle can appear releasable while a new capability is not independently evaluated.",
+      "remediation": "Obtain independent evaluation, close state/evidence, then update VERSION, manifest and CHANGELOG or mark status as release_candidate."
+    },
+    {
+      "id": "F-002",
+      "severity": "high",
+      "domain": "state_consistency",
+      "title": "Spec 002 run-state status conflicts with current phase and task ledger",
+      "evidence": [
+        "specs/002-sdd-harness-audit-process/run-state.yaml: status: draft",
+        "specs/002-sdd-harness-audit-process/run-state.yaml: current_phase: needs_evaluation",
+        "specs/002-sdd-harness-audit-process/tasks.md: T-001 needs_evaluation"
+      ],
+      "impact": "A resumed agent may misread the initiative as draft despite the implementation being complete and awaiting evaluation.",
+      "remediation": "Synchronize run-state status or split phase/status explicitly in the schema and validator."
+    },
+    {
+      "id": "F-003",
+      "severity": "medium",
+      "domain": "hard_mirrors",
+      "title": "Hard mirrors are documented more broadly than they are implemented",
+      "evidence": [
+        "manifest.yaml hard_mirror_recommendations lists multiple checks",
+        ".harness/rules/*.md include Recommended check entries",
+        "Only scripts/validate_bundle.py and smoke_test_scaffolder.py are executable local checks"
+      ],
+      "impact": "The harness is governed but not hardened; critical invariants still depend partly on agent compliance.",
+      "remediation": "Add deterministic checks for spec index consistency, evidence-before-done, evaluator identity, approval gates and graph reachability."
+    },
+    {
+      "id": "F-004",
+      "severity": "medium",
+      "domain": "skill_contracts",
+      "title": "Older skills are below the newly documented production-ready skill anatomy",
+      "evidence": [
+        "Several SKILL.md files lack explicit Inputs, External Knowledge, MCP, Tool Policy or Gotchas sections",
+        "auditoria/analysis-notes.md includes section coverage notes"
+      ],
+      "impact": "Skill activation and portability are adequate for current use but weaker than the standard the bundle now teaches.",
+      "remediation": "Normalize skills by risk level using the sdd-harness-audit skill as the stronger reference."
+    },
+    {
+      "id": "F-005",
+      "severity": "medium",
+      "domain": "agent_contracts",
+      "title": "Agent role documents are heterogeneous",
+      "evidence": [
+        "Some agent docs lack explicit Output or normalized Non-responsibilities sections",
+        "New audit agents are more complete than older role files"
+      ],
+      "impact": "Subagent delegation and review outputs are less predictable across roles.",
+      "remediation": "Standardize every agent file with Mission, Responsibilities, Non-responsibilities, Inputs/Context, Output and Blocking/Escalation."
+    },
+    {
+      "id": "F-006",
+      "severity": "medium",
+      "domain": "release_evidence_freshness",
+      "title": "Acceptance criteria evidence is stale",
+      "evidence": [
+        "docs/acceptance-criteria.md cites 225 checks",
+        "Current validate_bundle.py reports 260 checks"
+      ],
+      "impact": "Release evidence no longer describes the current validation surface.",
+      "remediation": "Refresh release evidence after independent evaluation of current changes."
+    },
+    {
+      "id": "F-008",
+      "severity": "medium",
+      "domain": "hooks",
+      "title": "No implemented hooks or CI workflows were found",
+      "evidence": [
+        "auditoria/hooks.json: status none_found",
+        "scripts/validate_bundle.py exists but is not wired to detected hook/CI",
+        "scripts/smoke_test_scaffolder.py exists but is not wired to detected hook/CI"
+      ],
+      "impact": "Deterministic checks depend on manual execution unless a consumer or maintainer wires them into hooks or CI.",
+      "remediation": "Add optional pre-commit/pre-push hooks or CI examples for validate_bundle.py, smoke_test_scaffolder.py and future state/graph validators."
+    },
+    {
+      "id": "F-007",
+      "severity": "low",
+      "domain": "encoding_readability",
+      "title": "Terminal output shows mojibake for some Portuguese text",
+      "evidence": [
+        "Terminal reads of README.md and .harness/AGENTS.md showed escaped/garbled accents"
+      ],
+      "impact": "Low operational risk, but it can reduce readability in CLI-based audits.",
+      "remediation": "Confirm UTF-8 handling and prefer ASCII section anchors for machine-parsed headings."
+    }
+  ]
+}

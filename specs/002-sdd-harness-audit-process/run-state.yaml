@@ -1,0 +1,75 @@
+schema_version: 1
+initiative_id: "002-sdd-harness-audit-process"
+initiative_sequence: "002"
+initiative_slug: "sdd-harness-audit-process"
+initiative_kind: "feature"
+status: "draft"
+summary: "Add a reusable SDD/harness audit process with graph review and HTML report contract."
+current_phase: "needs_evaluation"
+current_task: "T-001"
+last_safe_checkpoint: "Audit capability implemented; bundle validator and scaffolder smoke passed."
+updated_at: "2026-07-25"
+updated_by: "codex-builder"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: false
+  evidence_pack_ready: true
+  validation_done: false
+
+execution:
+  builder_id: "codex-builder"
+  evaluator_id: null
+  started_at: "2026-07-25"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "Added audit agents, rule, workflow, skill, template and framework docs."
+    - "Updated manifest, entrypoint, README, docs, memory and validator wiring."
+    - "Ran validator and scaffolder smoke successfully."
+  repository_revision: null
+  working_tree_summary: "uncommitted bundle changes for audit capability"
+
+task_ledger:
+  - id: "T-001"
+    status: "needs_evaluation"
+    builder_id: "codex-builder"
+    evaluator_id: null
+    evidence: "evidence/T-001.md"
+    last_transition_at: "2026-07-25"
+
+approvals:
+  human_required: false
+  pending: []
+  granted: []
+
+risks:
+  level: "medium"
+  open:
+    - "Independent evaluator approval still required before terminal done."
+
+evidence:
+  latest: "evidence/T-001.md"
+  approved: []
+
+next_safe_step: "Run independent evaluation of T-001 and, if approved, synchronize terminal state."

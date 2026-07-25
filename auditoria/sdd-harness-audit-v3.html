@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auditoria SDD/Harness v3 - sdd-harness-guardian</title>
+  <style>
+    :root {
+      --bg: #eef2f5;
+      --paper: #ffffff;
+      --ink: #162027;
+      --muted: #62717c;
+      --line: #c9d3db;
+      --strong: #0f3d4a;
+      --blue: #2563eb;
+      --teal: #0f766e;
+      --amber: #b45309;
+      --red: #b91c1c;
+      --slate: #334155;
+      --soft-blue: #e7eefc;
+      --soft-teal: #e1f3f1;
+      --soft-amber: #fff3d8;
+      --soft-red: #fde8e8;
+      --shadow: 0 18px 50px rgba(22, 32, 39, .10);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    header {
+      padding: 34px clamp(18px, 5vw, 64px) 22px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
+    main { width: min(1320px, calc(100% - 32px)); margin: 22px auto 56px; }
+    h1, h2, h3 { line-height: 1.16; margin: 0 0 12px; }
+    h1 { font-size: clamp(32px, 5vw, 58px); letter-spacing: 0; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 17px; margin-top: 18px; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: .94em;
+      background: #f4f6f8;
+      border: 1px solid #d8e0e6;
+      padding: 1px 5px;
+    }
+    .eyebrow { color: var(--teal); font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+    .summary { max-width: 980px; color: var(--muted); font-size: 18px; }
+    .meta-grid { display: grid; grid-template-columns: repeat(4, minmax(160px, 1fr)); gap: 12px; margin-top: 22px; }
+    .metric { background: var(--paper); border: 1px solid var(--line); padding: 14px; min-height: 96px; }
+    .metric strong { display: block; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .metric span { display: block; margin-top: 8px; font-size: 21px; font-weight: 800; }
+    .pass { color: var(--teal); }
+    .warn { color: var(--amber); }
+    .fail { color: var(--red); }
+    .info { color: var(--blue); }
+    .layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 18px; align-items: start; }
+    .tabs { position: sticky; top: 14px; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 10px; }
+    input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+    .tab-label { display: flex; align-items: center; gap: 8px; padding: 10px 11px; border: 1px solid transparent; color: var(--slate); cursor: pointer; font-size: 14px; font-weight: 700; }
+    .tab-label:hover { background: #f7fafc; border-color: #d9e2e8; }
+    .tab-dot { width: 10px; height: 10px; border-radius: 99px; background: var(--muted); flex: 0 0 auto; }
+    .dot-pass { background: var(--teal); }
+    .dot-warn { background: var(--amber); }
+    .dot-info { background: var(--blue); }
+    .dot-fail { background: var(--red); }
+    .content { min-width: 0; }
+    .panel { display: none; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow); padding: clamp(18px, 3vw, 32px); }
+    #tab-summary:checked ~ .layout label[for="tab-summary"],
+    #tab-graph:checked ~ .layout label[for="tab-graph"],
+    #tab-sdd:checked ~ .layout label[for="tab-sdd"],
+    #tab-harness:checked ~ .layout label[for="tab-harness"],
+    #tab-agents:checked ~ .layout label[for="tab-agents"],
+    #tab-enforcement:checked ~ .layout label[for="tab-enforcement"],
+    #tab-hooks:checked ~ .layout label[for="tab-hooks"],
+    #tab-memory:checked ~ .layout label[for="tab-memory"],
+    #tab-findings:checked ~ .layout label[for="tab-findings"],
+    #tab-roadmap:checked ~ .layout label[for="tab-roadmap"],
+    #tab-raw:checked ~ .layout label[for="tab-raw"] {
+      background: #edf6f6;
+      border-color: #a9d5d2;
+      color: var(--strong);
+    }
+    #tab-summary:checked ~ .layout #panel-summary,
+    #tab-graph:checked ~ .layout #panel-graph,
+    #tab-sdd:checked ~ .layout #panel-sdd,
+    #tab-harness:checked ~ .layout #panel-harness,
+    #tab-agents:checked ~ .layout #panel-agents,
+    #tab-enforcement:checked ~ .layout #panel-enforcement,
+    #tab-hooks:checked ~ .layout #panel-hooks,
+    #tab-memory:checked ~ .layout #panel-memory,
+    #tab-findings:checked ~ .layout #panel-findings,
+    #tab-roadmap:checked ~ .layout #panel-roadmap,
+    #tab-raw:checked ~ .layout #panel-raw { display: block; }
+    .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 18px 0; }
+    .card { border: 1px solid var(--line); background: #ffffff; padding: 15px; }
+    .card h3 { margin-top: 0; font-size: 15px; color: var(--strong); }
+    .score { display: flex; align-items: center; gap: 8px; margin: 8px 0; }
+    .bar { height: 10px; flex: 1; background: #e5eaee; overflow: hidden; }
+    .fill { height: 100%; background: var(--teal); }
+    .fill.warn { background: var(--amber); }
+    .fill.info { background: var(--blue); }
+    .fill.fail { background: var(--red); }
+    table { width: 100%; border-collapse: collapse; margin: 14px 0 18px; font-size: 14px; }
+    th, td { border: 1px solid var(--line); padding: 9px 10px; text-align: left; vertical-align: top; }
+    th { background: #f4f7f9; color: #42505a; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+    .badge { display: inline-block; padding: 3px 8px; font-size: 12px; font-weight: 800; border: 1px solid var(--line); background: #fff; color: var(--slate); }
+    .badge.pass { background: var(--soft-teal); border-color: #98d7d0; color: var(--teal); }
+    .badge.warn { background: var(--soft-amber); border-color: #f2c56d; color: var(--amber); }
+    .badge.fail { background: var(--soft-red); border-color: #f2a3a3; color: var(--red); }
+    .badge.info { background: var(--soft-blue); border-color: #b9cdf8; color: var(--blue); }
+    .diagram { width: 100%; max-width: 100%; border: 1px solid var(--line); background: #fbfcfd; margin: 14px 0 10px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 12px; border: 1px solid var(--line); background: #fff; padding: 10px 12px; margin: 0 0 20px; font-size: 13px; }
+    .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+    .swatch { width: 14px; height: 14px; border: 1px solid #8fa0ad; display: inline-block; }
+    .sw-pass { background: var(--soft-teal); border-color: var(--teal); }
+    .sw-neutral { background: #ffffff; border-color: #9fb0bc; }
+    .sw-info { background: var(--soft-blue); border-color: var(--blue); }
+    .sw-warn { background: var(--soft-amber); border-color: var(--amber); }
+    .sw-fail { background: var(--soft-red); border-color: var(--red); }
+    .sw-muted { background: #e5eaee; border-color: #9aa8b2; }
+    .note { border-left: 5px solid var(--blue); background: var(--soft-blue); padding: 12px 14px; margin: 14px 0; }
+    .risk-high { background: var(--soft-red); }
+    .risk-medium { background: var(--soft-amber); }
+    .risk-low { background: var(--soft-teal); }
+    .raw-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .raw-item { border: 1px solid var(--line); padding: 14px; background: #fff; }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .tabs { position: static; }
+      .meta-grid, .card-grid, .raw-list { grid-template-columns: 1fr; }
+      header { padding-top: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Pacote de auditoria SDD/Harness · v3 padronizado</div>
+    <h1>sdd-harness-guardian</h1>
+    <p class="summary">Relatório navegável com abas fixas, legendas de cor, aba de hooks e artefatos brutos preservados em <code>auditoria/</code>. O design e a anatomia desta versão estão documentados em <code>design.md</code> e <code>tabs.md</code>.</p>
+    <div class="meta-grid">
+      <div class="metric"><strong>Decisão</strong><span class="warn">pass_with_gaps</span></div>
+      <div class="metric"><strong>Maturidade</strong><span>3 / 4</span></div>
+      <div class="metric"><strong>Achados</strong><span>8</span></div>
+      <div class="metric"><strong>Hooks encontrados</strong><span class="fail">0</span></div>
+    </div>
+  </header>
+
+  <main>
+    <input checked type="radio" name="tabs" id="tab-summary">
+    <input type="radio" name="tabs" id="tab-graph">
+    <input type="radio" name="tabs" id="tab-sdd">
+    <input type="radio" name="tabs" id="tab-harness">
+    <input type="radio" name="tabs" id="tab-agents">
+    <input type="radio" name="tabs" id="tab-enforcement">
+    <input type="radio" name="tabs" id="tab-hooks">
+    <input type="radio" name="tabs" id="tab-memory">
+    <input type="radio" name="tabs" id="tab-findings">
+    <input type="radio" name="tabs" id="tab-roadmap">
+    <input type="radio" name="tabs" id="tab-raw">
+
+    <div class="layout">
+      <nav class="tabs" aria-label="Subpáginas da auditoria">
+        <label class="tab-label" for="tab-summary"><span class="tab-dot dot-warn"></span>Resumo</label>
+        <label class="tab-label" for="tab-graph"><span class="tab-dot dot-info"></span>Harness Graph</label>
+        <label class="tab-label" for="tab-sdd"><span class="tab-dot dot-pass"></span>SDD</label>
+        <label class="tab-label" for="tab-harness"><span class="tab-dot dot-pass"></span>Harness</label>
+        <label class="tab-label" for="tab-agents"><span class="tab-dot dot-warn"></span>Agentes & Skills</label>
+        <label class="tab-label" for="tab-enforcement"><span class="tab-dot dot-warn"></span>Enforcement</label>
+        <label class="tab-label" for="tab-hooks"><span class="tab-dot dot-fail"></span>Hooks</label>
+        <label class="tab-label" for="tab-memory"><span class="tab-dot dot-pass"></span>Memória</label>
+        <label class="tab-label" for="tab-findings"><span class="tab-dot dot-fail"></span>Achados</label>
+        <label class="tab-label" for="tab-roadmap"><span class="tab-dot dot-info"></span>Roadmap</label>
+        <label class="tab-label" for="tab-raw"><span class="tab-dot dot-info"></span>Brutos</label>
+      </nav>
+
+      <div class="content">
+        <section class="panel" id="panel-summary">
+          <h2>1. Resumo Executivo</h2>
+          <p>O repositório tem uma estrutura SDD/Harness real, alcançável e usável. O root adapter aponta para o entrypoint, o manifest registra os elementos centrais, as specs estão numeradas, e os scripts validam boa parte do contrato estrutural. O problema principal não é ausência de harness; é maturidade de hardening e fechamento de release.</p>
+          <p>A decisão continua <strong>pass_with_gaps</strong>: a iniciativa 002 aguarda avaliação independente, o status dela está divergente no run-state, não há hooks/CI detectados, e algumas skills/agentes antigos precisam ser normalizados para o padrão mais completo.</p>
+          <div class="card-grid">
+            <div class="card"><h3>SDD</h3><div class="score"><span>87%</span><div class="bar"><div class="fill" style="width:87%"></div></div></div><p>Forte, com gap concreto em estado da spec 002.</p></div>
+            <div class="card"><h3>Harness</h3><div class="score"><span>82%</span><div class="bar"><div class="fill" style="width:82%"></div></div></div><p>Boa conexão de entrypoint, manifest, regras e workflows.</p></div>
+            <div class="card"><h3>Hooks</h3><div class="score"><span>0%</span><div class="bar"><div class="fill fail" style="width:4%"></div></div></div><p>Nenhum hook/CI implementado foi encontrado.</p></div>
+          </div>
+          <svg class="diagram" viewBox="0 0 980 230" role="img" aria-label="Maturidade por domínio">
+            <rect width="980" height="230" fill="#fbfcfd"></rect>
+            <text x="30" y="34" font-size="18" font-weight="700" fill="#162027">Maturidade por domínio</text>
+            <g font-size="13" fill="#334155">
+              <text x="40" y="80">SDD</text><rect x="180" y="64" width="680" height="18" fill="#e5eaee"></rect><rect x="180" y="64" width="592" height="18" fill="#0f766e"></rect><text x="875" y="79">87%</text>
+              <text x="40" y="113">Harness</text><rect x="180" y="97" width="680" height="18" fill="#e5eaee"></rect><rect x="180" y="97" width="558" height="18" fill="#0f766e"></rect><text x="875" y="112">82%</text>
+              <text x="40" y="146">Agentes/Skills</text><rect x="180" y="130" width="680" height="18" fill="#e5eaee"></rect><rect x="180" y="130" width="476" height="18" fill="#b45309"></rect><text x="875" y="145">70%</text>
+              <text x="40" y="179">Enforcement</text><rect x="180" y="163" width="680" height="18" fill="#e5eaee"></rect><rect x="180" y="163" width="367" height="18" fill="#b45309"></rect><text x="875" y="178">54%</text>
+              <text x="40" y="212">Hooks</text><rect x="180" y="196" width="680" height="18" fill="#e5eaee"></rect><rect x="180" y="196" width="28" height="18" fill="#b91c1c"></rect><text x="875" y="211">0%</text>
+            </g>
+          </svg>
+          <div class="legend" aria-label="Legenda de cores do gráfico de maturidade">
+            <span class="legend-item"><span class="swatch sw-pass"></span>verde: operacional/validado</span>
+            <span class="legend-item"><span class="swatch sw-warn"></span>amarelo: parcial/pendente</span>
+            <span class="legend-item"><span class="swatch sw-fail"></span>vermelho: ausente/bloqueante</span>
+            <span class="legend-item"><span class="swatch sw-muted"></span>cinza: escala/base</span>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-graph">
+          <h2>2. Harness Graph</h2>
+          <p>O branco no grafo significa <strong>presente e neutro</strong>: o nó existe e está no fluxo normal, sem destaque de sucesso especial nem alerta específico. Não significa inexistente. Ausência/bloqueio usa vermelho; partial/weak/pending usa amarelo; alcançável/forte usa verde; artefato gerado/contextual usa azul.</p>
+          <svg class="diagram" viewBox="0 0 1100 580" role="img" aria-label="Grafo operacional do harness com legenda">
+            <defs>
+              <marker id="arrow-graph" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#53636f"></path></marker>
+              <style>.node{fill:#fff;stroke:#9fb0bc;stroke-width:1.4}.node-strong{fill:#e1f3f1;stroke:#0f766e;stroke-width:2}.node-warn{fill:#fff3d8;stroke:#b45309;stroke-width:2}.node-info{fill:#e7eefc;stroke:#2563eb;stroke-width:2}.node-fail{fill:#fde8e8;stroke:#b91c1c;stroke-width:2}.edge{stroke:#53636f;stroke-width:1.7;fill:none;marker-end:url(#arrow-graph)}.edge-warn{stroke:#b45309;stroke-dasharray:7 5;stroke-width:2;fill:none;marker-end:url(#arrow-graph)}.gtext{font:13px Inter,sans-serif;fill:#162027}.small{font:11px Inter,sans-serif;fill:#62717c}</style>
+            </defs>
+            <rect width="1100" height="580" fill="#fbfcfd"></rect>
+            <text x="30" y="34" font-size="20" font-weight="800" fill="#162027">Operational Reachability Graph</text>
+            <rect class="node-strong" x="40" y="80" width="145" height="58"></rect><text class="gtext" x="112" y="104" text-anchor="middle">AGENTS.md</text><text class="small" x="112" y="124" text-anchor="middle">root adapter</text>
+            <rect class="node-strong" x="250" y="80" width="170" height="58"></rect><text class="gtext" x="335" y="104" text-anchor="middle">.harness/AGENTS.md</text><text class="small" x="335" y="124" text-anchor="middle">primary entrypoint</text>
+            <rect class="node-strong" x="500" y="80" width="150" height="58"></rect><text class="gtext" x="575" y="104" text-anchor="middle">manifest.yaml</text><text class="small" x="575" y="124" text-anchor="middle">registry</text>
+            <rect class="node" x="740" y="45" width="125" height="52"></rect><text class="gtext" x="802" y="75" text-anchor="middle">Rules</text>
+            <rect class="node" x="910" y="45" width="125" height="52"></rect><text class="gtext" x="972" y="75" text-anchor="middle">Workflows</text>
+            <rect class="node" x="740" y="126" width="125" height="52"></rect><text class="gtext" x="802" y="156" text-anchor="middle">Agents</text>
+            <rect class="node" x="910" y="126" width="125" height="52"></rect><text class="gtext" x="972" y="156" text-anchor="middle">Skills</text>
+            <rect class="node" x="740" y="207" width="125" height="52"></rect><text class="gtext" x="802" y="237" text-anchor="middle">Templates</text>
+            <rect class="node" x="910" y="207" width="125" height="52"></rect><text class="gtext" x="972" y="237" text-anchor="middle">Scripts</text>
+            <rect class="node-strong" x="250" y="318" width="170" height="58"></rect><text class="gtext" x="335" y="342" text-anchor="middle">specs/INDEX.md</text><text class="small" x="335" y="362" text-anchor="middle">context map</text>
+            <rect class="node" x="500" y="290" width="170" height="58"></rect><text class="gtext" x="585" y="314" text-anchor="middle">001-build</text><text class="small" x="585" y="334" text-anchor="middle">closed</text>
+            <rect class="node-warn" x="500" y="372" width="210" height="58"></rect><text class="gtext" x="605" y="396" text-anchor="middle">002-audit-process</text><text class="small" x="605" y="416" text-anchor="middle">needs_eval / status draft</text>
+            <rect class="node-warn" x="740" y="340" width="190" height="58"></rect><text class="gtext" x="835" y="364" text-anchor="middle">Hard mirrors</text><text class="small" x="835" y="384" text-anchor="middle">partial</text>
+            <rect class="node-fail" x="965" y="340" width="95" height="58"></rect><text class="gtext" x="1012" y="364" text-anchor="middle">Hooks</text><text class="small" x="1012" y="384" text-anchor="middle">none</text>
+            <rect class="node-info" x="740" y="470" width="295" height="58"></rect><text class="gtext" x="887" y="494" text-anchor="middle">auditoria/ package</text><text class="small" x="887" y="514" text-anchor="middle">raw + HTML generated</text>
+            <path class="edge" d="M185 109 H250"></path><path class="edge" d="M420 109 H500"></path>
+            <path class="edge" d="M650 109 C690 109 690 71 740 71"></path><path class="edge" d="M650 109 C710 109 860 71 910 71"></path><path class="edge" d="M650 109 C700 109 700 152 740 152"></path><path class="edge" d="M650 109 C760 109 810 152 910 152"></path><path class="edge" d="M650 109 C700 109 700 233 740 233"></path><path class="edge" d="M650 109 C760 109 810 233 910 233"></path>
+            <path class="edge" d="M335 138 V318"></path><path class="edge" d="M420 347 C450 347 460 319 500 319"></path><path class="edge" d="M420 347 C455 347 460 401 500 401"></path>
+            <path class="edge-warn" d="M802 259 C805 305 830 315 835 340"></path><path class="edge-warn" d="M930 369 H965"></path><path class="edge" d="M887 398 V470"></path>
+          </svg>
+          <div class="legend" aria-label="Legenda de cores do harness graph">
+            <span class="legend-item"><span class="swatch sw-pass"></span>verde: entrypoint/índice forte e alcançável</span>
+            <span class="legend-item"><span class="swatch sw-neutral"></span>branco: presente e neutro, não é ausência</span>
+            <span class="legend-item"><span class="swatch sw-info"></span>azul: gerado/contextual</span>
+            <span class="legend-item"><span class="swatch sw-warn"></span>amarelo: weak/parcial/pendente</span>
+            <span class="legend-item"><span class="swatch sw-fail"></span>vermelho: ausente ou bloqueante</span>
+          </div>
+          <table>
+            <thead><tr><th>Classificação</th><th>Estado</th><th>Notas</th></tr></thead>
+            <tbody>
+              <tr><td>Reachable</td><td>Entry, manifest, rules, workflows, agents, skills, templates, specs</td><td>Caminhos explícitos por <code>AGENTS.md</code> e <code>manifest.yaml</code>.</td></tr>
+              <tr><td>Weak</td><td>Hard mirrors recomendados</td><td>Nomes existem, mas parte não é executável.</td></tr>
+              <tr><td>Missing</td><td>Hooks/CI</td><td>Nenhum hook/CI detectado para executar os scripts automaticamente.</td></tr>
+              <tr><td>Stale</td><td>Release evidence</td><td><code>docs/acceptance-criteria.md</code> cita checks antigos.</td></tr>
+            </tbody>
+          </table>
+          <p>Dados brutos: <a href="graph.json">graph.json</a> e <a href="inventory.json">inventory.json</a>.</p>
+        </section>
+
+        <section class="panel" id="panel-sdd">
+          <h2>3. SDD</h2>
+          <p>O SDD é forte: specs numeradas, índice, templates completos e scaffolder seguro. O gap concreto é a divergência de status na spec 002.</p>
+          <table><thead><tr><th>Artefato</th><th>001</th><th>002</th><th>Observação</th></tr></thead><tbody>
+            <tr><td><code>spec.md</code></td><td><span class="badge pass">ok</span></td><td><span class="badge pass">ok</span></td><td>002 define ACs e riscos.</td></tr>
+            <tr><td><code>plan.md</code></td><td><span class="badge pass">ok</span></td><td><span class="badge pass">ok</span></td><td>Plano técnico presente.</td></tr>
+            <tr><td><code>tasks.md</code></td><td><span class="badge pass">done</span></td><td><span class="badge warn">needs_evaluation</span></td><td>002 ainda não pode virar done.</td></tr>
+            <tr><td><code>run-state.yaml</code></td><td><span class="badge pass">ok</span></td><td><span class="badge fail">divergente</span></td><td><code>status: draft</code> conflita com fase.</td></tr>
+            <tr><td><code>evidence/</code></td><td><span class="badge pass">aprovado</span></td><td><span class="badge warn">draft</span></td><td>002 tem evidence draft sem evaluator.</td></tr>
+          </tbody></table>
+        </section>
+
+        <section class="panel" id="panel-harness">
+          <h2>4. Harness</h2>
+          <p>O harness é passivo, vendor-neutral e bem conectado. Ele separa intenção, design, validação, execução, prova, memória e aprendizado.</p>
+          <svg class="diagram" viewBox="0 0 980 270" role="img" aria-label="Camadas do harness">
+            <rect width="980" height="270" fill="#fbfcfd"></rect><text x="32" y="34" font-size="19" font-weight="800" fill="#162027">Camadas auditadas</text>
+            <g font-size="13" fill="#162027">
+              <rect x="40" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="105" y="104" text-anchor="middle">Intent</text>
+              <rect x="190" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="255" y="104" text-anchor="middle">Design</text>
+              <rect x="340" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="405" y="104" text-anchor="middle">Validation</text>
+              <rect x="490" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="555" y="104" text-anchor="middle">Execution</text>
+              <rect x="640" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="705" y="104" text-anchor="middle">Proof</text>
+              <rect x="790" y="70" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="855" y="104" text-anchor="middle">Memory</text>
+              <path d="M170 99 H190 M320 99 H340 M470 99 H490 M620 99 H640 M770 99 H790" stroke="#53636f"></path>
+              <rect x="190" y="170" width="130" height="58" fill="#fff3d8" stroke="#b45309"></rect><text x="255" y="204" text-anchor="middle">Hard mirrors</text>
+              <rect x="340" y="170" width="130" height="58" fill="#e1f3f1" stroke="#0f766e"></rect><text x="405" y="204" text-anchor="middle">Ratchet</text>
+              <rect x="490" y="170" width="130" height="58" fill="#e7eefc" stroke="#2563eb"></rect><text x="555" y="204" text-anchor="middle">Audit</text>
+            </g>
+          </svg>
+          <div class="legend"><span class="legend-item"><span class="swatch sw-pass"></span>verde: camada operacional</span><span class="legend-item"><span class="swatch sw-warn"></span>amarelo: camada parcial</span><span class="legend-item"><span class="swatch sw-info"></span>azul: nova capacidade de auditoria</span></div>
+        </section>
+
+        <section class="panel" id="panel-agents">
+          <h2>5. Agentes & Skills</h2>
+          <p>Agentes e skills são alcançáveis e registrados. O gap é padronização de contratos: os novos artefatos de auditoria estão mais completos que os antigos.</p>
+          <table><thead><tr><th>Grupo</th><th>Status</th><th>Gap</th><th>Ação</th></tr></thead><tbody>
+            <tr><td>Novos agentes de auditoria</td><td><span class="badge pass">alto</span></td><td>Sem gap relevante.</td><td>Usar como referência.</td></tr>
+            <tr><td>Agentes centrais antigos</td><td><span class="badge warn">médio</span></td><td>Output/Non-responsibilities heterogêneos.</td><td>Adicionar contrato padronizado.</td></tr>
+            <tr><td>Skill de auditoria</td><td><span class="badge pass">alto</span></td><td>Inclui External Knowledge Policy.</td><td>Usar como referência.</td></tr>
+            <tr><td>Skills antigas</td><td><span class="badge warn">médio</span></td><td>Faltam seções explícitas.</td><td>Refatorar por risco.</td></tr>
+          </tbody></table>
+        </section>
+
+        <section class="panel" id="panel-enforcement">
+          <h2>6. Enforcement</h2>
+          <p>O enforcement é parcial: há scripts e recomendações de hard mirror, mas não hooks/CI detectados.</p>
+          <svg class="diagram" viewBox="0 0 980 330" role="img" aria-label="Funil de enforcement">
+            <defs><marker id="arrow-enforcement-v3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#53636f"></path></marker></defs>
+            <rect width="980" height="330" fill="#fbfcfd"></rect><text x="32" y="34" font-size="19" font-weight="800" fill="#162027">Soft-to-hard enforcement ladder</text>
+            <g font-size="13" fill="#162027">
+              <rect x="70" y="80" width="180" height="60" fill="#e1f3f1" stroke="#0f766e"></rect><text x="160" y="106" text-anchor="middle">Markdown rules</text><text x="160" y="126" text-anchor="middle">13/13 present</text>
+              <rect x="300" y="80" width="180" height="60" fill="#e1f3f1" stroke="#0f766e"></rect><text x="390" y="106" text-anchor="middle">Recommended checks</text><text x="390" y="126" text-anchor="middle">13/13 named</text>
+              <rect x="530" y="80" width="180" height="60" fill="#fff3d8" stroke="#b45309"></rect><text x="620" y="106" text-anchor="middle">Local validators</text><text x="620" y="126" text-anchor="middle">partial</text>
+              <rect x="760" y="80" width="150" height="60" fill="#fde8e8" stroke="#b91c1c"></rect><text x="835" y="106" text-anchor="middle">CI/hooks</text><text x="835" y="126" text-anchor="middle">not found</text>
+              <path d="M250 110 H300 M480 110 H530 M710 110 H760" stroke="#53636f" marker-end="url(#arrow-enforcement-v3)"></path>
+              <rect x="180" y="210" width="620" height="42" fill="#fff" stroke="#c9d3db"></rect><text x="490" y="236" text-anchor="middle">Current state: governed by validated files, not fully hardened</text>
+            </g>
+          </svg>
+          <div class="legend"><span class="legend-item"><span class="swatch sw-pass"></span>verde: definido/validado</span><span class="legend-item"><span class="swatch sw-warn"></span>amarelo: parcial</span><span class="legend-item"><span class="swatch sw-fail"></span>vermelho: não encontrado</span><span class="legend-item"><span class="swatch sw-neutral"></span>branco: nota neutra</span></div>
+        </section>
+
+        <section class="panel" id="panel-hooks">
+          <h2>7. Hooks</h2>
+          <p>Nenhum hook ou workflow CI implementado foi encontrado nesta auditoria. Isso não significa que o harness não funcione; significa que a execução dos checks ainda depende de chamada manual ou de wiring externo pelo consumidor/mantenedor.</p>
+          <svg class="diagram" viewBox="0 0 980 260" role="img" aria-label="Status de hooks">
+            <rect width="980" height="260" fill="#fbfcfd"></rect><text x="32" y="34" font-size="19" font-weight="800" fill="#162027">Hooks & CI enforcement status</text>
+            <rect x="60" y="78" width="170" height="70" fill="#fde8e8" stroke="#b91c1c" stroke-width="2"></rect><text x="145" y="106" text-anchor="middle" font-size="14">Git hooks</text><text x="145" y="128" text-anchor="middle" font-size="12">0 found</text>
+            <rect x="280" y="78" width="170" height="70" fill="#fde8e8" stroke="#b91c1c" stroke-width="2"></rect><text x="365" y="106" text-anchor="middle" font-size="14">CI workflows</text><text x="365" y="128" text-anchor="middle" font-size="12">0 found</text>
+            <rect x="500" y="78" width="190" height="70" fill="#fff3d8" stroke="#b45309" stroke-width="2"></rect><text x="595" y="106" text-anchor="middle" font-size="14">Validator scripts</text><text x="595" y="128" text-anchor="middle" font-size="12">manual candidates</text>
+            <rect x="740" y="78" width="180" height="70" fill="#e7eefc" stroke="#2563eb" stroke-width="2"></rect><text x="830" y="106" text-anchor="middle" font-size="14">Recommended</text><text x="830" y="128" text-anchor="middle" font-size="12">pre-commit / CI</text>
+          </svg>
+          <div class="legend"><span class="legend-item"><span class="swatch sw-fail"></span>vermelho: hook/CI não encontrado</span><span class="legend-item"><span class="swatch sw-warn"></span>amarelo: existe script, mas não está conectado</span><span class="legend-item"><span class="swatch sw-info"></span>azul: recomendação</span></div>
+          <table><thead><tr><th>Hook/CI</th><th>Status</th><th>O que deveria fazer</th></tr></thead><tbody>
+            <tr><td>pre-commit validate bundle</td><td><span class="badge fail">não implementado</span></td><td>Executar <code>python scripts/validate_bundle.py</code>.</td></tr>
+            <tr><td>pre-push / CI smoke</td><td><span class="badge fail">não implementado</span></td><td>Executar <code>python scripts/smoke_test_scaffolder.py</code>.</td></tr>
+            <tr><td>state consistency check</td><td><span class="badge warn">recomendado</span></td><td>Detectar divergência index/run-state/tasks como F-002.</td></tr>
+            <tr><td>audit package check</td><td><span class="badge warn">recomendado</span></td><td>Garantir HTML + raw artifacts + legenda + aba hooks.</td></tr>
+          </tbody></table>
+          <p>Dados brutos: <a href="hooks.json">hooks.json</a>.</p>
+        </section>
+
+        <section class="panel" id="panel-memory">
+          <h2>8. Memória</h2>
+          <p>A memória está bem desenhada para economia de contexto: índice e estado compacto primeiro, detalhes sob demanda, e embeddings/MCP como camada opcional.</p>
+          <table><thead><tr><th>Camada</th><th>Arquivo/contrato</th><th>Status</th><th>Comentário</th></tr></thead><tbody>
+            <tr><td>Index</td><td><code>specs/INDEX.md</code></td><td><span class="badge pass">ok</span></td><td>Primeira leitura para iniciativas.</td></tr>
+            <tr><td>Working state</td><td><code>run-state.yaml</code></td><td><span class="badge warn">parcial</span></td><td>Spec 002 pede validator.</td></tr>
+            <tr><td>Progress</td><td><code>progress.md</code></td><td><span class="badge pass">ok</span></td><td>Resume instructions presentes.</td></tr>
+            <tr><td>Handoff</td><td><code>handoffs/latest-handoff.md</code></td><td><span class="badge pass">ok</span></td><td>Próximo passo explícito.</td></tr>
+            <tr><td>Ratchet</td><td><code>ratchet.md</code></td><td><span class="badge pass">ok</span></td><td>Existe por iniciativa e no bundle.</td></tr>
+          </tbody></table>
+        </section>
+
+        <section class="panel" id="panel-findings">
+          <h2>9. Achados</h2>
+          <table><thead><tr><th>ID</th><th>Severidade</th><th>Domínio</th><th>Evidência</th><th>Impacto</th><th>Remediação</th></tr></thead><tbody>
+            <tr class="risk-high"><td>F-001</td><td>High</td><td>Release</td><td><code>manifest.yaml</code> ready + spec 002 needs_evaluation.</td><td>Release pode parecer fechado sem avaliação.</td><td>Avaliar spec 002 e atualizar versão/changelog/status.</td></tr>
+            <tr class="risk-high"><td>F-002</td><td>High</td><td>State</td><td><code>run-state.status: draft</code> com fase <code>needs_evaluation</code>.</td><td>Retomada insegura ou confusa.</td><td>Sincronizar status e adicionar validator.</td></tr>
+            <tr class="risk-medium"><td>F-003</td><td>Medium</td><td>Hard mirrors</td><td>Recommended checks sem automação dedicada.</td><td>Governed, não hardened.</td><td>Implementar checks críticos.</td></tr>
+            <tr class="risk-medium"><td>F-004</td><td>Medium</td><td>Skills</td><td>Skills antigas sem seções do novo padrão.</td><td>Menor portabilidade e precisão.</td><td>Normalizar SKILL.md por risco.</td></tr>
+            <tr class="risk-medium"><td>F-005</td><td>Medium</td><td>Agents</td><td>Contratos heterogêneos.</td><td>Delegação menos previsível.</td><td>Padronizar outputs e boundaries.</td></tr>
+            <tr class="risk-medium"><td>F-006</td><td>Medium</td><td>Evidence</td><td>Acceptance criteria cita 225 checks; atual é 260.</td><td>Release evidence stale.</td><td>Atualizar após avaliação.</td></tr>
+            <tr><td>F-007</td><td>Low</td><td>Encoding</td><td>Mojibake no terminal em textos PT.</td><td>Ruído de auditoria CLI.</td><td>Confirmar UTF-8.</td></tr>
+            <tr class="risk-medium"><td>F-008</td><td>Medium</td><td>Hooks</td><td><code>hooks.json</code>: none_found.</td><td>Checks dependem de execução manual.</td><td>Adicionar hooks/CI opcionais.</td></tr>
+          </tbody></table>
+          <p>Dados brutos: <a href="findings.json">findings.json</a>.</p>
+        </section>
+
+        <section class="panel" id="panel-roadmap">
+          <h2>10. Roadmap</h2>
+          <table><thead><tr><th>Prioridade</th><th>Ação</th><th>Owner sugerido</th><th>Validação</th></tr></thead><tbody>
+            <tr><td><span class="badge fail">P0</span></td><td>Corrigir status da spec 002 e executar avaliação independente.</td><td>State Keeper + Evaluator Agent</td><td>Evidence aprovado e task terminal sincronizada.</td></tr>
+            <tr><td><span class="badge fail">P0</span></td><td>Atualizar release metadata antes de publicar.</td><td>Release maintainer</td><td><code>VERSION</code>, <code>manifest.yaml</code>, <code>CHANGELOG.md</code> alinhados.</td></tr>
+            <tr><td><span class="badge warn">P1</span></td><td>Criar validator de spec index/run-state/tasks.</td><td>Harness maintainer</td><td>Check detecta F-002 automaticamente.</td></tr>
+            <tr><td><span class="badge warn">P1</span></td><td>Criar graph reachability check.</td><td>Harness maintainer</td><td>Check gera nodes/edges e falha em órfãos críticos.</td></tr>
+            <tr><td><span class="badge warn">P1</span></td><td>Adicionar hooks/CI opcionais.</td><td>Release maintainer</td><td>Pipeline executa validator e smoke.</td></tr>
+            <tr><td><span class="badge info">P2</span></td><td>Normalizar skills e agents.</td><td>Platform engineering</td><td>Lint semântico por seções e risk level.</td></tr>
+          </tbody></table>
+        </section>
+
+        <section class="panel" id="panel-raw">
+          <h2>11. Brutos</h2>
+          <p>Pacote bruto/transitório preservado na pasta aprovada <code>auditoria/</code>.</p>
+          <div class="raw-list">
+            <div class="raw-item"><h3>Inventário</h3><p><a href="inventory.json">inventory.json</a></p></div>
+            <div class="raw-item"><h3>Grafo</h3><p><a href="graph.json">graph.json</a></p></div>
+            <div class="raw-item"><h3>Achados</h3><p><a href="findings.json">findings.json</a></p></div>
+            <div class="raw-item"><h3>Hooks</h3><p><a href="hooks.json">hooks.json</a></p></div>
+            <div class="raw-item"><h3>Checks</h3><p><a href="checks.md">checks.md</a></p></div>
+            <div class="raw-item"><h3>Notas</h3><p><a href="analysis-notes.md">analysis-notes.md</a></p></div>
+            <div class="raw-item"><h3>Design</h3><p><a href="design.md">design.md</a></p></div>
+            <div class="raw-item"><h3>Abas</h3><p><a href="tabs.md">tabs.md</a></p></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

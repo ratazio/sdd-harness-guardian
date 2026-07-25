@@ -1,0 +1,66 @@
+{
+  "audit_id": "sdd-harness-guardian-2026-07-25",
+  "generated_at": "2026-07-25",
+  "nodes": [
+    {"id": "root.AGENTS", "label": "AGENTS.md", "type": "entrypoint", "reachability": "reachable"},
+    {"id": "harness.AGENTS", "label": ".harness/AGENTS.md", "type": "entrypoint", "reachability": "reachable"},
+    {"id": "manifest", "label": "manifest.yaml", "type": "registry", "reachability": "reachable"},
+    {"id": "rules", "label": ".harness/rules/*", "type": "rule_set", "reachability": "reachable"},
+    {"id": "workflows", "label": ".harness/workflows/*", "type": "workflow_set", "reachability": "reachable"},
+    {"id": "agents", "label": ".harness/agents/*", "type": "agent_set", "reachability": "reachable"},
+    {"id": "skills", "label": ".harness/skills/*/SKILL.md", "type": "skill_set", "reachability": "reachable"},
+    {"id": "templates", "label": ".harness/templates/*", "type": "template_set", "reachability": "reachable"},
+    {"id": "scripts", "label": "scripts/*.py", "type": "hard_mirror_partial", "reachability": "reachable"},
+    {"id": "hooks", "label": "hooks/CI", "type": "hook_surface", "reachability": "missing"},
+    {"id": "spec_index", "label": "specs/INDEX.md", "type": "spec_index", "reachability": "reachable"},
+    {"id": "spec_001", "label": "specs/001-build-the-guardian", "type": "initiative", "reachability": "reachable"},
+    {"id": "spec_002", "label": "specs/002-sdd-harness-audit-process", "type": "initiative", "reachability": "reachable"},
+    {"id": "audit_report_template", "label": ".harness/templates/audit-report.html", "type": "template", "reachability": "reachable"},
+    {"id": "audit_output", "label": "auditoria/*", "type": "audit_output", "reachability": "generated"}
+  ],
+  "edges": [
+    {"from": "root.AGENTS", "to": "harness.AGENTS", "type": "entrypoint_loads", "evidence": "AGENTS.md"},
+    {"from": "harness.AGENTS", "to": "rules", "type": "entrypoint_loads", "evidence": ".harness/AGENTS.md"},
+    {"from": "harness.AGENTS", "to": "agents", "type": "entrypoint_loads", "evidence": ".harness/AGENTS.md"},
+    {"from": "harness.AGENTS", "to": "workflows", "type": "entrypoint_loads", "evidence": ".harness/AGENTS.md"},
+    {"from": "harness.AGENTS", "to": "skills", "type": "entrypoint_loads", "evidence": ".harness/AGENTS.md"},
+    {"from": "harness.AGENTS", "to": "templates", "type": "entrypoint_loads", "evidence": ".harness/AGENTS.md"},
+    {"from": "harness.AGENTS", "to": "spec_index", "type": "entrypoint_loads", "evidence": ".harness/AGENTS.md and state-and-memory rule"},
+    {"from": "manifest", "to": "rules", "type": "manifest_registers", "evidence": "manifest.yaml"},
+    {"from": "manifest", "to": "workflows", "type": "manifest_registers", "evidence": "manifest.yaml"},
+    {"from": "manifest", "to": "agents", "type": "manifest_registers", "evidence": "manifest.yaml"},
+    {"from": "manifest", "to": "skills", "type": "manifest_registers", "evidence": "manifest.yaml"},
+    {"from": "manifest", "to": "templates", "type": "manifest_registers", "evidence": "manifest.yaml"},
+    {"from": "scripts", "to": "manifest", "type": "script_validates", "evidence": "scripts/validate_bundle.py"},
+    {"from": "scripts", "to": "rules", "type": "script_validates", "evidence": "scripts/validate_bundle.py"},
+    {"from": "scripts", "to": "workflows", "type": "script_validates", "evidence": "scripts/validate_bundle.py"},
+    {"from": "scripts", "to": "skills", "type": "script_validates", "evidence": "scripts/validate_bundle.py"},
+    {"from": "scripts", "to": "templates", "type": "script_validates", "evidence": "scripts/validate_bundle.py"},
+    {"from": "hooks", "to": "scripts", "type": "missing_hard_mirror_wiring", "evidence": "hooks.json"},
+    {"from": "spec_index", "to": "spec_001", "type": "state_points_to", "evidence": "specs/INDEX.md"},
+    {"from": "spec_index", "to": "spec_002", "type": "state_points_to", "evidence": "specs/INDEX.md"},
+    {"from": "skills", "to": "audit_report_template", "type": "skill_requires", "evidence": ".harness/skills/sdd-harness-audit/SKILL.md"},
+    {"from": "workflows", "to": "audit_report_template", "type": "workflow_invokes", "evidence": ".harness/workflows/sdd-harness-audit.md"},
+    {"from": "audit_report_template", "to": "audit_output", "type": "template_scaffolds", "evidence": "auditoria/sdd-harness-audit-v2.html"}
+  ],
+  "reachability_assessment": {
+    "critical_orphans": [],
+    "weak_surfaces": [
+      {
+        "surface": "hard_mirror_recommendations",
+        "reason": "Recommended checks are named and partially covered by validate_bundle.py, but several are not implemented as dedicated validators, hooks, schemas or CI gates."
+      },
+      {
+        "surface": "hooks",
+        "reason": "No implemented repository hooks or CI workflows were found; enforcement scripts are manual/CI candidates only."
+      }
+    ],
+    "missing_references": [],
+    "stale_references": [
+      {
+        "surface": "release_evidence",
+        "evidence": "docs/acceptance-criteria.md cites 225 checks while current validator reports 258 checks."
+      }
+    ]
+  }
+}

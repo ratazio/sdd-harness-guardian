@@ -1,0 +1,123 @@
+{
+  "audit_id": "sdd-harness-guardian-2026-07-25",
+  "repository": "D:\\Projetos\\AI\\sdd-harness-guardian",
+  "generated_at": "2026-07-25",
+  "approved_output_directory": "auditoria",
+  "summary": {
+    "root_entrypoints": 1,
+    "harness_entrypoints": 1,
+    "agents": 10,
+    "skills": 8,
+    "rules": 13,
+    "workflows": 7,
+    "templates": 20,
+    "scripts": 3,
+    "docs": 5,
+    "spec_initiatives": 2,
+    "audit_reports": 3,
+    "hooks": 0,
+    "raw_audit_artifacts": 8
+  },
+  "entrypoints": [
+    {
+      "path": "AGENTS.md",
+      "type": "root_adapter",
+      "status": "reachable",
+      "notes": "Delegates to .harness/AGENTS.md and warns this is a source bundle, not a consumer project."
+    },
+    {
+      "path": ".harness/AGENTS.md",
+      "type": "primary_harness_entrypoint",
+      "status": "reachable",
+      "notes": "Defines operating model, protected invariants, roles, required flow, required artifacts and audit entry."
+    }
+  ],
+  "agents": [
+    "builder-agent",
+    "delivery-orchestrator",
+    "evaluator-agent",
+    "harness-auditor",
+    "harness-graph-mapper",
+    "harness-planner",
+    "impact-mapper",
+    "ratchet-maintainer",
+    "spec-guardian",
+    "state-keeper"
+  ],
+  "skills": [
+    "evidence-pack-generation",
+    "impact-analysis",
+    "interruption-recovery",
+    "ratchet-learning",
+    "sdd-harness-audit",
+    "spec-review",
+    "task-breakdown",
+    "validation-planning"
+  ],
+  "rules": [
+    "audit-policy",
+    "builder-evaluator-separation",
+    "destructive-operations",
+    "evidence-policy",
+    "human-visibility",
+    "instruction-precedence",
+    "outcome-readiness",
+    "sdd-quality",
+    "soft-hard-rules",
+    "spec-indexing",
+    "state-and-memory",
+    "task-readiness",
+    "validation-policy"
+  ],
+  "workflows": [
+    "interruption-recovery",
+    "sdd-bugfix",
+    "sdd-feature",
+    "sdd-harness-audit",
+    "sdd-lifecycle",
+    "sdd-refactor",
+    "spec-structure-normalization"
+  ],
+  "specs": [
+    {
+      "id": "001-build-the-guardian",
+      "index_status": "closed",
+      "run_state_status": "closed",
+      "validation_done": true,
+      "notes": "Historical build initiative is closed with approved evidence."
+    },
+    {
+      "id": "002-sdd-harness-audit-process",
+      "index_status": "needs_evaluation",
+      "run_state_status": "draft",
+      "current_phase": "needs_evaluation",
+      "validation_done": false,
+      "notes": "Active audit-process initiative is implemented but waiting for independent evaluation; run-state status is divergent."
+    }
+  ],
+  "scripts": [
+    {
+      "path": "scripts/new_initiative.py",
+      "role": "scaffold numbered SDD initiative and update specs/INDEX.md"
+    },
+    {
+      "path": "scripts/smoke_test_scaffolder.py",
+      "role": "isolated smoke test for scaffolder overwrite safety and numbered specs"
+    },
+    {
+      "path": "scripts/validate_bundle.py",
+      "role": "deterministic structural validation for manifest, rules, workflows, templates and skills"
+    }
+  ],
+  "ci_or_hooks": [],
+  "hooks": {
+    "status": "none_found",
+    "implemented": [],
+    "raw_artifact": "auditoria/hooks.json"
+  },
+  "notable_absences": [
+    "No repository CI workflow was found under common CI directories.",
+    "No dedicated schema validator was found for specs/INDEX.md versus run-state/task-ledger consistency.",
+    "No deterministic graph reachability parser was found."
+  ]
+}

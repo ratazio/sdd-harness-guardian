@@ -24,6 +24,8 @@ Ele fornece contratos reutilizáveis para:
 - impedir `done` sem evidence pack aprovado;
 - preservar estado entre sessões e agentes;
 - manter iniciativas numeradas e encontráveis via `specs/INDEX.md`;
+- auditar se SDD, harness, agentes, skills, memória e hard mirrors estão
+  realmente conectados;
 - converter falhas sérias ou recorrentes em ratchets.
 
 Harness Engineering aparece apenas como a camada de regras, execução,
@@ -42,7 +44,7 @@ frontend, workflow engine, knowledge base ou regras de um domínio consumidor.
   templates/              # artefatos canônicos copiáveis
   gc/ratchet.md           # aprendizado do próprio bundle
   memory/MEMORY.md        # princípios estáveis do bundle
-docs/                     # arquitetura, operação, aceite e referências
+docs/                     # arquitetura, operação, auditoria, aceite e referências
 scripts/
   new_initiative.py       # scaffolding opcional, sem workflow engine
   validate_bundle.py      # validação determinística do bundle
@@ -99,3 +101,22 @@ python scripts/validate_bundle.py
 Para publicar, mantenha `VERSION`, `manifest.yaml` e `CHANGELOG.md` alinhados,
 execute o validador, obtenha avaliação independente, faça commit e crie a tag
 imutável `v<versão>`. O procedimento completo está em `INSTALL.md`.
+
+## Auditoria
+
+Para auditar um consumidor ou este bundle, use
+`.harness/skills/sdd-harness-audit/SKILL.md` com o workflow
+`.harness/workflows/sdd-harness-audit.md`. A auditoria deve montar o grafo do
+harness, separar artefatos alcançáveis de arquivos decorativos, revisar SDD,
+agentes, skills, memória, validação, hard mirrors e produzir HTML no formato de
+`.harness/templates/audit-report.html`.
+
+Exemplo de pedido:
+
+```txt
+Faça uma auditoria SDD/harness completa deste repositório e gere o relatório em
+docs/audits/2026-07-25-sdd-harness-audit.html.
+```
+
+Se o pedido não informar onde gerar o HTML, o agente deve perguntar o caminho
+de saída antes de escrever o relatório. Ele não deve escolher a pasta sozinho.

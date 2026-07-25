@@ -30,6 +30,7 @@ Consumer repository
 | Proof | `evidence/` | resultados verificáveis e decisão |
 | Memory | `progress.md`, `handoffs/`, `decision-log.md` | retomada e contexto |
 | Learning | `ratchet.md` | prevenção de falhas recorrentes |
+| Audit | `sdd-harness-audit` + `audit-report.html` | grafo, gaps, maturidade e remediação |
 
 `specs/INDEX.md` é a primeira camada de descoberta. Ele reduz contexto inicial,
 preserva ordem sequencial e orienta humanos/agentes antes de abrir artefatos
@@ -82,6 +83,10 @@ LLM, IDE, CI, hooks, schemas e workflow engine.
 O bundle define defaults e invariantes de processo. O consumidor define domínio,
 stack, arquitetura, segredos, permissões, deploy e políticas adicionais. Dados
 de domínio e memória viva nunca devem ser gravados dentro do submódulo.
+
+Auditorias podem ler artefatos do consumidor, mas não devem mover, apagar ou
+normalizar arquivos sem uma iniciativa explícita de remediação. O relatório é
+evidência e direcionamento, não alteração automática do projeto.
 
 Regras locais podem especializar o bundle, mas não reduzir suas invariantes
 protegidas. Operações destrutivas cruzam um boundary humano e exigem aprovação
