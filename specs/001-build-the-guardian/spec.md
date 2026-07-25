@@ -1,6 +1,8 @@
-# Spec: build-the-guardian
+# Spec: 001-build-the-guardian
 
 **Status:** spec_ready  
+**Sequence:** 001  
+**Slug:** build-the-guardian  
 **Owner:** bundle maintainers  
 **Created:** 2026-07-13  
 **Last updated:** 2026-07-13  

@@ -1,7 +1,10 @@
 schema_version: 1
-initiative_id: "build-the-guardian"
+initiative_id: "001-build-the-guardian"
+initiative_sequence: "001"
+initiative_slug: "build-the-guardian"
 initiative_kind: "feature"
 status: "closed"
+summary: "Build a reusable SDD Harness Guardian bundle with gates, evidence and resumable state."
 current_phase: "closed"
 current_task: null
 last_safe_checkpoint: "Cycle 2 approved; T-001 through T-004 closed in dependency order."

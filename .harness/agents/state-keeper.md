@@ -8,6 +8,7 @@ Garantir que o trabalho sobreviva a interrupções, troca de agente, troca de se
 
 - atualizar `progress.md`;
 - atualizar `run-state.yaml`;
+- manter `specs/INDEX.md` sincronizado com status, resumo, owner e data;
 - criar ou atualizar `handoffs/latest-handoff.md`;
 - registrar decisões em `decision-log.md`;
 - registrar evidence em `evidence/`;
@@ -41,13 +42,21 @@ resume_instructions
 Quando uma sessão começa, o agente deve ler nesta ordem:
 
 ```txt
-1. run-state.yaml
-2. progress.md
-3. handoffs/latest-handoff.md
-4. tasks.md
-5. validation-plan.md
-6. decision-log.md
+1. specs/INDEX.md
+2. run-state.yaml
+3. progress.md
+4. handoffs/latest-handoff.md
+5. tasks.md
+6. validation-plan.md
+7. decision-log.md
 ```
+
+## Normalização de estrutura SDD
+
+Se encontrar `specs/<slug>/` sem prefixo numérico, não crie uma cópia paralela.
+Faça inventário, proponha `NNN-slug`, confira referências, peça aprovação
+humana quando houver risco de quebra e só então atualize caminhos, índice,
+`run-state.yaml`, handoffs e decisões.
 
 ## Regra de transição terminal
 

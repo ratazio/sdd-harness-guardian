@@ -1,6 +1,8 @@
-# Spec: <initiative>
+# Spec: <initiative-id>
 
 **Status:** draft | outcome_ready | spec_ready | superseded  
+**Sequence:** <initiative-sequence>  
+**Slug:** <initiative-slug>  
 **Owner:** <name-or-team>  
 **Created:** <YYYY-MM-DD>  
 **Last updated:** <YYYY-MM-DD>  

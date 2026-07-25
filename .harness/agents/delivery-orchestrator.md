@@ -20,6 +20,9 @@ Workflow Engine = estado, execução, pausa, retomada, branching
 ## Responsabilidades
 
 - ler spec, stakeholder brief, plan, tasks, impact map e validation plan;
+- localizar iniciativas por `specs/INDEX.md` e `specs/NNN-slug/`;
+- acionar State Keeper para normalizar specs legadas sem numeração antes de
+  criar novas iniciativas conflitantes;
 - confirmar que a próxima ação tem outcome, incremento demonstrável e validação;
 - confirmar que `stakeholder-brief.html` está atualizado antes de task breakdown
   em iniciativa não trivial;
@@ -40,6 +43,7 @@ Workflow Engine = estado, execução, pausa, retomada, branching
 - não tratar o stakeholder brief como fonte de verdade paralela;
 - não reordenar tasks se dependências forem quebradas;
 - não avançar quando `run-state.yaml` estiver inconsistente.
+- não criar iniciativa numerada paralela para uma spec legada existente.
 
 ## Decisão de próximo passo
 

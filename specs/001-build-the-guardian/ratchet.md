@@ -1,4 +1,4 @@
-# Ratchet Log: build-the-guardian
+# Ratchet Log: 001-build-the-guardian
 
 ## Index
 

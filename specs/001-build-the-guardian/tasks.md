@@ -1,4 +1,4 @@
-# Tasks: build-the-guardian
+# Tasks: 001-build-the-guardian
 
 **Status:** complete  
 **Spec:** ./spec.md  

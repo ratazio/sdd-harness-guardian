@@ -1,4 +1,4 @@
-# Validation Plan: build-the-guardian
+# Validation Plan: 001-build-the-guardian
 
 **Status:** validation_ready  
 **Spec:** ./spec.md  

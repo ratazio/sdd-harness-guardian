@@ -1,4 +1,4 @@
-# Impact Map: build-the-guardian
+# Impact Map: 001-build-the-guardian
 
 **Status:** reviewed  
 **Spec:** ./spec.md  
@@ -30,7 +30,7 @@ UI, backend, database, auth and deployment product surfaces are
 
 ```txt
 manifest -> bundle files -> consumer entrypoint -> project-local initiative
-templates -> optional scaffolder -> specs/<initiative>
+templates -> optional scaffolder -> specs/NNN-<initiative>
 spec/plan/tasks -> evidence draft -> evaluator -> done/state
 ```
 

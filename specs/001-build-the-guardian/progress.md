@@ -1,4 +1,4 @@
-# Progress: build-the-guardian
+# Progress: 001-build-the-guardian
 
 **Current phase/status:** closed / validation_done  
 **Current task:** none  

@@ -12,7 +12,7 @@ ready
 
 ## Current release evidence
 
-- Initiative: `specs/build-the-guardian/`
+- Initiative: `specs/001-build-the-guardian/`
 - Structural validator: `scripts/validate_bundle.py`
 - Acceptance checklist: `docs/acceptance-criteria.md`
 - Outcome readiness: `.harness/rules/outcome-readiness.md`

@@ -19,7 +19,7 @@ Antes de editar qualquer coisa:
 8. Leia `docs/architecture.md`, `docs/operating-model.md` e `docs/acceptance-criteria.md`.
 
 Gate de bootstrap deste repositório fonte:
-9. Crie ou retome `specs/build-the-guardian/` com todos os artefatos obrigatórios.
+9. Crie ou retome `specs/001-build-the-guardian/` com todos os artefatos obrigatórios.
 10. Trate este prompt como input da spec, complete impact map, plan, validation
     plan, stakeholder brief e tasks, e registre `Outcome Ready`/`Spec Ready`/
     `Human Visibility Ready`/`Tasks Ready` antes da implementação.

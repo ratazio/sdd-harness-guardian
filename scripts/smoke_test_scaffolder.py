@@ -68,13 +68,17 @@ def main() -> int:
         )
         require(bugfix.returncode == 0, "bugfix scaffold failed")
 
-        feature_root = consumer_root / "specs" / "sample-feature"
+        feature_root = consumer_root / "specs" / "001-sample-feature"
+        bugfix_root = consumer_root / "specs" / "002-sample-bug"
         for relative in FEATURE_FILES:
             require((feature_root / relative).is_file(), f"missing {relative}")
         require(
-            (consumer_root / "specs" / "sample-bug" / "reproduction.md").is_file(),
+            (bugfix_root / "reproduction.md").is_file(),
             "bugfix lacks reproduction.md",
         )
+        index = (consumer_root / "specs" / "INDEX.md").read_text(encoding="utf-8")
+        require("`001-sample-feature`" in index, "index lacks feature row")
+        require("`002-sample-bug`" in index, "index lacks bugfix row")
 
         feature_spec = feature_root / "spec.md"
         hash_before = sha256(feature_spec)
@@ -86,11 +90,19 @@ def main() -> int:
         require(hash_before == hash_after, "duplicate scaffold changed existing spec")
 
         bugfix_state = (
-            consumer_root / "specs" / "sample-bug" / "run-state.yaml"
+            bugfix_root / "run-state.yaml"
         ).read_text(encoding="utf-8")
         require(
             'initiative_kind: "bugfix"' in bugfix_state,
             "bugfix kind was not rendered",
+        )
+        require(
+            'initiative_id: "002-sample-bug"' in bugfix_state,
+            "bugfix initiative_id was not rendered",
+        )
+        require(
+            'initiative_sequence: "002"' in bugfix_state,
+            "bugfix sequence was not rendered",
         )
 
     print("RESULT: PASS")

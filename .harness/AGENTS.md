@@ -29,10 +29,12 @@ Ao operar em um projeto consumidor:
 2. leia as instruções locais aplicáveis (`AGENTS.md`, `.harness/` e
    equivalentes da ferramenta);
 3. leia este arquivo e as regras em `.harness/rules/`;
-4. localize a iniciativa em `specs/<initiative>/`;
-5. se a iniciativa não existir, use `.harness/templates/README.md` ou
+4. localize a iniciativa em `specs/NNN-slug/`;
+5. prefira iniciativas canônicas em `specs/NNN-slug/` e leia
+   `specs/INDEX.md` quando existir;
+6. se a iniciativa não existir, use `.harness/templates/README.md` ou
    `scripts/new_initiative.py` para criá-la;
-6. em retomadas, siga a ordem de leitura definida em
+7. em retomadas, siga a ordem de leitura definida em
    `.harness/rules/state-and-memory.md`.
 
 Todos os caminhos deste bundle são relativos à raiz do bundle. Todos os
@@ -122,7 +124,7 @@ ou justificadas, `evidence/<task-id>.md` completo, decisão independente
 ## Artefatos obrigatórios por iniciativa
 
 ```txt
-specs/<initiative>/
+specs/NNN-slug/
   spec.md
   stakeholder-brief.html
   plan.md
@@ -138,6 +140,12 @@ specs/<initiative>/
   handoffs/
     latest-handoff.md
 ```
+
+Novas iniciativas devem usar `specs/NNN-slug/` e manter `specs/INDEX.md`
+atualizado. O número é identidade sequencial/cronológica, não prioridade.
+Projetos consumidores legados com specs sem número devem ser normalizados por
+inventário, mapa de renome, atualização de referências e decisão humana quando
+houver risco.
 
 Bugfixes também usam `reproduction.md`. Os templates canônicos estão em
 `.harness/templates/`.

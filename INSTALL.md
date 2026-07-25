@@ -62,18 +62,22 @@ Opção recomendada, na raiz do consumidor:
 python vendor/sdd-harness-guardian/scripts/new_initiative.py minha-feature
 ```
 
+Isso cria `specs/001-minha-feature/` no primeiro uso e registra a linha em
+`specs/INDEX.md`.
+
 Para bugfix:
 
 ```bash
 python vendor/sdd-harness-guardian/scripts/new_initiative.py corrigir-login --kind bugfix
 ```
 
-O script falha se `specs/<initiative>` já existir e nunca sobrescreve trabalho.
-Ele apenas copia templates e cria `evidence/` e `handoffs/`; não executa o
-workflow.
+O script falha se `specs/NNN-<initiative>` já existir e nunca sobrescreve trabalho.
+Ele falha também ao detectar sequência reutilizada, slug duplicado ou iniciativa
+legada sem número com o mesmo slug. Ele apenas copia templates, cria
+`evidence/` e `handoffs/`, atualiza o índice e não executa o workflow.
 
-Sem Python, crie `specs/<initiative>/` e copie os arquivos listados em
-`.harness/templates/README.md`. Substitua os placeholders antes do
+Sem Python, crie `specs/NNN-<initiative>/`, mantenha `specs/INDEX.md`, e copie
+os arquivos listados em `.harness/templates/README.md`. Substitua os placeholders antes do
 Outcome/Spec Review e mantenha `stakeholder-brief.html` sincronizado para
 iniciativas não triviais.
 
@@ -83,9 +87,14 @@ Instrua o agente a ler, nesta ordem:
 
 1. regras locais;
 2. `vendor/sdd-harness-guardian/.harness/AGENTS.md`;
-3. `specs/<initiative>/run-state.yaml` em retomadas;
-4. os demais artefatos indicados pelo estado;
-5. o workflow correspondente em `.harness/workflows/`.
+3. `specs/INDEX.md`;
+4. `specs/NNN-<initiative>/run-state.yaml` em retomadas;
+5. os demais artefatos indicados pelo estado;
+6. o workflow correspondente em `.harness/workflows/`.
+
+Em projetos legados com `specs/<slug>/`, faça inventário, proponha mapa de
+renome para `specs/NNN-slug/`, atualize referências e registre a decisão antes
+de continuar a criar novas iniciativas.
 
 Uma task só chega a `done` depois de evidence pack e avaliação independente.
 Se não houver evaluator distinto disponível, mantenha `needs_evaluation`.

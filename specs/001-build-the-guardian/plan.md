@@ -1,4 +1,4 @@
-# Technical Plan: build-the-guardian
+# Technical Plan: 001-build-the-guardian
 
 **Status:** plan_ready  
 **Spec:** ./spec.md  

@@ -116,6 +116,7 @@ def main() -> int:
         "ratchet_log",
         "ratchet_entry",
         "reproduction",
+        "specs_index",
     }
     check(
         required_template_keys <= templates.keys(),
@@ -162,6 +163,9 @@ def main() -> int:
     for key in (
         "schema_version:",
         "initiative_id:",
+        "initiative_sequence:",
+        "initiative_slug:",
+        "summary:",
         "quality_gates:",
         "independent_evaluation_done:",
         "evidence_pack_ready:",

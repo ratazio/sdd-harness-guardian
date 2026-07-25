@@ -1,7 +1,10 @@
 schema_version: 1
-initiative_id: "<initiative>"
+initiative_id: "<initiative-id>"
+initiative_sequence: "<initiative-sequence>"
+initiative_slug: "<initiative-slug>"
 initiative_kind: "feature"
 status: "draft"
+summary: ""
 current_phase: "specify"
 current_task: null
 last_safe_checkpoint: null

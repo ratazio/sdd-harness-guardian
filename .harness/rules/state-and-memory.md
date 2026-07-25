@@ -8,7 +8,8 @@ store consumer execution state inside the vendored bundle.
 ## Required artifacts
 
 ```txt
-specs/<initiative>/
+specs/INDEX.md
+specs/NNN-slug/
   run-state.yaml
   progress.md
   tasks.md
@@ -20,14 +21,19 @@ specs/<initiative>/
 
 ## Session start order
 
-1. `run-state.yaml`;
-2. `progress.md`;
-3. `handoffs/latest-handoff.md`;
-4. repository/working-tree status;
-5. `tasks.md` and current evidence;
-6. `validation-plan.md` and `decision-log.md`.
+1. `specs/INDEX.md`;
+2. `run-state.yaml`;
+3. `progress.md`;
+4. `handoffs/latest-handoff.md`;
+5. repository/working-tree status;
+6. `tasks.md` and current evidence;
+7. `validation-plan.md` and `decision-log.md`.
 
 Reconcile discrepancies before changing files.
+
+Use the index and state files as the compact context boundary. Read full specs,
+plans, evidence packs or semantically retrieved documents only when they are
+needed for the active gate or decision.
 
 ## Session end requirements
 

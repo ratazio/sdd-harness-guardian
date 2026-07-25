@@ -1,4 +1,4 @@
-# Handoff: build-the-guardian
+# Handoff: 001-build-the-guardian
 
 **From:** codex-root / Builder  
 **Intended role/recipient:** release maintainer  

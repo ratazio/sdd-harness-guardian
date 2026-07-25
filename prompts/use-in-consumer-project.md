@@ -14,7 +14,7 @@ Antes de agir:
    - `.cursor/rules/`
    - `CLAUDE.md`
    - `GEMINI.md`
-3. Leia a spec alvo em `specs/`.
+3. Leia `specs/INDEX.md` e localize a spec alvo em `specs/NNN-slug/`.
 4. Se a iniciativa não existir, leia
    `vendor/sdd-harness-guardian/.harness/templates/README.md` e crie-a por
    cópia ou com `scripts/new_initiative.py`.
@@ -32,9 +32,10 @@ Modo de operação:
   `stakeholder-brief.html` estar conciso, revisável e sincronizado.
 - Não marque task como done sem evidence pack aprovado por evaluator distinto.
 - Separe implementação de avaliação.
-- Preserve estado em `specs/<initiative>/progress.md` e `specs/<initiative>/run-state.yaml`.
-- Registre decisões em `specs/<initiative>/decision-log.md`.
-- Registre handoff em `specs/<initiative>/handoffs/latest-handoff.md`.
+- Preserve estado em `specs/NNN-<initiative>/progress.md` e `specs/NNN-<initiative>/run-state.yaml`.
+- Registre decisões em `specs/NNN-<initiative>/decision-log.md`.
+- Registre handoff em `specs/NNN-<initiative>/handoffs/latest-handoff.md`.
+- Mantenha `specs/INDEX.md` sincronizado com status, resumo, owner e data.
 - Se encontrar erro sério ou recorrente, registre uma entrada de ratchet.
 - Se houver interrupção, atualize checkpoint, trabalho parcial, handoff e
   `resume_required` antes de encerrar.

@@ -6,7 +6,9 @@ repository; never write consumer state inside `vendor/sdd-harness-guardian`.
 ## Target layout
 
 ```txt
-specs/<initiative>/
+specs/
+  INDEX.md
+specs/NNN-slug/
   spec.md
   stakeholder-brief.html
   impact-map.md
@@ -21,6 +23,11 @@ specs/<initiative>/
   handoffs/latest-handoff.md
 ```
 
+Initiative directories use the canonical `NNN-slug` shape, for example
+`specs/001-auth-login/`. The sequence is stable identity and chronology, not
+business priority. New numbers are not reused after deletion, supersession or
+abandonment.
+
 Bugfixes also copy `reproduction.md`. Each implemented task copies
 `evidence-pack.md` to `evidence/<task-id>.md`. New ratchet entries use
 `ratchet-entry.md` inside the initiative `ratchet.md`.
@@ -33,14 +40,18 @@ From the consumer root:
 python vendor/sdd-harness-guardian/scripts/new_initiative.py <initiative>
 ```
 
-Use `--kind bugfix` to add reproduction. The script creates a new directory
-atomically enough for scaffolding and refuses any existing target.
+Use `--kind bugfix` to add reproduction. Pass either a slug (`auth-login`) or an
+explicit `NNN-slug`. The script creates the next numbered directory by default,
+updates `specs/INDEX.md`, and refuses existing targets, reused numbers and
+duplicate slugs.
 
 ## Manual copy
 
-Create the target tree, copy each canonical file with its target name, copy
+Create or update `specs/INDEX.md` from `specs-index.md`. Create the numbered
+target tree, copy each canonical file with its target name, copy
 `handoff.md` as `handoffs/latest-handoff.md` and create an empty `evidence/`.
-Replace `<initiative>`, dates and ownership placeholders before review.
+Replace `<initiative-id>`, `<initiative-slug>`, `<initiative-sequence>`, dates
+and ownership placeholders before review.
 Keep `stakeholder-brief.html` concise, human-readable and synchronized with the
 source artifacts.
 

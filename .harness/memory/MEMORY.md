@@ -26,3 +26,7 @@ Use this file only for stable bundle-level memory.
 - Evaluator must be separate from builder.
 - Critical soft rules need hard mirrors.
 - Repeated errors become ratchet entries.
+- Specs should be numbered as `NNN-slug` and summarized in `specs/INDEX.md`;
+  deterministic index and compact state come before semantic search.
+- Embeddings and memory search are optional harness/retrieval layers, not
+  replacements for explicit SDD artifacts.

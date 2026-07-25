@@ -7,7 +7,9 @@ Specialized workflows may add requirements but may not skip these gates.
 
 ## Entry condition
 
-An initiative exists under `specs/<initiative>/` using the canonical templates.
+An initiative exists under `specs/NNN-slug/` using the canonical templates and
+is represented in `specs/INDEX.md`. Legacy `specs/<slug>/` initiatives must be
+inventoried and normalized before new conflicting work is scaffolded.
 
 ## Flow
 

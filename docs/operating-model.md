@@ -13,6 +13,16 @@ Cada seta é uma transição explícita. O workflow comum está em
 `.harness/workflows/sdd-lifecycle.md`; feature, bugfix e refactor adicionam
 constraints próprios.
 
+Antes do loop, o agente localiza a iniciativa pelo `specs/INDEX.md` e pelo
+diretório canônico `specs/NNN-slug/`. O índice e `run-state.yaml` são o contexto
+mínimo; artefatos completos e busca semântica entram sob demanda.
+
+Quando a estrutura estiver fora do padrão, use
+`.harness/workflows/spec-structure-normalization.md`: State Keeper inventaria,
+Impact Mapper encontra referências quebráveis, Delivery Orchestrator propõe o
+mapa `slug -> NNN-slug`, Builder/State Keeper aplica e Evaluator confere
+índice, estado e caminhos.
+
 ## Quality gates
 
 | Gate | Owner | Entrada mínima | Saída verificável |

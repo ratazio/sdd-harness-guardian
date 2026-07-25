@@ -24,7 +24,10 @@ closed
 
 ## Required invariants
 
-- `schema_version` and `initiative_id` are present;
+- `schema_version`, `initiative_id`, `initiative_sequence` and
+  `initiative_slug` are present;
+- `initiative_id` matches `NNN-slug` and agrees with its directory and
+  `specs/INDEX.md` row;
 - artifact paths resolve inside the initiative;
 - `outcome_ready` requires declared outcome, demonstrable increment and
   priority source or human decision;

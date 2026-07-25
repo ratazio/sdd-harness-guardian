@@ -1,4 +1,4 @@
-# Decision Log: build-the-guardian
+# Decision Log: 001-build-the-guardian
 
 | ID | Date | Status | Decision | Rationale/evidence | Alternatives | Owner/approver | Supersedes |
 |---|---|---|---|---|---|---|---|

@@ -40,6 +40,12 @@ The bundle treats orchestration as a workflow problem, not only as an agent prom
 
 The bundle separates session context, working state, long-term execution memory and semantic/project knowledge.
 
+Numbered spec directories and `specs/INDEX.md` are adopted as deterministic
+memory scaffolding: they preserve order, reduce initial context load and give
+retrieval systems stable document identities. Semantic search and embeddings are
+recommended as optional harness capabilities for large projects, not as a
+replacement for explicit SDD artifacts.
+
 ### Builder and Evaluator separation
 
 Implementation and evaluation must be separate roles for medium/high risk work.

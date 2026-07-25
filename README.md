@@ -23,6 +23,7 @@ Ele fornece contratos reutilizáveis para:
 - separar implementação de avaliação;
 - impedir `done` sem evidence pack aprovado;
 - preservar estado entre sessões e agentes;
+- manter iniciativas numeradas e encontráveis via `specs/INDEX.md`;
 - converter falhas sérias ou recorrentes em ratchets.
 
 Harness Engineering aparece apenas como a camada de regras, execução,
@@ -45,7 +46,7 @@ docs/                     # arquitetura, operação, aceite e referências
 scripts/
   new_initiative.py       # scaffolding opcional, sem workflow engine
   validate_bundle.py      # validação determinística do bundle
-specs/                    # iniciativas de manutenção deste source bundle
+specs/                    # iniciativas numeradas e INDEX.md deste source bundle
 ```
 
 ## Consumo rápido
@@ -63,13 +64,18 @@ Depois, o agente deve ler:
 ```txt
 AGENTS.md do projeto consumidor
 vendor/sdd-harness-guardian/.harness/AGENTS.md
-specs/minha-feature/spec.md
-specs/minha-feature/stakeholder-brief.html
+specs/INDEX.md
+specs/001-minha-feature/spec.md
+specs/001-minha-feature/stakeholder-brief.html
 ```
 
 O script de scaffolding é conveniência; os templates também podem ser copiados
 manualmente. Veja `INSTALL.md` para instalação, pin, upgrade, rollback,
 adaptação local e versionamento.
+
+Novas iniciativas usam `specs/NNN-slug/`. O número é identidade sequencial e
+ordem cronológica, não prioridade. `specs/INDEX.md` é o mapa compacto lido antes
+de carregar artefatos completos ou acionar busca semântica opcional.
 
 ## Contrato de isolamento
 

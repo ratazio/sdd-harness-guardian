@@ -9,7 +9,8 @@ frontend, serviço hospedado, banco, knowledge base ou workflow engine.
 ```txt
 Consumer repository
 ├── project-local rules, code and knowledge
-├── specs/<initiative>/              # mutable execution state
+├── specs/INDEX.md                   # compact initiative map
+├── specs/NNN-<initiative>/          # mutable execution state
 └── vendor/sdd-harness-guardian/      # immutable pinned bundle
     ├── .harness/AGENTS.md
     ├── .harness/{agents,rules,skills,workflows,templates}/
@@ -29,6 +30,11 @@ Consumer repository
 | Proof | `evidence/` | resultados verificáveis e decisão |
 | Memory | `progress.md`, `handoffs/`, `decision-log.md` | retomada e contexto |
 | Learning | `ratchet.md` | prevenção de falhas recorrentes |
+
+`specs/INDEX.md` é a primeira camada de descoberta. Ele reduz contexto inicial,
+preserva ordem sequencial e orienta humanos/agentes antes de abrir artefatos
+longos. Busca semântica, embeddings ou MCP memory podem complementar o índice,
+mas não substituem o contrato de arquivos versionados.
 
 ## Fluxo de controle
 
