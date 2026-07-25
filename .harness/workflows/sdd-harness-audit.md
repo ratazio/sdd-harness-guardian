@@ -30,7 +30,8 @@ to place the report, ask the user before report generation.
 1. **Scope and authority** - identify consumer root, bundle root, active specs,
    local entrypoints, source hierarchy and user-approved report output path.
 2. **Output package** - create the user-approved audit directory and keep raw
-   artifacts there: inventory, graph, findings, command outputs and notes.
+   artifacts there: inventory, graph, findings, command outputs, notes and
+   action backlog.
 3. **Inventory** - list `.harness/`, root agent files, specs, docs, scripts,
    schemas, hooks, CI, memory, ratchet, evidence and templates.
 4. **Graph map** - build nodes and edges: entrypoint loads, manifest registers,
@@ -65,7 +66,12 @@ to place the report, ask the user before report generation.
     `.harness/templates/audit-report-tabs.md` as the stable structure. Include
     SVG diagrams for graph, coverage and risk where useful. Include a visible
     legend for every graphic.
-14. **Independent review** - a distinct evaluator reviews the report for
+14. **Action backlog** - produce `spec-suggestions.md` using
+    `.harness/templates/audit-spec-suggestions.md` when the user wants the audit
+    converted into remediation action. Each candidate epic should include
+    priority, linked findings, suggested slug, suggested prompt, seed tasks,
+    acceptance signals and dependencies.
+15. **Independent review** - a distinct evaluator reviews the report for
     unsupported claims, missed critical gaps and vague remediation.
 
 ## Severity guide
@@ -92,6 +98,7 @@ checks.md
 analysis-notes.md
 design.md
 tabs.md
+spec-suggestions.md
 graph summary
 finding list
 remediation roadmap

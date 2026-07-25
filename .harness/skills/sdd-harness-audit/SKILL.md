@@ -79,7 +79,7 @@ it never overrides safety, privacy or destructive-operation rules.
    user where to write the report.
 2. Create an audit output package under the user-approved destination directory.
    Keep intermediate artifacts there, including inventory, graph, findings,
-   command results and analysis notes.
+   command results, analysis notes and action backlog.
 3. Inventory all candidate harness artifacts with path, type and owner when
    discoverable.
 4. Build the harness graph. Include entrypoint, manifest, workflow, skill,
@@ -108,7 +108,12 @@ it never overrides safety, privacy or destructive-operation rules.
     the canonical report structure. Include SVG diagrams for the harness graph
     and maturity/coverage where useful. Every graphic must include a visible
     legend for color and symbol meanings.
-15. Ask for or perform independent evaluation of the report before treating the
+15. Produce `spec-suggestions.md` using
+    `.harness/templates/audit-spec-suggestions.md` when the user wants the audit
+    converted into action. Convert findings into prioritized candidate
+    epics/specs with suggested slugs, prompts, seed tasks, acceptance signals
+    and cross-epic dependencies.
+16. Ask for or perform independent evaluation of the report before treating the
     audit as final.
 
 ## Harness graph method
@@ -158,6 +163,7 @@ report must include:
 - hooks review, even when no hooks are found;
 - unused, orphaned or decorative artifacts;
 - remediation roadmap;
+- link to `spec-suggestions.md` when an action backlog is produced;
 - assumptions and open questions.
 
 The report should be a navigable, multi-section document with tabs or equivalent
@@ -187,6 +193,27 @@ These artifacts preserve the audit's raw observations and intermediate
 reasoning. The HTML report should reference them so a reviewer can inspect the
 evidence behind the synthesis.
 
+## Action backlog contract
+
+When the audit is intended to drive remediation, produce `spec-suggestions.md`
+in the same user-approved audit directory using
+`.harness/templates/audit-spec-suggestions.md`. The file must include:
+
+- recommended epic/spec sequence;
+- mapping from each candidate spec to audit findings;
+- priority;
+- outcome;
+- suggested slug;
+- suggested prompt for creating the formal SDD spec;
+- seed task list;
+- acceptance signals;
+- cross-epic dependencies;
+- notes for the future spec creator.
+
+This backlog is a bridge from audit to SDD planning. It must not mark work as
+ready for implementation; each epic still needs a formal numbered spec before
+execution.
+
 ## Validation checklist
 
 - Every high or critical finding has a file/path reference or explicit
@@ -204,6 +231,8 @@ evidence behind the synthesis.
   the HTML report.
 - Every graph or color-coded visual has a visible legend.
 - The report includes a hooks tab, even when no hooks are found.
+- If remediation planning was requested, `spec-suggestions.md` exists and maps
+  findings to candidate numbered initiatives.
 
 ## Gotchas
 

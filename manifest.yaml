@@ -108,6 +108,7 @@ artifact_templates:
   audit_report: .harness/templates/audit-report.html
   audit_report_design: .harness/templates/audit-report-design.md
   audit_report_tabs: .harness/templates/audit-report-tabs.md
+  audit_spec_suggestions: .harness/templates/audit-spec-suggestions.md
 
 consumer_contract:
   initiative_root: specs/NNN-<initiative>

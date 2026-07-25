@@ -29,6 +29,7 @@ auditoria/
   analysis-notes.md
   design.md
   tabs.md
+  spec-suggestions.md
 ```
 
 ## Color Semantics
@@ -66,6 +67,12 @@ graphic. Do not rely on color alone; pair color with text labels.
 - Harness layer/coverage view.
 - Enforcement ladder.
 - Hooks/enforcement status view, even when no hooks exist.
+
+## Action Backlog Link
+
+When `spec-suggestions.md` exists, the Brutos tab must link to it. The HTML
+roadmap may summarize actions, but `spec-suggestions.md` is the canonical place
+for candidate epics/specs, suggested prompts and seed tasks.
 
 ## Output Naming
 

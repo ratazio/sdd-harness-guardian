@@ -140,4 +140,5 @@ Must include links to:
 - `checks.md`;
 - `analysis-notes.md`;
 - `design.md`;
-- `tabs.md`.
+- `tabs.md`;
+- `spec-suggestions.md` when remediation planning was requested.

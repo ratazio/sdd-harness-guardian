@@ -10,13 +10,13 @@
     "skills": 8,
     "rules": 13,
     "workflows": 7,
-    "templates": 20,
+    "templates": 21,
     "scripts": 3,
     "docs": 5,
     "spec_initiatives": 2,
     "audit_reports": 3,
     "hooks": 0,
-    "raw_audit_artifacts": 8
+    "raw_audit_artifacts": 9
   },
   "entrypoints": [
     {

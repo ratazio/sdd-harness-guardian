@@ -54,5 +54,5 @@ expected evidence.
 ## 11. Brutos
 
 Links to raw/transient artifacts: `inventory.json`, `graph.json`,
-`findings.json`, `hooks.json`, `checks.md`, `analysis-notes.md`, `design.md`
-and `tabs.md`.
+`findings.json`, `hooks.json`, `checks.md`, `analysis-notes.md`, `design.md`,
+`tabs.md` and `spec-suggestions.md` when remediation planning was requested.
