@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.2.0
+
+Evolução compatível do bundle para tornar auditoria, organização de specs e
+visibilidade humana mais operacionais.
+
+Inclui:
+
+- processo de auditoria do harness com papéis, skill, workflow, regra, relatório
+  HTML e contrato para backlog de remediação;
+- iniciativas numeradas, `specs/INDEX.md`, normalização de estrutura e scaffolder
+  atualizado para o contrato canônico;
+- `stakeholder-brief.html` enriquecido como síntese para decisão: outcome,
+  benefício, sizing, escopo, impacto, arquitetura, fluxo e critérios de
+  proporcionalidade;
+- autoria e revisão explícitas do brief no lifecycle, com checklist condicional
+  e validações estruturais leves no validator e no smoke test.
+
 ## 0.1.2
 
 Evolução pequena de visibilidade humana para specs orientadas a resultado.

@@ -13,6 +13,21 @@ ERRORS: list[str] = []
 CHECKS = 0
 
 
+REQUIRED_BRIEF_IDS = (
+    "decision-snapshot",
+    "scope",
+    "validation",
+    "decision",
+)
+REQUIRED_BRIEF_SOURCES = (
+    "spec.md",
+    "impact-map.md",
+    "plan.md",
+    "validation-plan.md",
+)
+BRIEF_TEMPLATE_PLACEHOLDERS = ("<initiative>", "<YYYY-MM-DD>")
+
+
 def check(condition: bool, message: str) -> None:
     global CHECKS
     CHECKS += 1
@@ -51,6 +66,28 @@ def manifest_mapping(manifest: str, key: str) -> dict[str, str]:
             name, value = line.strip().split(":", 1)
             result[name] = value.strip()
     return result
+
+
+def stakeholder_brief_errors(html: str, *, rendered: bool) -> list[str]:
+    """Return stable structural contract failures for a stakeholder brief."""
+    errors: list[str] = []
+    for section_id in REQUIRED_BRIEF_IDS:
+        pattern = rf'\bid\s*=\s*["\']{re.escape(section_id)}["\']'
+        if not re.search(pattern, html):
+            errors.append(f"missing stakeholder brief section id: {section_id}")
+    for source in REQUIRED_BRIEF_SOURCES:
+        if not re.search(rf'href\s*=\s*["\']{re.escape(source)}["\']', html):
+            errors.append(f"missing stakeholder brief source link: {source}")
+
+    if rendered:
+        for placeholder in BRIEF_TEMPLATE_PLACEHOLDERS:
+            if placeholder in html:
+                errors.append(f"unresolved stakeholder brief placeholder: {placeholder}")
+    else:
+        for placeholder in BRIEF_TEMPLATE_PLACEHOLDERS:
+            if placeholder not in html:
+                errors.append(f"missing stakeholder brief template placeholder: {placeholder}")
+    return errors
 
 
 def main() -> int:
@@ -125,6 +162,10 @@ def main() -> int:
     )
     for relative in templates.values():
         read(relative)
+
+    stakeholder_brief = read(templates["stakeholder_brief"])
+    for error in stakeholder_brief_errors(stakeholder_brief, rendered=False):
+        check(False, error)
 
     for rule in manifest_list(manifest, "rules"):
         content = read(f".harness/rules/{rule}.md")

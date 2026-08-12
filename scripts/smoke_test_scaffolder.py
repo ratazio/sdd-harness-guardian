@@ -10,6 +10,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+from validate_bundle import stakeholder_brief_errors
+
 
 ROOT = Path(__file__).resolve().parent.parent
 SCAFFOLDER = ROOT / "scripts" / "new_initiative.py"
@@ -47,6 +49,10 @@ def sha256(path: Path) -> str:
 def require(condition: bool, message: str) -> None:
     if not condition:
         raise AssertionError(message)
+
+
+def require_exact_errors(actual: list[str], expected: list[str], case: str) -> None:
+    require(actual == expected, f"{case}: expected {expected!r}, got {actual!r}")
 
 
 def main() -> int:
@@ -103,6 +109,40 @@ def main() -> int:
         require(
             'initiative_sequence: "002"' in bugfix_state,
             "bugfix sequence was not rendered",
+        )
+
+        feature_brief = (feature_root / "stakeholder-brief.html").read_text(
+            encoding="utf-8"
+        )
+        require_exact_errors(
+            stakeholder_brief_errors(feature_brief, rendered=True),
+            [],
+            "rendered stakeholder brief",
+        )
+
+        missing_id = feature_brief.replace('id="decision-snapshot"', "", 1)
+        require_exact_errors(
+            stakeholder_brief_errors(missing_id, rendered=True),
+            ["missing stakeholder brief section id: decision-snapshot"],
+            "missing stakeholder brief section id",
+        )
+
+        unresolved_placeholder = feature_brief.replace(
+            "Last updated: ", "Last updated: <YYYY-MM-DD> ", 1
+        )
+        require_exact_errors(
+            stakeholder_brief_errors(unresolved_placeholder, rendered=True),
+            ["unresolved stakeholder brief placeholder: <YYYY-MM-DD>"],
+            "unresolved stakeholder brief placeholder",
+        )
+
+        missing_source = feature_brief.replace(
+            'href="impact-map.md"', 'href="impact-map-missing.md"', 1
+        )
+        require_exact_errors(
+            stakeholder_brief_errors(missing_source, rendered=True),
+            ["missing stakeholder brief source link: impact-map.md"],
+            "missing stakeholder brief source link",
         )
 
     print("RESULT: PASS")

@@ -24,8 +24,12 @@ Workflow Engine = estado, execução, pausa, retomada, branching
 - acionar State Keeper para normalizar specs legadas sem numeração antes de
   criar novas iniciativas conflitantes;
 - confirmar que a próxima ação tem outcome, incremento demonstrável e validação;
-- confirmar que `stakeholder-brief.html` está atualizado antes de task breakdown
-  em iniciativa não trivial;
+- depois que spec, impact map, plan e validation plan estiverem prontos,
+  solicitar ao autor uma síntese/refresh de `stakeholder-brief.html` antes do
+  task breakdown em iniciativa não trivial;
+- confirmar que o brief está atualizado antes de task breakdown e solicitar
+  refresh somente para mudança material de outcome, escopo, arquitetura,
+  impacto, risco ou validação;
 - escolher próxima task pronta;
 - garantir que pré-requisitos foram cumpridos;
 - delegar para agente especialista;
@@ -41,6 +45,7 @@ Workflow Engine = estado, execução, pausa, retomada, branching
 - não ignorar quality gates;
 - não inferir valor comercial, prioridade de produto ou objetivo de negócio;
 - não tratar o stakeholder brief como fonte de verdade paralela;
+- não exigir diagramas, tamanho ou revisão mais extensa que o impacto justifica;
 - não reordenar tasks se dependências forem quebradas;
 - não avançar quando `run-state.yaml` estiver inconsistente.
 - não criar iniciativa numerada paralela para uma spec legada existente.

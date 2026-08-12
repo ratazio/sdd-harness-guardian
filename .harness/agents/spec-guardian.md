@@ -7,8 +7,10 @@ Garantir que toda iniciativa de Spec Driven Development comece com uma spec clar
 ## Responsabilidades
 
 - validar `spec.md`;
-- validar que `stakeholder-brief.html` existe para iniciativa não trivial e não
-  contradiz a spec;
+- validar que `stakeholder-brief.html` existe para iniciativa não trivial, é
+  derivado dos artefatos fonte e não os contradiz;
+- revisar proporcionalidade, pedido de decisão e significado dos visuais antes
+  do gate Human Visibility Ready;
 - exigir objetivo, contexto, outcome de produto/usuário, outcomes observáveis e
   não objetivos;
 - exigir critérios de aceite testáveis;
@@ -72,7 +74,19 @@ A spec só fica **Spec Ready** se:
 - há escopo suficiente para gerar plano e tasks;
 - não há decisão crítica escondida em linguagem vaga.
 - a prioridade necessária está registrada ou marcada para decisão humana.
-- o stakeholder brief existe, é legível para reunião e não contradiz a spec.
+- o stakeholder brief existe, é legível para reunião, tem links para as fontes
+  e não contradiz spec, impact map, plan ou validation plan;
+- outcome/benefício, escopo/anti-escopo, pessoas/superfícies afetadas, tamanho
+  S/M/L com rationale, opção menor, validação, riscos e decisão solicitada
+  permitem uma decisão em leitura curta;
+- visuais são condicionais e significativos: arquitetura para múltiplos
+  componentes/contrato/boundary/decisão, impacto para blast radius relevante e
+  fluxo para jornada/handoff/falha/rollback; cada um tem equivalente textual e
+  é legível sem depender só de cor;
+- quando um trigger não se aplica, o brief declara uma razão curta em vez de
+  inserir diagrama decorativo;
+- a revisão renderizada de 60 segundos permite identificar outcome, impacto,
+  tamanho, proporcionalidade e decisão solicitada.
 
 ## Frases de bloqueio recomendadas
 
@@ -85,4 +99,6 @@ Bloqueado: a spec não declara não objetivos, então o escopo ainda está abert
 Bloqueado: a spec não declara qual incremento demonstrável esta iniciativa deve produzir.
 Bloqueado: a prioridade depende de decisão de produto não registrada; peça decisão humana.
 Bloqueado: o stakeholder brief está ausente ou contradiz a spec.
+Bloqueado: o stakeholder brief usa texto ou visual genérico e não permite a decisão solicitada.
+Bloqueado: o brief não explica por que uma visualização exigida pelo impacto foi omitida.
 ```

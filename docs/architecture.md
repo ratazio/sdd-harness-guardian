@@ -65,6 +65,9 @@ são compatíveis.
 
 `run-state.yaml` contém o estado compacto e machine-readable.
 `stakeholder-brief.html` é o resumo de reunião derivado dos artefatos fonte.
+Ele é a superfície principal de decisão humana, mas não uma fonte concorrente:
+o autor o sintetiza depois das fontes, e o Spec Guardian julga coerência,
+proporcionalidade e significado visual no gate já existente.
 `progress.md` e `handoffs/latest-handoff.md` explicam o contexto humano.
 `tasks.md` é o ledger de trabalho; `evidence/<task-id>.md` é o ledger de prova.
 

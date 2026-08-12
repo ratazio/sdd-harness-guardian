@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brief de decisão — Stakeholder Brief Enrichment</title>
+  <style>
+    :root {
+      --canvas: #f4f1ea;
+      --paper: #fffdf8;
+      --ink: #17211f;
+      --muted: #5f6b68;
+      --line: #d9d5ca;
+      --brand: #0e665d;
+      --brand-dark: #084b45;
+      --brand-soft: #dff0ec;
+      --amber: #9a5b07;
+      --amber-soft: #fff0ce;
+      --blue: #225b8f;
+      --blue-soft: #e5eff8;
+      --red: #8b3535;
+      --shadow: 0 12px 34px rgba(31, 44, 40, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(14, 102, 93, .10), transparent 26rem),
+        var(--canvas);
+      font: 16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a { color: var(--brand-dark); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #e6a632; outline-offset: 3px; }
+    main { max-width: 1180px; margin: 0 auto; padding: 28px 22px 64px; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border: 1px solid #a8cec7;
+      border-radius: 999px;
+      color: var(--brand-dark);
+      background: rgba(255,255,255,.72);
+      font-weight: 750;
+    }
+    .tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
+
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(270px, .55fr);
+      gap: 28px;
+      align-items: end;
+      padding: 36px;
+      border: 1px solid rgba(14,102,93,.22);
+      border-radius: 22px;
+      background: linear-gradient(135deg, #fffdf8 0%, #edf7f3 100%);
+      box-shadow: var(--shadow);
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--brand);
+      font-size: .76rem;
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 0; max-width: 800px; font-size: clamp(2.35rem, 6vw, 4.7rem); line-height: .98; letter-spacing: -.045em; }
+    .lede { margin: 22px 0 0; max-width: 780px; color: #384542; font-size: 1.14rem; }
+    .ask {
+      padding: 22px;
+      border-radius: 16px;
+      color: #f7fffd;
+      background: var(--brand-dark);
+    }
+    .ask strong { display: block; margin-bottom: 8px; font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; color: #a9dfd4; }
+    .ask p { margin: 0; font-size: 1.06rem; }
+
+    nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0; }
+    nav a { padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.66); font-size: .86rem; text-decoration: none; }
+
+    .snapshot { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 22px 0; }
+    .metric {
+      min-height: 142px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--paper);
+      box-shadow: 0 5px 18px rgba(31,44,40,.04);
+    }
+    .metric h2 { margin: 0 0 10px; color: var(--muted); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
+    .metric p { margin: 0; font-weight: 700; line-height: 1.35; }
+    .metric .big { display: block; margin-bottom: 5px; color: var(--brand-dark); font-size: 2rem; line-height: 1; }
+
+    section {
+      margin: 18px 0;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--paper);
+    }
+    section > h2 { margin: 0 0 6px; font-size: clamp(1.35rem, 3vw, 2rem); letter-spacing: -.025em; }
+    .section-intro { margin: 0 0 22px; max-width: 840px; color: var(--muted); }
+    h3 { margin: 0 0 7px; font-size: 1rem; }
+    p { text-wrap: pretty; }
+    ul { margin: 8px 0 0; padding-left: 21px; }
+    li + li { margin-top: 7px; }
+
+    .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .panel { padding: 19px; border: 1px solid var(--line); border-radius: 13px; background: #fff; }
+    .panel p { margin: 0; color: #3c4946; }
+    .in { border-top: 4px solid var(--brand); }
+    .out { border-top: 4px solid var(--red); }
+
+    .diagram-shell { overflow: hidden; padding: 14px; border: 1px solid #c8dcd7; border-radius: 14px; background: #f7fcfa; }
+    svg { display: block; width: 100%; height: auto; min-height: 240px; }
+    .diagram-note { margin: 12px 3px 0; color: var(--muted); font-size: .9rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+    .impact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .impact {
+      position: relative;
+      min-height: 144px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+    }
+    .impact::after { content: attr(data-level); position: absolute; top: 13px; right: 13px; padding: 3px 7px; border-radius: 999px; font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .impact.medium::after { color: #764300; background: var(--amber-soft); }
+    .impact.low::after { color: var(--brand-dark); background: var(--brand-soft); }
+    .impact h3 { padding-right: 56px; }
+    .impact p { margin: 8px 0 0; color: var(--muted); font-size: .9rem; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 12px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; }
+    td:first-child { font-weight: 750; }
+
+    .callout { margin-top: 18px; padding: 17px 19px; border-left: 5px solid var(--amber); border-radius: 10px; background: var(--amber-soft); }
+    .callout strong { color: #704000; }
+
+    .review { display: grid; grid-template-columns: .65fr 1.35fr; gap: 18px; align-items: start; }
+    .timer { padding: 24px; border-radius: 15px; color: white; background: var(--blue); text-align: center; }
+    .timer span { display: block; font-size: 3rem; font-weight: 850; line-height: 1; }
+    .timer small { display: block; margin-top: 8px; color: #d8edff; }
+    .questions { display: grid; gap: 9px; }
+    .question { padding: 13px 15px; border: 1px solid var(--line); border-radius: 11px; background: #fff; }
+    .question strong { color: var(--brand-dark); }
+
+    details { margin-top: 16px; padding: 15px 17px; border: 1px dashed #aeb8b5; border-radius: 12px; background: #fafbf9; }
+    summary { cursor: pointer; font-weight: 800; }
+    .checklist { columns: 2; column-gap: 28px; margin-top: 14px; }
+    .checklist li { break-inside: avoid; }
+    .yes { color: var(--brand-dark); font-weight: 800; }
+
+    footer { margin-top: 26px; padding: 22px 4px; color: var(--muted); font-size: .88rem; }
+    footer .sources { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 8px; }
+
+    @media (max-width: 880px) {
+      header, .review { grid-template-columns: 1fr; }
+      .snapshot { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .impact-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 620px) {
+      main { padding: 18px 12px 40px; }
+      header, section { padding: 22px 18px; border-radius: 14px; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .snapshot, .two-col, .impact-grid { grid-template-columns: 1fr; }
+      .metric { min-height: auto; }
+      .checklist { columns: 1; }
+      .diagram-shell { overflow-x: auto; }
+      svg { min-width: 700px; }
+      table { display: block; overflow-x: auto; }
+    }
+    @media print {
+      body { background: white; }
+      main { max-width: none; padding: 0; }
+      nav, details { display: none; }
+      header, section, .metric { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <span class="tag">Spec 003 · pronta para implementação</span>
+      <span>Atualizado em 12 ago 2026 · risco médio · tamanho M</span>
+    </div>
+
+    <header>
+      <div>
+        <p class="eyebrow">Brief de decisão · SDD Harness Guardian</p>
+        <h1>Uma spec que cabe em uma reunião</h1>
+        <p class="lede">Evoluir o <code>stakeholder-brief.html</code> para ser a principal
+          superfície de entendimento e decisão da spec: visual, arquitetural e
+          orientada a resultado — sem transformar especificação em burocracia.</p>
+      </div>
+      <aside class="ask" aria-label="Decisão solicitada">
+        <strong>Decisão solicitada</strong>
+        <p>Aprovar a direção lean: template enriquecido, checklist nas orientações
+          existentes, revisão visual no gate atual e apenas checks estruturais baratos.</p>
+      </aside>
+    </header>
+
+    <nav aria-label="Navegação do brief">
+      <a href="#decision-snapshot">Resumo</a>
+      <a href="#scope">Escopo</a>
+      <a href="#architecture">Arquitetura</a>
+      <a href="#impact">Impacto</a>
+      <a href="#flow">Fluxo</a>
+      <a href="#validation">Validação</a>
+      <a href="#decision">Decisão</a>
+    </nav>
+
+    <div class="snapshot" id="decision-snapshot" aria-label="Resumo da decisão">
+      <article class="metric">
+        <h2>Outcome</h2>
+        <p>Decidir valor, fronteira, impacto e implementação de uma spec em uma leitura curta.</p>
+      </article>
+      <article class="metric">
+        <h2>Benefício</h2>
+        <p>Menos contexto disperso nas reuniões e problemas de escopo percebidos antes do código.</p>
+      </article>
+      <article class="metric">
+        <h2>Tamanho</h2>
+        <p><span class="big">M</span>Vários contratos do bundle, nenhum runtime ou modelo de dados novo.</p>
+      </article>
+      <article class="metric">
+        <h2>Complexidade excluída</h2>
+        <p>Sem YAML/JSON novo, engine, agente permanente, screenshot CI ou avaliação semântica automática.</p>
+      </article>
+    </div>
+
+    <section id="scope">
+      <h2>Fatia proposta</h2>
+      <p class="section-intro">A menor solução que muda comportamento de autoria e revisão, não apenas a aparência do template.</p>
+      <div class="two-col">
+        <article class="panel in">
+          <h3>Entra nesta entrega</h3>
+          <ul>
+            <li>Template de brief com snapshot, sizing e visuais condicionais.</li>
+            <li>Checklist curto nas regras, skills e papéis que já existem.</li>
+            <li>Responsabilidade explícita do Orchestrator e revisão do Spec Guardian.</li>
+            <li>Checks de IDs, fontes e placeholders nos scripts existentes.</li>
+          </ul>
+        </article>
+        <article class="panel out">
+          <h3>Fica deliberadamente fora</h3>
+          <ul>
+            <li>Duplicar a spec inteira em HTML ou torná-la fonte canônica.</li>
+            <li>Diagramas obrigatórios para mudanças locais ou triviais.</li>
+            <li>Nova skill, estado, gate, agente permanente ou arquivo de checklist.</li>
+            <li>Scoring de prosa, comparação de pixels ou dependência externa.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="callout"><strong>Teste de proporcionalidade:</strong> mudar só o HTML seria menor, mas insuficiente — os agentes continuariam sem autoria e revisão explícitas. Ir além desta fatia adicionaria infraestrutura antes de existir evidência de necessidade.</div>
+    </section>
+
+    <section id="architecture">
+      <h2>Arquitetura: visão derivada, decisão central</h2>
+      <p class="section-intro">O HTML ocupa o centro da conversa humana, mas toda afirmação continua vindo dos quatro artefatos fonte.</p>
+      <div class="diagram-shell">
+        <svg viewBox="0 0 1040 360" role="img" aria-labelledby="arch-title arch-desc">
+          <title id="arch-title">Arquitetura de geração e revisão do stakeholder brief</title>
+          <desc id="arch-desc">Spec, mapa de impacto, plano e validação orientam o autor usando o checklist existente. O autor atualiza o stakeholder brief, que é revisado pelo Spec Guardian e liberado pelo gate já operado pelo Orchestrator antes das tasks.</desc>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#55706a"/>
+            </marker>
+          </defs>
+          <g font-family="Inter, system-ui, sans-serif">
+            <rect x="24" y="38" width="230" height="66" rx="12" fill="#e5eff8" stroke="#225b8f" stroke-width="2"/>
+            <text x="139" y="65" text-anchor="middle" font-size="17" font-weight="750" fill="#173c5e">spec.md + impact-map.md</text>
+            <text x="139" y="87" text-anchor="middle" font-size="14" fill="#315a7c">plan.md + validation-plan.md</text>
+
+            <rect x="334" y="38" width="220" height="66" rx="12" fill="#dff0ec" stroke="#0e665d" stroke-width="2"/>
+            <text x="444" y="65" text-anchor="middle" font-size="17" font-weight="750" fill="#084b45">Autor + orientação</text>
+            <text x="444" y="87" text-anchor="middle" font-size="14" fill="#35665f">checklist condicional</text>
+
+            <rect x="638" y="22" width="260" height="98" rx="15" fill="#0e665d" stroke="#084b45" stroke-width="3"/>
+            <text x="768" y="62" text-anchor="middle" font-size="20" font-weight="800" fill="#ffffff">stakeholder-brief.html</text>
+            <text x="768" y="88" text-anchor="middle" font-size="14" fill="#c9eee6">superfície de reunião e decisão</text>
+
+            <line x1="254" y1="71" x2="330" y2="71" stroke="#55706a" stroke-width="3" marker-end="url(#arrow)"/>
+            <line x1="554" y1="71" x2="633" y2="71" stroke="#55706a" stroke-width="3" marker-end="url(#arrow)"/>
+
+            <rect x="284" y="226" width="230" height="72" rx="12" fill="#fff0ce" stroke="#9a5b07" stroke-width="2"/>
+            <text x="399" y="255" text-anchor="middle" font-size="17" font-weight="750" fill="#704000">Spec Guardian</text>
+            <text x="399" y="278" text-anchor="middle" font-size="14" fill="#79571f">coerência + olhar visual</text>
+
+            <rect x="622" y="226" width="250" height="72" rx="12" fill="#ffffff" stroke="#0e665d" stroke-width="2"/>
+            <text x="747" y="255" text-anchor="middle" font-size="17" font-weight="750" fill="#084b45">Human Visibility Ready</text>
+            <text x="747" y="278" text-anchor="middle" font-size="14" fill="#35665f">gate existente → tasks</text>
+
+            <path d="M768 120 L768 172 L399 172 L399 221" fill="none" stroke="#55706a" stroke-width="3" marker-end="url(#arrow)"/>
+            <line x1="514" y1="262" x2="617" y2="262" stroke="#55706a" stroke-width="3" marker-end="url(#arrow)"/>
+
+            <text x="930" y="157" text-anchor="middle" font-size="13" font-weight="700" fill="#8b3535">não é fonte paralela</text>
+            <line x1="902" y1="132" x2="874" y2="116" stroke="#8b3535" stroke-width="2"/>
+          </g>
+        </svg>
+      </div>
+      <p class="diagram-note"><strong>O que este diagrama revela:</strong> autoria e julgamento são responsabilidades diferentes; o Orchestrator continua usando o gate atual e não surge uma engine nova.</p>
+    </section>
+
+    <section id="impact">
+      <h2>Mapa de impacto</h2>
+      <p class="section-intro">O blast radius é transversal ao bundle, mas termina nos contratos declarativos e scripts de teste. Produto, serviços, dados e infraestrutura permanecem intocados.</p>
+      <div class="impact-grid" aria-label="Superfícies afetadas e intensidade">
+        <article class="impact medium" data-level="médio"><h3>Template HTML</h3><p>Novo padrão visual, sizing e blocos condicionais. É a mudança mais visível.</p></article>
+        <article class="impact medium" data-level="médio"><h3>Orientação existente</h3><p>Uma síntese em uma passada e checklist curto nas regras/skills já usadas.</p></article>
+        <article class="impact medium" data-level="médio"><h3>Regra de visibilidade</h3><p>Gatilhos, proporcionalidade e critério contra conteúdo genérico.</p></article>
+        <article class="impact low" data-level="baixo"><h3>Agentes e lifecycle</h3><p>Explicitar quem atualiza, quem revisa e quando; sem transição adicional.</p></article>
+        <article class="impact low" data-level="baixo"><h3>Checks existentes</h3><p>Somente estrutura estável, referências e placeholders.</p></article>
+        <article class="impact low" data-level="nenhum"><h3>Runtime do consumidor</h3><p>Nenhuma alteração em aplicação, API, banco, deploy ou segurança.</p></article>
+      </div>
+      <table>
+        <thead><tr><th scope="col">Efeito indireto</th><th scope="col">Quem percebe</th><th scope="col">Controle</th></tr></thead>
+        <tbody>
+          <tr><td>Briefs novos ficam mais ricos</td><td>Agentes e stakeholders consumidores</td><td>Atualização deliberada da versão pinada do bundle</td></tr>
+          <tr><td>Briefs antigos podem parecer diferentes</td><td>Iniciativas em andamento</td><td>Sem migração automática; refresh apenas quando material</td></tr>
+          <tr><td>Custo de autoria pode crescer</td><td>Agente autor</td><td>Briefs S devem ser curtos; 600–900 palavras é só referência para M/L, com no máximo três visuais</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="flow">
+      <h2>Fluxo de criação — uma passada, uma revisão</h2>
+      <p class="section-intro">O brief nasce depois que as fontes estão maduras o bastante para sintetizar; ele não é refeito a cada edição cosmética.</p>
+      <div class="diagram-shell">
+        <svg viewBox="0 0 1060 280" role="img" aria-labelledby="flow-title flow-desc">
+          <title id="flow-title">Fluxo enxuto de criação e validação do brief</title>
+          <desc id="flow-desc">Criar a spec, mapear impacto e plano, sintetizar o brief em uma passada, revisar por 60 segundos e seguir para tasks se o gate estiver pronto; contradições retornam às fontes.</desc>
+          <defs>
+            <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#55706a"/>
+            </marker>
+          </defs>
+          <g font-family="Inter, system-ui, sans-serif">
+            <g fill="#fff" stroke="#0e665d" stroke-width="2">
+              <rect x="20" y="60" width="160" height="90" rx="14"/>
+              <rect x="230" y="60" width="170" height="90" rx="14"/>
+              <rect x="450" y="45" width="180" height="120" rx="14" fill="#dff0ec"/>
+              <rect x="680" y="60" width="170" height="90" rx="14" fill="#fff0ce" stroke="#9a5b07"/>
+              <rect x="900" y="60" width="140" height="90" rx="14" fill="#0e665d"/>
+            </g>
+            <g text-anchor="middle" fill="#17211f">
+              <text x="100" y="95" font-size="16" font-weight="750">1 · Especificar</text><text x="100" y="121" font-size="13">outcome + escopo</text>
+              <text x="315" y="95" font-size="16" font-weight="750">2 · Estruturar</text><text x="315" y="121" font-size="13">impacto + plano + prova</text>
+              <text x="540" y="89" font-size="16" font-weight="800">3 · Sintetizar</text><text x="540" y="116" font-size="13">HTML em uma passada</text><text x="540" y="139" font-size="13">só visuais relevantes</text>
+              <text x="765" y="95" font-size="16" font-weight="750">4 · Olhar visual</text><text x="765" y="121" font-size="13">teste de 60 segundos</text>
+              <text x="970" y="95" font-size="16" font-weight="800" fill="#fff">5 · Tasks</text><text x="970" y="121" font-size="13" fill="#c9eee6">gate pronto</text>
+            </g>
+            <g stroke="#55706a" stroke-width="3" marker-end="url(#arrow2)">
+              <line x1="180" y1="105" x2="225" y2="105"/><line x1="400" y1="105" x2="445" y2="105"/><line x1="630" y1="105" x2="675" y2="105"/><line x1="850" y1="105" x2="895" y2="105"/>
+            </g>
+            <path d="M765 155 C765 230, 315 230, 315 155" fill="none" stroke="#8b3535" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrow2)"/>
+            <text x="540" y="252" text-anchor="middle" font-size="13" font-weight="700" fill="#8b3535">contradição ou incerteza volta à fonte — não se inventa conteúdo no HTML</text>
+          </g>
+        </svg>
+      </div>
+      <p class="diagram-note"><strong>Refresh:</strong> antes das tasks e depois apenas se outcome, escopo, arquitetura, impacto, risco ou validação mudar materialmente.</p>
+    </section>
+
+    <section id="validation">
+      <h2>Validação mínima que ainda enxerga significado</h2>
+      <p class="section-intro">Separar o que uma máquina sabe verificar do que exige julgamento evita uma falsa garantia cara.</p>
+      <div class="two-col">
+        <article class="panel">
+          <h3>Checks determinísticos baratos</h3>
+          <ul>
+            <li>IDs das seções-base e links para as fontes.</li>
+            <li>Data/status e ausência de placeholders canônicos.</li>
+            <li>Scaffolder e validator existentes continuam passando.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Olhar do Spec Guardian</h3>
+          <ul>
+            <li>Conteúdo contradiz ou apenas repete as fontes?</li>
+            <li>O visual revela fronteira, dependência ou trade-off real?</li>
+            <li>A proposta está proporcional ao outcome?</li>
+          </ul>
+        </article>
+      </div>
+      <div class="review" style="margin-top:18px">
+        <div class="timer"><span>60s</span><small>teste de decisão, não prova cerimonial</small></div>
+        <div class="questions">
+          <div class="question"><strong>1.</strong> Consigo explicar outcome, impacto e decisão solicitada?</div>
+          <div class="question"><strong>2.</strong> Os visuais mostram algo concreto que um título genérico esconderia?</div>
+          <div class="question"><strong>3.</strong> Consigo decidir reduzir, adiar, aprovar ou rejeitar o escopo?</div>
+        </div>
+      </div>
+      <details>
+        <summary>Checklist condicional aplicado a este brief</summary>
+        <ul class="checklist">
+          <li><span class="yes">✓</span> outcome, ator e ganho específicos</li>
+          <li><span class="yes">✓</span> escopo e anti-escopo explícitos</li>
+          <li><span class="yes">✓</span> tamanho e opção menor considerados</li>
+          <li><span class="yes">✓</span> fontes e decisão solicitada visíveis</li>
+          <li><span class="yes">✓</span> arquitetura acionada por múltiplos contratos</li>
+          <li><span class="yes">✓</span> impacto acionado por várias superfícies</li>
+          <li><span class="yes">✓</span> fluxo acionado por handoff entre papéis</li>
+          <li><span class="yes">✓</span> SVGs têm título, descrição e texto de apoio</li>
+          <li><span class="yes">✓</span> nenhum visual depende apenas de cor</li>
+          <li><span class="yes">✓</span> nenhum dado de negócio foi inventado</li>
+        </ul>
+      </details>
+    </section>
+
+    <section id="decision">
+      <h2>Decisão e próximo passo seguro</h2>
+      <p class="section-intro">A iniciativa está especificada como uma mudança média, reversível e limitada aos contratos do bundle.</p>
+      <table>
+        <thead><tr><th scope="col">Decisão</th><th scope="col">Estado</th><th scope="col">Condição</th></tr></thead>
+        <tbody>
+          <tr><td>Outcome / Spec / Impacto / Plano</td><td class="yes">Prontos</td><td>Outcome, fronteira, arquitetura e riscos mapeados.</td></tr>
+          <tr><td>Visibilidade humana</td><td class="yes">Pronta</td><td>Este brief demonstra o padrão e deve passar pela inspeção renderizada final.</td></tr>
+          <tr><td>Implementação</td><td>Não iniciada</td><td>Começar T-001 com builder e evaluator distintos; estabilizar IDs antes de T-002.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><strong>Próximo passo:</strong> implementar primeiro o contrato visual e agentual. Só depois codificar os checks estáticos, para não congelar prematuramente uma estrutura ruim.</div>
+    </section>
+
+    <footer>
+      Este brief é uma visão derivada. Em caso de conflito, corrija-o a partir das fontes canônicas:
+      <div class="sources">
+        <a href="spec.md">spec.md</a>
+        <a href="impact-map.md">impact-map.md</a>
+        <a href="plan.md">plan.md</a>
+        <a href="validation-plan.md">validation-plan.md</a>
+        <a href="tasks.md">tasks.md</a>
+        <a href="decision-log.md">decision-log.md</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

@@ -53,7 +53,10 @@ target tree, copy each canonical file with its target name, copy
 Replace `<initiative-id>`, `<initiative-slug>`, `<initiative-sequence>`, dates
 and ownership placeholders before review.
 Keep `stakeholder-brief.html` concise, human-readable and synchronized with the
-source artifacts.
+source artifacts. Use the conditional checklist in
+`.harness/rules/human-visibility.md`: size the initiative S/M/L, consider a
+smaller option, and include architecture, impact or flow visuals only when they
+make a concrete relationship easier to decide.
 
 Do not copy `run-state.yaml.md` as state; it documents the contract.
 Copy `run-state.yaml` itself.

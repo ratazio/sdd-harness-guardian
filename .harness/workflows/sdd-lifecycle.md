@@ -21,9 +21,14 @@ inventoried and normalized before new conflicting work is scaffolded.
 4. **Impact Map** — map non-trivial surfaces, unknowns and risk.
 5. **Technical Plan** — define approach, decisions and rollback.
 6. **Validation Plan** — map every AC to checks and evidence.
-7. **Stakeholder Brief** — update `stakeholder-brief.html` as a concise,
-   human-readable summary of outcome, scope, impact, validation, risks and next
-   safe step.
+7. **Stakeholder Brief** — after the source artifacts are ready, the author
+   synthesizes/refreshes `stakeholder-brief.html` once as a concise,
+   human-readable summary of outcome, benefit, scope/anti-scope, affected
+   surfaces, size/proportionality, validation, risks and requested decision.
+   Apply the conditional human-visibility checklist: add architecture, impact
+   and flow visuals only when their relevance triggers apply; otherwise record a
+   short omission reason. The Spec Guardian performs the short source and
+   rendered-meaning review at the existing Human Visibility gate.
 8. **Task Breakdown** — create atomic, outcome-linked tasks with exit/evidence
    criteria.
 9. **Readiness Gate** — verify outcome linkage, dependencies, risk and approvals
@@ -49,7 +54,7 @@ inventoried and normalized before new conflicting work is scaffolded.
 | draft → outcome_ready | outcome, demonstrable increment, priority source or human decision | Spec Guardian/Orchestrator |
 | outcome_ready → spec_ready | Spec Guardian decision | Spec Guardian |
 | spec_ready → plan_ready | impact + plan + rollback | Orchestrator |
-| validation_ready → human_visibility_ready | synchronized stakeholder brief | Spec Guardian/Orchestrator |
+| validation_ready → human_visibility_ready | synchronized, proportional brief; conditional visual review | Spec Guardian/Orchestrator |
 | human_visibility_ready → tasks_ready | validation mapping + atomic tasks | Harness Planner/Orchestrator |
 | ready → in_progress | readiness record with outcome linkage | Builder/Orchestrator |
 | in_progress → needs_evaluation | implementation + evidence draft | Builder |

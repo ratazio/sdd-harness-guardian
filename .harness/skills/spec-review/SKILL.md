@@ -31,7 +31,12 @@ risk_level: medium
 5. Check whether the agent would need to infer commercial value or roadmap
    priority.
 6. Check whether `stakeholder-brief.html` is present for non-trivial work,
-   concise enough for review, and consistent with the spec.
+   derived from the source artifacts, concise enough for review, and consistent
+   with them. Use the conditional checklist in `human-visibility.md`: verify
+   outcome/benefit, scope/anti-scope, affected surfaces, S/M/L rationale,
+   smaller option, validation, risks and requested decision. Require
+   architecture, impact or flow visuals only when their trigger applies; require
+   a short omission reason otherwise. Reject generic or unreadable visuals.
 7. Classify issues as blocking or non-blocking.
 8. Return Outcome Ready yes/no, Spec Ready yes/no and Human Visibility Ready
    yes/no.
