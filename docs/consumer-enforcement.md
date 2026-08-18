@@ -1,0 +1,85 @@
+# Consumer Human Visibility enforcement
+
+The bundle supplies a portable validator; each consumer invokes it from its
+own task runner, hook, or CI provider. It is Python-standard-library only and
+never sends project contents anywhere.
+
+Run it from the consumer root:
+
+```bash
+python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/004-example
+```
+
+Before task breakdown or implementation, the command must pass and an
+independent reviewer must perform the short semantic/rendered brief review. A
+pass checks stable structure and declared state only; it is not approval of
+prose, stakeholder usefulness, or visual legibility.
+
+## Freshness
+
+In CI, compare the current change to the provider's existing base ref:
+
+```bash
+python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/004-example --base-ref origin/main
+```
+
+If a tracked source (`spec.md`, `impact-map.md`, `plan.md`, or
+`validation-plan.md`) changed in that diff but `stakeholder-brief.html` did
+not, validation fails. If Git or that ref is unavailable, the command reports
+the limitation and falls back to the local hash baseline; it fails only when
+that fallback cannot validate freshness. The validator does not require a
+particular CI system; the local wrapper supplies the appropriate base ref.
+
+For offline or archive use, write the inspectable local hash baseline only
+after the structural/gate check and independent review are complete:
+
+```bash
+python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/004-example --write-baseline
+```
+
+Later runs without `--base-ref` compare those hashes. A baseline is evidence
+of a refresh point, never a replacement for independent review.
+
+## Explicit exceptions
+
+Use `human-visibility-exception.yaml` only for `not_applicable` work or a
+reviewed non-material freshness change. It must be local to the initiative:
+
+```yaml
+scope: freshness # or not_applicable
+reason: Formatting-only change to the source artifact.
+owner: named reviewer or role
+human_visibility_status: reviewed
+```
+
+The validator prints accepted exceptions as limitations. Missing fields or a
+status other than `reviewed` fail; an exception cannot silently disable the
+protected gate.
+
+## Local bridge pattern
+
+Place this contract in the consumer root `AGENTS.md`, adapting the command
+name to its task runner:
+
+```md
+Before task breakdown or implementation for a non-trivial initiative, run
+`python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/NNN-slug [--base-ref <CI base ref>]`.
+Do not claim Human Visibility Ready until it passes and an independent reviewer
+has completed the short semantic/rendered brief review.
+```
+
+A generic wrapper can expose the command as `check:human-visibility` and call
+it from a pre-task step or CI job. The wrapper is consumer-owned and must
+return the validator's non-zero result before work proceeds.
+
+## Factory scaffold contract
+
+A Factory template can make the adoption reproducible with a root instruction
+bridge, `scripts/check_human_visibility.py`, a CI invocation point, and a
+`guardian-lock.json`. The lock contains the bundle repository and an immutable
+40-character commit. Its local `scripts/install_guardian.py` clones with
+`--no-checkout`, checks out that commit detached, and verifies `HEAD` before
+the wrapper runs. The template fixture under
+`scripts/fixtures/factory-guardian-consumer/` is executable evidence of this
+contract; Factory replaces its two lock placeholders with its selected URL and
+commit when generating a consumer repository.

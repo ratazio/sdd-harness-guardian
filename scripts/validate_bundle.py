@@ -117,6 +117,10 @@ def main() -> int:
         "prompts/use-in-consumer-project.md",
         "scripts/new_initiative.py",
         "scripts/smoke_test_scaffolder.py",
+        "scripts/validate_human_visibility.py",
+        "scripts/test_validate_human_visibility.py",
+        "scripts/test_factory_guardian_fixture.py",
+        "docs/consumer-enforcement.md",
     ):
         read(required)
 

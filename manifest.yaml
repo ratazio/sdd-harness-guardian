@@ -18,6 +18,7 @@ entrypoints:
   build_prompt: prompts/build-the-guardian.md
   consumer_prompt: prompts/use-in-consumer-project.md
   install_guide: INSTALL.md
+  consumer_enforcement_guide: docs/consumer-enforcement.md
   template_guide: .harness/templates/README.md
 
 principles:
@@ -117,6 +118,7 @@ consumer_contract:
   handoff_path: handoffs/latest-handoff.md
   task_terminal_status: done
   scaffold_command: python vendor/sdd-harness-guardian/scripts/new_initiative.py <initiative>
+  human_visibility_validate_command: python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/NNN-slug
 
 quality_gates:
   outcome_ready: required

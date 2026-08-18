@@ -1,0 +1,9 @@
+name: human-visibility
+on: [pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/install_guardian.py
+      - run: python scripts/check_human_visibility.py specs/001-example --base-ref origin/${{ github.base_ref }}

@@ -1,0 +1,91 @@
+schema_version: 1
+initiative_id: "004-consumer-enforcement-contract"
+initiative_sequence: "004"
+initiative_slug: "consumer-enforcement-contract"
+initiative_kind: "feature"
+status: "validation_done"
+summary: "Define consumer-facing enforcement for stakeholder-brief quality and Factory scaffold integration."
+current_phase: "validation_done"
+current_task: null
+last_safe_checkpoint: "All three tasks have approved evidence and independent evaluation approval."
+updated_at: "2026-08-18"
+updated_by: "Codex acting as Spec Guardian"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+execution:
+  builder_id: "Terra 5.6 implementation agent"
+  evaluator_id: "Terra 5.6 independent validation agent"
+  started_at: "2026-08-18"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "Implemented consumer validator, Factory contract fixture and adoption documentation."
+    - "Independent Terra evaluator approved technical AC-001 through AC-008 after remediation."
+    - "Recorded approved evidence packs for T-001, T-002 and T-003."
+  repository_revision: "working tree changes for initiative 004; commit not created"
+  working_tree_summary: "Validator, tests, Factory fixture, guides and initiative artifacts added/updated."
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    builder_id: "Terra 5.6 implementation agent"
+    evaluator_id: "Terra 5.6 independent validation agent"
+    evidence: "evidence/T-001.md"
+    decision: "approve"
+  - id: "T-002"
+    status: "done"
+    builder_id: "Terra 5.6 implementation agent"
+    evaluator_id: "Terra 5.6 independent validation agent"
+    evidence: "evidence/T-002.md"
+    decision: "approve"
+  - id: "T-003"
+    status: "done"
+    builder_id: "Terra 5.6 implementation agent"
+    evaluator_id: "Terra 5.6 independent validation agent"
+    evidence: "evidence/T-003.md"
+    decision: "approve"
+
+approvals:
+  human_required: false
+  pending: []
+  granted: []
+
+risks:
+  level: "medium"
+  open:
+    - "Consumer must wire the command into its own task runner or CI."
+    - "Human semantic/rendered review remains required."
+
+evidence:
+  latest: "evidence/T-003.md"
+  approved:
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+
+next_safe_step: "Use the delivered consumer enforcement contract as the input to the separate Agentic Factory implementation initiative."

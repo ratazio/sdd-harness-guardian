@@ -40,6 +40,16 @@ Modo de operação:
 - Se houver interrupção, atualize checkpoint, trabalho parcial, handoff e
   `resume_required` antes de encerrar.
 
+Para iniciativas nao triviais, antes de task breakdown ou implementacao, execute:
+
+```txt
+python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/NNN-slug
+```
+
+Em CI, acrescente `--base-ref <base-da-PR>`. Um passe estrutural nao substitui
+a revisao semantica/renderizada curta e independente; ambas sao obrigatorias
+para alegar Human Visibility Ready.
+
 Ao final:
 Entregue um resumo com:
 - spec usada;

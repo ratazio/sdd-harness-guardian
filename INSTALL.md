@@ -99,6 +99,16 @@ de continuar a criar novas iniciativas.
 Uma task só chega a `done` depois de evidence pack e avaliação independente.
 Se não houver evaluator distinto disponível, mantenha `needs_evaluation`.
 
+## 4.1 Aplicar o gate Human Visibility no consumidor
+
+Crie um comando local que execute o validador antes de task breakdown ou implementacao para iniciativas nao triviais:
+
+```bash
+python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/NNN-slug
+```
+
+Em CI, passe tambem `--base-ref <ref-base-da-PR>`; fora de Git, use o baseline local depois da revisao independente. O retorno nao-zero bloqueia o wrapper, hook ou job. O contrato completo esta em [`docs/consumer-enforcement.md`](docs/consumer-enforcement.md).
+
 ## 5. Atualizar ou fazer rollback do bundle
 
 Atualize para uma tag revisada:
