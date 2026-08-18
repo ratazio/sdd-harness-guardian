@@ -14,6 +14,39 @@ recorded in the initiative `decision-log.md`. The row must name the layout or
 design exception, rationale, owner/reviewer, retained decision surfaces, and
 accepted/reviewed status. Do not create an exception sidecar for layout.
 
+## Visual foundation
+
+Use the following template tokens; they are intentionally restrained so the
+brief reads like a decision document, not a product dashboard.
+
+| Role | Token | Value | Use |
+|---|---|---|---|
+| Canvas | `--canvas` | `#f4f1ea` | Warm, low-contrast page background. |
+| Paper | `--paper` | `#fffdf8` | Cards and sections; preserve high reading contrast. |
+| Ink | `--ink` | `#17211f` | Headings and primary body text. |
+| Muted | `--muted` | `#5f6b68` | Metadata, helper text and table labels only. |
+| Primary | `--brand` | `#0e665d` | Positive scope, active navigation and key emphasis. |
+| Primary dark | `--brand-dark` | `#084b45` | Requested-decision panel and high-emphasis links. |
+| Positive soft | `--soft` | `#dff0ec` | Positive/confirmed background, never status by color alone. |
+| Attention | `--amber` / `--amber-soft` | `#9a5b07` / `#fff0ce` | Pending decision, uncertainty and next-safe-step callouts. |
+| Risk | `--red` | `#8b3535` | Anti-scope, material risk and blocked path; pair with visible text. |
+| Divider | `--line` | `#d9d5ca` | Quiet section/card/table separation. |
+
+Typography uses the system UI stack: `Inter, ui-sans-serif, system-ui,
+-apple-system, "Segoe UI", sans-serif`. Keep the editorial hierarchy from the
+template: large, compact `h1` for the meeting decision; uppercase, tracked
+micro-labels for metadata; 16px body text with about 1.55 line-height; and
+small muted labels rather than small muted paragraphs. Do not introduce remote
+fonts, more than one display treatment, gradients beyond the existing subtle
+header wash, or decorative shadows that compete with the decision ask.
+
+Use whitespace as hierarchy: the header is the strongest region, cards group
+snapshot facts, sections separate decision topics, and tables carry dense
+traceability. Keep one accent purpose per block—green for confirmed/scope,
+amber for attention or pending choice, red for risk/anti-scope—and always print
+the corresponding state label. Inline SVGs use the same palette, a nearby
+legend when color encodes several states, and a text equivalent.
+
 ## Required meeting shell
 
 Keep the template's paper/canvas visual tokens, strong header, decision ask,
