@@ -37,6 +37,9 @@ risk_level: medium
    smaller option, validation, risks and requested decision. Require
    architecture, impact or flow visuals only when their trigger applies; require
    a short omission reason otherwise. Reject generic or unreadable visuals.
+   Confirm the canonical `v1` brief shell was populated rather than rebuilt;
+   a material custom layout must have a reviewed rationale, owner and retained
+   decision surfaces recorded in `decision-log.md`.
 7. Classify issues as blocking or non-blocking.
 8. Return Outcome Ready yes/no, Spec Ready yes/no and Human Visibility Ready
    yes/no.

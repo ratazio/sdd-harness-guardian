@@ -12,8 +12,17 @@ python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consum
 
 Before task breakdown or implementation, the command must pass and an
 independent reviewer must perform the short semantic/rendered brief review. A
-pass checks stable structure and declared state only; it is not approval of
+pass checks stable structure, design lineage/shell, and declared state only; it is not approval of
 prose, stakeholder usefulness, or visual legibility.
+
+## Design-contract validation
+
+New briefs must be populated from the canonical `stakeholder-brief.html` and
+retain `data-harness-brief-design="v1"` plus its shell hooks. The validator
+reports missing lineage or hooks as deterministic design-contract failures. It
+does not score rendered quality. A material custom layout needs a reviewed
+exception in the initiative `decision-log.md`, stating rationale, owner and
+retained decision surfaces; do not create a layout-exception sidecar.
 
 ## Freshness
 

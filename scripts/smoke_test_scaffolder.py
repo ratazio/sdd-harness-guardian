@@ -145,6 +145,13 @@ def main() -> int:
             "missing stakeholder brief source link",
         )
 
+        missing_lineage = feature_brief.replace('data-harness-brief-design="v1"', "", 1)
+        require_exact_errors(
+            stakeholder_brief_errors(missing_lineage, rendered=True),
+            ['missing stakeholder brief design-lineage marker: data-harness-brief-design="v1"'],
+            "missing stakeholder brief design lineage",
+        )
+
     print("RESULT: PASS")
     return 0
 

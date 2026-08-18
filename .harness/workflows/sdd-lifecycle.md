@@ -27,7 +27,9 @@ inventoried and normalized before new conflicting work is scaffolded.
    surfaces, size/proportionality, validation, risks and requested decision.
    Apply the conditional human-visibility checklist: add architecture, impact
    and flow visuals only when their relevance triggers apply; otherwise record a
-   short omission reason. The Spec Guardian performs the short source and
+   short omission reason. Populate the canonical design shell; a materially
+   custom layout requires reviewed rationale, owner and retained decision
+   surfaces in `decision-log.md`. The Spec Guardian performs the short source and
    rendered-meaning review at the existing Human Visibility gate.
 8. **Task Breakdown** — create atomic, outcome-linked tasks with exit/evidence
    criteria.

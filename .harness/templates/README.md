@@ -57,6 +57,10 @@ source artifacts. Use the conditional checklist in
 `.harness/rules/human-visibility.md`: size the initiative S/M/L, consider a
 smaller option, and include architecture, impact or flow visuals only when they
 make a concrete relationship easier to decide.
+Populate the canonical visual shell rather than reconstructing a page. Read
+`stakeholder-brief-design.md` before authoring: it defines the `v1` design
+lineage marker, required meeting surfaces, conditional views and the reviewed
+`decision-log.md` exception path for a material custom layout.
 
 Do not copy `run-state.yaml.md` as state; it documents the contract.
 Copy `run-state.yaml` itself.

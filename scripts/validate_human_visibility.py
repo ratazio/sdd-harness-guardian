@@ -20,6 +20,8 @@ from pathlib import Path
 
 REQUIRED_SOURCES = ("spec.md", "impact-map.md", "plan.md", "validation-plan.md")
 REQUIRED_SECTION_IDS = ("decision-snapshot", "scope", "validation", "decision")
+DESIGN_MARKER = 'data-harness-brief-design="v1"'
+REQUIRED_SHELL_HOOKS = ("brief-shell", "brief-header", "decision-register", "impact-evidence", "decision-actions")
 PLACEHOLDERS = ("<initiative>", "<YYYY-MM-DD>")
 BASELINE_FILE = "human-visibility-baseline.json"
 EXCEPTION_FILE = "human-visibility-exception.yaml"
@@ -102,6 +104,21 @@ def approved_exception(initiative: Path, report: Report) -> str | None:
     return str(scope)
 
 
+def approved_design_exception(initiative: Path, report: Report) -> bool:
+    """A material custom layout is reviewed in the canonical decision log."""
+    path = initiative / "decision-log.md"
+    if not path.is_file():
+        report.structural.append("missing decision-log.md required for design exception review")
+        return False
+    for row in (line.lower() for line in path.read_text(encoding="utf-8").splitlines() if "|" in line):
+        if (("design exception" in row or "layout exception" in row)
+                and ("reviewed" in row or "accepted" in row)
+                and ("rationale" in row or "reason" in row)
+                and "decision surface" in row):
+            return True
+    return False
+
+
 def check_gate_state(initiative: Path, report: Report) -> None:
     state = initiative / "run-state.yaml"
     if not state.is_file():
@@ -131,6 +148,17 @@ def check_brief(initiative: Path, report: Report, not_applicable: bool) -> None:
     for placeholder in PLACEHOLDERS:
         if placeholder in html:
             report.structural.append(f"unresolved stakeholder brief placeholder: {placeholder}")
+    design_errors: list[str] = []
+    if DESIGN_MARKER not in html:
+        design_errors.append("missing stakeholder brief design-lineage marker: data-harness-brief-design=\"v1\"")
+    for hook in REQUIRED_SHELL_HOOKS:
+        if not re.search(rf'\bclass\s*=\s*["\'][^"\']*\b{re.escape(hook)}\b', html):
+            design_errors.append(f"missing stakeholder brief canonical shell hook: {hook}")
+    if design_errors:
+        if approved_design_exception(initiative, report):
+            report.limitations.append("custom stakeholder brief layout accepted by reviewed design exception in decision-log.md; independent rendered review must confirm retained decision surfaces")
+        else:
+            report.structural.extend(design_errors)
 
 
 def changed_paths_from_git(root: Path, base_ref: str, initiative: Path) -> tuple[set[str] | None, str | None]:
@@ -249,7 +277,7 @@ def main() -> int:
         print(f"Wrote freshness baseline: {initiative / BASELINE_FILE}")
         return 0
     report = validate(initiative, root, args.base_ref)
-    print("Human Visibility deterministic validation")
+    print("Human Visibility deterministic design-contract validation")
     for label, entries in (("STRUCTURAL FAILURES", report.structural), ("GATE/STATE INCONSISTENCIES", report.gate), ("FRESHNESS FAILURES", report.freshness), ("LIMITATIONS", report.limitations), ("HUMAN REVIEW REQUIRED", report.human_review)):
         print(f"\n{label}:")
         for entry in entries or ("none",):
@@ -257,7 +285,7 @@ def main() -> int:
     if report.failures:
         print(f"\nRESULT: FAIL ({len(report.failures)} deterministic failure(s))")
         return 1
-    print("\nRESULT: PASS (deterministic structure only; independent review still required)")
+    print("\nRESULT: PASS (deterministic design/structure contract only; independent review still required)")
     return 0
 
 

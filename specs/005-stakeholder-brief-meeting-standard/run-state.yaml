@@ -1,0 +1,67 @@
+schema_version: 1
+initiative_id: "005-stakeholder-brief-meeting-standard"
+initiative_sequence: "005"
+initiative_slug: "stakeholder-brief-meeting-standard"
+initiative_kind: "feature"
+status: "validation_done"
+summary: "Restore canonical stakeholder-brief fidelity and enrich it as a meeting decision surface."
+current_phase: "validation_done"
+current_task: null
+last_safe_checkpoint: "User approved marker/exception; spec, impact, plan, validation and task breakdown are ready."
+updated_at: "2026-08-18"
+updated_by: "Codex acting as Spec Guardian"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+execution:
+  builder_id: null
+  evaluator_id: null
+  started_at: null
+  interrupted: false
+  resume_required: true
+  work_since_checkpoint:
+    - "User approved the lineage marker and decision-log exception contract."
+    - "Prepared spec, impact, plan, validation plan, populated brief and task breakdown."
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger: []
+
+approvals:
+  human_required: false
+  pending: []
+  granted: []
+
+risks:
+  level: "unknown"
+  open: []
+
+evidence:
+  latest: null
+  approved: []
+
+next_safe_step: "Complete T-001 and run its contract fixtures before advancing retrofit/guidance work."

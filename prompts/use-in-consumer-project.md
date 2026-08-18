@@ -46,6 +46,12 @@ Para iniciativas nao triviais, antes de task breakdown ou implementacao, execute
 python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/NNN-slug
 ```
 
+Ao criar ou atualizar o brief, popule o template canônico do Guardian e leia
+`vendor/sdd-harness-guardian/.harness/templates/stakeholder-brief-design.md`.
+Não reconstrua uma página mínima. Um layout materialmente customizado exige
+exceção revisada, com rationale, owner e decision surfaces retidas no
+`decision-log.md` da iniciativa.
+
 Em CI, acrescente `--base-ref <base-da-PR>`. Um passe estrutural nao substitui
 a revisao semantica/renderizada curta e independente; ambas sao obrigatorias
 para alegar Human Visibility Ready.

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "source_sha256": {
+    "spec.md": "9280ce63e7e06db3e93333fc0e5791e5cc5bad42e8fdb927b5e1f155c7ac4501",
+    "impact-map.md": "bdc6ff31c9d42b93647777d9e004643245795bde21762f327fd873ca7c3a4ec9",
+    "plan.md": "5f9641ba1a03fba7a8ccb0c85d0e8ef9ea3a01595e30bfe31b500e08bb596744",
+    "validation-plan.md": "c13f480b1b1d76d8153e3cade1d69afb61cc8470b3fc1a2ce2e8c94094b57e6b"
+  }
+}

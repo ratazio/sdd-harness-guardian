@@ -60,6 +60,14 @@ are reference points, never a minimum or automated gate.
 The brief must be concise enough for a stakeholder review and specific enough to
 spot misalignment before implementation starts.
 
+## Design standard and exception
+
+Populate the canonical template and retain its versioned design lineage and
+meeting shell. The deterministic contract detects missing lineage/shell, not
+rendered quality. A materially custom layout is allowed only with a reviewed
+exception in the initiative `decision-log.md` containing rationale, owner and
+retained decision surfaces. Do not add a separate layout-exception sidecar.
+
 ## Blocking conditions
 
 Block or request revision when:
@@ -86,8 +94,9 @@ brief when the reproduction, impact and validation are already clear.
 
 ## Hard mirror recommendation
 
-Use a brief validator to require the artifact, stable base section IDs, source
-links, update metadata and absence of canonical placeholders. Keep semantic
+Use a brief validator to require the artifact, stable base section IDs,
+versioned design-lineage marker, canonical shell hooks, source links, update
+metadata and absence of canonical placeholders. Keep semantic
 meaning and visual legibility in the short reviewer pass; do not use word-count
 blocking, automated prose scoring or screenshot CI as a default. Flag changed
 `spec.md`, `impact-map.md`, `plan.md` or `validation-plan.md` without a matching

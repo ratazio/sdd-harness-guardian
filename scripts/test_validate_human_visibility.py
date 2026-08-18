@@ -34,9 +34,9 @@ def write_fixture(root: Path) -> Path:
     for source in SOURCES:
         (initiative / source).write_text(f"# {source}\n", encoding="utf-8")
     (initiative / "run-state.yaml").write_text("quality_gates:\n  human_visibility_ready: true\n", encoding="utf-8")
-    (initiative / "stakeholder-brief.html").write_text("""<html><body>
-<div id="decision-snapshot"></div><section id="scope"></section>
-<section id="validation"></section><section id="decision"></section>
+    (initiative / "stakeholder-brief.html").write_text("""<html data-harness-brief-design="v1"><body class="brief-shell">
+<header class="brief-header"></header><div id="decision-snapshot"></div><section id="scope"></section>
+<section id="validation"></section><section id="decision"></section><section class="decision-register"></section><section class="impact-evidence"></section><section class="decision-actions"></section>
 <a href="spec.md">spec</a><a href="impact-map.md">impact</a>
 <a href="plan.md">plan</a><a href="validation-plan.md">validation</a>
 </body></html>""", encoding="utf-8")
@@ -59,6 +59,28 @@ def main() -> int:
         not_applicable = run(root)
         require(not_applicable.returncode == 0 and "not applicable under the explicit reviewed exception" in not_applicable.stdout, not_applicable.stdout)
         (initiative / "human-visibility-exception.yaml").unlink()
+        write_fixture(root)
+        run(root, "--write-baseline")
+
+        brief = initiative / "stakeholder-brief.html"
+        brief.write_text(brief.read_text(encoding="utf-8").replace('data-harness-brief-design="v1"', "", 1), encoding="utf-8")
+        missing_lineage = run(root)
+        require(missing_lineage.returncode == 1 and "missing stakeholder brief design-lineage marker" in missing_lineage.stdout, missing_lineage.stdout)
+        write_fixture(root)
+        run(root, "--write-baseline")
+
+        brief = initiative / "stakeholder-brief.html"
+        brief.write_text(brief.read_text(encoding="utf-8").replace('class="decision-actions"', 'class="custom-actions"', 1), encoding="utf-8")
+        missing_shell = run(root)
+        require(missing_shell.returncode == 1 and "missing stakeholder brief canonical shell hook: decision-actions" in missing_shell.stdout, missing_shell.stdout)
+        (initiative / "decision-log.md").write_text("""# Decision Log
+
+| ID | Status | Decision | Rationale/evidence | Owner/approver |
+|---|---|---|---|---|
+| D-001 | reviewed | Layout exception: retained decision surfaces | Rationale: accessibility audience needs a custom layout | reviewer |
+""", encoding="utf-8")
+        accepted_layout = run(root)
+        require(accepted_layout.returncode == 0 and "custom stakeholder brief layout accepted" in accepted_layout.stdout, accepted_layout.stdout)
         write_fixture(root)
         run(root, "--write-baseline")
 

@@ -26,6 +26,8 @@ REQUIRED_BRIEF_SOURCES = (
     "validation-plan.md",
 )
 BRIEF_TEMPLATE_PLACEHOLDERS = ("<initiative>", "<YYYY-MM-DD>")
+BRIEF_DESIGN_MARKER = 'data-harness-brief-design="v1"'
+REQUIRED_BRIEF_SHELL_HOOKS = ("brief-shell", "brief-header", "decision-register", "impact-evidence", "decision-actions")
 
 
 def check(condition: bool, message: str) -> None:
@@ -78,6 +80,11 @@ def stakeholder_brief_errors(html: str, *, rendered: bool) -> list[str]:
     for source in REQUIRED_BRIEF_SOURCES:
         if not re.search(rf'href\s*=\s*["\']{re.escape(source)}["\']', html):
             errors.append(f"missing stakeholder brief source link: {source}")
+    if BRIEF_DESIGN_MARKER not in html:
+        errors.append("missing stakeholder brief design-lineage marker: data-harness-brief-design=\"v1\"")
+    for hook in REQUIRED_BRIEF_SHELL_HOOKS:
+        if not re.search(rf'\bclass\s*=\s*["\'][^"\']*\b{re.escape(hook)}\b', html):
+            errors.append(f"missing stakeholder brief canonical shell hook: {hook}")
 
     if rendered:
         for placeholder in BRIEF_TEMPLATE_PLACEHOLDERS:
@@ -121,6 +128,7 @@ def main() -> int:
         "scripts/test_validate_human_visibility.py",
         "scripts/test_factory_guardian_fixture.py",
         "docs/consumer-enforcement.md",
+        ".harness/templates/stakeholder-brief-design.md",
     ):
         read(required)
 
