@@ -5,6 +5,10 @@
 Only a `ready` task may enter implementation. Tasks must be small, ordered,
 bounded, outcome-linked and independently verifiable.
 
+For v2 non-trivial work, preliminary task rows may exist under
+`tasks_drafted`, but remain `pending` until the coverage review, final brief,
+meeting decision propagation and `tasks_ready` gate are complete.
+
 ## Required contract
 
 Each task declares ID, objective, requirement IDs, acceptance criteria IDs,
@@ -30,6 +34,8 @@ Block when the task:
 - lacks objective exit criteria or an evidence destination;
 - expands beyond the approved spec/plan;
 - has the same builder and evaluator identity.
+- belongs to a v2 initiative without `tasks_ready`, even if it appears in the
+  preliminary task draft.
 
 ## Hard mirror recommendation
 

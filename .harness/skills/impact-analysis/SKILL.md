@@ -1,7 +1,7 @@
 ---
 name: impact-analysis
 description: Use when mapping the likely impact of a software change before implementation, including files, contracts, APIs, tests, risks and dependencies.
-version: "0.1.0"
+version: "0.2.0"
 owner: platform-engineering
 maturity: stable
 risk_level: high
@@ -27,8 +27,11 @@ risk_level: high
 2. Inspect architecture and relevant files.
 3. Identify affected domains.
 4. Classify risk low/medium/high/unknown.
-5. Recommend validations and reviewers.
-6. Produce impact-map.md.
+5. Record affected architecture dimensions and select the proportional
+   localized/S, M or L/high/unknown profile. Missing material facts are named
+   unknowns with owner/resolution path, never inferred diagram content.
+6. Recommend validations and reviewers.
+7. Produce impact-map.md.
 
 ## Output contract
 

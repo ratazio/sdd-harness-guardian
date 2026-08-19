@@ -13,20 +13,31 @@ ERRORS: list[str] = []
 CHECKS = 0
 
 
-REQUIRED_BRIEF_IDS = (
+V1_REQUIRED_BRIEF_IDS = (
     "decision-snapshot",
     "scope",
     "validation",
     "decision",
 )
-REQUIRED_BRIEF_SOURCES = (
+V2_REQUIRED_BRIEF_IDS = (
+    "decision-snapshot",
+    "scope",
+    "architecture",
+    "impact",
+    "execution",
+    "validation",
+    "evolution",
+    "decision",
+    "coverage",
+)
+V1_REQUIRED_BRIEF_SOURCES = (
     "spec.md",
     "impact-map.md",
     "plan.md",
     "validation-plan.md",
 )
-BRIEF_TEMPLATE_PLACEHOLDERS = ("<initiative>", "<YYYY-MM-DD>")
-BRIEF_DESIGN_MARKER = 'data-harness-brief-design="v1"'
+V1_BRIEF_TEMPLATE_PLACEHOLDERS = ("<initiative>", "<YYYY-MM-DD>")
+V2_BRIEF_TEMPLATE_PLACEHOLDERS = ("{{initiative}}", "{{date}}", "{{risk}}", "{{size}}")
 REQUIRED_BRIEF_SHELL_HOOKS = ("brief-shell", "brief-header", "decision-register", "impact-evidence", "decision-actions")
 
 
@@ -73,27 +84,35 @@ def manifest_mapping(manifest: str, key: str) -> dict[str, str]:
 def stakeholder_brief_errors(html: str, *, rendered: bool) -> list[str]:
     """Return stable structural contract failures for a stakeholder brief."""
     errors: list[str] = []
-    for section_id in REQUIRED_BRIEF_IDS:
+    marker = re.search(r'\bdata-harness-brief-design\s*=\s*["\'](v1|v2)["\']', html)
+    if not marker:
+        return ["missing stakeholder brief design-lineage marker: data-harness-brief-design=\"v1\" or \"v2\""]
+    lineage = marker.group(1)
+    for section_id in (V2_REQUIRED_BRIEF_IDS if lineage == "v2" else V1_REQUIRED_BRIEF_IDS):
         pattern = rf'\bid\s*=\s*["\']{re.escape(section_id)}["\']'
         if not re.search(pattern, html):
             errors.append(f"missing stakeholder brief section id: {section_id}")
-    for source in REQUIRED_BRIEF_SOURCES:
-        if not re.search(rf'href\s*=\s*["\']{re.escape(source)}["\']', html):
-            errors.append(f"missing stakeholder brief source link: {source}")
-    if BRIEF_DESIGN_MARKER not in html:
-        errors.append("missing stakeholder brief design-lineage marker: data-harness-brief-design=\"v1\"")
+    if lineage == "v1":
+        for source in V1_REQUIRED_BRIEF_SOURCES:
+            if not re.search(rf'href\s*=\s*["\']{re.escape(source)}["\']', html):
+                errors.append(f"missing stakeholder brief source link: {source}")
     for hook in REQUIRED_BRIEF_SHELL_HOOKS:
         if not re.search(rf'\bclass\s*=\s*["\'][^"\']*\b{re.escape(hook)}\b', html):
             errors.append(f"missing stakeholder brief canonical shell hook: {hook}")
 
+    placeholders = V2_BRIEF_TEMPLATE_PLACEHOLDERS if lineage == "v2" else V1_BRIEF_TEMPLATE_PLACEHOLDERS
     if rendered:
-        for placeholder in BRIEF_TEMPLATE_PLACEHOLDERS:
+        for placeholder in placeholders:
             if placeholder in html:
                 errors.append(f"unresolved stakeholder brief placeholder: {placeholder}")
     else:
-        for placeholder in BRIEF_TEMPLATE_PLACEHOLDERS:
+        for placeholder in placeholders:
             if placeholder not in html:
                 errors.append(f"missing stakeholder brief template placeholder: {placeholder}")
+        if lineage == "v2":
+            for attribute in ("data-source", "data-source-section", "data-coverage"):
+                if attribute not in html:
+                    errors.append(f"v2 stakeholder brief template lacks provenance attribute: {attribute}")
     return errors
 
 

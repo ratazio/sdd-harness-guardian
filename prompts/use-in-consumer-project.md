@@ -23,13 +23,17 @@ Antes de agir:
 
 Modo de operação:
 - Trabalhe pelo fluxo completo specify -> outcome review -> review -> impact -> plan ->
-  validation plan -> stakeholder brief -> tasks -> implement -> evidence ->
-  independent evaluation.
+  validation plan -> task draft -> coverage review -> stakeholder brief -> meeting ->
+  decisão no log + propagação para fontes -> regeneração -> Tasks Ready -> implement ->
+  evidence -> independent evaluation. O trecho task draft/coverage/reunião é v2;
+  briefs v1 históricos/pinned seguem o caminho legado até migração explícita.
 - Não implemente nem expanda tasks enquanto outcome, incremento demonstrável,
   validação e `why now` não estiverem declarados.
 - Não implemente nada enquanto a spec não estiver Outcome Ready e Spec Ready.
-- Para trabalho não trivial, não gere ou execute tasks antes de
-  `stakeholder-brief.html` estar conciso, revisável e sincronizado.
+- Para trabalho v2 não trivial, tasks preliminares podem ser geradas para a
+  reunião, mas não execute nem marque `ready` antes de coverage review distinta,
+  decisão propagada, checks refeitos e brief regenerado. Para v1 histórico,
+  preserve o contrato pinned até a rota de migração/exception revisada.
 - Não marque task como done sem evidence pack aprovado por evaluator distinto.
 - Separe implementação de avaliação.
 - Preserve estado em `specs/NNN-<initiative>/progress.md` e `specs/NNN-<initiative>/run-state.yaml`.
@@ -51,6 +55,11 @@ Ao criar ou atualizar o brief, popule o template canônico do Guardian e leia
 Não reconstrua uma página mínima. Um layout materialmente customizado exige
 exceção revisada, com rationale, owner e decision surfaces retidas no
 `decision-log.md` da iniciativa.
+
+Depois de uma reunião v2, extraia decisões para o `decision-log.md` append-only,
+atualize todas as fontes canônicas afetadas, refaça checks de coverage/freshness
+e regenere o brief. Nunca altere somente HTML nem declare `tasks_ready` antes
+desse ciclo; o consumidor é dono dessas ações.
 
 Em CI, acrescente `--base-ref <base-da-PR>`. Um passe estrutural nao substitui
 a revisao semantica/renderizada curta e independente; ambas sao obrigatorias

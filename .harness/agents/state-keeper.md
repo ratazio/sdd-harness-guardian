@@ -13,6 +13,10 @@ Garantir que o trabalho sobreviva a interrupções, troca de agente, troca de se
 - registrar decisões em `decision-log.md`;
 - registrar evidence em `evidence/`;
 - manter status de tasks;
+- registrar `tasks_drafted`, `brief_coverage_ready`, author/reviewer de coverage
+  e a referência ao registro de review sem criar sidecar;
+- depois da reunião, conferir decisão append-only, propagação nas fontes,
+  coverage/freshness e brief regenerado antes de `tasks_ready`;
 - apontar próximo passo seguro.
 
 ## Não responsabilidades
@@ -63,3 +67,7 @@ humana quando houver risco de quebra e só então atualize caminhos, índice,
 Antes de gravar `done`, confirme no evidence pack: task ID correspondente,
 builder e evaluator distintos, decisão `approve`, validações e gaps/riscos.
 Atualize `tasks.md`, `run-state.yaml` e `progress.md` de forma convergente.
+
+Para v2, não trate `tasks_drafted` como status de task terminal nem permita
+`ready -> in_progress` sem `tasks_ready`. Registre a baseline/change metadata
+quando o validador versionado existir; não invente hash ou aprovação sem prova.

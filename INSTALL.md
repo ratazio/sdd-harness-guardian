@@ -63,7 +63,8 @@ python vendor/sdd-harness-guardian/scripts/new_initiative.py minha-feature
 ```
 
 Isso cria `specs/001-minha-feature/` no primeiro uso e registra a linha em
-`specs/INDEX.md`.
+`specs/INDEX.md`. O novo scaffold usa a linhagem v2 e começa com todos os gates
+falsos; ele não autoriza task ou implementação.
 
 Para bugfix:
 
@@ -80,6 +81,10 @@ Sem Python, crie `specs/NNN-<initiative>/`, mantenha `specs/INDEX.md`, e copie
 os arquivos listados em `.harness/templates/README.md`. Substitua os placeholders antes do
 Outcome/Spec Review e mantenha `stakeholder-brief.html` sincronizado para
 iniciativas não triviais.
+
+Iniciativas históricas/pinned com brief v1 continuam válidas sob o contrato
+v1. Não as reescreva automaticamente: em refresh material, siga o diagnóstico
+de migração do validador ou registre uma exceção legacy revisada.
 
 ## 4. Operar e retomar
 
@@ -98,6 +103,11 @@ de continuar a criar novas iniciativas.
 
 Uma task só chega a `done` depois de evidence pack e avaliação independente.
 Se não houver evaluator distinto disponível, mantenha `needs_evaluation`.
+
+Para v2, tasks preliminares são apenas discussão. Depois da reunião, acrescente
+a decisão no `decision-log.md`, propague-a para cada fonte canônica afetada,
+refaça os checks de coverage/freshness e regenere o brief. Só então o
+Orchestrator pode declarar `tasks_ready`; HTML nunca é o único registro.
 
 ## 4.1 Aplicar o gate Human Visibility no consumidor
 

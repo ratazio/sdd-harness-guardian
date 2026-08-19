@@ -1,0 +1,154 @@
+schema_version: 1
+initiative_id: "006-stakeholder-brief-complete-decision-surface"
+initiative_sequence: "006"
+initiative_slug: "stakeholder-brief-complete-decision-surface"
+initiative_kind: "feature"
+status: "validation_done"
+summary: "Evolve the Stakeholder Brief into a complete, progressively disclosed and independently coverage-reviewed meeting decision surface."
+brief_lineage: "v2"
+current_phase: "validation_done"
+current_task: null
+last_safe_checkpoint: "T-005 and all validation gates are done; D-020 authorizes release 0.3.0 through commit, main push and immutable tag v0.3.0."
+updated_at: "2026-08-19"
+updated_by: "Codex / State Keeper and Orchestrator"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "Terra 5.6 high / t2_builder"
+  coverage_reviewer: "Terra 5.6 high / t2_evaluator"
+  reviewed_at: "2026-08-19"
+  review_record: "decision-log.md#D-014"
+  findings_status: "pass_after_revision"
+
+execution:
+  builder_id: "Terra 5.6 high / t5_builder"
+  evaluator_id: "Terra 5.6 high / t5_evaluator"
+  started_at: "2026-08-19"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "Created initiative planning package."
+    - "Prepared preliminary tasks for stakeholder review; tasks are not ready."
+    - "Corrected two independent coverage review rounds and received pre-render coverage PASS."
+    - "Bundle, brief structure, DOM, SVG and inline-script static checks passed."
+    - "Human sponsor accepted execution decision D-009 and simplicity constraint."
+    - "Implemented T-001 source/coverage/provenance, architecture-readiness and lifecycle contracts without HTML v2 or production validator changes."
+    - "Focused contract test and bundle validation passed; evidence/T-001.md awaits distinct evaluation."
+    - "Evaluator requested revision: make v2 gates lineage-conditional, correct the 006 v1 state and add behavioral contract fixtures."
+    - "Transitioned needs_revision -> in_progress -> needs_evaluation after applying lineage/state/fixture corrections and revalidation."
+    - "Evaluator requested the stale v1 planning-brief refresh after plan.md changed; refreshed only material T-001 facts, reviewed source-to-brief, renewed baseline and revalidated."
+    - "Transitioned needs_revision -> in_progress -> needs_evaluation after the v1 freshness refresh; no v2 HTML, production validator, Factory or consumer work started."
+    - "T-001 evaluator returned approve after the two revision rounds; State Keeper recorded approved -> done."
+    - "Orchestrator transitioned T-002 pending -> ready -> in_progress with distinct Terra/high identities."
+    - "Implemented the v2 canonical template and populated 006 decision surface with native anchors/details progressive enhancement; v2 coverage/Human Visibility/Tasks Ready remain unapproved."
+    - "T-002 evaluator requested revision for stale v1/T-001 prose, D-013 propagation, single-source provenance, truthful validator compatibility and retained render artifacts."
+    - "Transitioned needs_evaluation -> needs_revision -> in_progress; corrected the v2 template/example and reran static/render checks."
+    - "Transitioned in_progress -> needs_evaluation; v2 coverage/Human Visibility/Tasks Ready remain false pending distinct review."
+    - "T-002 evaluator requested a minimal disposition/evidence correction: `gap` is a blocking finding, not a disposition, and evidence must not claim legacy-validator green status."
+    - "Transitioned needs_evaluation -> needs_revision -> in_progress -> needs_evaluation after correcting the v2 design/template and evidence; gates remain false."
+    - "T-002 evaluator returned approve; D-014 records final v2 coverage/rendered review and State Keeper set brief_coverage_ready, human_visibility_ready and tasks_ready true."
+    - "State Keeper recorded T-002 approved -> done; Orchestrator transitioned T-003 pending -> ready -> in_progress with distinct Terra/high identities."
+    - "Implemented the stdlib lineage-aware validator: v1 retains its pinned schema-v1/four-source contract; v2 requires expanded sources, eight views, provenance, coverage register, distinct review metadata and v2 gates."
+    - "Resolved Q-003 in D-015 by evolving the existing baseline file to schema v2 only for v2, with lineage/source-set/brief-hash/review-record metadata and an actionable migration diagnostic."
+    - "Added positive, negative, migration, stale/delta and privacy-sentinel fixtures; bundle and validator suites pass. T-003 transitioned in_progress -> needs_evaluation without semantic self-approval."
+    - "Evaluator requested revision for coverage-register row parsing, baseline review/change metadata, explicit v1 migration route and record-specific propagation. Transitioned needs_evaluation -> needs_revision -> in_progress."
+    - "Implemented the requested deterministic checks and exact negative fixtures. Focused validator, T-001 contract and bundle suites pass; smoke and Factory failures were recorded as unmodified T-004 debts."
+    - "Transitioned T-003 in_progress -> needs_evaluation after revision; deterministic PASS still does not grant semantic or independent approval."
+    - "T-003 evaluator returned approve after the revision and synchronized freshness recheck; State Keeper recorded approved -> done."
+    - "Orchestrator transitioned only T-004 pending -> ready -> in_progress with distinct Terra/high identities; release/publish/tag remains unauthorized."
+    - "T-004 rendered v2 scaffolder placeholders, aligned smoke assertions, refreshed consumer/install/prompt/manifest guidance, and added explicit v1/v2 Factory and post-meeting propagation fixtures."
+    - "T-004 focused integration and proportional regression checks passed; transitioned in_progress -> needs_evaluation without self-approval."
+    - "T-004 evaluator requested only synchronization/freshness revision. Builder transitioned needs_evaluation -> needs_revision -> in_progress, refreshed D-016/state/tasks/progress/handoff/brief and renewed the v2 baseline, then returned in_progress -> needs_evaluation."
+    - "T-004 evaluator returned approve after the synchronization revision; State Keeper recorded approved -> done."
+    - "Orchestrator transitioned only T-005 pending -> ready -> in_progress with distinct Terra/high identities; release/publish/tag remains unauthorized."
+    - "T-005 reproduced bundle, validator, scaffolder, Factory, lifecycle and post-meeting regressions; source-to-brief reconciliation appended D-017 for T-004's distinct approval, corrected stale Q-003/T-003 brief facts and renewed the schema-v2 baseline."
+    - "T-005 rendered desktop/narrow/no-script/print artifacts and found F-005-01: narrow decision and coverage tables compress text below readable density. The Builder did not mask or repair the owning T-002 surface; terminal evaluation is paused pending its return."
+    - "T-005 V-011/M-001 found unreadable dense narrow tables; the distinct T-002 evaluator approved the minimum local-scroll correction in D-018."
+    - "T-005 rerun passed the full deterministic/compatibility suite and final desktop/narrow/no-script/keyboard/print checks: no global overflow, local scroll for dense narrow tables, seven progressive details and native keyboard behavior."
+    - "T-005 transitioned needs_evaluation -> needs_revision -> in_progress while factual evidence/state/brief drift from the D-018 rerun was corrected, then in_progress -> needs_evaluation; Builder did not self-approve."
+    - "The pre-D-018 freshness baseline is intentionally stale after final evidence/state/brief alignment. t5_evaluator must review content before authorizing baseline renewal and the final independent validator rerun."
+    - "T-005 evaluator approved the final content review, authorized baseline renewal and independently confirmed matching hashes plus all terminal V/E/M gates."
+    - "State Keeper recorded T-005 needs_evaluation -> approved -> done and initiative validation_done; release/publish/tag remains unauthorized."
+    - "Human sponsor authorized commit, main push, SemVer 0.3.0 and immutable tag v0.3.0 in D-020."
+  repository_revision: "3669d61b26513949bab42e5e84b035d368b123f4"
+  working_tree_summary: "Initiative 006 planning artifacts plus uncommitted T-001/T-002/T-003 work and T-004 scaffolder, consumer guidance, Factory compatibility and post-meeting fixture changes. No release, publish, tag, service, sidecar or permanent-agent work."
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    builder: "Terra 5.6 high / t1_builder"
+    evaluator: "Terra 5.6 high / t1_evaluator"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    builder: "Terra 5.6 high / t2_builder"
+    evaluator: "Terra 5.6 high / t2_evaluator"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    builder: "Terra 5.6 high / t3_builder"
+    evaluator: "Terra 5.6 high / t3_evaluator"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    builder: "Terra 5.6 high / t4_builder"
+    evaluator: "Terra 5.6 high / t4_evaluator"
+    evidence: "evidence/T-004.md"
+  - id: "T-005"
+    status: "done"
+    builder: "Terra 5.6 high / t5_builder"
+    evaluator: "Terra 5.6 high / t5_evaluator"
+    evidence: "evidence/T-005.md"
+
+approvals:
+  human_required: true
+  pending: []
+  granted:
+    - "2026-08-19: approved creation and planning of initiative 006."
+    - "2026-08-19 D-009: approved execution of T-001–T-005, D-006/D-007, paired Terra 5.6 high agents and simplest sufficient implementation."
+    - "2026-08-19 D-020: approved commit, main push, version 0.3.0 and immutable publication tag v0.3.0."
+
+risks:
+  level: "high"
+  open:
+    - "R-001: complete coverage may reduce readability."
+    - "R-004: preliminary tasks may be mistaken for authorized work."
+    - "R-007: v2 may break historical/pinned v1 consumers."
+
+evidence:
+  latest: "evidence/T-005.md"
+  approved:
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+    - "evidence/T-004.md"
+    - "evidence/T-005.md"
+
+next_safe_step: "Publish the validated release as commit on main plus immutable tag v0.3.0; consumers may then pin that tag."

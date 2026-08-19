@@ -15,14 +15,34 @@ independent reviewer must perform the short semantic/rendered brief review. A
 pass checks stable structure, design lineage/shell, and declared state only; it is not approval of
 prose, stakeholder usefulness, or visual legibility.
 
-## Design-contract validation
+## Design-contract validation and compatibility
 
-New briefs must be populated from the canonical `stakeholder-brief.html` and
-retain `data-harness-brief-design="v1"` plus its shell hooks. The validator
-reports missing lineage or hooks as deterministic design-contract failures. It
-does not score rendered quality. A material custom layout needs a reviewed
-exception in the initiative `decision-log.md`, stating rationale, owner and
-retained decision surfaces; do not create a layout-exception sidecar.
+New non-trivial initiatives scaffolded by the current bundle use
+`data-harness-brief-design="v2"`, expanded source freshness, local provenance,
+the coverage register and distinct review metadata. Historical/pinned v1
+briefs remain accepted under their four-source v1 contract; do not silently
+rewrite them. A material v1 refresh must follow the validator's migration
+diagnostic or record a reviewed legacy exception.
+
+Both lineages retain the canonical shell hooks. The validator reports missing
+lineage or hooks as deterministic design-contract failures; it does not score
+rendered quality. A material custom layout needs a reviewed exception in the
+initiative `decision-log.md`, stating rationale, owner and retained decision
+surfaces; do not create a layout-exception sidecar.
+
+## V2 order and post-meeting propagation
+
+For v2, preliminary tasks are meeting input only. The required order is:
+
+```txt
+task draft -> coverage composition -> distinct coverage review -> final brief
+-> meeting -> decision-log append -> affected canonical-source updates
+-> revalidation/coverage refresh -> regenerated brief -> Tasks Ready
+```
+
+Do not set `tasks_ready` or begin implementation from an HTML-only decision or
+transcript. The consumer owns extraction, source edits and brief regeneration;
+the bundle supplies the contract and validator, not a meeting integration.
 
 ## Freshness
 
@@ -32,15 +52,15 @@ In CI, compare the current change to the provider's existing base ref:
 python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/004-example --base-ref origin/main
 ```
 
-If a tracked source (`spec.md`, `impact-map.md`, `plan.md`, or
-`validation-plan.md`) changed in that diff but `stakeholder-brief.html` did
+If a tracked source changed in that diff but `stakeholder-brief.html` did
 not, validation fails. If Git or that ref is unavailable, the command reports
 the limitation and falls back to the local hash baseline; it fails only when
 that fallback cannot validate freshness. The validator does not require a
 particular CI system; the local wrapper supplies the appropriate base ref.
 
 For offline or archive use, write the inspectable local hash baseline only
-after the structural/gate check and independent review are complete:
+after the structural/gate check and independent review are complete. V2 writes
+schema v2 in the same baseline file; pinned v1 remains schema v1:
 
 ```bash
 python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/004-example --write-baseline
@@ -91,4 +111,5 @@ bridge, `scripts/check_human_visibility.py`, a CI invocation point, and a
 the wrapper runs. The template fixture under
 `scripts/fixtures/factory-guardian-consumer/` is executable evidence of this
 contract; Factory replaces its two lock placeholders with its selected URL and
-commit when generating a consumer repository.
+commit when generating a consumer repository. The executable fixture proves
+both historical v1 validation and a v2 source/review/propagation record.

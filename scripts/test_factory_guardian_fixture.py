@@ -44,14 +44,57 @@ def create_guardian_repository(root: Path) -> tuple[Path, str]:
     return guardian, commit
 
 
-def create_valid_initiative(consumer: Path) -> None:
-    initiative = consumer / "specs" / "001-example"
+def create_valid_v1_initiative(consumer: Path) -> None:
+    """Historical/pinned v1 remains accepted by the installed validator."""
+    initiative = consumer / "specs" / "001-v1-example"
     initiative.mkdir(parents=True)
     for name in ("spec.md", "impact-map.md", "plan.md", "validation-plan.md"):
         (initiative / name).write_text(f"# {name}\n", encoding="utf-8")
-    (initiative / "run-state.yaml").write_text("quality_gates:\n  human_visibility_ready: true\n", encoding="utf-8")
-    (initiative / "stakeholder-brief.html").write_text("""<div id="decision-snapshot"></div><div id="scope"></div><div id="validation"></div><div id="decision"></div>
-<a href="spec.md"></a><a href="impact-map.md"></a><a href="plan.md"></a><a href="validation-plan.md"></a>""", encoding="utf-8")
+    (initiative / "run-state.yaml").write_text("brief_lineage: \"v1\"\nquality_gates:\n  human_visibility_ready: true\n", encoding="utf-8")
+    (initiative / "stakeholder-brief.html").write_text("""<html data-harness-brief-design="v1"><body class="brief-shell"><header class="brief-header"></header>
+<div id="decision-snapshot"></div><div id="scope" class="impact-evidence"></div><div id="validation"></div><div id="decision" class="decision-actions"></div><div class="decision-register"></div>
+<a href="spec.md"></a><a href="impact-map.md"></a><a href="plan.md"></a><a href="validation-plan.md"></a></body></html>""", encoding="utf-8")
+
+
+def create_valid_v2_initiative(consumer: Path) -> None:
+    """New Factory consumers get the v2 source/review/propagation contract."""
+    initiative = consumer / "specs" / "002-v2-example"
+    initiative.mkdir(parents=True)
+    sources = ("spec.md", "impact-map.md", "plan.md", "tasks.md", "validation-plan.md", "decision-log.md", "progress.md")
+    for name in sources:
+        (initiative / name).write_text(f"# {name}\n", encoding="utf-8")
+    (initiative / "decision-log.md").write_text(
+        "| ID | Decision |\n|---|---|\n| D-001 | Meeting decision propagated to canonical sources before regenerated brief and Tasks Ready. |\n",
+        encoding="utf-8",
+    )
+    (initiative / "run-state.yaml").write_text("""brief_lineage: "v2"
+quality_gates:
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+brief_review:
+  author: "factory-builder"
+  coverage_reviewer: "factory-reviewer"
+  reviewed_at: "2026-08-19"
+  review_record: "decision-log.md#D-001"
+  findings_status: "pass_after_propagation"
+""", encoding="utf-8")
+    source_rows = []
+    blocks = []
+    for index, source in enumerate((*sources, "run-state.yaml")):
+        target = f"source-{index}"
+        blocks.append(f'<section id="{target}" data-source="{source}" data-source-section="principal" data-coverage="represented"></section>')
+        source_rows.append(f'<tr><td>{source} #principal</td><td><a href="#{target}">target</a></td><td>represented: Factory fixture</td></tr>')
+    (initiative / "stakeholder-brief.html").write_text(
+        "<html data-harness-brief-design=\"v2\"><body class=\"brief-shell\"><header class=\"brief-header\"></header>"
+        "<div id=\"decision-snapshot\"></div><section id=\"scope\" class=\"impact-evidence\"></section><section id=\"architecture\"></section><section id=\"impact\"></section><section id=\"execution\"></section><section id=\"validation\"></section><section id=\"evolution\" class=\"decision-register\"></section><section id=\"decision\" class=\"decision-actions\"></section><section id=\"coverage\"></section>"
+        + "".join(blocks)
+        + "<table id=\"coverage-register\"><tr><th>Source / heading</th><th>Target</th><th>Disposition</th></tr>"
+        + "".join(source_rows)
+        + "</table></body></html>",
+        encoding="utf-8",
+    )
 
 
 def main() -> int:
@@ -72,13 +115,15 @@ def main() -> int:
         shutil.rmtree(consumer / "vendor", ignore_errors=True)
         lock = {"repository": str(guardian), "commit": commit}
         (consumer / "guardian-lock.json").write_text(json.dumps(lock, indent=2) + "\n", encoding="utf-8")
-        create_valid_initiative(consumer)
+        create_valid_v1_initiative(consumer)
+        create_valid_v2_initiative(consumer)
         run(sys.executable, "scripts/install_guardian.py", cwd=consumer)
         installed = run("git", "-C", str(consumer / "vendor" / "sdd-harness-guardian"), "rev-parse", "HEAD").stdout.strip()
         require(installed == commit == lock["commit"], "installed Guardian HEAD does not match materialized lock")
         installed_validator = consumer / "vendor" / "sdd-harness-guardian" / "scripts" / "validate_human_visibility.py"
-        run(sys.executable, str(installed_validator), "--consumer-root", str(consumer), "--initiative", "specs/001-example", "--write-baseline")
-        run(sys.executable, "scripts/check_human_visibility.py", "specs/001-example", cwd=consumer)
+        for initiative in ("specs/001-v1-example", "specs/002-v2-example"):
+            run(sys.executable, str(installed_validator), "--consumer-root", str(consumer), "--initiative", initiative, "--write-baseline")
+            run(sys.executable, "scripts/check_human_visibility.py", initiative, cwd=consumer)
     print("RESULT: PASS")
     return 0
 

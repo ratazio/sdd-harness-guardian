@@ -19,6 +19,13 @@ specs/NNN-slug/
   handoffs/latest-handoff.md
 ```
 
+For v2 Human Visibility, keep the coverage composition in the existing plan,
+the independent review record in the existing decision log, and the
+author/reviewer/reference fields in `run-state.yaml`. Do not add a coverage
+sidecar, permanent agent state or duplicate JSON index. `tasks_drafted` and
+`brief_coverage_ready` are explicit quality gates; they are not task terminal
+statuses and do not permit implementation.
+
 ## Session start order
 
 1. `specs/INDEX.md`;

@@ -16,8 +16,11 @@ non-goals. Behavior change requires a feature/bugfix spec instead.
 ## Flow
 
 1. Capture regression baseline before modification.
-2. Execute Common SDD Lifecycle gates 1–6.
-3. Split work into small reversible tasks.
+2. Select the brief lineage. Historical/pinned v1 retains the legacy
+   brief-before-task sequence; v2 executes Common SDD Lifecycle gates 1–12.
+3. For v2, draft small reversible tasks for coverage/meeting review; only
+   post-meeting `tasks_ready` permits a task to become ready. V1 uses the
+   legacy task breakdown after Human Visibility.
 4. Implement one task and rerun the relevant baseline.
 5. Draft `evidence/<task-id>.md` and set `needs_evaluation`.
 6. A distinct Evaluator compares baseline, contracts, diff and evidence.

@@ -14,7 +14,10 @@ attempts, uncertainty and an evidence-producing discovery task.
 
 1. Write/review `spec.md` and `reproduction.md`.
 2. Capture a failing regression check or justified baseline evidence.
-3. Execute Common SDD Lifecycle gates 2–6, including impact mapping.
+3. Select the brief lineage. Historical/pinned v1 retains the legacy
+   brief-before-task sequence; v2 executes Common SDD Lifecycle gates 2–12,
+   including impact mapping, preliminary task draft, coverage review and
+   post-meeting propagation when the initiative is non-trivial.
 4. Implement the smallest ready fix task.
 5. Execute the regression check plus mapped validations.
 6. Draft `evidence/<task-id>.md` and set `needs_evaluation`.

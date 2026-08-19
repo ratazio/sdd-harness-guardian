@@ -1,7 +1,7 @@
 ---
 name: validation-planning
 description: Use when transforming acceptance criteria into concrete tests, commands, checks, evals and evidence requirements.
-version: "0.1.0"
+version: "0.2.0"
 owner: platform-engineering
 maturity: stable
 risk_level: high
@@ -30,6 +30,9 @@ risk_level: high
 5. Define evidence artifacts.
 6. Define expected result and evidence destination for every check.
 7. Identify manual checks or LLM-as-judge only when necessary.
+8. For v2 briefs, separately map deterministic source/heading, provenance,
+   review-identity and lifecycle-order checks from semantic coverage,
+   architecture adequacy and rendered meeting review.
 
 ## Output contract
 

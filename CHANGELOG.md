@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.0
+
+Evolução compatível do Stakeholder Brief para uma superfície completa de
+decisão, com profundidade progressiva e enforcement version-aware.
+
+Inclui:
+
+- brief v2 com oito visões, provenance local e registro humano de cobertura;
+- arquitetura proporcional a tamanho/risco, task/validation ledgers e evolução
+  de decisões na mesma projeção derivada;
+- lifecycle com task draft, revisão distinta de coverage, propagação de
+  decisões de reunião e Tasks Ready somente após refresh das fontes/brief;
+- validator e baseline v1/v2 com freshness, review metadata, diagnostics de
+  migração e fixtures negativas/privacy;
+- scaffolder, guidance e Factory atualizados, preservando consumidores v1
+  pinned e adicionando prova v2/pós-reunião;
+- regressões e evidence para desktop, narrow, teclado, no-script e print,
+  incluindo tabelas densas com scroll local em telas estreitas.
+
 ## 0.2.0
 
 Evolução compatível do bundle para tornar auditoria, organização de specs e

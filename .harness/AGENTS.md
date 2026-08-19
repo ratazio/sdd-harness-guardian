@@ -99,15 +99,17 @@ As definições completas estão em `.harness/agents/`.
 4. Impact Map
 5. Technical Plan -> Gate: Plan Ready
 6. Validation Plan -> Gate: Validation Ready
-7. Stakeholder Brief -> Gate: Human Visibility Ready
-8. Task Breakdown -> Gate: Tasks Ready
-9. Implementation of one ready task
-10. Evidence draft
-11. Independent Evaluation
-12. Evidence approval
-13. Task done + state update
-14. Initiative Validation Done
-15. Ratchet update when triggered
+7. v2 only: Preliminary Task Draft -> Gate: Tasks Drafted (not authorized)
+8. v2 only: Coverage Composition + distinct review -> Gate: Brief Coverage Ready
+9. Stakeholder Brief -> Gate: Human Visibility Ready
+10. v2 only: Meeting decision propagation + refreshed brief -> Gate: Tasks Ready
+11. Implementation of one ready task
+12. Evidence draft
+13. Independent Evaluation
+14. Evidence approval
+15. Task done + state update
+16. Initiative Validation Done
+17. Ratchet update when triggered
 ```
 
 Auditorias usam o workflow `.harness/workflows/sdd-harness-audit.md` e a skill
@@ -166,6 +168,17 @@ Bloqueie avanço quando:
   não estão declarados;
 - iniciativa não trivial não possui brief humano ou o brief contradiz spec,
   impact map, plan ou validation plan;
+- uma iniciativa v2 não possui source inventory/coverage disposition para cada
+  heading principal aplicável, provenance `data-*`, razão exigida ou tabela
+  humana de coverage;
+- cobertura v2 usa `link_only` para heading material de fonte core, ou autor e
+  reviewer de coverage não são identidades distintas;
+- tarefa preliminar é tratada como `ready`, ou Tasks Ready ocorre antes de
+  propagação de decisões de reunião e refresh de coverage/brief;
+- perfil de arquitetura S/M/L/high/unknown não está sustentado por fontes, ou
+  informação ausente não foi bloqueada/transformada em discovery;
+- brief v1 histórico/pinned é forçado pelos gates v2 antes de refresh material
+  ou migração explícita.
 - a próxima task não explica por que é o próximo passo seguro rumo ao outcome;
 - critérios de aceite não são testáveis ou não têm validation mapping;
 - impacto de mudança não trivial não foi mapeado;

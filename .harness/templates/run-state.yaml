@@ -5,6 +5,7 @@ initiative_slug: "<initiative-slug>"
 initiative_kind: "feature"
 status: "draft"
 summary: ""
+brief_lineage: null
 current_phase: "specify"
 current_task: null
 last_safe_checkpoint: null
@@ -30,12 +31,21 @@ quality_gates:
   impact_mapped: false
   plan_ready: false
   validation_ready: false
+  tasks_drafted: false
+  brief_coverage_ready: false
   human_visibility_ready: false
   tasks_ready: false
   implementation_done: false
   independent_evaluation_done: false
   evidence_pack_ready: false
   validation_done: false
+
+brief_review:
+  author: null
+  coverage_reviewer: null
+  reviewed_at: null
+  review_record: null
+  findings_status: "not_started"
 
 execution:
   builder_id: null

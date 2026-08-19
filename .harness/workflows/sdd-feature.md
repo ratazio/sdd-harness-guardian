@@ -12,7 +12,10 @@ Non-trivial features also maintain `stakeholder-brief.html` for human review.
 
 ## Flow
 
-1. Execute `sdd-lifecycle.md` gates 1–8.
+1. Select the lifecycle lineage first. Pinned/historical v1 executes the legacy
+   brief-before-task path; v2 executes `sdd-lifecycle.md` gates 1–12, including
+   the unauthorised preliminary task draft, distinct coverage review and
+   post-meeting propagation.
 2. Confirm compatibility, migration and rollout impact where relevant.
 3. For each ready task, Builder implements, drafts evidence and sets
    `needs_evaluation`; a distinct Evaluator must `approve` before State Keeper
@@ -25,8 +28,9 @@ Non-trivial features also maintain `stakeholder-brief.html` for human review.
 - contract, data or behavior changes are explicit in spec/plan;
 - every feature task declares the outcome served, demonstrable increment,
   expected artifact and validation method;
-- stakeholder brief summarizes outcome, scope, impact, validation, risks and
-  next safe step without becoming a source of truth;
+- stakeholder brief remains derived; only for v2 it dispositiona applicable source
+  headings and exposes draft task discussion before Tasks Ready without becoming
+  a source of truth;
 - the workflow asks for clarification instead of inferring business priority;
 - rollout and rollback match the impact level;
 - scope discovered during implementation returns to planning;

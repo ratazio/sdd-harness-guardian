@@ -22,6 +22,8 @@ any non-terminal state -> blocked
 ```
 
 `done` requires approved evidence, distinct identities and synchronized state.
+`tasks_drafted` may contain the same task rows for meeting discussion, but they
+remain `pending` until the post-meeting `tasks_ready` gate permits `ready`.
 
 ## Task template
 

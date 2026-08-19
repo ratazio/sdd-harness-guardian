@@ -8,6 +8,7 @@ import platform
 import subprocess
 import sys
 import tempfile
+from datetime import date
 from pathlib import Path
 
 from validate_bundle import stakeholder_brief_errors
@@ -114,6 +115,9 @@ def main() -> int:
         feature_brief = (feature_root / "stakeholder-brief.html").read_text(
             encoding="utf-8"
         )
+        require('data-harness-brief-design="v2"' in feature_brief, "new scaffold must use v2 brief lineage")
+        for placeholder in ("{{initiative}}", "{{date}}", "{{risk}}", "{{size}}"):
+            require(placeholder not in feature_brief, f"scaffold left v2 template placeholder: {placeholder}")
         require_exact_errors(
             stakeholder_brief_errors(feature_brief, rendered=True),
             [],
@@ -128,27 +132,18 @@ def main() -> int:
         )
 
         unresolved_placeholder = feature_brief.replace(
-            "Last updated: ", "Last updated: <YYYY-MM-DD> ", 1
+            date.today().isoformat(), "{{date}}", 1
         )
         require_exact_errors(
             stakeholder_brief_errors(unresolved_placeholder, rendered=True),
-            ["unresolved stakeholder brief placeholder: <YYYY-MM-DD>"],
+            ["unresolved stakeholder brief placeholder: {{date}}"],
             "unresolved stakeholder brief placeholder",
         )
 
-        missing_source = feature_brief.replace(
-            'href="impact-map.md"', 'href="impact-map-missing.md"', 1
-        )
-        require_exact_errors(
-            stakeholder_brief_errors(missing_source, rendered=True),
-            ["missing stakeholder brief source link: impact-map.md"],
-            "missing stakeholder brief source link",
-        )
-
-        missing_lineage = feature_brief.replace('data-harness-brief-design="v1"', "", 1)
+        missing_lineage = feature_brief.replace('data-harness-brief-design="v2"', "", 1)
         require_exact_errors(
             stakeholder_brief_errors(missing_lineage, rendered=True),
-            ['missing stakeholder brief design-lineage marker: data-harness-brief-design="v1"'],
+            ['missing stakeholder brief design-lineage marker: data-harness-brief-design="v1" or "v2"'],
             "missing stakeholder brief design lineage",
         )
 

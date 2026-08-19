@@ -104,6 +104,10 @@ def render_template(
         "<initiative-sequence>": f"{initiative_sequence:03d}",
         "<feature-or-change-name>": initiative_id,
         "<YYYY-MM-DD>": date.today().isoformat(),
+        "{{initiative}}": initiative_id,
+        "{{date}}": date.today().isoformat(),
+        "{{risk}}": "risk unknown",
+        "{{size}}": "size to assess",
     }
     for old, new in replacements.items():
         text = text.replace(old, new)
@@ -234,8 +238,8 @@ def main() -> int:
 
     print(f"Created {args.kind} initiative: {target}")
     print(
-        "Next step: complete spec.md, update stakeholder-brief.html, "
-        "and request Outcome/Spec Guardian review."
+        "Next step: complete canonical sources, keep the v2 brief derived, "
+        "and request Outcome/Spec Guardian review. Draft tasks are not authorization."
     )
     return 0
 

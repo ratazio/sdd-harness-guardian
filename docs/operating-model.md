@@ -4,7 +4,8 @@
 
 ```txt
 specify -> outcome review -> spec review -> impact -> plan -> validation plan
--> stakeholder brief -> tasks
+-> preliminary task draft -> coverage composition + distinct review
+-> stakeholder brief -> meeting decision propagation -> tasks ready
 -> implement one task -> evidence draft -> independent evaluation
 -> approved evidence -> done -> initiative validation -> ratchet
 ```
@@ -12,6 +13,11 @@ specify -> outcome review -> spec review -> impact -> plan -> validation plan
 Cada seta é uma transição explícita. O workflow comum está em
 `.harness/workflows/sdd-lifecycle.md`; feature, bugfix e refactor adicionam
 constraints próprios.
+
+O ramo mostrado com task draft/coverage/propagação é v2. Briefs históricos ou
+pinned com lineage v1 preservam o caminho legado `brief -> Human Visibility ->
+task breakdown -> Tasks Ready` até refresh material/migração explícita; os gates
+de evidence/evaluator são iguais para ambas as lineages.
 
 Antes do loop, o agente localiza a iniciativa pelo `specs/INDEX.md` e pelo
 diretório canônico `specs/NNN-slug/`. O índice e `run-state.yaml` são o contexto
@@ -32,8 +38,10 @@ mapa `slug -> NNN-slug`, Builder/State Keeper aplica e Evaluator confere
 | Impact Mapped | Impact Mapper | spec ready + contexto | superfícies, risco, unknowns |
 | Plan Ready | Orchestrator | spec + impact | abordagem, decisões, rollback |
 | Validation Ready | Harness Planner | ACs estáveis | cada AC mapeado |
-| Human Visibility Ready | Spec Guardian/Orchestrator | artefatos fonte | brief HTML conciso e sincronizado |
-| Tasks Ready | Orchestrator | plano + validação | tasks atômicas com outcome/exit/evidence |
+| Tasks Drafted (v2) | Harness Planner/Orchestrator | plano + validação | tarefas preliminares, visíveis mas não autorizadas |
+| Brief Coverage Ready (v2) | Spec Guardian/Orchestrator | inventário/fonte + revisão distinta | disposição por heading e gaps resolvidos |
+| Human Visibility Ready | Spec Guardian/Orchestrator | artefatos fonte + render corrigido | brief derivado, sincronizado e revisado |
+| Tasks Ready | Orchestrator/State Keeper | decisão de reunião propagada | tasks atômicas com outcome/exit/evidence autorizadas |
 | Implementation Done | Builder | uma task ready | mudança + evidence draft |
 | Independent Evaluation | Evaluator | diff + checks + draft | approve/revise/block/escalate |
 | Evidence Pack Ready | Evaluator/State Keeper | avaliação concluída | pack completo e aprovado |
@@ -53,6 +61,13 @@ pending|ready|in_progress|needs_evaluation|needs_revision -> blocked
 `approved` é decisão do evaluator. `done` é atualização de estado realizada
 depois que o evidence pack registra essa decisão. Sem evaluator distinto, o
 estado terminal é proibido.
+
+Para v2, `tasks_drafted` não é um status de execução. A composição usa o
+inventário de fontes aplicáveis e uma disposição por heading; os blocos
+renderizados usam `data-source`, `data-source-section` e `data-coverage`, com
+tabela humana correspondente, sem JSON/sidecar duplicado. O reviewer de
+coverage é distinto do autor (ou humano nomeado), e a reunião grava decisões no
+log, propaga fontes e regenera o brief antes de Tasks Ready.
 
 ## Risco e aprovação humana
 

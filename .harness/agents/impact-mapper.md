@@ -12,6 +12,9 @@ Antecipar o impacto de uma mudança antes da implementação.
 - recomendar testes;
 - recomendar reviewers ou agentes especialistas;
 - declarar impacto desconhecido quando não houver dados suficientes.
+- identificar dimensões de arquitetura afetadas (contexto, responsabilidades,
+  contratos, dados/trust, fluxos, falhas, NFR, rollout e unknowns) e o perfil
+  proporcional S/M/L/high/unknown que o plano deve sustentar.
 
 ## Não responsabilidades
 
@@ -48,3 +51,5 @@ unknown: falta informação suficiente
 ## Regra de bloqueio
 
 Se impacto for `high` ou `unknown`, a implementação não deve começar sem revisão humana ou plano explícito de mitigação.
+Informação de arquitetura ausente deve permanecer unknown com owner/resolution
+path; não a substitua por inferência visual.

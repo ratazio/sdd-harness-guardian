@@ -24,40 +24,86 @@ Describe sequence, boundaries and why this is the smallest safe approach.
 **Smaller option considered:** state the smaller approach and why it is sufficient or insufficient.  
 **Complexity deliberately excluded:** state infrastructure, process or scope not justified by the outcome.
 
-## 4. Change sequence
+## 4. Architecture readiness and proportionality
+
+State the initiative profile (`localized/S`, `M`, `L`, `high` or `unknown`) and
+complete every applicable row before Plan Ready. An omission needs a source-backed
+reason. Missing material information becomes a named unknown with owner and
+resolution path; block Plan Ready or create a bounded discovery task rather
+than inventing a diagram or contract.
+
+| Dimension | Current state | Target/decision | Proof, owner or N/A reason |
+|---|---|---|---|
+| System context | | | |
+| Components/responsibilities | | | |
+| Interfaces/events/contracts | | | |
+| Data ownership/lifecycle | | | |
+| Security/trust boundaries | | | |
+| Critical runtime flows | | | |
+| Failure behavior | | | |
+| NFRs | | | |
+| Compatibility/migration | | | |
+| Observability | | | |
+| Rollout/rollback | | | |
+| Alternatives/trade-offs | | | |
+| Unknowns | | | |
+
+| Profile | Minimum architecture decision surface |
+|---|---|
+| localized/S | Concise text or one boundary view only when it improves a decision. |
+| M | Context, changed components/contracts and applicable critical flow. |
+| L, high or unknown | Applicable context, responsibilities, data/trust and success/failure/rollback views; source-backed omissions only. |
+
+## 5. Change sequence
 
 | Step | Surface/files | Preconditions | Result | Reversible? |
 |---|---|---|---|---|
 | 1 | | | | |
 
-## 5. Contracts, data and compatibility
+## 6. Contracts, data and compatibility
 
 - API/events:
 - Database/storage:
 - External systems:
 - Compatibility/migration:
 
-## 6. Security, privacy and permissions
+## 7. Security, privacy and permissions
 
 - Authentication/authorization:
 - Secrets/PII:
 - Required permission:
 - Destructive operations and approvals:
 
-## 7. Rollout, observability and rollback
+## 8. Rollout, observability and rollback
 
 - Rollout:
 - Success/failure signals:
 - Rollback trigger:
 - Exact rollback/checkpoint:
 
-## 8. Open questions
+## 9. Brief coverage composition (v2 when applicable)
+
+Before final rendering, inventory the applicable sources and principal headings
+in this existing plan. For each, record source locator, coverage disposition,
+rendered target and any required reason. Do not create an embedded JSON index
+or coverage sidecar. Core material headings may not be `link_only`.
+
+| Source locator | Coverage (`represented`/`synthesized`/`not_applicable`/`link_only`) | Rendered target | Reason when required |
+|---|---|---|---|
+| | | | |
+
+Record the author, distinct coverage reviewer, review date, findings status and
+the `decision-log.md` row that records the review. The review must precede
+`brief_coverage_ready`; a named human reviewer is required if an independent
+agent is unavailable.
+
+## 10. Open questions
 
 | ID | Question | Owner | Resolution | Blocking? |
 |---|---|---|---|---|
 | Q-001 | | | | yes/no |
 
-## 9. Plan decision
+## 11. Plan decision
 
 **Plan Ready:** no  
 **Reviewer:**  

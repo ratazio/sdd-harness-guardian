@@ -43,7 +43,8 @@ python vendor/sdd-harness-guardian/scripts/new_initiative.py <initiative>
 Use `--kind bugfix` to add reproduction. Pass either a slug (`auth-login`) or an
 explicit `NNN-slug`. The script creates the next numbered directory by default,
 updates `specs/INDEX.md`, and refuses existing targets, reused numbers and
-duplicate slugs.
+duplicate slugs. New output is the v2 brief lineage; it is a draft package,
+not a declaration that any readiness gate has passed.
 
 ## Manual copy
 
@@ -51,16 +52,32 @@ Create or update `specs/INDEX.md` from `specs-index.md`. Create the numbered
 target tree, copy each canonical file with its target name, copy
 `handoff.md` as `handoffs/latest-handoff.md` and create an empty `evidence/`.
 Replace `<initiative-id>`, `<initiative-slug>`, `<initiative-sequence>`, dates
-and ownership placeholders before review.
+and ownership placeholders before review. The scaffolder renders the v2 brief
+identity/date/risk/size fields; replace its neutral risk/size defaults from the
+canonical sources before review.
 Keep `stakeholder-brief.html` concise, human-readable and synchronized with the
-source artifacts. Use the conditional checklist in
+source artifacts. For v2, draft tasks before the final brief, record the
+applicable-source/heading composition in the existing plan, obtain a distinct
+coverage review, then render, meet, propagate decisions and only then declare
+Tasks Ready. `tasks_drafted` is not implementation authority. Use the checklist in
 `.harness/rules/human-visibility.md`: size the initiative S/M/L, consider a
-smaller option, and include architecture, impact or flow visuals only when they
-make a concrete relationship easier to decide.
+smaller option, record the architecture-readiness profile, and include the
+proportional architecture/impact/flow views only when they make a concrete
+relationship easier to decide.
 Populate the canonical visual shell rather than reconstructing a page. Read
-`stakeholder-brief-design.md` before authoring: it defines the `v1` design
+`stakeholder-brief-design.md` before authoring: it defines the current design
 lineage marker, required meeting surfaces, conditional views and the reviewed
 `decision-log.md` exception path for a material custom layout.
+
+## Post-meeting refresh (v2)
+
+After the meeting, extract each decision, append it to `decision-log.md`, and
+update every affected canonical artifact (for example spec, impact, plan,
+tasks or validation plan). Re-run the applicable coverage/readiness checks and
+regenerate `stakeholder-brief.html` from those sources. Only then may the
+Orchestrator set `tasks_ready`; never use an HTML-only decision as the record.
+Historical/pinned v1 briefs remain on their legacy contract until a material
+refresh follows the migration diagnostic or a reviewed legacy exception.
 
 Do not copy `run-state.yaml.md` as state; it documents the contract.
 Copy `run-state.yaml` itself.

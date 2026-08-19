@@ -15,6 +15,9 @@ Transformar critérios de aceite em validações objetivas, quality gates, teste
 - definir hard mirrors para rules críticas;
 - indicar quando LLM-as-judge pode ser usado;
 - indicar quando validação determinística é obrigatória.
+- para briefs v2, mapear validação de inventário de fonte/heading, coverage e
+  provenance, identidade de review, ordem de lifecycle e perfis de arquitetura;
+  separar fatos determinísticos de julgamento semântico/renderizado.
 
 ## Não responsabilidades
 

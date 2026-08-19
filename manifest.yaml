@@ -1,7 +1,7 @@
 schema_version: 1
 name: sdd-harness-guardian
 display_name: SDD Harness Guardian
-version: 0.2.0
+version: 0.3.0
 type: agentic-governance-bundle
 status: ready
 owner: platform-engineering
@@ -119,6 +119,9 @@ consumer_contract:
   task_terminal_status: done
   scaffold_command: python vendor/sdd-harness-guardian/scripts/new_initiative.py <initiative>
   human_visibility_validate_command: python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/NNN-slug
+  new_non_trivial_brief_lineage: v2
+  pinned_v1_policy: preserve_until_material_refresh_migration_or_reviewed_legacy_exception
+  v2_post_meeting_order: decision_log_append_then_canonical_source_propagation_then_revalidation_then_brief_regeneration_then_tasks_ready
 
 quality_gates:
   outcome_ready: required
@@ -126,6 +129,8 @@ quality_gates:
   impact_mapped: required_for_non_trivial_change
   plan_ready: required
   validation_ready: required
+  tasks_drafted: required_for_v2_non_trivial_change
+  brief_coverage_ready: required_for_v2_non_trivial_change
   human_visibility_ready: required_for_non_trivial_change
   tasks_ready: required
   implementation_done: required

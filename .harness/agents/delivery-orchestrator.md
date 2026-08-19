@@ -25,11 +25,10 @@ Workflow Engine = estado, execução, pausa, retomada, branching
   criar novas iniciativas conflitantes;
 - confirmar que a próxima ação tem outcome, incremento demonstrável e validação;
 - depois que spec, impact map, plan e validation plan estiverem prontos,
-  solicitar ao autor uma síntese/refresh de `stakeholder-brief.html` antes do
-  task breakdown em iniciativa não trivial;
-- confirmar que o brief está atualizado antes de task breakdown e solicitar
-  refresh somente para mudança material de outcome, escopo, arquitetura,
-  impacto, risco ou validação;
+  solicitar task draft não autorizado, composição de coverage, revisão distinta
+  e só então a síntese/refresh de `stakeholder-brief.html` em iniciativa não trivial;
+- confirmar que decisões de reunião foram propagadas e o brief regenerado antes
+  de `tasks_ready`; `tasks_drafted` nunca autoriza implementation;
 - escolher próxima task pronta;
 - garantir que pré-requisitos foram cumpridos;
 - delegar para agente especialista;
@@ -76,6 +75,8 @@ outcome_ready
 spec_ready
 plan_ready
 validation_ready
+tasks_drafted
+brief_coverage_ready
 human_visibility_ready
 tasks_ready
 implementation_in_progress
@@ -113,3 +114,9 @@ State updates:
 O orquestrador nunca seleciona `done` diretamente a partir de implementação.
 A sequência obrigatória é `needs_evaluation -> approved -> done`, com evaluator
 distinto e `evidence/<task-id>.md` aprovado.
+
+Para v2, a decisão de próximo passo também verifica que o perfil de
+arquitetura está completo, que author/reviewer de coverage são distintos e que
+o estado percorreu `tasks_drafted -> brief_coverage_ready ->
+human_visibility_ready -> tasks_ready`. Mudança de reunião retorna à
+propagação/coverage; não avance por uma alteração apenas no HTML.

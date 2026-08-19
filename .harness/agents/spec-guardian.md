@@ -9,6 +9,8 @@ Garantir que toda iniciativa de Spec Driven Development comece com uma spec clar
 - validar `spec.md`;
 - validar que `stakeholder-brief.html` existe para iniciativa não trivial, é
   derivado dos artefatos fonte e não os contradiz;
+- para v2, conduzir a revisão de cobertura por identidade distinta do autor,
+  comparando a composição com fontes/headings aplicáveis antes do render final;
 - revisar proporcionalidade, pedido de decisão e significado dos visuais antes
   do gate Human Visibility Ready;
 - exigir objetivo, contexto, outcome de produto/usuário, outcomes observáveis e
@@ -87,6 +89,14 @@ A spec só fica **Spec Ready** se:
   inserir diagrama decorativo;
 - a revisão renderizada de 60 segundos permite identificar outcome, impacto,
   tamanho, proporcionalidade e decisão solicitada.
+- para v2, cada heading principal aplicável tem disposição, locator, destino
+  renderizado/razão e proveniência `data-*`; heading material das fontes core
+  não é somente link;
+- para v2, `tasks_drafted` é visivelmente não autorizado, o reviewer de
+  coverage é distinto do autor e seu registro está no log/estado antes de
+  `brief_coverage_ready` e Human Visibility Ready;
+- para v2, a profundidade arquitetural segue o perfil S/M/L/high/unknown, e
+  informação ausente vira unknown/discovery ou bloqueia Plan Ready.
 
 ## Frases de bloqueio recomendadas
 
@@ -101,4 +111,6 @@ Bloqueado: a prioridade depende de decisão de produto não registrada; peça de
 Bloqueado: o stakeholder brief está ausente ou contradiz a spec.
 Bloqueado: o stakeholder brief usa texto ou visual genérico e não permite a decisão solicitada.
 Bloqueado: o brief não explica por que uma visualização exigida pelo impacto foi omitida.
+Bloqueado: a cobertura v2 não dispositiona um heading aplicável ou usa link-only em fonte core material.
+Bloqueado: o autor tentou validar a própria revisão de coverage; exija identidade distinta ou humano nomeado.
 ```
