@@ -134,3 +134,8 @@ enforcement e recuperação.
 O relatório HTML usa `.harness/templates/audit-report.html`. Ele deve conter
 decisão, maturidade, grafo, achados por severidade, artefatos órfãos ou
 decorativos, roadmap de remediação, assumptions e open questions.
+# Proportionate assurance
+
+Use the assurance profile and task assurance contract in existing artifacts.
+Select A1/A2/A3 before Plan Ready; keep A1 concise, use A2 for defined risk
+triggers, and escalate A3 to named local authority. Do not claim certification.

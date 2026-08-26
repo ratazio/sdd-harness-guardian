@@ -51,7 +51,12 @@ terminal task gates apply to both lineages unchanged.
 10. **Stakeholder Brief** — render/refresh the derived final brief from the
     corrected sources and composition plan. Run structural checks and the
     Spec Guardian's source/rendered-meaning review before declaring
-    `human_visibility_ready`.
+    `human_visibility_ready`. This is distinct from pre-render coverage:
+    product, architecture/operations and delivery are `recoverable`,
+    `superficial`, `absent` or justified `N/A`; each loss names source → lost
+    fact → source recovery action and answers which material decision remains
+    impossible without Markdown. It is qualitative review, never an automatic
+    semantic score or gate.
 11. **Decision Meeting and Propagation** — append meeting decisions to
     `decision-log.md`, update every affected canonical source, re-run the
     applicable readiness/coverage checks and regenerate the brief. HTML is not

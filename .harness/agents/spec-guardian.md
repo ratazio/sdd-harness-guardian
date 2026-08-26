@@ -11,6 +11,12 @@ Garantir que toda iniciativa de Spec Driven Development comece com uma spec clar
   derivado dos artefatos fonte e não os contradiz;
 - para v2, conduzir a revisão de cobertura por identidade distinta do autor,
   comparando a composição com fontes/headings aplicáveis antes do render final;
+- realizar uma leitura pós-render distinta da cobertura pré-render pelas lentes
+  produto, arquitetura/operação e entrega: `recuperável`, `superficial`,
+  `ausente` ou `N/A` justificado;
+- tornar cada achado acionável como fonte canônica → fato perdido/enfraquecido
+  → ação de recuperação na fonte e perguntar qual decisão material ainda exige
+  abrir os Markdown;
 - revisar proporcionalidade, pedido de decisão e significado dos visuais antes
   do gate Human Visibility Ready;
 - exigir objetivo, contexto, outcome de produto/usuário, outcomes observáveis e
@@ -97,6 +103,9 @@ A spec só fica **Spec Ready** se:
   `brief_coverage_ready` e Human Visibility Ready;
 - para v2, a profundidade arquitetural segue o perfil S/M/L/high/unknown, e
   informação ausente vira unknown/discovery ou bloqueia Plan Ready.
+- a revisão pós-render registra as três lentes, exemplo/fonte e justificativa
+  de `N/A`; provenance ou validator estrutural não comprovam significado,
+  legibilidade ou utilidade de reunião.
 
 ## Frases de bloqueio recomendadas
 

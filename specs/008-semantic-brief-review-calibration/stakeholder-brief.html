@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR" data-harness-brief-design="v2">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brief de decisão — 008 Calibração de revisão semântica</title>
+<style>
+:root{--canvas:#f4f1ea;--paper:#fffdf8;--ink:#17211f;--muted:#5f6b68;--line:#d9d5ca;--brand:#0e665d;--dark:#084b45;--amber:#fff0ce;--red:#8d3030;--green:#dff3ea}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:16px/1.55 system-ui,sans-serif}a{color:var(--dark)}a:focus-visible,summary:focus-visible{outline:3px solid #e6a632;outline-offset:3px}main{max-width:1180px;margin:auto;padding:28px 22px 64px}.topbar{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.86rem}.tag,.status{padding:5px 9px;border:1px solid #a8cec7;border-radius:999px;color:var(--dark);font-weight:750}.status.pending{border-color:#dfb567;color:#73510f;background:var(--amber)}header,section,.metric{border:1px solid var(--line);background:var(--paper);border-radius:18px}header{display:grid;grid-template-columns:1.45fr .7fr;gap:28px;margin-top:22px;padding:36px;background:linear-gradient(135deg,#fffdf8,#edf7f3)}h1{margin:0;font-size:clamp(2.2rem,5.5vw,4.2rem);line-height:1.02}.eyebrow{color:var(--brand);font-weight:800;letter-spacing:.1em;text-transform:uppercase}.ask{padding:20px;border-radius:14px;background:var(--dark);color:#fff}.ask p{margin-bottom:0}nav{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}nav a{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;text-decoration:none}.snapshot,.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.grid{grid-template-columns:repeat(2,1fr)}.metric,.card{padding:18px}.metric h2,.label{margin:0;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}.metric p{margin:.35rem 0 0;font-weight:700}section{margin:18px 0;padding:28px}.intro{color:var(--muted);max-width:75ch}.card{border:1px solid var(--line);border-radius:13px;background:#fff}.card h3{margin-top:0}.diagram{overflow:auto;padding:20px;border:1px solid #c8dcd7;border-radius:14px;background:#f7fcfa}.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:10px;min-width:710px}.node{padding:14px;border:1px solid #a8cec7;border-radius:12px;background:white;font-weight:700;text-align:center}.arrow{font-size:1.8rem;color:var(--brand);text-align:center}.subflow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;min-width:710px}.subflow .node{font-size:.9rem;font-weight:600}.legend{font-size:.9rem;color:var(--muted);margin:.7rem 0 0}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--muted);font-size:.75rem;text-transform:uppercase}.risk{border-left:5px solid var(--red);padding-left:12px}.control{border-left:5px solid var(--brand);padding-left:12px}.callout{padding:16px;border-left:5px solid #9a5b07;background:var(--amber)}.ok{padding:16px;border-left:5px solid var(--brand);background:var(--green)}details{margin-top:14px;padding:14px;border:1px dashed #aeb8b5;border-radius:12px}summary{cursor:pointer;font-weight:800}.source-links{font-size:.9rem;color:var(--muted)}footer{padding:20px 4px;color:var(--muted);font-size:.9rem}@media(max-width:700px){main{padding:18px 12px}header,.snapshot,.grid{grid-template-columns:1fr}.flow,.subflow{min-width:650px}table,.diagram{display:block;overflow-x:auto}}@media print{nav{display:none}details:not([open])>:not(summary){display:block!important}}
+</style>
+</head>
+<body class="brief-shell"><main>
+<div class="topbar"><span class="tag">Spec 008 · brief v2 de decisão</span><span>25 ago 2026 · risco médio · tamanho M</span></div>
+<header class="brief-header" data-source="spec.md" data-source-section="1-3" data-coverage="synthesized">
+  <div><p class="eyebrow">Calibração de revisão semântica</p><h1>Fazer o brief preservar decisões — sem transformar contexto em score.</h1><p>Uma melhoria proporcional para que uma aprovação estrutural não mascare uma síntese incapaz de orientar a reunião.</p></div>
+  <aside class="ask"><strong>Decisão solicitada nesta leitura</strong><p>Validar se a evidência entregue mantém o equilíbrio certo: revisão humana/agêntica mais clara e exemplos calibradores, sem parser semântico, nota de qualidade ou novo workflow engine.</p><p><span class="status pending">Avaliação independente pendente</span></p></aside>
+</header>
+<nav aria-label="Navegação do brief"><a href="#scope">Valor e escopo</a><a href="#architecture">Arquitetura</a><a href="#impact">Impacto</a><a href="#execution">Execução</a><a href="#validation">Validação</a><a href="#evolution">Evolução</a><a href="#decision">Decisão</a><a href="#coverage">Cobertura</a></nav>
+
+<div class="snapshot" id="decision-snapshot" data-source="spec.md" data-source-section="2-4" data-coverage="synthesized">
+  <article class="metric"><h2>Outcome</h2><p>Reviewer recupera decisão útil do brief.</p></article>
+  <article class="metric"><h2>Valor</h2><p>Evita “PASS formal, reunião fraca”.</p></article>
+  <article class="metric" data-source="plan.md" data-source-section="3-4" data-coverage="synthesized"><h2>Proporcionalidade</h2><p>M · A2 elevado · sem runtime.</p></article>
+  <article class="metric" id="authority" data-source="run-state.yaml" data-source-section="status,quality_gates,brief_review" data-coverage="represented"><h2>Autoridade atual</h2><p>Human Visibility: PASS. T-001–T-004 e release: aprovadas; baseline e checks finais: PASS.</p></article>
+</div>
+
+<section id="scope" data-source="spec.md" data-source-section="1-8" data-coverage="synthesized">
+<h2>Valor e escopo</h2><p class="intro">O problema não é a ausência de regras: é uma revisão que vê headings e atributos, mas não detecta quando uma decisão material se perdeu na síntese.</p>
+<div class="grid">
+  <article class="card"><h3>Resultado mínimo útil</h3><p>O parecer independente usa três lentes — produto, arquitetura/operação e entrega — e marca cada uma como <em>recuperável</em>, <em>superficial</em>, <em>ausente</em> ou <em>N/A</em> justificado.</p><p>Todo achado aponta a fonte, o fato perdido e a ação de recuperação.</p></article>
+  <article class="card"><h3>Fora de escopo por decisão</h3><p>Não haverá score, contagem de palavras/tabelas/diagramas, parser de prosa, LLM juiz, sidecar JSON, novo agente permanente, serviço, banco de estado ou migração forçada de briefs v1.</p></article>
+</div>
+<div class="grid" style="margin-top:14px">
+  <article class="card" id="requirements" data-source="spec.md" data-source-section="6-7#FR-001-007,AC-001-008" data-coverage="represented"><h3>Compromissos verificáveis</h3><ul><li>Separar cobertura pré-render de significado pós-render.</li><li>Usar exemplos software e não-software, além de um negativo formalmente coberto.</li><li>Preservar o validator como verificador de estrutura/estado/proveniência.</li><li>Exigir evidência final de recuperação das cinco superfícies de decisão.</li></ul></article>
+  <article class="card"><h3>Definição de êxito</h3><p>Nos exemplos, um reviewer independente consegue localizar no brief o outcome, risco/controle, estado, decisão e próximo passo sem reabrir Markdown; o mantenedor aceita ou devolve a evidência final de T-004.</p></article>
+</div>
+<details open data-progressive data-source="spec.md" data-source-section="8-10" data-coverage="synthesized"><summary>Limites, riscos e premissas</summary><p>Sem arquitetura técnica, a lente usa operação/contexto ou N/A fundamentado. Sem identidade distinta de reviewer, o gate continua pendente. v1 histórico não recebe v2 por força. O risco principal é criar burocracia/overfitting; o controle é manter quatro julgamentos curtos, N/A e exemplos de domínios diferentes.</p></details>
+</section>
+
+<section id="architecture" data-source="plan.md" data-source-section="1-8" data-coverage="synthesized">
+<h2>Arquitetura e limite da mudança</h2><p class="intro">Perfil M, A2-elevated. A mudança é no caminho de orientação e revisão do bundle; não existe serviço novo, API pública, dados de usuário ou infraestrutura.</p>
+<div class="diagram" data-source="plan.md" data-source-section="4#critical-review-flow" data-coverage="represented">
+  <div class="flow" role="img" aria-label="Fluxo de revisão: fontes Markdown, composição do autor, cobertura independente, brief renderizado e revisão de significado voltam às fontes antes da reunião.">
+    <div class="node">Fontes canônicas<br><small>spec · impacto · plano · tasks · validação · estado</small></div><div class="arrow">→</div>
+    <div class="node">Composição do autor<br><small>proveniência e síntese</small></div><div class="arrow">→</div>
+    <div class="node">Cobertura independente<br><small>produto · operação · entrega</small></div>
+  </div>
+  <div class="subflow"><div class="node">Brief renderizado</div><div class="node">Revisão pós-render:<br>“o que não dá para decidir sem MD?”</div><div class="node">Correção na fonte → refresh → reunião</div></div>
+  <p class="legend">Equivalente textual: a cobertura prova que as fontes foram consideradas. A revisão pós-render prova que a síntese ainda permite decidir; ela nunca corrige apenas o HTML.</p>
+</div>
+<div class="grid" style="margin-top:14px">
+<article class="card"><h3>Decisões técnicas</h3><p><strong>AD-001/002:</strong> reutilizar Spec Guardian, lifecycle e decision log; manter cobertura e significado em registros distintos.</p><p><strong>AD-003/004:</strong> lentes qualitativas com N/A e dois exemplos calibradores, não um checklist rígido.</p></article>
+<article class="card"><h3>Falha, compatibilidade e rollback</h3><p>Falha observada: o validador estrutural pode passar um brief raso. Controle: reviewer bloqueia Human Visibility por registro no log. v1 permanece na sua linhagem. Rollback é reverter um conjunto limitado de guidance/template/fixture, sem dados a migrar.</p></article>
+</div>
+<details open data-progressive data-source="plan.md" data-source-section="2-3,6-8" data-coverage="represented"><summary>Trade-offs e guardrails</summary><p>Um hard mirror só pode ser proposto depois de evidência de uma invariável estável, com necessidade, custo e caminho de remoção. Se as dúvidas Q-001–003 não forem resolvidas, o fallback é o menor: reutilizar a orientação existente, não criar locator/mirror, não nomear aprovação inexistente.</p></details>
+</section>
+
+<section id="impact" class="impact-evidence" data-source="impact-map.md" data-source-section="1-5" data-coverage="synthesized">
+<h2>Impacto, risco e controle</h2><p class="intro">A mudança afeta orientação de review, lifecycle, template e fixtures. Não toca API, dados, autenticação ou deploy. O blast radius é de governança: uma regra mal calibrada pode afetar muitas specs.</p>
+<table><thead><tr><th>Superfície</th><th>Mudança</th><th>Impacto</th><th>Controle</th></tr></thead><tbody>
+<tr><td>Review guidance</td><td>Três lentes e finding fonte → fato → ação.</td><td>Reviewer passa a expor perda de decisão.</td><td>Exemplos e N/A justificado.</td></tr>
+<tr><td>Lifecycle</td><td>Coverage e pós-render explicitamente separados.</td><td>Evita confundir atributo com significado.</td><td>Registros distintos no decision log.</td></tr>
+<tr><td>Fixtures e testes</td><td>Software, não-software e negativo raso.</td><td>Calibra sem forçar domínio técnico.</td><td>Revisão independente + checks focados.</td></tr>
+<tr><td>Validator</td><td>Permanece estrutural.</td><td>Não ganha falso poder semântico.</td><td>Diff review sem score/parser.</td></tr>
+</tbody></table>
+<div class="grid" style="margin-top:14px">
+<article class="card risk"><h3>Risco IR-002: PASS estrutural vira aprovação semântica</h3><p><strong>Sinal:</strong> brief com atributos/gates que não permite responder uma decisão material.</p><p><strong>Controle:</strong> revisão pós-render pergunta o que ficou impossível decidir; falha retorna à fonte.</p><p><strong>Contingência:</strong> bloquear Human Visibility; owner: Orchestrator/reviewer.</p></article>
+<article class="card control"><h3>Risco IR-003: determinismo demais</h3><p><strong>Sinal:</strong> proposta de threshold, score ou parser de qualidade.</p><p><strong>Controle:</strong> FR-006/007, teste de diff e decisão humana futura.</p><p><strong>Contingência:</strong> rejeitar a mudança; owner: maintainer.</p></article>
+</div>
+<details open data-progressive data-source="impact-map.md" data-source-section="6-8" data-coverage="represented"><summary>Unknowns e impactos não aplicáveis</summary><p>U-001: reusar template existente; se inconclusivo, não criar outro. U-002: só criar locator/mirror se a evidência mostrar invariável estável; se não, não criar. U-003: reusar helpers de fixture quando possível. Não há contrato público, auth/PII, deployment ou infraestrutura novos; os exemplos são fictícios e estáticos.</p></details>
+</section>
+
+<section id="execution" data-source="tasks.md" data-source-section="task-ledger,T-001-T-004" data-coverage="represented">
+<h2>Execução — quatro incrementos aprovados e validação concluída</h2><p class="intro">D-006 foi registrado e propagado. D-008 aprovou T-001–T-003; D-009 aprovou T-004 e a release após a correção do gate; D-010 escreveu a baseline autorizada e passou os checks finais.</p>
+<div class="diagram" data-source="plan.md" data-source-section="5" data-coverage="represented"><div class="flow" role="img" aria-label="Sequência de execução: orientar, criar fixtures, proteger limite estrutural, validar independentemente."><div class="node">T-001<br>Orientação</div><div class="arrow">→</div><div class="node">T-002<br>Fixtures</div><div class="arrow">→</div><div class="node">T-003 + T-004<br>Limite e evidência</div></div><p class="legend">Cada etapa tem validação e evidence pack; as setas representam dependência, não permissão de iniciar.</p></div>
+<table><thead><tr><th>Task</th><th>Incremento/outcome</th><th>Prova planejada</th><th>Estado</th></tr></thead><tbody>
+<tr><td>T-001</td><td>Tornou lentes, finding e pergunta pós-render descobríveis.</td><td>V-001, V-003, E-001; <code>evidence/T-001.md</code>.</td><td><span class="status">done · D-008</span></td></tr>
+<tr><td>T-002</td><td>Calibrou software/não-software e mostra um negativo raso.</td><td>V-002, V-004, M-001–003, E-002; <code>evidence/T-002.md</code>.</td><td><span class="status">done · D-008</span></td></tr>
+<tr><td>T-003</td><td>Protege v1 e a fronteira estrutural.</td><td>V-005, V-006, V-REG-002–003; <code>evidence/T-003.md</code>.</td><td><span class="status">done · D-008</span></td></tr>
+<tr><td>T-004</td><td>Validou o pacote e corrigiu o gate de release.</td><td>M-001–003, E-001–003, V-007; <code>evidence/T-004.md</code>.</td><td><span class="status">done · D-009</span></td></tr>
+</tbody></table>
+</section>
+
+<section id="validation" data-source="validation-plan.md" data-source-section="1-8" data-coverage="synthesized">
+<h2>Validação e limites da prova</h2><p class="intro">Determinismo verifica estrutura, linhagem e wiring. Uma avaliação independente verifica significado, proporcionalidade e legibilidade; nenhum dos dois substitui o outro.</p>
+<table><thead><tr><th>O que será provado</th><th>Método</th><th>Oráculo/evidência</th><th>Limite</th></tr></thead><tbody>
+<tr><td>Três lentes e ação recuperável</td><td>V-001 / E-001</td><td>Review record com fonte → fato → ação.</td><td>Julgamento qualitativo, não score.</td></tr>
+<tr><td>Brief formalmente coberto mas raso é detectado</td><td>V-002 / V-REG-001</td><td>Fixture negativo e finding de correção.</td><td>Validador sozinho não prova isso.</td></tr>
+<tr><td>Generalização e compatibilidade</td><td>V-004, V-006 / E-002</td><td>Par software/não-software e fixture v1.</td><td>Não obriga linguagem de software.</td></tr>
+<tr><td>Leitura renderizada útil</td><td>M-001–003 / E-003</td><td>Revisão independente e HTML sem JS; screenshot local bloqueado, sem alegação de captura.</td><td>Limitação documentada, não um PASS visual inventado.</td></tr>
+<tr><td>Release</td><td>V-007</td><td>Mantenedor aceitou T-004 em D-009.</td><td>Baseline e checks finais ainda determinísticos.</td></tr>
+</tbody></table>
+<details open data-progressive data-source="validation-plan.md" data-source-section="4-7" data-coverage="represented"><summary>Comandos, evidências e validações intencionalmente ausentes</summary><p>Planejados: <code>python scripts/validate_bundle.py</code>, testes focados de Human Visibility e comando de fixture criado em T-002. Não há load test porque não há runtime. Não há oráculo automático de semântica porque isso criaria precisão falsa; a evidência pós-render ficará em <code>evidence/T-004.md</code> e a decisão no <code>decision-log.md</code>.</p></details>
+</section>
+
+<section id="evolution" class="decision-register" data-source="decision-log.md" data-source-section="D-001-D-004" data-coverage="represented">
+<h2>Evolução e estado</h2><p class="intro">O brief é derivado. Decisões, gates e checkpoint continuam nos arquivos canônicos abaixo.</p>
+<div class="grid">
+<article class="card" id="decisions-ledger" data-source="decision-log.md" data-source-section="D-001-D-010" data-coverage="represented"><h3>Decisões que trouxeram a iniciativa até aqui</h3><ol><li><strong>D-001:</strong> melhorar o review sem hard mirror semântico.</li><li><strong>D-002:</strong> estado reconciliado; reviewer controla coverage/Human Visibility; maintainer controla release.</li><li><strong>D-003:</strong> primeira revisão pediu correção de estado/autoridade.</li><li><strong>D-004:</strong> cobertura pré-render aprovada.</li><li><strong>D-005:</strong> Human Visibility pós-render aprovada; não é Tasks Ready.</li><li><strong>D-006:</strong> o usuário autorizou a execução completa e indicou o sandbox de calibração.</li><li><strong>D-007:</strong> o estado foi reconciliado e a decisão propagada sem autoaprovação terminal.</li><li><strong>D-008:</strong> T-001–T-003 foram aprovadas; T-004 voltou para correção de gate/baseline.</li><li><strong>D-009:</strong> T-004 e release foram aprovadas após a correção; baseline foi autorizada.</li><li><strong>D-010:</strong> baseline e checks finais passaram; iniciativa encerrada.</li></ol></article>
+<article class="card" id="state-summary" data-source="run-state.yaml" data-source-section="status,quality_gates,risks,next_safe_step" data-coverage="represented"><h3>Estado verdadeiro</h3><p><strong>Fase:</strong> complete.</p><p><strong>Pronto:</strong> orientação, fixtures, guardrail estrutural, sandbox, evidence packs, baseline e checks finais.</p><p><strong>Pendente:</strong> nada; futuras mudanças usam esta iniciativa como calibração.</p></article>
+</div>
+<details open data-progressive id="progress-summary" data-source="progress.md" data-source-section="outcome-context,work-since-checkpoint,blockers,next-safe-step" data-coverage="represented"><summary>Checkpoint de retomada</summary><p>D-010 encerrou a iniciativa com baseline e checks finais PASS. Para uma alteração futura, reutilize os fixtures e o sandbox e mantenha R-001: evitar burocracia; R-002: não confundir estrutura com significado; R-003: não deixar o estado atrasar o trabalho.</p></details>
+</section>
+
+<section id="decision" class="decision-actions" data-source="decision-log.md" data-source-section="D-001-D-010" data-coverage="represented">
+<h2>Decisão, autoridade e próximo passo</h2><p class="intro">O usuário autorizou a execução em D-006, o avaliador/mantenedor aceitou T-004 e a release em D-009, e D-010 concluiu a validação. A decisão terminal está registrada.</p>
+<div class="callout"><strong>Estado:</strong> iniciativa concluída.<br><strong>Próximo uso:</strong> ao alterar criação/review de specs, compare os novos briefs com os três fixtures e com o sandbox news/blog antes de liberar a mudança.<br><strong>Limite:</strong> Human Visibility e validator seguem sem autorizar significado automaticamente.</div>
+<div class="ok" id="gate-authority" style="margin-top:14px" data-source="plan.md" data-source-section="8#gate-authority" data-coverage="represented"><strong>Controle de autoridade:</strong> o reviewer independente decide coverage/Human Visibility em registro explícito; o mantenedor aceita a evidência final de release. O validator não libera semântica automaticamente. Aprovação humana só será necessária se alguém propor um futuro hard mirror.</div>
+</section>
+
+<section id="coverage" data-source="plan.md" data-source-section="9" data-coverage="represented">
+<h2>Cobertura e proveniência</h2><p class="intro">Registro humano da composição aprovada em D-004. Cada bloco abaixo preserva a fonte local; ele não substitui as fontes.</p>
+<table id="coverage-register"><thead><tr><th>Fonte / heading</th><th>Destino</th><th>Disposição / rationale</th></tr></thead><tbody>
+<tr><td>spec.md §1–5 problema, outcome, atores e não-goals</td><td><a href="#decision-snapshot">#decision-snapshot</a>, <a href="#scope">#scope</a></td><td>synthesized</td></tr>
+<tr><td>spec.md §6–10 requisitos, aceite, limites e riscos</td><td><a href="#requirements">#requirements</a></td><td>represented</td></tr>
+<tr><td>impact-map.md §1–8 superfícies, fluxo, riscos, unknowns e decisão</td><td><a href="#impact">#impact</a></td><td>synthesized</td></tr>
+<tr><td>plan.md §1–8 abordagem, arquitetura, sequência, rollback e autoridade</td><td><a href="#architecture">#architecture</a>, <a href="#gate-authority">#gate-authority</a></td><td>synthesized</td></tr>
+<tr><td>plan.md §9 composição</td><td><a href="#coverage">#coverage</a></td><td>represented</td></tr>
+<tr><td>tasks.md ledger e T-001–T-004</td><td><a href="#execution">#execution</a></td><td>represented</td></tr>
+<tr><td>validation-plan.md §1–8 estratégia, ACs, checks e evals</td><td><a href="#validation">#validation</a></td><td>synthesized</td></tr>
+<tr><td>decision-log.md D-001–D-010</td><td><a href="#decisions-ledger">#decisions-ledger</a></td><td>represented</td></tr>
+<tr><td>progress.md checkpoint, riscos e próximo passo</td><td><a href="#progress-summary">#progress-summary</a></td><td>represented</td></tr>
+<tr><td>run-state.yaml status, gates, reviewer e riscos</td><td><a href="#authority">#authority</a>, <a href="#state-summary">#state-summary</a></td><td>represented</td></tr>
+</tbody></table>
+</section>
+<footer class="source-links">Projeção de reunião derivada de <a href="spec.md">spec</a>, <a href="impact-map.md">impacto</a>, <a href="plan.md">plano</a>, <a href="tasks.md">tasks</a>, <a href="validation-plan.md">validação</a>, <a href="decision-log.md">decisões</a>, <a href="progress.md">progresso</a> e <a href="run-state.yaml">estado</a>. Corrija a fonte canônica, não o HTML isoladamente.</footer>
+</main><script>(()=>{const all=[...document.querySelectorAll('details[data-progressive]')];all.forEach(d=>d.open=false);window.addEventListener('beforeprint',()=>all.forEach(d=>d.open=true))})()</script></body></html>

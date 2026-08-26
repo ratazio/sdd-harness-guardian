@@ -64,3 +64,11 @@ Required next action:
 `approve` autoriza o State Keeper a mover `needs_evaluation -> approved`.
 Somente depois de o evidence pack registrar a decisão a task pode chegar a
 `done`.
+
+## Assurance review
+
+For A2/A3 material work, verify profile trigger, architecture delta and
+complexity envelope; distinct risk/impact/control records; a justified
+technique/oracle/evidence path; and accountable failure/waiver scope and expiry.
+Judge adequacy independently; populated fields or screenshots alone are not
+proof of correctness.

@@ -38,11 +38,14 @@ Use `not_applicable` with reason instead of deleting relevant rows.
 - Rollout/feature flag:
 - Rollback implications:
 
-## 5. Regression risks
+## 5. Regression risks and controls
 
-| ID | Risk | Trigger/surface | Mitigation | Validation ID |
-|---|---|---|---|---|
-| IR-001 | | | | |
+Impact identifies affected surfaces; risk is an uncertain harmful event;
+control is the response. Keep them distinct.
+
+| ID | Risk event | Trigger/early signal | Likelihood/impact | Preventive control | Contingency/owner | Validation ID |
+|---|---|---|---|---|---|---|
+| IR-001 | | | | | | |
 
 ## 6. Unknowns
 

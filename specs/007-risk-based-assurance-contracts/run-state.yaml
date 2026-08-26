@@ -1,0 +1,101 @@
+schema_version: 1
+initiative_id: "007-risk-based-assurance-contracts"
+initiative_sequence: "007"
+initiative_slug: "risk-based-assurance-contracts"
+initiative_kind: "feature"
+status: "validation_done"
+summary: "Add proportionate risk-based assurance contracts while keeping deterministic enforcement minimal."
+brief_lineage: "v2"
+current_phase: "validation_done"
+current_task: null
+last_safe_checkpoint: "D-016 records independent approval of T-002 and terminal initiative reconciliation."
+updated_at: "2026-08-25"
+updated_by: "Codex / State Keeper-007"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "Codex / spec-author-007"
+  coverage_reviewer: "stakeholder-human"
+  reviewed_at: "2026-08-20"
+  review_record: "decision-log.md#D-012"
+  findings_status: "pass — stakeholder approval and D-012 decision propagation are represented in the refreshed brief; independent task evaluation remains pending"
+
+execution:
+  builder_id: "Codex / Builder-007"
+  evaluator_id: "Codex / Evaluator-007-T002-reconciliation (independent agent)"
+  started_at: "2026-08-20"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "T-001 initial evaluation requested revision."
+    - "T-001 transitioned needs_evaluation -> needs_revision -> in_progress -> needs_evaluation; D-009 records the transition."
+    - "D-007/D-008 and brief/state synchronization were submitted for fresh independent evaluation."
+    - "T-001 later corrected stale validation ownership and was resubmitted; D-011 records the additional lifecycle transition."
+    - "T-001 expanded evidence provenance and was resubmitted; D-013 records the additional lifecycle transition."
+    - "D-015 reconciled the unsupported T-002 terminal state and returned its evidence-only revision to independent evaluation."
+    - "D-016 records independent approval of the corrected T-002 evidence and terminal state reconciliation."
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: true
+  pending: []
+  granted:
+    - "D-003: implementation authority in dependency order."
+
+risks:
+  level: "high"
+  open:
+    - "R-001: assurance process bloat"
+    - "R-002: brittle deterministic enforcement"
+
+evidence:
+  latest: "evidence/T-002.md"
+  approved:
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+    - "evidence/T-004.md"
+
+next_safe_step: "Initiative closed; run a real consumer trial before any future release decision."

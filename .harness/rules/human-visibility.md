@@ -81,6 +81,20 @@ status and the review record locator in the existing `decision-log.md` and
 Visibility Ready. If a distinct agent is unavailable, a named human reviewer
 performs and records the same review; otherwise the gate remains blocked.
 
+Coverage review and rendered-meaning review are different moments with the
+same existing reviewer responsibility, not new roles or persistent state.
+Coverage review occurs before final rendering and verifies that applicable
+sources/headings have truthful dispositions. After rendering, the reviewer asks
+whether a stakeholder can recover the decision surface without opening
+Markdown. For product, architecture/operations and delivery, record
+`recoverable`, `superficial`, `absent` or justified `N/A`, with a
+source/example. Every material finding is **canonical source → fact lost or
+weakened by synthesis → recovery action in the source**, and answers: “Which
+material decision remains impossible without the Markdown?” Correct the source
+and regenerate HTML; never edit HTML alone. This is qualitative independent
+judgment, not a word score, prose parser, semantic schema or deterministic
+semantic gate.
+
 After the final render and Human Visibility review, the meeting may decide.
 Meeting decisions are appended to `decision-log.md`, propagated to every
 affected canonical source, rechecked for coverage/freshness and reflected by a
@@ -123,6 +137,9 @@ secrets, PII or sensitive topology.
   present; unresolved gaps block the gate;
 - [ ] the rendered page supports a 60-second executive scan and deeper source
   recovery without replacing the canonical artifacts.
+- [ ] the post-render review separately records product,
+  architecture/operations and delivery; each `N/A` is justified and every
+  material loss has source → lost fact → recovery action.
 
 ## Design standard and exception
 
@@ -152,6 +169,8 @@ Block or request revision when:
   unknown/discovery path;
 - a meeting decision exists only in HTML or has not refreshed affected sources;
 - stakeholder-visible uncertainty is hidden in technical language.
+- provenance, heading coverage or a structural validator pass is treated as
+  proof that a material decision is recoverable after rendering.
 
 When the brief exposes a missing business, product or priority decision,
 request human clarification. Do not infer it.

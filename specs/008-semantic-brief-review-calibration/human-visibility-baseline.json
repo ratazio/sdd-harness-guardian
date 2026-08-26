@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "source_sha256": {
+    "spec.md": "14bb12a172a2b192433bb8dfc8fe1dc86c9eeb1418e148861eda3cd389c8f468",
+    "impact-map.md": "f1dfac225bf73288f019ad5a386cd42217384aa31124f6dcd113d3cc590c402b",
+    "plan.md": "aa2bb0c1c1b94c148684de5016c8a8896008c9615e037c503d813a410c0239e7",
+    "tasks.md": "dca0a29a39cc0f88eb297f343d3a8b63270c45ce55eed30195d46b9db2e128d4",
+    "validation-plan.md": "070ee316221adf4fa4c58b5a816c4b2b954fc7c26f1afa22a74808687f4a902b",
+    "decision-log.md": "355ad9ea2a1816a62d4824140c5ff3127990ea53d2310593fcab041e2e96edc5",
+    "progress.md": "0ec4d2ae2649bb2a149848a906e8f52ddbfa6a36159acdff718f4807f65869d0",
+    "run-state.yaml": "e5639d64e03eb5b86ab6ec8c672f641f6966ca70767b24ab151f801b06f631e1"
+  },
+  "brief_lineage": "v2",
+  "source_set": [
+    "spec.md",
+    "impact-map.md",
+    "plan.md",
+    "tasks.md",
+    "validation-plan.md",
+    "decision-log.md",
+    "progress.md",
+    "run-state.yaml"
+  ],
+  "brief_sha256": "8213e53d10b6aea964a0600b5e8897410ae31608af2d5d8b82be0f49432995e3",
+  "review_record": "decision-log.md#D-007",
+  "reviewed_by": "/root/review_008_coverage",
+  "coverage_reviewer": "/root/review_008_coverage",
+  "reviewed_at": "2026-08-25",
+  "prior_change_anchor": "decision-log.md#D-007"
+}

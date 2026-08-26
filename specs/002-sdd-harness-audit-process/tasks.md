@@ -1,16 +1,16 @@
 # Tasks: 002-sdd-harness-audit-process
 
-**Status:** in_progress  
+**Status:** validation_done  
 **Spec:** ./spec.md  
 **Plan:** ./plan.md  
 **Validation plan:** ./validation-plan.md  
-**Last updated:** 2026-07-25
+**Last updated:** 2026-08-25
 
 ## Task ledger
 
 | ID | Status | Title | Dependencies | Risk | Builder | Evaluator | Evidence |
 |---|---|---|---|---|---|---|---|
-| T-001 | needs_evaluation | Add SDD/harness audit capability | none | medium | codex-builder | unassigned | evidence/T-001.md |
+| T-001 | done | Add SDD/harness audit capability | none | medium | codex-builder | Codex / Evaluator-002-T001 (independent agent) | evidence/T-001.md |
 
 ## Allowed statuses and transitions
 
@@ -25,7 +25,7 @@ any non-terminal state -> blocked
 
 ### T-001 - Add SDD/harness audit capability
 
-**Status:** needs_evaluation  
+**Status:** done  
 **Objective:** Add a reusable audit process and report contract to the bundle.  
 **Requirement IDs:** FR-001, FR-002, FR-003, FR-004, FR-005  
 **Acceptance criteria IDs:** AC-001, AC-002, AC-003, AC-004, AC-005, AC-006  
@@ -89,8 +89,8 @@ template; scripts may assist but not replace judgment.
 - [x] scoped implementation is complete;
 - [x] required validation executed or approved exception recorded;
 - [x] evidence draft covers ACs and exit criteria;
-- [ ] distinct evaluator decided `approve`;
-- [ ] evidence pack records decision and residual risk;
+- [x] distinct evaluator decided `approve`;
+- [x] evidence pack records decision and residual risk;
 - [x] task, run-state and progress are synchronized.
 
 #### Readiness decision

@@ -7,6 +7,12 @@
 **Created:** <YYYY-MM-DD>  
 **Last updated:** <YYYY-MM-DD>  
 **Risk:** low | medium | high | unknown
+**Assurance profile:** unknown | A1-local | A2-elevated | A3-critical-local-policy
+
+New initiatives begin `unknown`. Select a profile before Plan Ready: A1 is
+local/reversible work; A2 is required for high/unknown risk, public-contract,
+data-migration, trust-boundary or material-UI work; A3 escalates to named local
+authority and never certifies compliance. Historical/pinned sources may omit it.
 
 ## 1. Problem
 

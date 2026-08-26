@@ -47,10 +47,16 @@ risk_level: medium
    For v2, inventory applicable source headings and require an existing-plan
    coverage disposition, locator, rendered target/reason and the three
    provenance attributes. Confirm core material headings are not link-only.
-   Conduct the pre-render coverage pass as a distinct identity from the brief
-   author; record the reviewer/author, findings and decision-log locator.
-   Self-review does not qualify. Require named human review if no independent
-   identity is available.
+    Conduct the pre-render coverage pass as a distinct identity from the brief
+    author; record the reviewer/author, findings and decision-log locator.
+    Self-review does not qualify. Require named human review if no independent
+    identity is available. Then conduct a distinct post-render, loss-aware
+    reading: classify product, architecture/operations and delivery as
+    `recoverable`, `superficial`, `absent` or justified `N/A`. Each finding
+    names the canonical source, lost/weakened fact and source correction. Ask:
+    “Which material decision remains impossible without opening Markdown?” This
+    is qualitative independent judgment, never a score, prose parser or
+    automatic semantic gate.
 8. Classify issues as blocking or non-blocking.
 9. Return Outcome Ready yes/no, Spec Ready yes/no and Human Visibility Ready
    yes/no.
@@ -61,7 +67,10 @@ Return a report with: summary, blocking issues, non-blocking issues, missing
 fields, recommended rewrite, Outcome Ready status and Spec Ready status.
 Include Human Visibility Ready status when the initiative is non-trivial. For
 v2, also report `tasks_drafted`, `brief_coverage_ready`, review identity and
-whether post-meeting propagation is still required before Tasks Ready.
+whether post-meeting propagation is still required before Tasks Ready. Separate
+the pre-render coverage result from the post-render meaning result; include the
+three lens judgments, justified `N/A` reasons, source → lost fact → recovery
+action for every finding, and the decision-loss answer.
 
 ## Quality bar
 

@@ -20,6 +20,12 @@ criteria. Dependencies must be `done` or explicitly waived with rationale.
 A task should fit one focused session. If it cannot, split it or create a
 discovery task with its own evidence.
 
+For A1, record one concise disposition and omit the full table when normal task
+validation is enough. For material A2/A3 work, add a proportionate assurance contract: claim/risk,
+technique rationale or N/A, oracle/data/environment, executor/evaluator,
+evidence and failure/waiver behavior. Do not require this table for concise A1
+work when its normal validation contract is sufficient.
+
 ## Blocking conditions
 
 Block when the task:

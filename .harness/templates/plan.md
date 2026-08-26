@@ -26,7 +26,17 @@ Describe sequence, boundaries and why this is the smallest safe approach.
 
 ## 4. Architecture readiness and proportionality
 
-State the initiative profile (`localized/S`, `M`, `L`, `high` or `unknown`) and
+### Assurance choice
+
+**Profile:** unknown | A1-local | A2-elevated | A3-critical-local-policy  
+**Rationale and trigger evidence:**  
+**A2/A3 source links/headings (or A1 N/A reason):**  
+**Reapproval trigger:** profile change, envelope breach, new trust/data/public
+boundary, or an assurance failure/waiver.
+
+### Architecture scope/size profile (separate from assurance profile)
+
+State the architecture scope/size profile (`localized/S`, `M`, `L`, `high` or `unknown`) and
 complete every applicable row before Plan Ready. An omission needs a source-backed
 reason. Missing material information becomes a named unknown with owner and
 resolution path; block Plan Ready or create a bounded discovery task rather
@@ -48,7 +58,18 @@ than inventing a diagram or contract.
 | Alternatives/trade-offs | | | |
 | Unknowns | | | |
 
-| Profile | Minimum architecture decision surface |
+### Current → target → delta and complexity envelope
+
+| View | Current | Target | Delta/commitment | Reapproval trigger |
+|---|---|---|---|---|
+| Architecture/method | | | | |
+| Modules/classes/APIs/data/contracts | | | | |
+| Process/tooling | | | | |
+
+Use bounded counts or `not_applicable` with reason when meaningful. This is a
+decision envelope, not a speculative implementation inventory.
+
+| Architecture scope/size profile | Minimum architecture decision surface |
 |---|---|
 | localized/S | Concise text or one boundary view only when it improves a decision. |
 | M | Context, changed components/contracts and applicable critical flow. |

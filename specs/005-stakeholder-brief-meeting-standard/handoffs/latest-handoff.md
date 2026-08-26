@@ -1,29 +1,24 @@
 # Handoff: 005-stakeholder-brief-meeting-standard
 
-**From:** Codex acting as Spec Guardian  
-**Intended role/recipient:** platform-engineering  
-**Created at:** 2026-08-18  
-**Current phase/status:** outcome review / Outcome Ready  
-**Current task/status:** no implementation task  
-**Last safe checkpoint:** Outcome-ready spec and populated decision brief are
-ready for human review.
+**From:** Codex / State Keeper-005  
+**Intended role/recipient:** bundle maintainer  
+**Created at:** 2026-08-25  
+**Current phase/status:** validation_done  
+**Current task/status:** none; T-001–T-003 done  
+**Last safe checkpoint:** D-003 reconciled terminal evidence and state.  
 
-## Completed
+## Completed and approved work
 
-- Created and indexed spec 005.
-- Proved 004 bypassed an existing canonical template; it is not an acceptable
-local visual variation.
-- Populated the 005 brief with observed evidence, the requested approval,
-two proposed contract decisions, impact, flow and next safe step.
+- T-001: canonical v1 design standard, marker/shell and validator contract.
+- T-002: rules, workflow, prompt, consumer guidance, fixtures and 004 retrofit.
+- T-003: render/regression validation and evidence.
 
-## Blockers and next safe step
+Each task has a separate Builder identity, Delivery Orchestrator evaluator and
+an `approve` decision in its evidence pack.
 
-Human approval is needed for the exact lineage/version marker and reviewed
-exception syntax because both become public consumer contract. Then derive
-impact, plan and validation artifacts, refresh the brief and seek Spec Ready.
+## Validation and next safe step
 
-## Do not do
-
-- Do not replace canonical sources with the HTML brief.
-- Do not make every optional diagram mandatory.
-- Do not use structural lineage as a substitute for rendered semantic review.
+Current bundle (267), Human Visibility tests/005 validation, scaffolder smoke
+and diff checks pass. No implementation task remains. A future change to the
+lineage or exception contract requires a new finding/spec; do not treat a
+structural validator pass as a substitute for rendered semantic review.

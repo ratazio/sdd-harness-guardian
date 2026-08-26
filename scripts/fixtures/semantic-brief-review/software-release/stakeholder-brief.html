@@ -1,0 +1,6 @@
+<!doctype html><html data-harness-brief-design="v2"><body class="brief-shell">
+<header class="brief-header" data-source="spec.md" data-source-section="Outcome" data-coverage="synthesized"><h1>Safe invoice-export release</h1><p>Enable export only when tenant isolation is proven.</p></header>
+<section id="architecture" data-source="plan.md" data-source-section="Plan" data-coverage="represented"><h2>Architecture and trust</h2><p>Signed session tenant → route handler → tenant-filtered Prisma query → PostgreSQL. The trust boundary is session resolution; rollback disables the feature flag.</p></section>
+<section id="validation" data-source="validation-plan.md" data-source-section="Validation" data-coverage="represented"><h2>Proof</h2><p>Two-tenant integration test; a foreign invoice ID must never appear. Evidence: T-003.</p></section>
+<section id="decision" class="decision-actions" data-source="decision-log.md" data-source-section="D-S1" data-coverage="represented"><h2>Decision and next step</h2><p>Release operator enables the reversible flag after proof; otherwise it stays off. Next: run the integration test.</p></section>
+</body></html>

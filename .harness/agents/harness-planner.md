@@ -39,3 +39,11 @@ Transformar critérios de aceite em validações objetivas, quality gates, teste
 ## Saída
 
 Use `.harness/templates/validation-plan.md`.
+
+## Assurance proportional
+
+Select A1/A2/A3 from change risk and explain the trigger. For each material
+task, choose techniques deliberately and record oracle, evidence, executor,
+evaluator and failure/waiver behavior. Do not mandate Gherkin, mutation,
+screenshots or a tool merely because it exists. A UI image is visual evidence;
+pair it with behavior evidence when the interaction matters.

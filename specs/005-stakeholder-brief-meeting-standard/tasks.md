@@ -1,16 +1,16 @@
 # Tasks: 005-stakeholder-brief-meeting-standard
 
-**Status:** complete  
+**Status:** validation_done  
 **Spec:** ./spec.md  
 **Plan:** ./plan.md  
 **Validation plan:** ./validation-plan.md  
-**Last updated:** 2026-08-18
+**Last updated:** 2026-08-25
 
 | ID | Status | Title | Dependencies | Risk | Builder | Evaluator | Evidence |
 |---|---|---|---|---|---|---|---|
-| T-001 | done | Design standard, template and validator contract | plan | medium | Terra 5.6 | orchestrator | evidence/T-001.md |
-| T-002 | done | Guidance, fixtures and 004 retrofit | T-001 | medium | Terra 5.6 | orchestrator | evidence/T-002.md |
-| T-003 | done | Render/regr​ession validation and evidence | T-001, T-002 | low | Terra 5.6 | orchestrator | evidence/T-003.md |
+| T-001 | done | Design standard, template and validator contract | plan | medium | Terra 5.6 implementation agent | Codex acting as Delivery Orchestrator | evidence/T-001.md |
+| T-002 | done | Guidance, fixtures and 004 retrofit | T-001 | medium | Terra 5.6 implementation agent | Codex acting as Delivery Orchestrator | evidence/T-002.md |
+| T-003 | done | Render/regr​ession validation and evidence | T-001, T-002 | low | Terra 5.6 implementation agent | Codex acting as Delivery Orchestrator | evidence/T-003.md |
 
 ## T-001 — Design standard, template and validator contract
 

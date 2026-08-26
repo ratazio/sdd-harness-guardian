@@ -1,12 +1,12 @@
 # Handoff: 002-sdd-harness-audit-process
 
-**From:** codex-builder  
-**Intended role/recipient:** Evaluator Agent  
-**Created at:** 2026-07-25  
-**Current phase/status:** needs_evaluation  
-**Current task/status:** T-001 / needs_evaluation  
-**Last safe checkpoint:** audit capability implemented; validator and smoke passed  
-**Repository revision/working-tree summary:** working tree has uncommitted bundle changes
+**From:** Codex / State Keeper-002  
+**Intended role/recipient:** bundle maintainer  
+**Created at:** 2026-08-25  
+**Current phase/status:** validation_done  
+**Current task/status:** none; T-001 done  
+**Last safe checkpoint:** independent evaluator approved terminal closure.  
+**Repository revision/working-tree summary:** original implementation is retained in history; current suite passes.
 
 ## 1. Completed work
 
@@ -16,8 +16,7 @@ framework.
 
 ## 2. Partial or unverified work
 
-Independent evaluation has not happened yet. Do not mark T-001 done until a
-distinct evaluator approves.
+Independent evaluation completed on 2026-08-25 and approved T-001.
 
 ## 3. Files changed
 
@@ -33,17 +32,18 @@ Bundle validator passed 258 checks. Scaffolder smoke passed. Evidence is in
 
 ## 5. Decisions and approvals
 
-See `decision-log.md`. No independent approval yet.
+See `decision-log.md` D-2026-08-25-004 for the independent approval.
 
 ## 6. Blockers, unknowns and risks
 
-Only blocker is evaluator approval for terminal transition.
+Graph parsing remains intentionally out of scope; the audit stays an
+agent-authored judgment process rather than a script-only certification.
 
 ## 7. Exact next safe step
 
-Evaluator reviews spec, plan, validation plan, diff and evidence. If approved,
-State Keeper updates tasks, run-state, progress and evidence to done.
+No implementation task remains. Consider a separate improvement only if the
+optional remediation-backlog artifact needs template-level alignment.
 
 ## 8. Do not do
 
-Do not treat the builder evidence as independent approval.
+Do not claim that deterministic graph parsing or certification was delivered.

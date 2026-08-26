@@ -1,10 +1,10 @@
 # Progress: 002-sdd-harness-audit-process
 
-**Current phase/status:** needs_evaluation  
-**Current task:** T-001  
-**Last safe checkpoint:** audit capability implemented and local validations passed  
-**Last updated:** 2026-07-25  
-**Updated by:** codex-builder  
+**Current phase/status:** validation_done  
+**Current task:** none; T-001 done  
+**Last safe checkpoint:** independent evaluation approved T-001 and State Keeper closed the initiative.  
+**Last updated:** 2026-08-25  
+**Updated by:** Codex / State Keeper-002  
 **Run-state:** ./run-state.yaml
 **Stakeholder brief:** ./stakeholder-brief.html
 
@@ -21,18 +21,16 @@
 
 | Status | Task IDs |
 |---|---|
-| done | none |
+| done | T-001 |
 | in progress | none |
-| needs evaluation/revision | T-001 |
+| needs evaluation/revision | none |
 | blocked | none |
 
 ## Work since last checkpoint
 
-- read supplied local HTML knowledge sources;
-- added audit agents, rule, workflow, skill, template and framework docs;
-- wired audit artifacts into manifest, AGENTS, README and operating docs;
-- created initiative artifacts and evidence draft;
-- ran bundle validation and scaffolder smoke successfully.
+- Original audit capability implementation and evidence remain intact.
+- A distinct evaluator approved T-001 against AC-001–AC-006 on 2026-08-25.
+- Current bundle validation (267 checks), scaffolder smoke and diff check pass.
 
 ## Validations and evidence
 
@@ -40,6 +38,7 @@
 |---|---|---|---|
 | 2026-07-25 | T-001 | bundle validator passed: 258 checks | evidence/T-001.md |
 | 2026-07-25 | T-001 | scaffolder smoke passed | evidence/T-001.md |
+| 2026-08-25 | T-001 | bundle validation passed: 267 checks; scaffolder smoke and diff check passed | evidence/T-001.md |
 
 ## Recent files/working-tree state
 
@@ -51,18 +50,18 @@ initiative `002-sdd-harness-audit-process`.
 | ID/date | Summary | Link |
 |---|---|---|
 | D-2026-07-25-001 | Audit capability is additive and passive; HTML report remains agent-authored. | decision-log.md |
+| D-2026-08-25-004 | Independent evaluation approved T-001. | decision-log.md |
 
 ## Blockers and residual risks
 
 | ID | Reason/impact | Owner | Next action |
 |---|---|---|---|
-| B-001 | Independent evaluator has not approved T-001 yet. | Evaluator Agent | Review evidence and decide approve/request_revision/block. |
+| R-001 | Graph parsing remains intentionally out of scope. | bundle maintainer | Keep audit judgment agent-authored. |
 
 ## Exact next safe step
 
-Run independent evaluation of T-001 against spec, validation plan, diff and
-evidence. If approved, State Keeper can move `needs_evaluation -> approved ->
-done`.
+No implementation task remains. A future enhancement may align optional
+`spec-suggestions.md` guidance with the report-template artifact list.
 
 ## Resume instructions
 

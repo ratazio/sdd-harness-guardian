@@ -10,6 +10,15 @@
 
 State validation levels, environments, fixtures and risk-based priorities.
 
+### Assurance selection
+
+| Profile/task | Risk or claim | Technique selected/inapplicable rationale | Oracle and evidence | Executor | Evaluator | Failure/waiver behavior |
+|---|---|---|---|---|---|---|
+| | | | | | | |
+
+No technique is universal. A blocking failure returns the task to revision; an
+exception needs accountable human, scope, expiry and residual-risk record.
+
 ## 2. Acceptance traceability
 
 Every AC appears at least once.

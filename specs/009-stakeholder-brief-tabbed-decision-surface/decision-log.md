@@ -1,0 +1,12 @@
+# Decision Log: 009-stakeholder-brief-tabbed-decision-surface
+
+Record decisions that change scope, architecture, validation, risk, precedence or workflow. Do not rewrite prior rows; append a superseding decision.
+
+| ID | Date | Status | Decision | Rationale/evidence | Alternatives | Owner/approver | Supersedes |
+|---|---|---|---|---|---|---|---|
+| D-001 | 2026-08-26 | accepted — planning direction | Plan a v2 stakeholder brief as one offline HTML document with eight focused tab views, richer source-derived execution/validation content and proportional discovery for missing material facts. | Explicit user request after reviewing the current single long-page brief; source stored in this conversation. | Keep long-page-only navigation; create multiple pages; force fixed detail; invent missing data; all rejected. | requester / Codex (record) | none |
+| D-002 | 2026-08-26 | proposed — discovery gate | Select a native-first tab pattern and existing authoring entrypoints before changing the template; preserve no-script, keyboard and print fallback. | U-001/U-002 and IR-001/IR-005 show interaction and workflow cannot be safely inferred. | JS-only tabs; framework; duplicate discovery skill; rejected pending T-001. | T-001 planner + accessibility reviewer | none |
+| D-003 | 2026-08-26 | proposed — content proportionality | A tab has a stable mission but conditional content: source-backed fact, concise N/A, or owned material question/unknown. | Supports software and non-software work without placeholders, fake diagrams or mandatory questionnaires. | Minimum word count; universal diagrams/tests; generic “a confirmar”; rejected. | T-003 planner / Spec Guardian | none |
+| D-004 | 2026-08-26 | proposed — execution fidelity | Execution and Validation views project existing detailed task/validation contracts rather than title-only summaries or a parallel schema. | User identified generic task titles as insufficient for delivery quality; sources already own these fields. | HTML-owned task model; copying Markdown verbatim; rejected. | T-004 planner/reviewer | none |
+| D-005 | 2026-08-26 | proposed — validation boundary | Structural checks remain limited to stable tab/fallback/provenance contracts; meaning and proportionality remain independently reviewed. | Avoids deterministic prose quality gate while protecting compatibility. | Score/parser/LLM judge; rejected. | T-005 maintainer | none |
+

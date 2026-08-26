@@ -1,41 +1,26 @@
 # Progress: 005-stakeholder-brief-meeting-standard
 
-**Current phase/status:** outcome review / Outcome Ready  
-**Current task:** none  
-**Last safe checkpoint:** Research, diagnosis and populated decision brief recorded; design-lineage convention awaits human approval.  
-**Last updated:** 2026-08-18  
-**Updated by:** Codex acting as Spec Guardian  
+**Current phase/status:** validation_done  
+**Current task:** none; T-001–T-003 done  
+**Last safe checkpoint:** D-003 reconciled terminal evidence and state.  
+**Last updated:** 2026-08-25  
+**Updated by:** Codex / State Keeper-005  
 **Run-state:** ./run-state.yaml  
 **Stakeholder brief:** ./stakeholder-brief.html
 
-## Outcome context
+## Terminal record
 
-**Product/user outcome:** Stakeholders can decide scope, evidence, trade-offs
-and next steps from one canonical rendered brief.  
-**Active MVP/slice:** Design standard, template lineage contract, selective
-decision/evidence content and 004 retrofit.  
-**Brief synchronized:** partial — the populated brief reflects the outcome-ready
-spec and research; refresh it after plan, impact and validation sources exist.
+T-001 implemented the v1 design standard/template/validator contract, T-002
+added guidance, fixtures and the 004 retrofit, and T-003 completed rendered and
+regression validation. Each evidence pack records an independent `approve`.
 
-## Work since last checkpoint
+Current reconciliation checks passed: `validate_bundle.py` (267 checks),
+`test_validate_human_visibility.py`, Human Visibility validation for 005 with
+the current CLI, `smoke_test_scaffolder.py` and `git diff --check`.
 
-- Compared the canonical template, 003 and 004; identified the 004 manual
-  reconstruction as a template-fidelity failure.
-- Confirmed no stakeholder-brief design standard exists; the only nearby one is
-  for audit reports.
-- Researched C4, SEI stakeholder/view documentation and ADR decision guidance.
-- Created the outcome-ready spec and replaced the empty scaffold brief with a
-  populated decision brief.
+## Residual risk and next safe step
 
-## Decisions and blockers
-
-| ID | Status | Detail |
-|---|---|---|
-| D-001 | accepted | Root cause is missing design/lineage enforcement, not missing HTML. |
-| B-001 | open | Choose exact design marker/version and reviewed exception syntax. |
-
-## Exact next safe step
-
-Approve the marker/version and exception contract, then create the impact map,
-plan and validation plan; refresh the brief from those complete sources before
-task breakdown.
+Deterministic Human Visibility validation does not replace a rendered semantic
+review; the approved packs retain that responsibility. No implementation task
+remains. Preserve canonical v1 lineage and use the reviewed exception path for
+material custom layouts.

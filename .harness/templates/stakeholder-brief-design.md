@@ -46,6 +46,13 @@ label drafts as non-authorizing. Do not claim coverage review, Human Visibility
 or Tasks Ready from the HTML. Record decisions append-only and propagate a
 meeting decision to canonical sources before regenerating the brief.
 
+After rendering, a reviewer separately checks product,
+architecture/operations and delivery for `recoverable`, `superficial`,
+`absent` or justified `N/A`. A synthesis loss is recorded as source → lost fact
+→ source correction, plus the material decision that cannot be made from the
+brief alone. This is human/agent judgment; no score, prose parser or automated
+semantic approval belongs in the HTML contract.
+
 ## Visual/accessibility baseline
 
 Keep system UI typography, the existing muted green/amber/red palette and

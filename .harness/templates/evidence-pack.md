@@ -8,6 +8,7 @@
 **Started/finished:**  
 **Commit SHA or working-tree description:**  
 **Decision:** pending | approve | request_revision | block | escalate_to_human
+**Assurance profile / contract link:**
 
 ## 1. Implementation summary
 
@@ -46,6 +47,12 @@ State what changed and explicitly what did not.
 | Check | Reason | Risk impact | Evaluator acceptance |
 |---|---|---|---|
 | none | | | |
+
+## 6a. Failures, exceptions and waivers
+
+| Failure/exception | Why normal evidence is insufficient | Accountable human | Scope/expiry | Residual risk | Decision link |
+|---|---|---|---|---|---|
+| none | | | | | |
 
 ## 7. Known gaps and residual risks
 

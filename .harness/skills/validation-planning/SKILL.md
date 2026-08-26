@@ -33,6 +33,10 @@ risk_level: high
 8. For v2 briefs, separately map deterministic source/heading, provenance,
    review-identity and lifecycle-order checks from semantic coverage,
    architecture adequacy and rendered meeting review.
+9. Select A1/A2/A3 proportionally: identify risk trigger, selected or
+   inapplicable technique, oracle, executor, independent evaluator, evidence
+   and failure/waiver path. Do not impose Gherkin, mutation, screenshots or a
+   universal coverage target.
 
 ## Output contract
 

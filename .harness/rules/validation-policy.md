@@ -18,6 +18,18 @@ Prefer:
 Omitted checks require a reason, risk impact and evaluator acceptance. A passing
 command unrelated to an AC does not satisfy that AC.
 
+## Proportionate assurance
+
+Choose assurance from the task's claim and risk, not a universal tool list.
+A1 may be concise. A2 is required for high/unknown risk, public-contract,
+data-migration, trust-boundary or material-UI work. A3 names accountable local
+authority and applicable local/sector policy; this bundle does not certify it.
+
+Each material task records selected/inapplicable technique rationale, oracle,
+executor, independent evaluator, evidence and failure/waiver path. For UI,
+visual evidence is paired with behavioral proof when behavior is material.
+Gherkin, mutation and screenshots are options, never universal requirements.
+
 ## Blocking conditions
 
 Block when:

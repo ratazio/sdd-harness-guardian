@@ -60,6 +60,26 @@ remain `pending` until the post-meeting `tasks_ready` gate permits `ready`.
 
 #### Implementation constraints
 
+#### Assurance disposition (proportionate to profile/risk)
+
+**A1 concise disposition:** selected check(s) and N/A rationale, or
+`not_applicable — normal task validation is sufficient because <reason>`.
+
+For A2/A3, or any material risk, complete the full contract below.
+
+| Claim/risk | Selected technique and why | Oracle/data/environment | Builder/test executor | Evaluator/specialist | Evidence | Entry/exit/failure or waiver path |
+|---|---|---|---|---|---|---|
+| | | | | | | |
+
+Select only techniques warranted by risk. A1 omits this table after its concise
+disposition. Examples: **A1:** local copy edit — lint plus visual spot-check;
+mutation/Gherkin/N/A. **A2:** changed public form validation — boundary unit
+test, UI behavior steps and screenshot, with separate oracles and evidence.
+Possible techniques include unit/integration/contract/E2E,
+Gherkin, mutation, static quality, manual exploration or UI visual + behavior
+proof. Mark an inapplicable technique with a reason; a screenshot alone proves
+appearance, not interaction/behavior.
+
 #### Validation IDs and commands
 
 #### Evidence requirements

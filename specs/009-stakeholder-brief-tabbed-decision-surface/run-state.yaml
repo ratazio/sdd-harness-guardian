@@ -1,0 +1,98 @@
+schema_version: 1
+initiative_id: "009-stakeholder-brief-tabbed-decision-surface"
+initiative_sequence: "009"
+initiative_slug: "stakeholder-brief-tabbed-decision-surface"
+initiative_kind: "feature"
+status: "tasks_drafted"
+summary: "Organizar o stakeholder brief v2 em abas acessíveis e proporcionais, aprofundando conteúdo somente quando fontes canônicas o sustentam."
+brief_lineage: "v2"
+current_phase: "coverage_composition"
+current_task: null
+last_safe_checkpoint: "D-001 registra escopo de planejamento; fontes, plano, validação e tasks preliminares estão preenchidos, mas nenhuma task está autorizada."
+updated_at: "2026-08-26"
+updated_by: "Codex / State Keeper"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: false
+  human_visibility_ready: false
+  tasks_ready: false
+  implementation_done: false
+  independent_evaluation_done: false
+  evidence_pack_ready: false
+  validation_done: false
+
+brief_review:
+  author: "Codex / brief author"
+  coverage_reviewer: null
+  reviewed_at: null
+  review_record: null
+  findings_status: "not_started — coverage and rendered-meaning review require a distinct identity"
+
+execution:
+  builder_id: null
+  evaluator_id: null
+  started_at: null
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "D-001 captured the explicit user direction for one-document tabbed v2 briefs."
+    - "Canonical planning sources and preliminary task contracts were completed without implementation authorization."
+  repository_revision: null
+  working_tree_summary: "Repository may contain unrelated in-progress changes; keep 009 isolated."
+
+task_ledger:
+  - id: "T-001"
+    status: "pending"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "pending"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "pending"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "pending"
+    evidence: "evidence/T-004.md"
+  - id: "T-005"
+    status: "pending"
+    evidence: "evidence/T-005.md"
+
+approvals:
+  human_required: false
+  pending:
+    - "Distinct coverage reviewer before brief_coverage_ready."
+    - "Stakeholder meeting decision and propagation before tasks_ready."
+  granted:
+    - "D-001 user authorized planning of the tabbed decision surface."
+
+risks:
+  level: "medium"
+  open:
+    - "IR-001: tab enhancement could hide material content without a complete fallback."
+    - "IR-003: rich projection could fabricate or drift from canonical source detail."
+    - "IR-004: discovery could become generic bureaucracy instead of a material question."
+
+evidence:
+  latest: null
+  approved: []
+
+next_safe_step: "Obtain a distinct pre-render coverage review of populated sources and composition; do not implement T-001 before meeting propagation and Tasks Ready."

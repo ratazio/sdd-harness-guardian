@@ -15,6 +15,13 @@ independent reviewer must perform the short semantic/rendered brief review. A
 pass checks stable structure, design lineage/shell, and declared state only; it is not approval of
 prose, stakeholder usefulness, or visual legibility.
 
+The independent rendered review is loss-aware: record product,
+architecture/operations and delivery as `recoverable`, `superficial`, `absent`
+or justified `N/A`. A material finding states canonical source → lost fact →
+source correction, then answers which material decision remains impossible
+without Markdown. This remains qualitative review; do not add a score, prose
+parser or automatic semantic gate.
+
 ## Design-contract validation and compatibility
 
 New non-trivial initiatives scaffolded by the current bundle use
@@ -86,6 +93,19 @@ status other than `reviewed` fail; an exception cannot silently disable the
 protected gate.
 
 ## Local bridge pattern
+
+## Risk-based assurance adoption
+
+New initiatives resolve `assurance_profile` to A1, A2 or A3 before Plan Ready.
+A1 records a concise validation disposition. A2 is used for high/unknown risk,
+public contracts, migrations, trust boundaries or material UI and records a
+task assurance contract. A3 escalates to named local authority; it is not
+Guardian certification. Existing pinned initiatives without profile metadata
+remain readable and are not silently migrated.
+
+The local `validate_assurance_contract.py` mirror checks only declared profile
+structure, rationale and A2/A3 source links. It never infers risk or semantic
+adequacy; independent evaluation remains mandatory.
 
 Place this contract in the consumer root `AGENTS.md`, adapting the command
 name to its task runner:

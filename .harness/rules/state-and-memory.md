@@ -38,6 +38,16 @@ statuses and do not permit implementation.
 
 Reconcile discrepancies before changing files.
 
+## Execution-authorization checkpoint
+
+When a direct stakeholder instruction changes authorization from planning to
+execution, append the decision and synchronize `run-state.yaml`, `progress.md`
+and `handoffs/latest-handoff.md` before the first implementation artifact is
+changed. Refresh the stakeholder brief whenever that state is material to the
+decision surface. If work is discovered before that checkpoint, stop, record
+the divergence and move affected tasks to `needs_evaluation`; never infer a
+terminal approval from the completed diff.
+
 Use the index and state files as the compact context boundary. Read full specs,
 plans, evidence packs or semantically retrieved documents only when they are
 needed for the active gate or decision.

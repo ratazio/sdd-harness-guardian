@@ -1,0 +1,101 @@
+schema_version: 1
+initiative_id: "008-semantic-brief-review-calibration"
+initiative_sequence: "008"
+initiative_slug: "semantic-brief-review-calibration"
+initiative_kind: "feature"
+status: "validation_done"
+summary: "Calibrar a revisão semântica e pós-render de stakeholder briefs sem adicionar pontuação ou gate semântico determinístico."
+brief_lineage: "v2"
+current_phase: "complete"
+current_task: null
+last_safe_checkpoint: "D-010 recorded passing post-approval baseline and final deterministic validation."
+updated_at: "2026-08-25"
+updated_by: "Codex / State Keeper"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "Codex / brief author"
+  coverage_reviewer: "/root/review_008_coverage"
+  reviewed_at: "2026-08-25"
+  review_record: "decision-log.md#D-007"
+  findings_status: "pass — D-005 approved rendered meaning; D-007 records the propagated Tasks Ready decision"
+
+execution:
+  builder_id: "Codex / builder-008"
+  evaluator_id: "/root/sandbox_coverage_review"
+  started_at: "2026-08-25"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "D-007 reconciled the human execution authorization and propagated it to planning sources."
+    - "T-001 guidance, T-002 fixtures, T-003 boundary checks and T-004 sandbox evidence are complete and await a distinct evaluator."
+    - "D-008 approved T-001–T-003; T-004 corrected the release gate."
+    - "D-009 independently approved T-004 and release; final baseline/checks are next."
+    - "D-010 wrote the post-approval baseline and passed final deterministic checks."
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: false
+  pending: []
+  granted:
+    - "D-006 user execution authorization, reconciled and propagated by D-007."
+    - "T-001 through T-003 approved by /root/sandbox_coverage_review in D-008."
+    - "T-004 and release approved by /root/sandbox_coverage_review in D-009."
+
+risks:
+  level: "medium"
+  open:
+    - "IR-001: lenses may overfit a software example; paired fixtures and justified N/A are required."
+    - "IR-002: structural pass may be confused with semantic approval; distinct rendered-meaning review is required."
+
+evidence:
+  latest: "evidence/T-004.md"
+  approved:
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+    - "evidence/T-004.md"
+
+next_safe_step: "Initiative complete; preserve evidence and use the calibration fixtures plus sandbox for future brief-review changes."
