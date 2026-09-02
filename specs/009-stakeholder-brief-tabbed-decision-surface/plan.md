@@ -60,7 +60,7 @@ T-001 inventaria a estrutura visual atual, validator, entrypoints de autoria/rev
 | Observability | Decision log, progress and state describe gates. | Evolution/decision view makes facts recoverable; no telemetry. | FR-008; T-004. |
 | Rollout/rollback | Arquivos versionados/fixtures estáticas. | Atualização limitada do bundle; leitura linear anterior permanece fallback. | §8; impact §4. |
 | Alternatives/trade-offs | Long scroll minimizes interaction but diffuses focus. | Tabs focus one decision surface while retaining full fallback. | AD-001–003. |
-| Unknowns | Interaction, authoring entrypoint, task/validation field set unverified. | Resolve U-001–U-004 through discovery. | impact §6; T-001/T-003/T-004. |
+| Unknowns | U-001/U-002 resolved; task/validation field sets remain unverified. | Resolve U-003/U-004 through discovery. | impact §6; D-015; T-003/T-004. |
 
 ### Critical reader and discovery flow
 
@@ -140,19 +140,28 @@ Author: **Codex / brief author**. This is planning composition, not a self-appro
 | progress.md checkpoint/risks/next step | synthesized | `#evolution` | Compact resumable state. |
 | run-state.yaml gates/ledger/risks | represented | `#decision-snapshot`, `#evolution` | Truthful authorization state. |
 
+**Coverage review:** approved pre-render on 2026-08-26 by `/root/sandbox_coverage_review`; author: Codex / brief author; record: D-008. Product, architecture/operations and delivery are recoverable. This approval does not approve rendered meaning, decision propagation or Tasks Ready.
+
+### Rendered detail contract
+
+The Execution target uses one progressive card per material task. Each card exposes, when the canonical task contains it, objective/outcome and increment; FR/AC; scope and anti-scope; expected files/contracts; dependencies; risk and assurance; validation/evidence; exit criteria; status/authority; and why that task is the next safe step. A genuinely missing material field is a source-owned question/unknown/N/A, not an HTML omission or invented field.
+
+The Validation target uses an AC/validation trace matrix (or equivalent traceable blocks) that exposes method, command or environment, fixture, oracle, evidence destination and limitation. A no-command/not-applicable row preserves its reason, residual risk and owner. Both targets keep child-level provenance so a reviewer can recover the canonical source without using a `link_only` disposition.
+
 ## 10. Open questions
 
 | ID | Question | Owner | Resolution | Blocking? |
 |---|---|---|---|---|
-| Q-001 | Which native-first markup/behavior selects a tab while retaining no-script, keyboard and print access? | T-001 planner + accessibility reviewer | Prototype and record fallback in D-002. | yes |
-| Q-002 | Which existing authoring skill/agent receives source-sufficiency protocol? | T-001 planner | Inventory entrypoints; select minimal existing surfaces. | yes |
-| Q-003 | Which full task fields are stable to project and how do absent optional fields appear? | T-003 planner | Compare template, 008 and sandbox. | yes |
-| Q-004 | How does no-command/non-software validation appear without looking like failure? | T-004 planner | Validate a justified skip/N/A fixture. | no |
-| Q-005 | Is a new structural test needed or can current tests cover tab/fallback invariants? | T-005 maintainer | Compare fixture failure modes; add minimum check. | no |
+| Q-001 | Resolved by D-015: anchors/panels are static baseline; inline ARIA enhancement selects at runtime; print CSS reveals all. | T-001 planner + accessibility reviewer | **Decision impact resolved:** the template may now adopt the selected interaction; T-002 repeats proof with real content. | no |
+| Q-002 | Resolved by D-015: design standard authors the protocol; Spec Guardian/spec-review review it; `new_initiative.py` scaffolds the template. | T-001 planner | **Decision impact resolved:** T-003 can enrich existing surfaces without a duplicate skill/schema. | no |
+| Q-003 | Resolved by D-021: stable fields are the existing non-empty task-template contract (objective/outcome/increment, FR/AC/discovery, scope, contracts, dependencies, risk/assurance, validation/evidence, exit, authority and why-now); validation projects its existing AC trace. | T-003 planner + `/root/sandbox_coverage_review` | **Decision impact resolved:** T-004 may project those fields with child provenance; optional absence remains concise source-backed N/A or a four-part material question, not a parallel schema. | no |
+| Q-004 | Resolved by D-025: no-command proof retains AC/claim, method, manual context, relevant data/fixture, oracle, evidence destination, owner and skip/limitation with residual risk; CLI is optional. | T-004 planner + `/root/sandbox_coverage_review` | **Decision impact resolved:** manual/operational proof is recoverable and not mistaken for silent missing validation. | no |
+| Q-005 | Resolved by D-030: the small tab-surface contract test protects eight controls/panels, static fallback and print because existing lifecycle/visibility checks do not directly protect them. | T-005 maintainer + `/root/sandbox_coverage_review` | **Decision impact resolved:** it is structural-only, preserves rendered review as a separate judgment and creates no semantic gate. | no |
 
 ## 11. Plan decision
 
 **Plan Ready:** yes  
+**Post-review authorization:** D-011 propagates the requester’s D-006 authorization after D-008 coverage and D-010 Human Visibility; D-012 passes the fresh post-propagation check. D-013 selected T-001, D-015/D-018/D-021 completed T-001–T-003 and D-022 selects only T-004 as the next safe increment.  
 **Reviewer:** Codex / Harness Planner  
 **Reviewed at:** 2026-08-26  
-**Conditions/links:** U-001–U-003 are bounded discovery work; no template or validator change begins before their resolution. Tasks remain non-authorizing until independent review and meeting propagation.
+**Conditions/links:** U-001/U-002 were resolved by independent T-001 review, U-003 by D-021, U-004 by D-025 and U-005 by D-030. T-005 release evidence is accepted for the bundle only; no external deployment authority is implied.

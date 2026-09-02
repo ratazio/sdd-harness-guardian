@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Static calibration-fixture wiring; it deliberately does not judge prose quality."""
+"""Static fixture wiring for independent human review; it never scores prose."""
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
+
+from validate_bundle import stakeholder_brief_errors
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -23,9 +26,17 @@ def read(path: Path) -> str:
 
 
 def assert_review_contract(review: str) -> None:
-    for token in ("Product", "Architecture/operations", "Delivery", "Decision impossible from the brief"):
+    for token in (
+        "Review ID:", "Request locator:", "Canonical source locators:",
+        "Rendered HTML locator:", "Materiality", "Finding ID:",
+        "Decision impossible from the brief", "Recovery action:",
+        "Re-review:",
+    ):
         assert token in review, f"review lacks required semantic-review locator: {token}"
     assert "Source:" in review or "Source/example" in review, "review lacks source locator"
+    assert re.search(r"\*\*Reviewer:\*\*|\| Lens \| Reviewer ID \|", review), (
+        "review lacks an independent reviewer identity"
+    )
 
 
 def main() -> int:
@@ -40,11 +51,35 @@ def main() -> int:
             read(case_root / source)
         brief = read(case_root / "stakeholder-brief.html")
         assert 'data-harness-brief-design="v2"' in brief, f"{case} lacks v2 fixture marker"
-        assert_review_contract(read(case_root / "rendered-review.md"))
+        review = read(case_root / "rendered-review.md")
+        assert_review_contract(review)
+        assert "<body" in brief, f"{case} fixture is not renderable HTML"
 
     negative = read(FIXTURES / "shallow-negative" / "rendered-review.md")
-    for token in ("`superficial`", "`absent`", "Lost fact:", "Recovery action:"):
+    for token in ("structurally valid", "`insufficient`", "Lost fact:", "Recovery action:", "REVISE"):
         assert token in negative, f"negative fixture does not demonstrate shallow synthesis: {token}"
+    negative_html = read(FIXTURES / "shallow-negative" / "stakeholder-brief.html")
+    assert stakeholder_brief_errors(negative_html, rendered=True) == [], (
+        "decision-poor negative must remain structurally valid; its rejection belongs to human review"
+    )
+    css_scaffold_selector = negative_html.replace(
+        "</style>", "html[data-harness-template-kind='scaffold'] .slot:after{content:'fixture'}</style>", 1
+    )
+    assert stakeholder_brief_errors(css_scaffold_selector, rendered=True) == [], (
+        "a retained CSS selector must not be mistaken for the root template identity"
+    )
+    assert "`insufficient` / REVISE" in negative, (
+        "negative fixture must retain an expected material review revision"
+    )
+
+    for case in ("software-release", "field-operations"):
+        positive = read(FIXTURES / case / "rendered-review.md")
+        assert "APPROVE" in positive, f"{case} must record an approval disposition"
+
+    varied = read(FIXTURES / "field-operations" / "stakeholder-brief.html")
+    assert 'role="tab"' not in varied and "<svg" not in varied, (
+        "varied positive fixture must prove that neither tabs nor diagrams are universal requirements"
+    )
 
     print("Semantic brief-review calibration fixtures passed; semantic adequacy remains independent review.")
     return 0

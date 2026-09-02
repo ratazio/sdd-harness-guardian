@@ -1,7 +1,7 @@
 schema_version: 1
 name: sdd-harness-guardian
 display_name: SDD Harness Guardian
-version: 0.3.0
+version: 0.4.0
 type: agentic-governance-bundle
 status: ready
 owner: platform-engineering
@@ -55,9 +55,16 @@ agents:
   - ratchet-maintainer
   - harness-auditor
   - harness-graph-mapper
+  - spec-depth-reviewer
+  - brief-experience-composer
+  - executive-brief-reviewer
 
 skills:
   - spec-review
+  - spec-depth-authoring
+  - executive-brief-composition
+  - executive-brief-experience-review
+  - rendered-brief-decision-review
   - task-breakdown
   - impact-analysis
   - validation-planning

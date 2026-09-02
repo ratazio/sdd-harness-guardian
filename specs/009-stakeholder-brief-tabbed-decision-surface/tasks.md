@@ -1,6 +1,6 @@
 # Tasks: 009-stakeholder-brief-tabbed-decision-surface
 
-**Status:** tasks_drafted — planning only; no task is authorized.  
+**Status:** validation_done — D-030 accepted bundle release evidence; no external deployment is in scope.  
 **Spec:** ./spec.md  
 **Plan:** ./plan.md  
 **Validation plan:** ./validation-plan.md  
@@ -10,15 +10,15 @@
 
 | ID | Status | Title | Dependencies | Risk | Builder | Evaluator | Evidence |
 |---|---|---|---|---|---|---|---|
-| T-001 | pending | Discover accessible one-document tab behavior and authoring entrypoints | none | high | unassigned | distinct accessibility reviewer | evidence/T-001.md |
-| T-002 | pending | Construir a estrutura de abas v2 com fallback progressivo | T-001 | high | unassigned | distinct accessibility reviewer | evidence/T-002.md |
-| T-003 | pending | Define tab missions, source-sufficiency questions and proportional detail | T-001 | high | unassigned | distinct Spec Guardian | evidence/T-003.md |
-| T-004 | pending | Project rich task and validation contracts into execution views | T-002, T-003 | high | unassigned | distinct planner/reviewer | evidence/T-004.md |
-| T-005 | pending | Validate compatibility, fixtures and release evidence independently | T-001–T-004 | medium | unassigned | distinct maintainer | evidence/T-005.md |
+| T-001 | done | Discover accessible one-document tab behavior and authoring entrypoints | none | high | Codex / Builder-009 | /root/sandbox_coverage_review | evidence/T-001.md |
+| T-002 | done | Construir a estrutura de abas v2 com fallback progressivo | T-001 | high | Codex / Builder-009 | /root/sandbox_coverage_review | evidence/T-002.md |
+| T-003 | done | Define tab missions, source-sufficiency questions and proportional detail | T-001 | high | Codex / Builder-009 | /root/sandbox_coverage_review | evidence/T-003.md |
+| T-004 | done | Project rich task and validation contracts into execution views | T-002, T-003 | high | Codex / Builder-009 | /root/sandbox_coverage_review | evidence/T-004.md |
+| T-005 | done | Validate compatibility, fixtures and release evidence independently | T-001–T-004 | medium | Codex / Builder-009 | /root/sandbox_coverage_review | evidence/T-005.md |
 
 ## Authorization boundary
 
-`tasks_drafted` is a discussion gate only. D-001 authorizes planning, not changes to a template, script, fixture or consumer brief. A distinct coverage review, rendered-meaning review, meeting decision propagation and refreshed brief must occur before one task can become `ready`.
+`tasks_drafted` is a discussion gate only. D-001 authorized planning, not changes to a template, script, fixture or consumer brief. D-011 propagated the requester decision and regenerated the brief; D-012 independently reconfirmed Human Visibility. D-013 therefore permits only T-001 to become `ready`; every later task retains its own dependency and readiness gate.
 
 ## Allowed statuses and transitions
 
@@ -31,7 +31,7 @@ any non-terminal state -> blocked
 
 ### T-001 — Discover accessible one-document tab behavior and authoring entrypoints
 
-**Status:** pending  
+**Status:** done  
 **Objective:** Resolve U-001/U-002 by choosing and documenting the smallest accessible tab interaction/fallback and existing skills/agents that receive the source-sufficiency protocol.  
 **Requirement IDs:** FR-001, FR-003, FR-007, FR-009  
 **Acceptance criteria IDs:** AC-001, AC-007, AC-008, AC-009  
@@ -87,20 +87,20 @@ Options considered, selected behavior, keyboard/no-script/print observations, so
 
 #### Exit criteria
 
-- [ ] U-001/U-002 have resolution or bounded blocker.
-- [ ] One-document, keyboard, no-script and print fallback are proven or rejected.
-- [ ] No template/validator change is claimed complete.
-- [ ] Distinct evaluator records approve or revision.
+- [x] U-001/U-002 resolved by D-015.
+- [x] One-document, keyboard, no-script and print fallback demonstrated in the approved prototype.
+- [x] No template/validator change was claimed complete.
+- [x] Distinct evaluator approved D-014 and evidence in D-015.
 
 #### Readiness decision
 
-**Task Ready:** no  
-**Reviewed by:** planning author only; coverage/meeting gate pending.  
-**Blocking conditions:** Tasks Ready has not been granted.
+**Task Ready:** completed — D-015  
+**Reviewed by:** `/root/sandbox_coverage_review`; D-014 accepted, U-001/U-002 resolved as discovery.  
+**Blocking conditions:** none; task is done and does not authorize T-002 by itself.
 
 ### T-002 — Construir a estrutura de abas v2 com fallback progressivo
 
-**Status:** pending  
+**Status:** done  
 **Objective:** Implementar a estrutura selecionada de abas/painéis no template v2 e fixture focada, preservando hierarquia, ordem de fonte, foco de teclado e impressão.  
 **Requirement IDs:** FR-001, FR-002, FR-007, FR-009  
 **Acceptance criteria IDs:** AC-001, AC-002, AC-008, AC-009  
@@ -156,22 +156,22 @@ Tab/panel mapping, fallback observations, screenshots only as visual supplement,
 
 #### Exit criteria
 
-- [ ] Eight views exist in one offline document.
-- [ ] Every panel is recoverable without script and in print.
-- [ ] Keyboard/focus behavior matches T-001 decision.
-- [ ] Existing v1/v2 checks pass.
-- [ ] Distinct evaluator approves evidence.
+- [x] Eight views exist in one offline document.
+- [x] Every panel is recoverable without script and in print.
+- [x] Keyboard/focus behavior matches T-001 decision.
+- [x] Existing v1/v2 checks pass.
+- [x] Distinct evaluator approves evidence in D-018.
 
 #### Readiness decision
 
-**Task Ready:** no  
-**Reviewed by:** planning author only.  
-**Blocking conditions:** T-001 and global Tasks Ready gate.
+**Task Ready:** completed — D-018  
+**Reviewed by:** `/root/sandbox_coverage_review`; D-017 accepted.  
+**Blocking conditions:** none; task is done and does not authorize T-004.
 
 ### T-003 — Define tab missions, source-sufficiency questions and proportional detail
 
-**Status:** pending  
-**Objective:** Make existing authoring/review guidance specify mission, eligible facts, N/A/unknown behavior and clarification protocol for every tab; resolve U-003.  
+**Status:** done  
+**Objective:** Make existing authoring/review guidance specify mission, eligible facts, N/A/unknown behavior and clarification protocol — including decision impact — for every tab; resolve U-003.  
 **Requirement IDs:** FR-002, FR-003, FR-004, FR-006, FR-008, FR-009  
 **Acceptance criteria IDs:** AC-002, AC-003, AC-004, AC-005, AC-007, AC-009  
 **Outcome served:** Rich briefs derive depth from canonical sources instead of generic filler.  
@@ -182,7 +182,7 @@ Tab/panel mapping, fallback observations, screenshots only as visual supplement,
 **Max subtasks before validation:** 3  
 **Dependencies:** T-001 approved  
 **Risk:** high  
-**Builder:** unassigned  
+**Builder:** Codex / Builder-009  
 **Evaluator:** distinct Spec Guardian  
 **Human approval:** only for an actual unresolved consumer business question  
 **Evidence:** evidence/T-003.md
@@ -226,21 +226,21 @@ Per-tab contract, three fixture comparisons, each unknown/question and source �
 
 #### Exit criteria
 
-- [ ] All eight missions are concrete and source-backed.
-- [ ] Rich task/validation fields are identified without new schema.
-- [ ] Sparse/non-software examples avoid fake detail.
-- [ ] Material gaps produce owned questions; non-material gaps do not.
-- [ ] Distinct Spec Guardian approves evidence.
+- [x] All eight missions are concrete and source-backed in the design standard/template.
+- [x] Rich task/validation fields are identified from existing templates without new schema.
+- [x] Software, non-software and negative sparse calibration cases avoid fake detail.
+- [x] Material gaps use the four-part owned-question contract; non-material gaps use concise N/A/omission.
+- [x] Distinct Spec Guardian approves evidence in D-021.
 
 #### Readiness decision
 
-**Task Ready:** no  
-**Reviewed by:** planning author only.  
-**Blocking conditions:** T-001 and global Tasks Ready gate.
+**Task Ready:** completed — D-021  
+**Reviewed by:** `/root/sandbox_coverage_review`; D-020 accepted and U-003 resolved as guidance.  
+**Blocking conditions:** none; task is done and does not authorize T-005.
 
 ### T-004 — Project rich task and validation contracts into execution views
 
-**Status:** pending  
+**Status:** done  
 **Objective:** Implement detailed Execution and Validation panels from canonical task/validation sources, including compact variants for legitimate N/A/skips.  
 **Requirement IDs:** FR-004, FR-005, FR-006, FR-008, FR-009  
 **Acceptance criteria IDs:** AC-005, AC-006, AC-007, AC-009  
@@ -252,7 +252,7 @@ Per-tab contract, three fixture comparisons, each unknown/question and source �
 **Max subtasks before validation:** 3  
 **Dependencies:** T-002 and T-003 approved  
 **Risk:** high  
-**Builder:** unassigned  
+**Builder:** Codex / Builder-009  
 **Evaluator:** distinct planner/reviewer  
 **Human approval:** not_required  
 **Evidence:** evidence/T-004.md
@@ -296,21 +296,21 @@ For each fixture: task/validation locator mapping, recovered decision, skip/N/A 
 
 #### Exit criteria
 
-- [ ] Rich tasks are more than titles/status and match canonical sources.
-- [ ] Validation matrix recovers AC, method, context, oracle and evidence.
-- [ ] Missing data uses appropriate question/N/A and owner/risk.
-- [ ] Draft status remains non-authorizing.
-- [ ] Distinct evaluator approves evidence.
+- [x] Rich tasks are more than titles/status and trace existing canonical sources.
+- [x] Validation matrix recovers AC, method, context, fixture, oracle and evidence.
+- [x] No-command/missing data uses explicit manual context or appropriate N/A/owner/risk.
+- [x] Draft/pending status remains non-authorizing in both rich briefs.
+- [x] Distinct evaluator approved evidence in D-025.
 
 #### Readiness decision
 
-**Task Ready:** no  
-**Reviewed by:** planning author only.  
-**Blocking conditions:** T-002/T-003 and global Tasks Ready gate.
+**Task Ready:** completed — D-025  
+**Reviewed by:** `/root/sandbox_coverage_review`.  
+**Blocking conditions:** none; D-026 independently selects T-005.
 
 ### T-005 — Validate compatibility, fixtures and release evidence independently
 
-**Status:** pending  
+**Status:** done — D-030 accepted bundle release evidence  
 **Objective:** Run proportionate regression checks, choose minimum focused structural test, obtain independent accessibility/meaning review and prepare release evidence.  
 **Requirement IDs:** FR-007, FR-009, FR-010  
 **Acceptance criteria IDs:** AC-001, AC-002, AC-004, AC-008, AC-009, AC-010  
@@ -322,7 +322,7 @@ For each fixture: task/validation locator mapping, recovered decision, skip/N/A 
 **Max subtasks before validation:** 3  
 **Dependencies:** T-001–T-004 approved  
 **Risk:** medium  
-**Builder:** unassigned  
+**Builder:** Codex / Builder-009  
 **Evaluator:** distinct maintainer  
 **Human approval:** pending only if new dependency, v1 migration or semantic mirror is proposed  
 **Evidence:** evidence/T-005.md
@@ -366,15 +366,15 @@ Command output, fixture matrix, no-score diff assertion, independent reviewer id
 
 #### Exit criteria
 
-- [ ] Required commands pass or approved exception is explicit.
-- [ ] v1/v2 contracts remain valid.
-- [ ] Independent review covers meaning, fallback and accessibility.
-- [ ] No score/parser/sidecar/new runtime appears.
-- [ ] Evidence, state, progress and handoff synchronize.
+- [x] Required commands pass; Human Visibility freshness is explicitly pending distinct review/baseline.
+- [x] v1/v2 contracts remain valid.
+- [x] Independent review covers meaning, fallback and accessibility in D-029.
+- [x] No score/parser/sidecar/new runtime appears.
+- [x] Evidence, state, progress, brief, baselines and handoff synchronize after final release-evidence decision.
 - [ ] Distinct maintainer approves or requests revision.
 
 #### Readiness decision
 
-**Task Ready:** no  
-**Reviewed by:** planning author only.  
-**Blocking conditions:** all preceding tasks, coverage review, meeting decision and global Tasks Ready gate.
+**Task Ready:** completed — D-030  
+**Reviewed by:** `/root/sandbox_coverage_review`.  
+**Blocking conditions:** none; preserve evidence and do not infer external deployment.

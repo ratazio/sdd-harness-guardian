@@ -70,7 +70,7 @@ Use deterministic checks only for stable HTML, contract, fallback and provenance
 |---|---|---|---|---|
 | E-001 | Per-tab mission and decision-loss rubric: product, architecture/operations and delivery are recoverable, superficial, absent or N/A justified. | Rich v2 fixture. | Reviewer can state each tab’s decision and no source fact is silently weakened. | distinct Spec Guardian |
 | E-002 | Proportionality rubric. | Non-software/localized and sparse fixtures. | No technical fiction or mandatory filler; absence is N/A or owned question only when material. | distinct reviewer |
-| E-003 | Discovery specificity rubric. | Missing-detail fixture and source log. | Every prompt says needed fact, owner, impact and resolution; no generic “a confirmar”. | distinct planner/reviewer |
+| E-003 | Discovery specificity rubric. | Missing-detail fixture and source log. | Every prompt says needed fact, owner, **decision impact** and resolution; no generic “a confirmar”. | distinct planner/reviewer |
 | E-004 | Accessibility/visual behavior rubric. | Final rendered HTML. | Tab selection is discoverable and fallback preserves reading/print; screenshot alone is not behavior proof. | accessibility reviewer |
 
 ## 7. Skipped or unavailable validation
@@ -83,7 +83,7 @@ Use deterministic checks only for stable HTML, contract, fallback and provenance
 
 ## 8. Validation decision
 
-**Validation Ready:** yes  
+**Validation Ready:** complete — D-030  
 **All ACs mapped:** yes  
 **Reviewer:** Codex / Harness Planner  
-**Blocking gaps:** T-001 resolves interaction/fallback; T-005 decides whether a focused test is needed. These are bounded discovery, not permission to omit validation.
+**Blocking gaps:** none. D-030 accepts the focused structural test and release evidence; rendered meaning remains an independently reviewed, non-deterministic judgment.

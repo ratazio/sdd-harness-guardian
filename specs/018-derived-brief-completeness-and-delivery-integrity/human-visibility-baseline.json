@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "source_sha256": {
+    "spec.md": "6412579d0f396669808e6cbab6d0a1d5f8f3998592402b57a5843311e58fb890",
+    "impact-map.md": "a02969b86470efb5a3144313d2c63e7aaf1cde0f845849f70b3cec65e388353e",
+    "plan.md": "5d4cad3cd9b46b6c4ae69a183d9f0102942403249c06e408fc6ff876e2bd77db",
+    "tasks.md": "c984a62657530346225ab5d52b15b450e8c7030215bd58cdf6499af27b03540c",
+    "validation-plan.md": "03a1244991953cede2f3739c27259024652f47bf87f4cfb00dd7c5fbd1b2ed74",
+    "decision-log.md": "1cad4704388bf6f5e18c6f398e2ab99310d840dc433f3aef5a93393e4d47acfc",
+    "progress.md": "7022acdc000c6cd79022fcbf1e64ec706c9d44b55388963a6758462d0e6d911e",
+    "run-state.yaml": "f2e2b44b792e02cea043a08a5f8cd27b9ae3df88df424d6601b67818ad4b459e"
+  },
+  "brief_lineage": "v2",
+  "source_set": [
+    "spec.md",
+    "impact-map.md",
+    "plan.md",
+    "tasks.md",
+    "validation-plan.md",
+    "decision-log.md",
+    "progress.md",
+    "run-state.yaml"
+  ],
+  "brief_sha256": "20b5c61ed2192263ae3841e16ec60c3a1a088a23d05ec087f47eac3c3d1cc75e",
+  "review_record": "decision-log.md#D-018-04",
+  "reviewed_by": "audit_018_root_cause",
+  "coverage_reviewer": "audit_018_root_cause",
+  "reviewed_at": "2026-08-27",
+  "prior_change_anchor": "decision-log.md#D-018-04"
+}

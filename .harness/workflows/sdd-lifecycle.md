@@ -27,7 +27,10 @@ terminal task gates apply to both lineages unchanged.
 
 ## Flow
 
-1. **Specify** — create/revise `spec.md`.
+1. **Specify** — create/revise `spec.md`. Before drafting a new SPEC, read
+   `.harness/skills/spec-depth-authoring/SKILL.md` when it is available; use
+   its conditional questions to deepen the existing canonical artifacts. This
+   is author guidance, not an automated workflow step or semantic gate.
 2. **Outcome Review** — confirm outcome, demonstrable increment, priority source
    or required human decision.
 3. **Spec Review** — Spec Guardian records `Outcome Ready: yes/no` and
@@ -43,30 +46,51 @@ terminal task gates apply to both lineages unchanged.
 8. **Coverage Composition** — inventory applicable sources and principal
    headings; record each disposition, locator, rendered target/reason and the
    planned provenance blocks in the existing plan or decision log.
-9. **Independent Coverage Review** — a distinct reviewer compares the
-   composition against source headings, reports gaps/contradictions/unknowns
-   and records the review. Set `brief_coverage_ready: true` only with no
-   unresolved blocking finding. A named human substitutes when no independent
-   agent is available; author self-review does not qualify.
-10. **Stakeholder Brief** — render/refresh the derived final brief from the
+9. **Independent Coverage and Construction Review** — the **Executive Brief
+   Reviewer**, using `executive-brief-experience-review`, is a distinct reviewer
+   compares source headings and the `plan.md` construction record against the
+   sources. Coverage mapping alone is insufficient: before a skeleton exists,
+   the reviewer returns `APPROVE` or `REVISE` on thesis/audience, eight routes,
+   material relationships, selected form/reason, repeated items,
+   limits/discoveries and closing actions. Each `REVISE` records source → loss
+   or ambiguity → decision prejudiced → canonical correction. Set
+   `brief_coverage_ready: true` only with no unresolved blocking finding. A
+   named human substitutes when no independent agent is available; author
+   self-review does not qualify. When a `REVISE` is recoverable from the
+   request and canonical sources, the Orchestrator returns it immediately to
+   the composer, re-runs this review and continues in the same run; it does not
+   wait for routine requester approval or leave the brief half-built. Escalate
+   only a new authority, scope, or genuinely absent material fact.
+10. **Skeleton Composition** — only after the construction review is `APPROVE`,
+    the **Brief Experience Composer**, using `executive-brief-composition`,
+    instantiates the initiative-local, non-promotable
+    v3 skeleton; the visual author copies that file to the candidate location
+    and fills the copied structure in place. Run the candidate-inheritance
+    check against that exact local skeleton. A parallel HTML that merely names
+    a base is a composition failure, not a brief candidate.
+11. **Stakeholder Brief** — render/refresh the derived final brief from the
     corrected sources and composition plan. Run structural checks and the
-    Spec Guardian's source/rendered-meaning review before declaring
+    **Executive Brief Reviewer**'s `rendered-brief-decision-review` through a
+    `127.0.0.1` preview before declaring
     `human_visibility_ready`. This is distinct from pre-render coverage:
     product, architecture/operations and delivery are `recoverable`,
     `superficial`, `absent` or justified `N/A`; each loss names source → lost
-    fact → source recovery action and answers which material decision remains
-    impossible without Markdown. It is qualitative review, never an automatic
-    semantic score or gate.
-11. **Decision Meeting and Propagation** — append meeting decisions to
+   fact → source recovery action and answers which material decision remains
+   impossible without Markdown. It is qualitative review, never an automatic
+   semantic score or gate. A recoverable rendered-review finding returns
+   automatically to composition, rerender and re-review. It can retain Human
+   Visibility approval, but it must not become a passive reason to stop
+   authoring a source-backed final brief.
+12. **Decision Meeting and Propagation** — append meeting decisions to
     `decision-log.md`, update every affected canonical source, re-run the
     applicable readiness/coverage checks and regenerate the brief. HTML is not
     an authoring record.
-12. **Tasks Ready** — only after propagation and refreshed Human Visibility,
+13. **Tasks Ready** — only after propagation and refreshed Human Visibility,
     the Orchestrator may set `tasks_ready` and transition one task to `ready`.
-13. **Implementation** — Builder implements only that task.
-14. **Evidence Draft** — Builder writes `evidence/<task-id>.md` and moves the
+14. **Implementation** — Builder implements only that task.
+15. **Evidence Draft** — Builder writes `evidence/<task-id>.md` and moves the
     task to `needs_evaluation`.
-15. **Independent Evaluation** — distinct Evaluator returns `approve`,
+16. **Independent Evaluation** — distinct Evaluator returns `approve`,
     `request_revision`, `block` or `escalate_to_human`.
 16. **Revision loop** — `request_revision` returns to the Builder; new evidence
     and evaluation are required.
@@ -87,7 +111,7 @@ terminal task gates apply to both lineages unchanged.
 | validation_ready → human_visibility_ready (v1) | synchronized concise v1 brief + Human Visibility review | Spec Guardian/Orchestrator |
 | human_visibility_ready → tasks_ready (v1) | validation mapping + atomic tasks | Harness Planner/Orchestrator |
 | validation_ready → tasks_drafted (v2) | preliminary tasks, outcome linkage, draft labels and no authorization | Harness Planner/Orchestrator |
-| tasks_drafted → brief_coverage_ready (v2) | applicable-source composition + distinct coverage review record | Spec Guardian/Orchestrator |
+| tasks_drafted → brief_coverage_ready (v2) | applicable-source coverage plus `plan.md` construction record and distinct `APPROVE` review | Spec Guardian/Orchestrator |
 | brief_coverage_ready → human_visibility_ready (v2) | corrected final brief, structural check and source/rendered review | Spec Guardian/Orchestrator |
 | human_visibility_ready → tasks_ready (v2) | meeting decision propagation, refreshed coverage/freshness and atomic tasks | Orchestrator/State Keeper |
 | ready → in_progress | readiness record with outcome linkage and `tasks_ready` | Builder/Orchestrator |

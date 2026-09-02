@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="pt-BR" data-harness-brief-design="v2" data-client-identity-profile="pearson">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Client Identity Profile — brief de decisão</title>
+<style>
+:root{--navy:#0b004a;--violet:#4c30a5;--lav:#c1bffa;--canvas:#edecf5;--paper:#fff;--ink:#0b004a;--muted:#475061;--soft:#f3f2fe;--line:#e0def8;--success:#007a53;--warn:#b39d00;--danger:#b42318}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:16px/1.55 "Plus Jakarta Sans","Segoe UI",Arial,sans-serif}main{width:min(100% - 3rem,80rem);margin:auto;padding:28px 0 64px}a{color:inherit;text-underline-offset:.2em}:focus-visible{outline:3px solid var(--violet);outline-offset:3px}.top{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.9rem}.tag{display:inline-block;border:1px solid var(--lav);border-radius:999px;padding:4px 10px;font-weight:700;color:var(--navy)}header,section,.metric,.card{border:1px solid var(--lav);background:var(--paper)}header{display:grid;grid-template-columns:1.5fr .7fr;gap:28px;margin:20px 0;padding:40px;border-radius:28px;background:linear-gradient(135deg,#fff 15%,#f3f2fe)}h1{margin:0;max-width:18ch;font-size:clamp(2.4rem,5vw,4rem);font-weight:600;line-height:1.1}h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:600;line-height:1.15}.eyebrow{color:var(--violet);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.ask{border-radius:20px;padding:22px;background:var(--navy);color:#fff}.ask p{margin-bottom:0}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.tabs a{border:1px solid var(--lav);border-radius:12px;padding:9px 12px;background:#fff;text-decoration:none;font-weight:700}.tabs [aria-selected=true]{background:var(--violet);border-color:var(--violet);color:#fff}.snapshot,.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.metric,.card{border-radius:20px;padding:20px}.metric h2{margin:0;color:var(--muted);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}.metric p{margin-bottom:0}.card h3{margin-top:0;font-size:1.25rem}.card p:last-child{margin-bottom:0}section{margin:20px 0;padding:32px;border-radius:24px}.intro{color:var(--muted);max-width:70ch;font-size:1.05rem}.diagram{margin:18px 0;padding:20px;border:1px solid var(--lav);border-radius:18px;background:var(--soft);font-weight:600}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.flow div{border:1px solid var(--lav);border-radius:14px;padding:13px;background:#fff}.task{margin:16px 0}.task dl{display:grid;grid-template-columns:170px 1fr;gap:8px 18px;margin:0}.task dt{font-weight:700;color:var(--muted)}.pill{display:inline-block;padding:3px 8px;border-radius:999px;border:1px solid var(--lav);font-size:.78rem;font-weight:700;color:var(--violet)}.draft{border-color:#d8c25c;color:#746000;background:#fbf9e0}.risk{border-left:5px solid var(--danger)}.ok{border-left:5px solid var(--success)}table{width:100%;border-collapse:collapse}th,td{padding:11px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th{font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}details{margin-top:16px;border:1px dashed var(--lav);border-radius:15px;padding:14px}summary{font-weight:700;cursor:pointer}.callout{margin-top:18px;padding:18px;border-left:5px solid var(--violet);border-radius:0 15px 15px 0;background:var(--soft)}.source{font-size:.85rem;color:var(--muted)}footer{color:var(--muted);font-size:.9rem;padding:10px}@media(max-width:760px){main{width:min(100% - 2rem,80rem);padding-top:16px}header,.snapshot,.grid{grid-template-columns:1fr}.tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.tabs a{overflow-wrap:anywhere}.flow{grid-template-columns:1fr}.task dl{grid-template-columns:1fr;gap:2px}table{display:block;overflow:auto}th,td{min-width:11rem}}@media print{body{background:#fff}main{width:100%;padding:0}.tabs{display:none}.panel[hidden]{display:block!important}details:not([open])>*{display:block!important}section{break-inside:avoid}}
+</style>
+<style>
+/* T-003: the profile decorates named operational roles; labels and tables stay semantic. */
+html[data-client-identity-profile="pearson"] .brief-client-logo{display:flex;align-items:center;min-height:5rem;margin:20px 0 -20px;padding:1rem 1.5rem;border-radius:24px 24px 0 0;background:var(--navy)}
+html[data-client-identity-profile="pearson"] .brief-client-logo img{display:block;width:clamp(8rem,18vw,11rem);height:auto}
+html[data-client-identity-profile="pearson"] .brief-client-logo:focus-visible{outline-color:#7fdfe0}
+.brief-impact-footprint,.brief-risk-chain,.brief-coverage-group{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:14px;margin:18px 0}.brief-impact-footprint article,.brief-risk-chain article,.brief-coverage-group article{border:1px solid var(--lav);border-radius:18px;padding:18px;background:#fff}.brief-impact-footprint article{border-top:5px solid var(--violet)}.brief-risk-chain article{border-top:5px solid var(--danger)}.brief-coverage-group article{border-top:5px solid #7f7e7e}.brief-proof-card{border-left:5px solid var(--success)}.brief-decision-call{border-left-color:var(--violet)}.brief-impact-footprint h3,.brief-risk-chain h3,.brief-coverage-group h3{margin-top:0;font-size:1rem}.brief-role-label{display:block;margin-bottom:7px;color:var(--muted);font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.brief-status-icon{font-weight:800}.brief-coverage-group p{margin-bottom:0}@media(max-width:760px){.brief-impact-footprint,.brief-risk-chain,.brief-coverage-group{grid-template-columns:1fr}#coverage-register th,#coverage-register td,#proof-matrix th,#proof-matrix td{min-width:10rem}}@media(prefers-reduced-motion:reduce){html[data-client-identity-profile="pearson"] *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body class="brief-shell" data-tab-enhancement="fallback">
+<main>
+<div class="top">
+<span class="tag">011 · brief de decisão v2</span>
+<span>2026-08-26 · risco medium · tamanho M · A2</span>
+</div>
+<a class="brief-client-logo" href="/" aria-label="Pearson — página inicial">
+<img src="../../.harness/assets/brand/pearson-logo-white.png" width="175" height="53" alt="">
+</a>
+<header class="brief-header" data-source="spec.md" data-source-section="1-5" data-coverage="synthesized">
+<div>
+<p class="eyebrow">Brief de decisão — T-002 concluída</p>
+<h1>Perfil Pearson opt-in, local e acessível — sem rebrand global.</h1>
+<p>A iniciativa transforma a referência visual fornecida em um perfil de cliente explícito, aplicado a componentes semânticos e preservando offline, provenance e autoridade.</p>
+</div>
+<aside class="ask">
+<strong>Autoridade atual</strong>
+<p>D-010 registra a autorização explícita do requester para o ativo oficial, implementação e release desta execução. D-014 aprovou T-003; D-018 aprovou T-004 e D-019 registrou a baseline regravada/revalidada e o estado terminal.</p>
+<p>
+<span class="tag" style="color:#fff;border-color:#c1bffa">T-001–T-004 done · validation done</span>
+</p>
+</aside>
+</header>
+<nav class="tabs" aria-label="Visões do brief" role="tablist">
+<a id="tab-scope" role="tab" href="#scope" aria-controls="scope" aria-selected="true">Valor &amp; escopo</a>
+<a id="tab-architecture" role="tab" href="#architecture" aria-controls="architecture" aria-selected="false">Arquitetura</a>
+<a id="tab-impact" role="tab" href="#impact" aria-controls="impact" aria-selected="false">Impacto</a>
+<a id="tab-execution" role="tab" href="#execution" aria-controls="execution" aria-selected="false">Execução</a>
+<a id="tab-validation" role="tab" href="#validation" aria-controls="validation" aria-selected="false">Validação</a>
+<a id="tab-evolution" role="tab" href="#evolution" aria-controls="evolution" aria-selected="false">Evolução</a>
+<a id="tab-decision" role="tab" href="#decision" aria-controls="decision" aria-selected="false">Decisão</a>
+<a id="tab-coverage" role="tab" href="#coverage" aria-controls="coverage" aria-selected="false">Cobertura</a>
+</nav>
+<div class="snapshot" id="decision-snapshot">
+<article class="metric" data-source="spec.md" data-source-section="2-3" data-coverage="synthesized">
+<h2>Outcome</h2>
+<p>Consumidor selecionado ganha identidade Pearson e melhor hierarquia; consumidor neutro não herda marca/ativo.</p>
+</article>
+<article class="metric" data-source="spec.md" data-source-section="6-9" data-coverage="synthesized">
+<h2>Limite</h2>
+<p>Sem hotlink, CDN, logo improvisado, fotografia de hero, runtime de tema ou aprovação legal inferida.</p>
+</article>
+<article class="metric" data-source="plan.md" data-source-section="3-4" data-coverage="represented">
+<h2>Envelope</h2>
+<p>M/A2: seleção, ativos locais, tokens e variantes; nenhum runtime ou mudança de fonte.</p>
+</article>
+<article class="metric" data-source="run-state.yaml" data-source-section="quality_gates" data-coverage="represented">
+<h2>Estado</h2>
+<p>T-001–T-004 estão concluídas e aprovadas; a baseline final passou e a iniciativa está em validation_done. O default sem seleção continua vendor-neutral e asset-free.</p>
+</article>
+</div>
+
+<section id="scope" class="panel" role="tabpanel" aria-labelledby="tab-scope" tabindex="0" data-source="spec.md" data-source-section="1-14" data-coverage="synthesized">
+<h2>Valor e escopo</h2>
+<p class="intro">A missão é trazer navy/lavanda/branco, tipografia e cartões Pearson para o brief sem confundir design com decisão. O perfil só existe quando a fonte do consumidor o seleciona e um owner de marca é recuperável.</p>
+<div class="grid">
+<article class="card">
+<h3>Dentro da iniciativa</h3>
+<ul>
+<li>Contrato de seleção opt-in e registro de brand owner.</li>
+<li>Ativo local de logo branco, tokens, fallback de fonte e header protegido.</li>
+<li>Variantes semânticas para task, impacto, risco, prova, decisão e cobertura.</li>
+</ul>
+</article>
+<article class="card">
+<h3>Deliberadamente fora</h3>
+<ul>
+<li>Aplicar Pearson em todos os consumidores do bundle.</li>
+<li>Hotlink de logo/fonte, CSS filter, logo gerado ou licença presumida.</li>
+<li>Hero editorial/fotografia que prejudique uma superfície operacional.</li>
+</ul>
+</article>
+</div>
+<details open data-progressive data-source="spec.md" data-source-section="7-12" data-coverage="represented">
+<summary>Critério de proporcionalidade</summary>
+<p>A referência externa é visual, não instrução operacional nem autorização de marca. Se seleção/owner/asset não existem, o shell genérico continua e nenhuma marca é carregada.</p>
+</details>
+</section>
+
+<section id="architecture" class="panel" role="tabpanel" aria-labelledby="tab-architecture" tabindex="0" data-source="plan.md" data-source-section="1-8" data-coverage="synthesized">
+<h2>Arquitetura</h2>
+<p class="intro">A arquitetura adiciona uma camada de perfil acima do mesmo HTML derivado. Ela não muda fontes canônicas, estado ou gates; apenas seleciona tokens e ativos locais para consumidores autorizados.</p>
+<div class="diagram" data-source="plan.md" data-source-section="1-6" data-coverage="represented">Seleção explícita do consumidor + registro de owner → ativo local/tokens Pearson → variantes semânticas no brief offline → review de brand e acessibilidade. Sem seleção: shell v2 vendor-neutral, sem asset Pearson.</div>
+<div class="flow">
+<div>Seleção explícita</div>
+<div>Owner/asset local</div>
+<div>Tokens seguros</div>
+<div>Componentes semânticos</div>
+<div>Review/fallback</div>
+</div>
+<details open data-progressive data-source="plan.md" data-source-section="2-4,10" data-coverage="represented">
+<summary>Decisões e trade-offs</summary>
+<p>Rejeita-se rebrand global, logo remoto e uma página de marketing. A 011 consome os papéis da 010 quando disponíveis, mas não depende de um framework novo.</p>
+</details>
+</section>
+
+<section id="impact" class="panel impact-evidence" role="tabpanel" aria-labelledby="tab-impact" tabindex="0" data-source="impact-map.md" data-source-section="1-8" data-coverage="synthesized">
+<h2>Impacto</h2>
+<p class="intro">O impacto inclui identidade, acessibilidade, distribuição offline e confiança: uma escolha de marca errada pode contaminar consumidores ou esconder risco/provenance por cor.</p>
+<div class="brief-impact-footprint" aria-label="Footprint do impacto">
+<article>
+<span class="brief-role-label">Superfície</span>
+<h3>Consumidor neutro</h3>
+<p>Permanece sem tokens, logo ou request Pearson.</p>
+</article>
+<article>
+<span class="brief-role-label">Superfície</span>
+<h3>Brief selecionado</h3>
+<p>Recebe somente variantes locais e semânticas.</p>
+</article>
+<article>
+<span class="brief-role-label">Controle</span>
+<h3>Offline e fallback</h3>
+<p>Ativo local e conteúdo textual continuam recuperáveis.</p>
+</article>
+</div>
+<div class="brief-risk-chain" aria-label="Cadeias de risco e controle">
+<article>
+<span class="brief-status-icon">!</span> <span class="brief-role-label">Risco</span>
+<h3>Leakage</h3>
+<p>
+<strong>Sinal:</strong> fixture neutro contém ativo/token.</p>
+<p>
+<strong>Controle:</strong> seleção explícita; <strong>owner:</strong> bundle.</p>
+</article>
+<article>
+<span class="brief-status-icon">!</span> <span class="brief-role-label">Risco</span>
+<h3>Logo inseguro</h3>
+<p>
+<strong>Sinal:</strong> URL remoto, filter ou fundo claro.</p>
+<p>
+<strong>Controle:</strong> logo local em navy; <strong>owner:</strong> marca.</p>
+</article>
+<article>
+<span class="brief-status-icon">!</span> <span class="brief-role-label">Risco</span>
+<h3>Cor esconde fato</h3>
+<p>
+<strong>Sinal:</strong> grayscale/leitor perde status.</p>
+<p>
+<strong>Controle:</strong> texto, ícone e estrutura; <strong>owner:</strong> acessibilidade.</p>
+</article>
+</div>
+<table>
+<thead>
+<tr>
+<th>Risco</th>
+<th>Sinal</th>
+<th>Controle</th>
+<th>Owner / contingência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IR-001: leakage</td>
+<td>Fixture neutro contém asset/token Pearson</td>
+<td>Seleção explícita + fixture negativo</td>
+<td>Bundle owner: desativar perfil.</td>
+</tr>
+<tr>
+<td>IR-002: logo inseguro</td>
+<td>URL remoto, filter ou fundo claro</td>
+<td>Ativo local/proporção/header navy</td>
+<td>Brand owner: remover/reempacotar.</td>
+</tr>
+<tr>
+<td>IR-003: cor esconde fato</td>
+<td>Grayscale/leitor perde status</td>
+<td>Texto/ícone/estrutura além da cor</td>
+<td>Accessibility owner: recompor variante.</td>
+</tr>
+<tr>
+<td>IR-004: offline/reflow falha</td>
+<td>Network fetch, clipping ou print ruim</td>
+<td>Fallback/local/no-script/zoom</td>
+<td>Template owner: reverter variante.</td>
+</tr>
+<tr>
+<td>IR-005: guia vira licença</td>
+<td>Owner/asset não registrados</td>
+<td>D-010/D-011 registram autoridade e pacote local; preservar o registro.</td>
+<td>Client brand owner: registrar aprovação.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout risk brief-decision-call" data-source="impact-map.md" data-source-section="6" data-coverage="represented">
+<strong>Unknowns:</strong> U-002 é o único fallback técnico ainda aberto. U-001/U-003/U-004 foram resolvidos por D-010, T-001 e T-002; o release exige manter esses registros e a fixture negativa.</div>
+</section>
+
+<section id="execution" class="panel" role="tabpanel" aria-labelledby="tab-execution" tabindex="0" data-source="tasks.md" data-source-section="ledger,T-001–T-004" data-coverage="represented">
+<h2>Execução</h2>
+<p class="intro">As tasks abaixo são projeções diretas de tasks.md. Todas têm evidence aprovada; <span class="pill">T-004 done</span> concluiu isolamento, acessibilidade e baseline final. Este brief não cria autoridade de marca.</p>
+<div id="task-ledger" data-source="tasks.md" data-source-section="Task ledger,T-001–T-004" data-coverage="represented">
+<article class="card task">
+<h3>T-001 · Definir seleção opt-in e boundary de referência <span class="pill">done</span>
+</h3>
+<dl>
+<dt>Objetivo / outcome</dt>
+<dd>Escolher a menor fonte canônica para seleção e registrar owner; design.md continua referência visual.</dd>
+<dt>Incremento demonstrável</dt>
+<dd>Fixture neutro e selecionado têm fronteira clara; U-003 é resolvido.</dd>
+<dt>Escopo / fora</dt>
+<dd>Dentro: metadata/decisão. Fora: baixar logo, CSS e alegar licença.</dd>
+<dt>Contratos / dependências</dt>
+<dd>Sem dependência; brand approval é explicitamente pendente.</dd>
+<dt>Risco / assurance</dt>
+<dd>Alto / A2: evita leakage e autorização falsa.</dd>
+<dt>Prova e evidence</dt>
+<dd>V-001, V-008, E-002; evidence/T-001.md.</dd>
+<dt>Por que agora</dt>
+<dd>Ativo/CSS não deve existir antes de boundary/owner.</dd>
+</dl>
+</article>
+<article class="card task">
+<h3>T-002 · Empacotar ativos locais e tokens Pearson com segurança <span class="pill">done</span>
+</h3>
+<dl>
+<dt>Objetivo / outcome</dt>
+<dd>Criar workflow local de logo/fonte, tokens navy/lavanda e header acessível.</dd>
+<dt>Incremento demonstrável</dt>
+<dd>Perfil selecionado funciona offline; neutro não muda; fallback continua legível.</dd>
+<dt>Escopo / fora</dt>
+<dd>Dentro: path/checksum, tokens, foco/motion/header. Fora: hero, impact redesign e licença inferida.</dd>
+<dt>Contratos / dependências</dt>
+<dd>Depende de T-001; D-010 registra owner/autoridade e D-011 aprova a evidence.</dd>
+<dt>Risco / assurance</dt>
+<dd>Alto / A2: logo/contraste/hotlink bloqueiam.</dd>
+<dt>Prova e evidence</dt>
+<dd>V-002, V-003, V-006, V-009, M-001/M-002; evidence/T-002.md.</dd>
+<dt>Por que agora</dt>
+<dd>Sem fundação segura, estilo é ad hoc.</dd>
+</dl>
+</article>
+<article class="card task">
+<h3>T-003 · Aplicar variantes semânticas operacionais <span class="pill">done</span>
+</h3>
+<dl>
+<dt>Objetivo / outcome</dt>
+<dd>Dar hierarquia Pearson a tab, task, impacto, proof, decisão e cobertura.</dd>
+<dt>Incremento demonstrável</dt>
+<dd>Brief selecionado é coerente sem ocultar provenance/tabela/equivalente.</dd>
+<dt>Escopo / fora</dt>
+<dd>Dentro: variantes e reflow. Fora: fontes/gates, imagem-only e marketing.</dd>
+<dt>Contratos / dependências</dt>
+<dd>T-002 está aprovada; consome 010 se existir, hooks v2 se não.</dd>
+<dt>Risco / assurance</dt>
+<dd>Médio / A2: estética não pode vencer semântica.</dd>
+<dt>Prova e evidence</dt>
+<dd>V-004 a V-006, M-003/M-006, E-001; evidence/T-003.md.</dd>
+<dt>Por que agora</dt>
+<dd>Os papéis precisam de tokens e boundary seguros primeiro.</dd>
+</dl>
+</article>
+<article class="card task">
+<h3>T-004 · Provar acessibilidade, offline e isolamento do perfil <span class="pill">done</span>
+</h3>
+<dl>
+<dt>Objetivo / outcome</dt>
+<dd>Fechar evidence de seleção, reflow, print, grayscale e review semântico/brand.</dd>
+<dt>Incremento demonstrável</dt>
+<dd>Selected/unselected, no-network e fallback ficam recuperáveis em pack único.</dd>
+<dt>Escopo / fora</dt>
+<dd>Dentro: fixtures negativos, checks e ratchet. Fora: deploy cliente e rebrand aplicação.</dd>
+<dt>Contratos / dependências</dt>
+<dd>Depende de T-001–T-003 com evidence aprovada.</dd>
+<dt>Risco / assurance</dt>
+<dd>Alto / A2: último gate do perfil.</dd>
+<dt>Prova e evidence</dt>
+<dd>V-001, V-006–V-009, M-004/M-005, E-002/E-003; evidence/T-004.md.</dd>
+<dt>Por que agora</dt>
+<dd>Só depois de existir perfil e fallback reais.</dd>
+</dl>
+</article>
+</div>
+</section>
+
+<section id="validation" class="panel" role="tabpanel" aria-labelledby="tab-validation" tabindex="0" data-source="validation-plan.md" data-source-section="1-8" data-coverage="synthesized">
+<h2>Validação</h2>
+<p class="intro">A matriz preserva método, oráculo e evidence. T-001–T-004 estão aprovadas; T-004 comprovou render, isolamento, reflow, teclado, no-script, print e baseline final sem substituir a avaliação independente.</p>
+<div class="brief-coverage-group" aria-label="Provas planejadas">
+<article class="brief-proof-card">
+<span class="brief-role-label">Prova estrutural</span>
+<h3>V-004 / V-005</h3>
+<p>Inventário de variantes e equivalente semântico de impacto/cobertura.</p>
+</article>
+<article class="brief-proof-card">
+<span class="brief-role-label">Prova humana</span>
+<h3>M-003 / M-006</h3>
+<p>Scannability e fidelidade operacional, não aprovação de conteúdo.</p>
+</article>
+<article class="brief-proof-card">
+<span class="brief-role-label">Gate independente</span>
+<h3>E-001</h3>
+<p>Revisor visual distinto do builder decide a proporcionalidade.</p>
+</article>
+</div>
+<table id="proof-matrix" data-source="validation-plan.md" data-source-section="Acceptance traceability,Required commands,Manual checks" data-coverage="represented">
+<thead>
+<tr>
+<th>Validação / AC</th>
+<th>Método</th>
+<th>Oráculo</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V-001 / AC-001</td>
+<td>Fixtures selected/unselected</td>
+<td>Perfil só muda consumidor que o seleciona.</td>
+<td>T-001/T-004</td>
+</tr>
+<tr>
+<td>V-002–V-003 / AC-002–003</td>
+<td>Inspeção asset/header/tokens</td>
+<td>Logo local proporcional em navy; contraste/foco/tipo recuperáveis.</td>
+<td>T-002</td>
+</tr>
+<tr>
+<td>V-004–V-005 / AC-004–005</td>
+<td>Inventário e browser</td>
+<td>Variantes coerentes; impacto/cobertura mantêm semântica.</td>
+<td>T-003</td>
+</tr>
+<tr>
+<td>V-006–V-007 / AC-006–007</td>
+<td>320/390/zoom/print/grayscale</td>
+<td>Ordem, foco, fallback e significado não dependem de cor.</td>
+<td>T-004</td>
+</tr>
+<tr>
+<td>V-008–V-009 / AC-008–009</td>
+<td>Review de fonte/scan no-network</td>
+<td>Owner recuperável; nenhum hotlink, fake logo ou claim legal.</td>
+<td>T-001/T-004</td>
+</tr>
+<tr>
+<td>E-001–E-003 / AC-010</td>
+<td>Review visual, brand e semântico</td>
+<td>Fidelidade não substitui conteúdo verdadeiro.</td>
+<td>T-003/T-004</td>
+</tr>
+</tbody>
+</table>
+<details open data-progressive data-source="validation-plan.md" data-source-section="Required commands,Manual and independent checks" data-coverage="represented">
+<summary>Comandos e revisão independente</summary>
+<p>Quando implementado, os checks cobrem test_brief_v2_contracts, tabbed surface, validate_bundle e fixture específico selected/unselected. Brand e semântica continuam validações humanas distintas.</p>
+</details>
+</section>
+
+<section id="evolution" class="panel decision-register" role="tabpanel" aria-labelledby="tab-evolution" tabindex="0" data-source="decision-log.md" data-source-section="D-001–D-019" data-coverage="represented">
+<h2>Evolução e estado</h2>
+<p class="intro">D-001 a D-005 preservam o boundary; D-010 registra a autoridade explícita; D-014 aprova T-003. D-016 encontrou a projeção desatualizada; D-017 a sincronizou, D-018 aprovou T-004 e D-019 fechou baseline e estado.</p>
+<table>
+<thead>
+<tr>
+<th>Decisão</th>
+<th>Estado</th>
+<th>Consequência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D-001–D-005</td>
+<td>Aceitas.</td>
+<td>Opt-in, referência não é licença, offline e sem rebrand global.</td>
+</tr>
+<tr>
+<td>D-010</td>
+<td>Autoridade explícita.</td>
+<td>Autoriza ativo oficial, implementação e release nesta execução.</td>
+</tr>
+<tr>
+<td>D-011/D-014</td>
+<td>T-002/T-003 aprovadas.</td>
+<td>Fundação local e variantes semânticas preservam contratos e default neutro.</td>
+</tr>
+<tr>
+<td>D-015–D-019</td>
+<td>T-004 done.</td>
+<td>Checks técnicos, parecer independente, baseline e estado terminal estão sincronizados.</td>
+</tr>
+</tbody>
+</table>
+<div id="checkpoint" class="callout" data-source="progress.md" data-source-section="Current truth,Risks and next safe step" data-coverage="represented">
+<strong>Checkpoint:</strong> T-001–T-004 têm evidence aprovada; D-019 sincroniza a baseline final e o estado validation_done.</div>
+<div id="gates" class="callout risk" data-source="run-state.yaml" data-source-section="status,quality_gates,next_safe_step" data-coverage="represented">
+<strong>Estado:</strong> todos os gates de planejamento, evidence, avaliação e validação estão concluídos em <code>validation_done</code>.</div>
+</section>
+
+<section id="decision" class="panel decision-actions" role="tabpanel" aria-labelledby="tab-decision" tabindex="0" data-source="decision-log.md" data-source-section="D-009–D-019" data-coverage="represented">
+<h2>Decisão e próximo passo</h2>
+<p class="intro">D-014 aprovou as variantes de T-003. D-016 confirmou as provas técnicas de T-004, D-017 regenerou este HTML, D-018 aprovou a versão sincronizada e D-019 fechou baseline e estado.</p>
+<div class="callout brief-decision-call">
+<span class="brief-role-label">Decisão operacional</span>
+<strong>Próximo passo:</strong> manutenção futura deve abrir uma nova task e preservar o boundary opt-in, o fallback neutro e as regressões de render.</div>
+</section>
+
+<section id="coverage" class="panel" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0" data-source="spec.md" data-source-section="1-14" data-coverage="represented">
+<h2>Cobertura e proveniência</h2>
+<p class="intro">Este registro mostra a projeção atual das fontes canônicas, incluindo D-010–D-019. A baseline foi regravada/revalidada após a autorização independente D-018.</p>
+<div class="brief-coverage-group" aria-label="Grupos de proveniência">
+<article>
+<span class="brief-role-label">Fonte de intenção</span>
+<h3>Spec e impacto</h3>
+<p>Missão, critérios, riscos e limites permanecem fonte→view recuperáveis.</p>
+</article>
+<article>
+<span class="brief-role-label">Fonte operacional</span>
+<h3>Plano e tasks</h3>
+<p>Componentes são apresentação; não se tornam fonte de gate ou estado.</p>
+</article>
+<article>
+<span class="brief-role-label">Fonte de prova</span>
+<h3>Validação e decisões</h3>
+<p>Disposição explícita preserva o motivo e o destino da evidence.</p>
+</article>
+</div>
+<table id="coverage-register">
+<thead>
+<tr>
+<th>Fonte / heading</th>
+<th>Alvo</th>
+<th>Disposição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>spec.md §1–§14</td>
+<td>
+<a href="#scope">Valor e escopo</a>
+</td>
+<td>synthesized: missão, requisitos, limites e critérios.</td>
+</tr>
+<tr>
+<td>impact-map.md §1–§8</td>
+<td>
+<a href="#impact">Impacto</a>
+</td>
+<td>synthesized: superfícies, riscos e unknowns.</td>
+</tr>
+<tr>
+<td>plan.md §1–§10</td>
+<td>
+<a href="#architecture">Arquitetura</a>
+</td>
+<td>synthesized: abordagem, decisões e fluxo.</td>
+</tr>
+<tr>
+<td>tasks.md ledger,T-001–T-004</td>
+<td>
+<a href="#execution">Execução</a>
+</td>
+<td>represented: cards de task preenchidos.</td>
+</tr>
+<tr>
+<td>validation-plan.md §1–§8</td>
+<td>
+<a href="#validation">Validação</a>
+</td>
+<td>represented: matriz pronta, ainda não executada.</td>
+</tr>
+<tr>
+<td>decision-log.md D-001–D-019</td>
+<td>
+<a href="#evolution">Evolução</a>
+</td>
+<td>represented: boundary, autoridade explícita, aprovações T-002/T-003 e revisão de freshness T-004.</td>
+</tr>
+<tr>
+<td>progress.md Current truth</td>
+<td>
+<a href="#checkpoint">Checkpoint</a>
+</td>
+<td>represented: fase e limite reais.</td>
+</tr>
+<tr>
+<td>run-state.yaml quality_gates</td>
+<td>
+<a href="#gates">Gates</a>
+</td>
+<td>represented: todos os gates e T-004 estão done; baseline final validada.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<footer>HTML derivado das fontes canônicas. Corrija fontes e regenere; esta página não substitui evidence ou avaliação independente.</footer>
+</main>
+<script>(()=>{const tabs=[...document.querySelectorAll('[role=tab]')],panels=tabs.map(t=>document.getElementById(t.getAttribute('aria-controls'))),details=[...document.querySelectorAll('details[data-progressive]')];let active=tabs[0];const current=()=>tabs.find(t=>t.hash===location.hash)||tabs[0];const set=(tab,hash)=>{active=tab;tabs.forEach((t,i)=>{const on=t===tab;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;panels[i].hidden=!on});if(hash)history.replaceState(null,'',tab.hash)};if(tabs.length===8&&panels.every(Boolean)){document.body.dataset.tabEnhancement='active';set(current());tabs.forEach((t,i)=>{t.addEventListener('click',e=>{e.preventDefault();set(t,true)});t.addEventListener('keydown',e=>{let n=null;if(e.key==='ArrowRight')n=(i+1)%tabs.length;if(e.key==='ArrowLeft')n=(i+tabs.length-1)%tabs.length;if(e.key==='Home')n=0;if(e.key==='End')n=tabs.length-1;if(n!==null){e.preventDefault();tabs[n].focus();set(tabs[n],true)}});window.addEventListener('hashchange',()=>set(current()))});window.addEventListener('beforeprint',()=>{details.forEach(d=>d.open=true);panels.forEach(p=>p.hidden=false)});window.addEventListener('afterprint',()=>set(active))}details.forEach(d=>d.open=false)})()</script>
+</body>
+</html>

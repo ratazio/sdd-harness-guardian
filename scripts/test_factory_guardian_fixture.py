@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import shutil
 import subprocess
 import sys
@@ -34,7 +35,8 @@ def text(root: Path, relative: str) -> str:
 def create_guardian_repository(root: Path) -> tuple[Path, str]:
     guardian = root / "guardian-source"
     (guardian / "scripts").mkdir(parents=True)
-    shutil.copy2(ROOT / "scripts" / "validate_human_visibility.py", guardian / "scripts" / "validate_human_visibility.py")
+    for script in ("validate_human_visibility.py", "brief_review.py", "brief_v2_sources.py"):
+        shutil.copy2(ROOT / "scripts" / script, guardian / "scripts" / script)
     run("git", "init", str(guardian))
     run("git", "-C", str(guardian), "config", "user.email", "fixture@example.test")
     run("git", "-C", str(guardian), "config", "user.name", "Fixture")
@@ -60,14 +62,16 @@ def create_valid_v2_initiative(consumer: Path) -> None:
     """New Factory consumers get the v2 source/review/propagation contract."""
     initiative = consumer / "specs" / "002-v2-example"
     initiative.mkdir(parents=True)
-    sources = ("spec.md", "impact-map.md", "plan.md", "tasks.md", "validation-plan.md", "decision-log.md", "progress.md")
+    sources = ("spec.md", "impact-map.md", "plan.md", "tasks.md", "validation-plan.md", "decision-log.md", "progress.md", "ratchet.md")
     for name in sources:
         (initiative / name).write_text(f"# {name}\n", encoding="utf-8")
+    (initiative / "ratchet.md").write_text("# principal\nNo ratchet entries.\n", encoding="utf-8")
     (initiative / "decision-log.md").write_text(
         "| ID | Decision |\n|---|---|\n| D-001 | Meeting decision propagated to canonical sources before regenerated brief and Tasks Ready. |\n",
         encoding="utf-8",
     )
     (initiative / "run-state.yaml").write_text("""brief_lineage: "v2"
+brief_phase: "rendered"
 quality_gates:
   tasks_drafted: true
   brief_coverage_ready: true
@@ -78,13 +82,23 @@ brief_review:
   coverage_reviewer: "factory-reviewer"
   reviewed_at: "2026-08-19"
   review_record: "decision-log.md#D-001"
-  findings_status: "pass_after_propagation"
+  findings_status: "pass"
 """, encoding="utf-8")
     source_rows = []
     blocks = []
     for index, source in enumerate((*sources, "run-state.yaml")):
         target = f"source-{index}"
-        blocks.append(f'<section id="{target}" data-source="{source}" data-source-section="principal" data-coverage="represented"></section>')
+        source_digest = hashlib.sha256((initiative / source).read_bytes()).hexdigest()
+        if source == "ratchet.md":
+            fragment = "No ratchet entries."
+            fragment_digest = hashlib.sha256(fragment.encode("utf-8")).hexdigest()
+            blocks.append(
+                f'<section id="{target}" data-source="{source}" data-source-section="principal" '
+                f'data-source-digest="sha256:{source_digest}" data-source-fragment="{fragment}" '
+                f'data-source-fragment-sha256="sha256:{fragment_digest}" data-coverage="represented">{fragment}</section>'
+            )
+        else:
+            blocks.append(f'<section id="{target}" data-source="{source}" data-source-section="principal" data-source-digest="sha256:{source_digest}" data-coverage="represented"></section>')
         source_rows.append(f'<tr><td>{source} #principal</td><td><a href="#{target}">target</a></td><td>represented: Factory fixture</td></tr>')
     (initiative / "stakeholder-brief.html").write_text(
         "<html data-harness-brief-design=\"v2\"><body class=\"brief-shell\"><header class=\"brief-header\"></header>"
@@ -121,6 +135,8 @@ def main() -> int:
         installed = run("git", "-C", str(consumer / "vendor" / "sdd-harness-guardian"), "rev-parse", "HEAD").stdout.strip()
         require(installed == commit == lock["commit"], "installed Guardian HEAD does not match materialized lock")
         installed_validator = consumer / "vendor" / "sdd-harness-guardian" / "scripts" / "validate_human_visibility.py"
+        require((installed_validator.parent / "brief_review.py").is_file(), "installed Guardian lacks validator dependency brief_review.py")
+        require((installed_validator.parent / "brief_v2_sources.py").is_file(), "installed Guardian lacks validator dependency brief_v2_sources.py")
         for initiative in ("specs/001-v1-example", "specs/002-v2-example"):
             run(sys.executable, str(installed_validator), "--consumer-root", str(consumer), "--initiative", initiative, "--write-baseline")
             run(sys.executable, "scripts/check_human_visibility.py", initiative, cwd=consumer)

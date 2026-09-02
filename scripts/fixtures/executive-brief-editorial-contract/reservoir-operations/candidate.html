@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><body>
+<section id="architecture" aria-labelledby="architecture-title">
+  <header id="architecture-opening" data-source="source.md" data-source-section="Turbidity recovery procedure" data-coverage="synthesized">
+    <h1 id="architecture-title">The safe operating decision is to hold before restarting pumping.</h1>
+    <p><strong>Thesis:</strong> recovery requires a hold, a second sample and water-quality-lead authorization before pumping restarts.</p>
+    <p><strong>Decision pillars:</strong> alarm triggers hold; the second sample informs recovery; the water-quality lead authorizes recovery.</p>
+    <p><strong>Material limit:</strong> this is an operating procedure, not a named software architecture. <strong>Next conversation:</strong> has the water-quality lead authorized recovery after the second sample?</p>
+  </header>
+  <div id="architecture-macro" data-source="source.md" data-source-section="Turbidity recovery procedure" data-coverage="represented">
+    Alarm leads to hold; a second sample is taken; the water-quality lead authorizes recovery; only then may pumping resume.
+  </div>
+  <div id="architecture-change-map" data-source="source.md" data-source-section="Turbidity recovery procedure" data-coverage="represented">
+    Changed operating state: alarm through authorized recovery. Preserved safety boundary: pumping does not restart before the second sample and water-quality-lead authorization.
+  </div>
+  <aside id="architecture-scale-discovery" data-source="source.md" data-source-section="Turbidity recovery procedure" data-coverage="represented">
+    Scale is unknown. Needed unit: named physical assets or operating surfaces affected by this procedure. The source defines the recovery transition but no denominator, asset count or physical-surface inventory; it is not zero.
+  </aside>
+  <aside id="architecture-zoom-na" data-source="source.md" data-source-section="Turbidity recovery procedure" data-coverage="not_applicable">
+    No internal frontend or subsystem zoom is represented because the source is an operating procedure; the operational handoff above is the proportional detail.
+  </aside>
+</section>
+</body></html>

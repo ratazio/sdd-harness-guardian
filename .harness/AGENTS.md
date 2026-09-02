@@ -46,7 +46,8 @@ artefatos de iniciativa são relativos à raiz do projeto consumidor.
 - nenhuma implementação ou expansão de tasks começa sem outcome e incremento
   demonstrável declarados;
 - iniciativa não trivial mantém `stakeholder-brief.html` legível e sincronizado
-  com os artefatos fonte;
+  com os artefatos fonte depois de `brief_phase: rendered`; antes disso, a
+  ausência do HTML é obrigatória e não deve ser apresentada como entrega;
 - mudança não trivial exige `impact-map.md`;
 - todo critério de aceite tem validação rastreável;
 - nenhuma task chega a `done` sem evidence pack aprovado;
@@ -87,6 +88,8 @@ invariantes protegidas. Conflitos devem ser registrados no
 | Ratchet Maintainer | converter falhas em prevenção permanente | exigir regression check |
 | Harness Auditor | auditar SDD, harness, grafo e evidência | não confundir existência com uso |
 | Harness Graph Mapper | mapear artefatos e referências alcançáveis | não inferir edges sem prova |
+| Brief Experience Composer | preencher o candidate v3 a partir do skeleton e fontes canônicas | não aprovar a própria composição |
+| Executive Brief Reviewer | avaliar construção e HTML renderizado para decisão executiva | não editar durante a avaliação |
 
 As definições completas estão em `.harness/agents/`.
 
@@ -135,7 +138,6 @@ ou justificadas, `evidence/<task-id>.md` completo, decisão independente
 ```txt
 specs/NNN-slug/
   spec.md
-  stakeholder-brief.html
   plan.md
   tasks.md
   impact-map.md
@@ -158,6 +160,12 @@ houver risco.
 
 Bugfixes também usam `reproduction.md`. Os templates canônicos estão em
 `.harness/templates/`.
+
+O scaffolder cria somente fontes canônicas. Para materializar um brief, o autor
+prepara um candidato após cobertura revisada, define `brief_phase:
+ready_to_render` e usa `scripts/render_stakeholder_brief.py`; o promotor recusa
+casca, placeholders, estado incorreto e logo divergente. Renderizar não é
+aprovar ou entregar: a revisão independente do HTML continua obrigatória.
 
 ## Gates de bloqueio
 

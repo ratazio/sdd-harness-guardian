@@ -84,6 +84,19 @@ appearance, not interaction/behavior.
 
 #### Evidence requirements
 
+#### Stakeholder brief projection (v2, when material)
+
+The Execution view projects existing non-empty task fields; it does not create
+another task schema or become the source of truth. When the source task holds
+them, expose objective/outcome/increment, FR/AC or discovery question,
+scope/anti-scope, expected files/contracts, dependencies, risk/assurance,
+validation/evidence, exit criteria, status/authority and why-now/next-safe-step
+with child-level provenance. A title and status are not a sufficient projection
+when those source fields exist. A task may be research, operations, policy or
+implementation work. Do not invent a file, technical action or priority for a
+missing field; use a concise source-backed N/A or the existing owned-question
+path only when its absence affects a decision, AC, risk control or next step.
+
 #### Exit criteria
 
 - [ ] outcome linkage, demonstrable increment and why-now rationale are recorded;

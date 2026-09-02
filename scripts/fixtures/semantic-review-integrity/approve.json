@@ -1,0 +1,13 @@
+{
+  "contract_version": "semantic-review-integrity/v1",
+  "record_scope": "candidate_and_rendered_artifact",
+  "composer_identity": "composer-021",
+  "reviewer_identity": "independent-operations-reviewer",
+  "candidate": {"path": "candidate.html", "locator": "#recovery", "sha256": "sha256:0dd5720fdd9da78c17528d3f6a67aa465ee952af8d287a7a1ff13302a7835842"},
+  "rendered": {"path": "rendered.html", "locator": "#recovery", "sha256": "sha256:9690ccd0c29dffd38953cdf2207045cd25d38d5aef7682a75e151373068f544f"},
+  "corpus_manifest": [
+    {"path": "request.md", "locator": "#Reconciliation request", "sha256": "sha256:a716b1003e03f997bfc888536261260702d73556d66828fc681374683e1b2b35"},
+    {"path": "source.md", "locator": "#Recovery source", "sha256": "sha256:99125a63e19e466be260a51b048c61b8901cdc8a6d1e5e753d788a9f60e8d764"}
+  ],
+  "human_verdict": "APPROVE"
+}

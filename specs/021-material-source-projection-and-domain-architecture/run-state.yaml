@@ -1,0 +1,110 @@
+schema_version: 1
+initiative_id: "021-material-source-projection-and-domain-architecture"
+initiative_sequence: "021"
+initiative_slug: "material-source-projection-and-domain-architecture"
+initiative_kind: "feature"
+status: "executing"
+summary: "Stakeholder brief rendered; independent post-render review recorded; not approved or deliverable."
+brief_lineage: "v2"
+brief_phase: "rendered"
+current_phase: "rendered_decision_review_recorded"
+current_task: null
+last_safe_checkpoint: "Post-render review recorded against the immutable rendered HTML snapshot; no delivery decision was made."
+updated_at: "2026-08-30"
+updated_by: "spec022_t004_builder"
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: false
+  tasks_ready: false
+  implementation_done: false
+  independent_evaluation_done: false
+  evidence_pack_ready: true
+  validation_done: false
+brief_review:
+  author: "spec022_t004_builder"
+  coverage_reviewer: null
+  reviewed_at: null
+  review_record: "decision-log.md#D-021-118"
+  findings_status: "pending"
+  quality_review_required: true
+  quality_review_record: "evidence/T-000-rendered-review-d021118.md"
+  quality_review_reviewer: "/root/review_t004_arch_system"
+  quality_review_status: "approve"
+  quality_review_roles: null
+  quality_review_inputs: "rendered=stakeholder-brief.html@sha256:ecb89ef68207c5f1f43f3b55b8459ded74488030fd8797135e720d141f91a261"
+  quality_review_findings: null
+execution:
+  builder_id: null
+  evaluator_id: null
+  started_at: "2026-08-30"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "SPEC 020 T-004 found two recurring HTML composition failures."
+    - "User required domain-general semantic review; SPEC now limits deterministic checks to integrity of a distinct natural-language reviewer hook."
+    - "Independent source-package review APPROVE; preparing coverage and a real candidate brief before implementation tasks."
+    - "Pre-render review REVISE: preserve hook-generalization control, fresh-root/digest proof and approved-evidence dependency in sources/candidate."
+    - "Historical D-021-100/D-021-101 candidate and rendered attempt were refused as lifecycle-inconsistent evidence."
+    - "SPEC 022 repaired reusable render lifecycle authority; the prior D-021-106 candidate/rendered pair and its final review remain historical evidence."
+    - "T-004 r15 evidence remains independently approved; it does not substitute the new five-identity rendered review required by SPEC 022 T-004."
+    - "D-021-110 begins a source-first recomposition against the now-complete T-001 through T-004 source state."
+  repository_revision: "1568928e5f973a8b3c0602c26c4f22caf72dc450"
+  working_tree_summary: "D-021-115 remains historical signed pre-render authority; D-021-116 is immutable and unsigned. No lifecycle gate, baseline, refresh or delivery is authorized."
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+    evaluator: "/root/reevaluate_spec021_t001"
+    approved_at: "2026-08-30"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+    evaluator: "/root/evaluate_spec021_t002"
+    approved_at: "2026-08-30"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+    evaluator: "/root/evaluate_spec021_t003"
+    approved_at: "2026-08-30"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/T-004.md"
+    evaluator: "/root/review_t004_arch_system"
+    approved_at: "2026-08-30"
+approvals:
+  human_required: false
+  pending: []
+  granted:
+    - "SPEC 020 user instruction authorized creation after a systemic mock-lab finding."
+risks:
+  level: "high"
+  open:
+    - "Do not turn materiality into a universal visual checklist."
+    - "Do not turn the semantic hook into a domain taxonomy, expected-answer prompt or automatic approval seal."
+    - "Do not claim Human Visibility or Tasks Ready before a distinct review of the fresh candidate and rendered artifact."
+evidence:
+  latest: "evidence/T-004.md"
+  approved:
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+    - "evidence/T-004.md"
+next_safe_step: "Retain the recorded post-render review; any Human Visibility or delivery decision remains separate, and Tasks Ready remains false."

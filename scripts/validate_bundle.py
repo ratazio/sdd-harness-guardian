@@ -7,6 +7,9 @@ import re
 import sys
 from pathlib import Path
 
+from validate_pearson_brief_policy import canonical_template_errors
+from architecture_visual_contract import architecture_visual_errors
+
 
 ROOT = Path(__file__).resolve().parent.parent
 ERRORS: list[str] = []
@@ -99,9 +102,19 @@ def stakeholder_brief_errors(html: str, *, rendered: bool) -> list[str]:
     for hook in REQUIRED_BRIEF_SHELL_HOOKS:
         if not re.search(rf'\bclass\s*=\s*["\'][^"\']*\b{re.escape(hook)}\b', html):
             errors.append(f"missing stakeholder brief canonical shell hook: {hook}")
+    if lineage == "v2":
+        errors.extend(architecture_visual_errors(html))
 
     placeholders = V2_BRIEF_TEMPLATE_PLACEHOLDERS if lineage == "v2" else V1_BRIEF_TEMPLATE_PLACEHOLDERS
     if rendered:
+        if lineage == "v2" and re.search(
+            r'<html\b[^>]*\bdata-brief-phase\s*=\s*["\']scaffold["\']', html, re.IGNORECASE
+        ):
+            errors.append("scaffolded v2 stakeholder brief cannot be classified as rendered")
+        if lineage == "v2" and re.search(
+            r'<html\b[^>]*\bdata-harness-template-kind\s*=\s*["\']scaffold["\']', html, re.IGNORECASE
+        ):
+            errors.append("scaffold template identity cannot be classified as rendered")
         for placeholder in placeholders:
             if placeholder in html:
                 errors.append(f"unresolved stakeholder brief placeholder: {placeholder}")
@@ -109,10 +122,10 @@ def stakeholder_brief_errors(html: str, *, rendered: bool) -> list[str]:
         for placeholder in placeholders:
             if placeholder not in html:
                 errors.append(f"missing stakeholder brief template placeholder: {placeholder}")
-        if lineage == "v2":
-            for attribute in ("data-source", "data-source-section", "data-coverage"):
-                if attribute not in html:
-                    errors.append(f"v2 stakeholder brief template lacks provenance attribute: {attribute}")
+        # Provenance belongs to authored, source-backed blocks inside composable
+        # slots.  Route panels are immutable shell structure, so declaring a
+        # partial provenance triplet here would force a candidate either to
+        # fabricate hashes or to mutate the shell it must inherit.
     return errors
 
 
@@ -142,9 +155,18 @@ def main() -> int:
         "prompts/build-the-guardian.md",
         "prompts/use-in-consumer-project.md",
         "scripts/new_initiative.py",
+        "scripts/render_stakeholder_brief.py",
         "scripts/smoke_test_scaffolder.py",
+        "scripts/test_render_stakeholder_brief.py",
+        "scripts/test_renderer_skeleton_boundary.py",
+        "scripts/test_spec028_autonomous_composition_contract.py",
+        "scripts/test_unapproved_brief_render.py",
+        "scripts/test_source_render_isolation.py",
         "scripts/validate_human_visibility.py",
         "scripts/test_validate_human_visibility.py",
+        "scripts/test_quality_review_preview_binding.py",
+        "scripts/validate_pearson_brief_policy.py",
+        "scripts/test_pearson_brief_policy.py",
         "scripts/test_factory_guardian_fixture.py",
         "docs/consumer-enforcement.md",
         ".harness/templates/stakeholder-brief-design.md",
@@ -196,6 +218,8 @@ def main() -> int:
 
     stakeholder_brief = read(templates["stakeholder_brief"])
     for error in stakeholder_brief_errors(stakeholder_brief, rendered=False):
+        check(False, error)
+    for error in canonical_template_errors(ROOT):
         check(False, error)
 
     for rule in manifest_list(manifest, "rules"):

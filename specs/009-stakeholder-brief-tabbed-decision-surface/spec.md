@@ -92,7 +92,7 @@ inventadas.
 |---|---|---|
 | FR-001 | O template v2 SHALL manter um único `stakeholder-brief.html` offline e apresentar as oito visões como abas acessíveis, sem trocar URL para outro arquivo. | A organização visual não pode fragmentar a fonte de leitura. |
 | FR-002 | Cada aba SHALL declarar uma missão curta e uma visão textual inicial: valor/escopo explica missão, valor, outcome, limite, risco e autoridade; arquitetura e impacto explicam missão/visão antes dos detalhes. | A aba deve orientar a leitura, não só agrupar tabelas. |
-| FR-003 | A composição SHALL usar fatos de fonte, `not_applicable` justificado ou unknown acionável; para lacuna material, o autor SHALL formular pergunta, owner, impacto e caminho de resolução. | Evita invenção e placeholders, preservando descoberta proporcional. |
+| FR-003 | A composição SHALL usar fatos de fonte, `not_applicable` justificado ou unknown acionável; para lacuna material, o autor SHALL formular pergunta, owner, impacto **na decisão** e caminho de resolução. | Evita invenção e placeholders, preservando descoberta proporcional. |
 | FR-004 | Execução SHALL projetar o contrato completo de cada task disponível: objetivo/outcome, FR/AC, incremento, escopo/anti-escopo, artefatos/contratos, dependências, risco, assurance, validação, evidência, exit criteria e por que é o próximo passo seguro. | Títulos não bastam para orientar implementação ou avaliação. |
 | FR-005 | Validação SHALL projetar a rastreabilidade de AC, método, comando ou ambiente, fixture, oracle, evidence pack e limite/skip justificado. | Uma decisão de qualidade exige entender o que a prova demonstra. |
 | FR-006 | Arquitetura, impacto, fluxo, dados e controles SHALL usar o perfil proporcional existente: incluir visual/estrutura somente quando há relação material; caso contrário declarar N/A/unknown com fonte. | Generaliza para contextos não-software e mudanças pequenas. |
@@ -111,7 +111,7 @@ inventadas.
 | AC-004 | Arquitetura e impacto exibem introdução própria e detalhe proporcional; exemplos simples/não-software não recebem visual ou detalhe fabricado. | V-004, E-002 |
 | AC-005 | Cada task material no fixture rico é recuperável como contrato de execução, não apenas título/estado. | V-005, M-002 |
 | AC-006 | A matriz de validação permite recuperar AC, método, ambiente/comando, oracle e evidência ou razão de ausência. | V-006, M-003 |
-| AC-007 | Falta material nas fontes produz pergunta/unknown com owner, impacto e resolução; falta não material não gera burocracia. | V-007, E-003 |
+| AC-007 | Falta material nas fontes produz pergunta/unknown com owner, impacto na decisão e resolução; falta não material não gera burocracia. | V-007, E-003 |
 | AC-008 | Teclado, no-script, 390px e print preservam acesso a todo conteúdo; a aba não depende somente de JavaScript. | V-008, M-004 |
 | AC-009 | v1 permanece no caminho legado e a projeção v2 mantém provenance, coverage e estados/gates sem nova fonte de verdade. | V-009, V-REG-001 |
 | AC-010 | Nenhum score, parser semântico, LLM juiz ou gate automático de conteúdo é introduzido. | V-010, V-REG-002 |

@@ -19,6 +19,15 @@ Garantir que toda iniciativa de Spec Driven Development comece com uma spec clar
   abrir os Markdown;
 - revisar proporcionalidade, pedido de decisão e significado dos visuais antes
   do gate Human Visibility Ready;
+- para v2, aplicar o design standard das oito abas como missões condicionais:
+  valor/escopo recupera missão, pilares materiais, limite, risco e autoridade;
+  arquitetura e impacto começam por missão/visão sem inventar tecnicismo;
+  execução/validação recuperam o contrato fonte quando ele existe; evolução,
+  decisão e cobertura revelam estado, autoridade e proveniência;
+- exigir uma pergunta de esclarecimento somente quando a falta muda ou bloqueia
+  decisão, AC, controle de risco, autoridade ou próximo passo; a pergunta
+  informa fato exato, owner, impacto decisório e caminho de resolução na fonte
+  canônica existente;
 - exigir objetivo, contexto, outcome de produto/usuário, outcomes observáveis e
   não objetivos;
 - exigir critérios de aceite testáveis;
@@ -93,6 +102,13 @@ A spec só fica **Spec Ready** se:
   é legível sem depender só de cor;
 - quando um trigger não se aplica, o brief declara uma razão curta em vez de
   inserir diagrama decorativo;
+- as oito abas v2 cumprem suas missões com fatos da fonte, N/A conciso com
+  razão ou unknown/pergunta owned; não há quota de detalhe, API/diagrama falso
+  ou “a confirmar” sem owner, impacto e resolução;
+- quando uma task ou validação canônica contém detalhe material, Execução ou
+  Validação recupera esse contrato em vez de exibir apenas título/status; uma
+  atividade não-software ou sem comando pode usar método/contexto/oracle/evidência
+  proporcionais;
 - a revisão renderizada de 60 segundos permite identificar outcome, impacto,
   tamanho, proporcionalidade e decisão solicitada.
 - para v2, cada heading principal aplicável tem disposição, locator, destino

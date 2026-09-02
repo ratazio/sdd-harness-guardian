@@ -1,0 +1,49 @@
+{
+  "consumer": "fresh source-only scaffold with separate neutral and explicitly selected Pearson fixtures",
+  "neutral": "no Pearson logo request or DOM hook",
+  "pearson": "same-origin approved local logo; focus, responsive, no-script, print and reduced-motion checks passed",
+  "viewports": [
+    "320x700",
+    "390x844",
+    "768x900",
+    "1024x900",
+    "1440x960"
+  ],
+  "viewport_metrics": [
+    {
+      "viewport": "320x700",
+      "h1_font_size_px": 40,
+      "logo_width_px": 128,
+      "root_scroll_width": 320,
+      "body_scroll_width": 320
+    },
+    {
+      "viewport": "390x844",
+      "h1_font_size_px": 40,
+      "logo_width_px": 128,
+      "root_scroll_width": 390,
+      "body_scroll_width": 390
+    },
+    {
+      "viewport": "768x900",
+      "h1_font_size_px": 40,
+      "logo_width_px": 128,
+      "root_scroll_width": 768,
+      "body_scroll_width": 768
+    },
+    {
+      "viewport": "1024x900",
+      "h1_font_size_px": 40.96,
+      "logo_width_px": 128,
+      "root_scroll_width": 1024,
+      "body_scroll_width": 1024
+    },
+    {
+      "viewport": "1440x960",
+      "h1_font_size_px": 57.6,
+      "logo_width_px": 172.797,
+      "root_scroll_width": 1440,
+      "body_scroll_width": 1440
+    }
+  ]
+}

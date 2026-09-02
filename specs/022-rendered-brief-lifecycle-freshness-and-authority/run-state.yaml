@@ -1,0 +1,98 @@
+schema_version: 1
+initiative_id: "022-rendered-brief-lifecycle-freshness-and-authority"
+initiative_sequence: "022"
+initiative_slug: "rendered-brief-lifecycle-freshness-and-authority"
+initiative_kind: "bugfix"
+status: "executing"
+summary: "T-004 independently approved with SPEC 021 exact five-lens rendered evidence; delivery gates remain false."
+brief_lineage: "v2"
+brief_phase: "rendered"
+current_phase: "rendered_decision_review_recorded"
+current_task: null
+last_safe_checkpoint: "Post-render review recorded against the immutable rendered HTML snapshot; no delivery decision was made."
+updated_at: "2026-08-30"
+updated_by: "spec022_state_keeper_d022060"
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: false
+  tasks_ready: false
+  implementation_done: false
+  independent_evaluation_done: false
+  evidence_pack_ready: false
+  validation_done: false
+brief_review:
+  author: "spec022_brief_composer"
+  coverage_reviewer: "/root/review_d022061_candidate"
+  reviewed_at: "2026-08-30"
+  review_record: "decision-log.md#D-022-062"
+  findings_status: "pass"
+  quality_review_required: true
+  quality_review_record: "evidence/T-003-rendered-review-d022062.md"
+  quality_review_status: "approve"
+  quality_review_reviewer: "/root/review_d022062_rendered"
+  quality_review_inputs: "rendered=stakeholder-brief.html@sha256:6a5223898d3516458831643cde4ec6f89ec5fae40c66590f65dae4cee7099e84"
+execution:
+  builder_id: "spec022_state_keeper_d022038"
+  evaluator_id: "/root/final_reevaluate_spec022_t003"
+  started_at: "2026-08-28"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "D-022-060 independently approved T-003; D-022-061 reset only the active source state for a fresh composition."
+  repository_revision: "1568928e5f973a8b3c0602c26c4f22caf72dc450"
+  working_tree_summary: "Promotion and recovery only commit stakeholder-brief.html plus run-state.yaml after exact review."
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/T-004.md"
+    evaluator: "/root/review_t004_arch_system"
+    approved_at: "2026-08-30"
+approvals:
+  human_required: false
+  pending: []
+  granted:
+    - "Standing user authorization to create corrective Guardian SPECs for systemic findings."
+    - "2026-08-28 user authorization to execute SPEC 022; bootstrap is limited to T-001's minimal renderer repair after independent source-package approval."
+    - "2026-08-28 user authorization for a bounded T-002 bootstrap: reconcile ratchet.md across v2 source set, coverage register and baseline with tests/evaluation; no semantic scoring, domain interpretation or scope expansion."
+    - "2026-08-28 user authorization to continue SPEC 022 after critical loop assessment: execute the minimal T-003 repair needed to prevent promotion from reproducing a demonstrated stale lifecycle/authority contradiction."
+risks:
+  level: "high"
+  open:
+    - "Do not turn lifecycle synchronization into arbitrary content rewriting."
+evidence:
+  latest: "evidence/T-004.md"
+  approved:
+    - "evidence/T-000-source-package-review.md"
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+    - "evidence/T-003-final-evaluation-d022060.md"
+    - "evidence/T-004.md"
+next_safe_step: "Retain the recorded post-render review; any Human Visibility or delivery decision remains separate, and Tasks Ready remains false."

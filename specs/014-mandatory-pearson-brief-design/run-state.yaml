@@ -1,0 +1,121 @@
+schema_version: 1
+initiative_id: "014-mandatory-pearson-brief-design"
+initiative_sequence: "014"
+initiative_slug: "mandatory-pearson-brief-design"
+initiative_kind: "feature"
+status: "done"
+summary: "SPEC 014 is complete: canonical Pearson creation routes, consumer-local asset provisioning, flexible deterministic policy and independent corrected-consumer rendered review all passed."
+brief_lineage: "v2"
+current_phase: "complete"
+current_task: null
+last_safe_checkpoint: "2026-08-27: D-022 independently approved T-004; final Human Visibility baseline was written and rechecked clean after the complete state projection."
+updated_at: "2026-08-27"
+updated_by: "build_t001_014"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "Codex / planning author"
+  coverage_reviewer: "review_brief014 / independent reviewer"
+  reviewed_at: "2026-08-27"
+  review_record: "decision-log.md#D-009"
+  findings_status: "pass — D-008 independent approval; D-009 propagated Tasks Ready; reduced motion verified statically because browser emulation was unavailable"
+
+execution:
+  builder_id: "build_t001_014"
+  evaluator_id: "review_planning_gates_014"
+  started_at: "2026-08-27"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "Preserved the pre-gate provenance/font/inventory observations without treating them as task evidence."
+    - "Added the missing V-008 custom-layout exception oracle and complete coverage-composition record."
+    - "Recorded D-007 independent pre-gate rendered-brief PASS; no baseline or task evaluator is claimed."
+    - "Recorded D-008 independent approval of planning, coverage and rendered Human Visibility, including its bounded reduced-motion limitation."
+    - "Propagated D-009: T-001 is ready; no other task is authorized."
+    - "T-002: canonical Pearson shell/default generation independently approved in D-013; baseline refresh remains final T-004 work."
+    - "T-003: deterministic policy, legacy/override controls and fixture matrix passed; awaiting distinct evaluation."
+    - "T-003 revision: unmarked material style, generic second-base and semantic-hook-loss controls added; revised evidence resubmitted for distinct evaluation."
+    - "T-004: fresh consumer emits the local logo URL but the resolved asset is absent; recorded as material blocker with T-002 revision plan."
+    - "T-002 revision: scaffolder now provisions the official local logo after a hash preflight; smoke proves existence/hash/175x53 and no-overwrite failure, while Playwright observes the served fresh-consumer PNG at HTTP 200. Submitted for distinct evaluation."
+    - "T-004: fresh-consumer Chromium evidence captured at 320/768/1024/1440 plus keyboard, 200%, reduced motion, no-script and print; inventory rechecked as 9 rows (7 historical/legacy, 2 scheduled). Submitted with mobile H1/logo guide-alignment findings and no baseline."
+    - "T-004 revision: canonical mobile H1/logo sizing now passes fresh-consumer 320/390 assertions (H1 40px; logo 128px); screenshots/PDF/JSON recaptured and resubmitted under D-021."
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    planner_status: "done"
+    blocker: null
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    planner_status: "done"
+    blocker: null
+    builder: "build_t001_014"
+    evaluator: "review_planning_gates_014"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    planner_status: "done"
+    builder: "build_t001_014"
+    evaluator: "review_planning_gates_014"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    planner_status: "done"
+    blocker: null
+    builder: "build_t001_014"
+    evaluator: "review_planning_gates_014"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: true
+  pending: []
+  granted:
+    - "D-004 independent outcome/spec approval."
+    - "D-007 independent pre-gate rendered-brief PASS (non-authorizing)."
+    - "D-008 independent planning, validation, coverage and Human Visibility approval."
+    - "D-009 Tasks Ready propagation; only T-001 is authorized."
+    - "D-011 independent T-001 evaluation; T-002 is ready."
+    - "D-013 independent T-002 evaluation; T-003 is ready."
+    - "D-016 independent T-003 evaluation; T-004 was the final pending task."
+    - "D-019 independent T-002 asset-distribution revision approval; T-004 resumed."
+    - "D-022 independent T-004 approval; final baseline and completion projection authorized."
+
+risks:
+  level: "high"
+  open: ["U-001 local Plus Jakarta Sans packaging authority"]
+
+evidence:
+  latest: "evidence/T-004.md (D-022 independently approved)"
+  approved: ["T-001", "T-002", "T-003", "T-004"]
+
+next_safe_step: "Complete; preserve D-019 asset-distribution and D-022 rendered-review regressions in future changes."

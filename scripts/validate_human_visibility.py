@@ -18,12 +18,13 @@ from dataclasses import dataclass, field
 from html.parser import HTMLParser
 from pathlib import Path
 
+from brief_v2_sources import V2_EVIDENCE_REFERENCE_SOURCES, V2_REQUIRED_SOURCES, V2_SUPPORT_SOURCES
+from brief_review import yaml_review_finding_outcome
+from render_stakeholder_brief import lifecycle_error
+from architecture_visual_contract import architecture_visual_errors
+from editorial_exceptions import composition_editorial_findings, reviewed_editorial_exception_error
 
 V1_REQUIRED_SOURCES = ("spec.md", "impact-map.md", "plan.md", "validation-plan.md")
-V2_REQUIRED_SOURCES = (
-    "spec.md", "impact-map.md", "plan.md", "tasks.md", "validation-plan.md",
-    "decision-log.md", "progress.md", "run-state.yaml",
-)
 V1_REQUIRED_SECTION_IDS = ("decision-snapshot", "scope", "validation", "decision")
 V2_REQUIRED_SECTION_IDS = (
     "decision-snapshot", "scope", "architecture", "impact", "execution", "validation",
@@ -36,6 +37,25 @@ PLACEHOLDERS = ("<initiative>", "<YYYY-MM-DD>")
 BASELINE_FILE = "human-visibility-baseline.json"
 EXCEPTION_FILE = "human-visibility-exception.yaml"
 
+# Evidence packs are always initiative-relative. The bare form is the normal
+# Markdown/link target form; the second expression deliberately catches paths
+# that reach an evidence directory by traversal or absolute path so they are
+# rejected instead of silently ignored.
+EVIDENCE_REFERENCE = re.compile(
+    r"(?<![A-Za-z0-9_/\\-])(?P<reference>(?:\.[\\/])?evidence[\\/][^\s`<>\"'()\[\]#?]*?\.md)(?:#[^\s`<>\"'()\[\]]*)?"
+)
+UNSAFE_EVIDENCE_REFERENCE = re.compile(
+    r"(?<![A-Za-z0-9_.-])(?P<reference>(?:(?:[A-Za-z]:)?[\\/]|(?:\.\.[\\/])+)[^\s`<>\"'()\[\]#?]*?evidence[\\/][^\s`<>\"'()\[\]#?]*?\.md)(?:#[^\s`<>\"'()\[\]]*)?"
+)
+
+# T-003 deliberately mirrors the bounded grammar approved in
+# specs/012-.../evidence/T-001.md. Product specs may use arbitrary prose;
+# only these explicit source forms create a projection obligation.
+RISK_TABLE_ROW = re.compile(r"^\|\s*(IR-[A-Za-z0-9][A-Za-z0-9_-]*)\s*\|.+\|\s*$")
+HTTP_ROUTE = re.compile(
+    r"\b(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)\s+(/api/[A-Za-z0-9._~!$&'()*+,;=:@%{}\-/]+)(?:\?[^`|\s]*)?"
+)
+
 
 @dataclass
 class Report:
@@ -43,6 +63,7 @@ class Report:
     gate: list[str] = field(default_factory=list)
     freshness: list[str] = field(default_factory=list)
     limitations: list[str] = field(default_factory=list)
+    editorial_exceptions: list[str] = field(default_factory=list)
     human_review: list[str] = field(default_factory=lambda: [
         "Independent reviewer must confirm the brief is accurate, decision-useful, "
         "proportional, and visually legible in its rendered form.",
@@ -77,14 +98,54 @@ class BriefParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self.nodes: list[tuple[str, dict[str, str]]] = []
+        self.rendered_ids: list[str] = []
+        self.tail_tokens: list[str] = []
         self.coverage_rows: list[list[tuple[str, list[str]]]] = []
         self._in_coverage_table = False
         self._row: list[tuple[str, list[str]]] | None = None
         self._cell_parts: list[str] | None = None
+        self.panel_text: dict[str, list[str]] = {panel: [] for panel in ("impact", "architecture", "validation")}
+        self._open_panels: list[tuple[str, str | None]] = []
+        self._inert_depth = 0
+        self._seen_rendered_html_close = False
+        # Tab groups retain node indexes instead of source text.  The
+        # validator must prove only rendered structure; prose that happens to
+        # mention a keyboard key cannot create a tab contract.
+        self.tablist_groups: list[list[int]] = []
+        self._tablist_stack: list[tuple[str, list[int]]] = []
+        self.script_bodies: list[str] = []
+        self._script_body_stack: list[int] = []
+        self.provenance_blocks: list[dict[str, str]] = []
+        self._provenance_stack: list[tuple[str, dict[str, str]]] = []
+
+    def _tail(self, token: str) -> None:
+        if self._seen_rendered_html_close and not self._inert_depth:
+            self.tail_tokens.append(token)
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = {key: value or "" for key, value in attrs}
+        if self._inert_depth:
+            if tag in {"script", "style", "template"}:
+                self._inert_depth += 1
+            return
+        self._tail("element")
         self.nodes.append((tag, values))
+        if "data-source" in values:
+            block = {**values, "__tag": tag, "__text": ""}
+            self.provenance_blocks.append(block)
+            self._provenance_stack.append((tag, block))
+        node_index = len(self.nodes) - 1
+        if values.get("role") == "tablist":
+            group: list[int] = []
+            self.tablist_groups.append(group)
+            self._tablist_stack.append((tag, group))
+        elif values.get("role") == "tab" and self._tablist_stack:
+            # A nested tablist owns its tabs; a surrounding tablist cannot
+            # borrow them to satisfy its own selected/roving state.
+            self._tablist_stack[-1][1].append(node_index)
+        if values.get("id"):
+            self.rendered_ids.append(values["id"])
+        self._open_panels.append((tag, values.get("id") if values.get("id") in self.panel_text else None))
         if tag == "table" and values.get("id") == "coverage-register":
             self._in_coverage_table = True
         elif self._in_coverage_table and tag == "tr":
@@ -95,12 +156,41 @@ class BriefParser(HTMLParser):
             href = values.get("href", "")
             if href.startswith("#"):
                 self._cell_parts.append(href)
+        if tag in {"script", "style", "template"}:
+            if tag == "script":
+                self.script_bodies.append("")
+                self._script_body_stack.append(len(self.script_bodies) - 1)
+            self._inert_depth += 1
 
     def handle_data(self, data: str) -> None:
+        # Script/style/template contents are source code or inert markup, not
+        # text a stakeholder can see in the rendered panel. They must never
+        # satisfy a source-to-brief projection obligation.
+        if self._inert_depth:
+            if self._script_body_stack:
+                self.script_bodies[self._script_body_stack[-1]] += data
+        else:
+            if data.strip():
+                self._tail("text")
+            for _, block in self._provenance_stack:
+                block["__text"] += data
+            for _, panel in self._open_panels:
+                if panel is not None:
+                    self.panel_text[panel].append(data)
         if self._cell_parts is not None:
             self._cell_parts.append(data)
 
     def handle_endtag(self, tag: str) -> None:
+        if self._inert_depth:
+            if tag in {"script", "style", "template"}:
+                if tag == "script" and self._script_body_stack:
+                    self._script_body_stack.pop()
+                self._inert_depth -= 1
+            return
+        if tag == "html":
+            self._seen_rendered_html_close = True
+        else:
+            self._tail("end-tag")
         if self._in_coverage_table and tag in {"td", "th"} and self._row is not None and self._cell_parts is not None:
             self._row.append((" ".join(self._cell_parts).strip(), [part for part in self._cell_parts if part.startswith("#")]))
             self._cell_parts = None
@@ -109,6 +199,27 @@ class BriefParser(HTMLParser):
             self._row = None
         elif self._in_coverage_table and tag == "table":
             self._in_coverage_table = False
+        for index in range(len(self._provenance_stack) - 1, -1, -1):
+            if self._provenance_stack[index][0] == tag:
+                del self._provenance_stack[index:]
+                break
+        for index in range(len(self._open_panels) - 1, -1, -1):
+            if self._open_panels[index][0] == tag:
+                del self._open_panels[index:]
+                break
+        for index in range(len(self._tablist_stack) - 1, -1, -1):
+            if self._tablist_stack[index][0] == tag:
+                del self._tablist_stack[index:]
+                break
+
+    def handle_decl(self, decl: str) -> None:
+        self._tail("declaration")
+
+    def unknown_decl(self, data: str) -> None:
+        self._tail("declaration")
+
+    def handle_pi(self, data: str) -> None:
+        self._tail("processing-instruction")
 
 
 def brief_lineage(html: str) -> str | None:
@@ -126,6 +237,28 @@ def yaml_scalar(content: str, key: str, *, indent: int | None = None) -> str | N
     if not match:
         return None
     return match.group(1).split(" #", 1)[0].strip().strip('"\'')
+
+
+def yaml_raw_scalar(content: str, key: str, *, indent: int | None = None) -> str | None:
+    """Read a scalar without converting whitespace or nested quotes to syntax."""
+    prefix = rf"^\s{{{indent}}}" if indent is not None else r"^\s*"
+    match = re.search(rf"(?m){prefix}{re.escape(key)}:\s?(.*)$", content)
+    return match.group(1) if match else None
+
+
+def yaml_exact_literal(raw_value: str | None, literal: str) -> bool:
+    """Accept one canonical YAML scalar without normalizing its contents.
+
+    YAML quote delimiters are syntax and may surround the literal.  Case,
+    whitespace, embedded quotes and descriptive alternatives are content and
+    must not grant a gate outcome.
+    """
+    if raw_value is None:
+        return False
+    value = raw_value
+    if value[:1] in {"\"", "'"} and value[-1:] == value[:1]:
+        value = value[1:-1]
+    return value == literal
 
 
 def yaml_bool(content: str, key: str) -> bool | None:
@@ -242,7 +375,7 @@ def check_v2_gate_state(initiative: Path, report: Report) -> None:
     reviewer = yaml_scalar(content, "coverage_reviewer", indent=2)
     reviewed_at = yaml_scalar(content, "reviewed_at", indent=2)
     review_record = yaml_scalar(content, "review_record", indent=2)
-    findings = yaml_scalar(content, "findings_status", indent=2)
+    findings = yaml_raw_scalar(content, "findings_status", indent=2)
     if not author:
         report.gate.append("v2 brief_review.author is required")
     if not reviewer:
@@ -253,8 +386,13 @@ def check_v2_gate_state(initiative: Path, report: Report) -> None:
         report.gate.append("v2 brief_review.reviewed_at is required")
     if not review_record or not review_record.startswith("decision-log.md#"):
         report.gate.append("v2 brief_review.review_record must locate a decision-log.md record")
-    if not findings or "pass" not in findings.lower():
-        report.gate.append("v2 brief_review.findings_status must record a resolved pass")
+    try:
+        findings_outcome = yaml_review_finding_outcome(findings)
+    except ValueError as error:
+        report.gate.append(str(error))
+    else:
+        if findings_outcome != "pass":
+            report.gate.append("v2 brief_review.findings_status must be exactly pass for Human Visibility readiness")
     decision_log = initiative / "decision-log.md"
     if review_record and review_record.startswith("decision-log.md#"):
         record_id = review_record.partition("#")[2]
@@ -264,11 +402,86 @@ def check_v2_gate_state(initiative: Path, report: Report) -> None:
         elif gates.get("tasks_ready") is True:
             if "propagat" not in record.lower():
                 report.gate.append("v2 Tasks Ready review record does not confirm decision propagation")
+    check_decision_quality_review(initiative, content, report)
+
+
+def check_decision_quality_review(initiative: Path, state: str, report: Report) -> None:
+    """Verify minimal independent rendered-review evidence, never its judgment.
+
+    Initiatives may add review lenses that fit their own risk and domain, but
+    the reusable validator must not prescribe personas or a review count.  The
+    deterministic boundary is intentionally small: a real record, an exact
+    approval, an independent reviewer, a digest of the rendered artifact, and
+    the loopback preview evidence that makes the rendered claim inspectable.
+    """
+    required = yaml_scalar(state, "quality_review_required", indent=2)
+    if required not in {"true", "True"}:
+        return
+    fields = {key: yaml_scalar(state, key, indent=2) for key in (
+        "quality_review_record", "quality_review_status", "quality_review_reviewer",
+        "quality_review_inputs",
+    )}
+    raw_outcomes = {
+        "quality_review_status": yaml_raw_scalar(state, "quality_review_status", indent=2),
+    }
+    for key, value in fields.items():
+        if not value:
+            report.gate.append(f"v2 decision-quality review lacks brief_review.{key}")
+    # These are closed outcome fields.  Do not turn aliases or prose into
+    # authorization through case folding or whitespace/quote normalization.
+    if fields["quality_review_status"] and not yaml_exact_literal(raw_outcomes["quality_review_status"], "approve"):
+        report.gate.append("v2 decision-quality review status must be exactly approve")
+    reviewer = fields["quality_review_reviewer"] or ""
+    author = yaml_scalar(state, "author", indent=2)
+    if reviewer and author and reviewer == author:
+        report.gate.append("v2 decision-quality reviewer must be distinct from brief_review.author")
+    inputs = fields["quality_review_inputs"] or ""
+    rendered_pattern = r"(?:^|;\s*)rendered=[^;@]+@sha256:[0-9a-fA-F]{64}(?=;|$)"
+    if not re.search(rendered_pattern, inputs):
+        report.gate.append("v2 decision-quality review inputs must locate and digest the rendered artifact")
+    record = fields["quality_review_record"] or ""
+    if record:
+        candidate = (initiative / record).resolve()
+        evidence_root = (initiative / "evidence").resolve()
+        try:
+            contained = candidate.is_relative_to(evidence_root)
+        except AttributeError:
+            contained = str(candidate).startswith(str(evidence_root))
+        if not contained or not candidate.is_file():
+            report.gate.append("v2 decision-quality review record must resolve inside evidence/")
+        elif not candidate.read_text(encoding="utf-8").strip():
+            report.gate.append("v2 decision-quality review record must be nonempty")
+        else:
+            evidence = candidate.read_text(encoding="utf-8")
+            preview = re.search(r"(?m)^\s*Preview URL: `?(?P<url>\S+?)`?\s*$", evidence)
+            if not preview or not re.fullmatch(r"http://127\.0\.0\.1(?::\d{1,5})?(?:/[^\s]*)?", preview.group("url")):
+                report.gate.append("v2 decision-quality review record must contain Preview URL: http://127.0.0.1[:port]/...")
+            environment = re.search(r"(?m)^\s*Preview environment:\s*`?(?P<value>.*?)`?\s*$", evidence)
+            if not environment or not environment.group("value").strip():
+                report.gate.append("v2 decision-quality review record must contain a non-empty Preview environment")
 
 
 def decision_record(path: Path, record_id: str) -> str | None:
-    """Return exactly one Markdown-table row, never an arbitrary log substring."""
-    for line in path.read_text(encoding="utf-8").splitlines():
+    """Resolve one exact table record or explicit Markdown decision section.
+
+    Table rows preserve the legacy concise decision register.  Composition
+    reviews use a headed record so their identity and fields cannot be inferred
+    from an arbitrary substring elsewhere in the log.
+    """
+    log = path.read_text(encoding="utf-8")
+    # A word boundary would treat the hyphen in a longer identifier (for
+    # example, D-001-extra) as a valid terminator.  Headed records must use
+    # the exact ID, followed only by a title boundary.
+    heading = re.compile(rf"(?m)^(?P<level>#+)\s+{re.escape(record_id)}(?=$|\s|—).*$")
+    match = heading.search(log)
+    if match:
+        next_heading = re.compile(r"(?m)^(?P<level>#+)\s+")
+        following = next(
+            (item for item in next_heading.finditer(log, match.end()) if len(item.group("level")) <= len(match.group("level"))),
+            None,
+        )
+        return log[match.start() : following.start() if following else len(log)]
+    for line in log.splitlines():
         if not line.lstrip().startswith("|"):
             continue
         cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
@@ -282,6 +495,164 @@ def coverage_source(cell: str) -> tuple[str | None, str]:
         if cell.startswith(source):
             return source, cell[len(source):].strip(" \t§:-")
     return None, ""
+
+
+def evidence_references(content: str) -> set[str]:
+    """Return every declared evidence path, removing optional heading anchors.
+
+    We intentionally inspect only the canonical v2 source set. Brief
+    provenance is checked separately and must not introduce an untracked file
+    dependency.
+    """
+    return {
+        re.sub(r"^\.[\\/]", "", match.group("reference").split("#", 1)[0])
+        for pattern in (EVIDENCE_REFERENCE, UNSAFE_EVIDENCE_REFERENCE)
+        for match in pattern.finditer(content)
+        # `evidence/*.md` is a documentation glob, not a cited artifact.
+        if "*" not in match.group("reference")
+    }
+
+
+def inventory_risk_ids(impact_map: str) -> set[str]:
+    """Return material IDs only from the first column of Markdown tables."""
+    return {match.group(1) for line in impact_map.splitlines() if (match := RISK_TABLE_ROW.match(line))}
+
+
+def inventory_http_routes(plan: str) -> set[str]:
+    """Return normalized API routes from the T-001 explicit contract grammar."""
+    routes: set[str] = set()
+    in_contract_heading = False
+    table_contract = False
+    for line in plan.splitlines():
+        if not line.strip():
+            table_contract = False
+            continue
+        heading = re.match(r"^#{1,6}\s+(.+)$", line)
+        if heading:
+            in_contract_heading = bool(re.search(r"\b(api|contract)s?\b", heading.group(1), re.IGNORECASE))
+            table_contract = False
+            continue
+        is_table = line.lstrip().startswith("|")
+        if is_table:
+            cells = [cell.strip().lower() for cell in line.strip().strip("|").split("|")]
+            is_separator = all(not cell or set(cell) <= {"-", ":", " "} for cell in cells)
+            has_contract_column = any(re.fullmatch(r"(?:api )?(?:route|method)", cell) for cell in cells)
+            if (in_contract_heading or has_contract_column) and not table_contract:
+                table_contract = True
+                continue
+            if is_separator:
+                continue
+        is_table_contract = is_table and table_contract
+        is_list_contract = in_contract_heading and re.match(r"^\s*[-*]\s+`", line) is not None
+        if is_table_contract or is_list_contract:
+            routes.update(f"{match.group(1)} {match.group(2)}" for match in HTTP_ROUTE.finditer(line))
+    return routes
+
+
+def panel_contains_token(panel_text: str, token: str) -> bool:
+    """Avoid accepting an ID/route merely because it is a longer token's prefix."""
+    return re.search(rf"(?<![A-Za-z0-9_./:{{}}-]){re.escape(token)}(?![A-Za-z0-9_./:{{}}-])", panel_text) is not None
+
+
+def check_v2_projection(initiative: Path, report: Report) -> None:
+    """Prove material source tokens are visible in their prescribed v2 view."""
+    impact_map = initiative / "impact-map.md"
+    plan = initiative / "plan.md"
+    brief = initiative / "stakeholder-brief.html"
+    if not (impact_map.is_file() and plan.is_file() and brief.is_file()):
+        return
+    parser = BriefParser()
+    try:
+        parser.feed(brief.read_text(encoding="utf-8"))
+    except Exception:
+        report.structural.append("invalid v2 stakeholder brief HTML")
+        return
+    impact_text = " ".join(parser.panel_text["impact"])
+    architecture_text = " ".join(parser.panel_text["architecture"])
+    validation_text = " ".join(parser.panel_text["validation"])
+    for risk_id in sorted(inventory_risk_ids(impact_map.read_text(encoding="utf-8"))):
+        if not panel_contains_token(impact_text, risk_id):
+            report.structural.append(f"missing v2 risk projection: {risk_id} from impact-map.md must appear in #impact")
+    for route in sorted(inventory_http_routes(plan.read_text(encoding="utf-8"))):
+        if not (panel_contains_token(architecture_text, route) or panel_contains_token(validation_text, route)):
+            report.structural.append(f"missing v2 API projection: {route} from plan.md must appear in #architecture or #validation")
+
+
+def deferred_task_evidence(initiative: Path) -> set[str]:
+    """Return evidence destinations for tasks not yet ready for evaluation.
+
+    A v2 planning package must declare evidence for every preliminary task, so
+    treating those future destinations as current citations would make a valid
+    `tasks_ready` initiative impossible to baseline.  Once a task reaches
+    needs_evaluation/approved/done, its declared evidence is no longer
+    deferred and missing proof fails normally.
+    """
+    state_path = initiative / "run-state.yaml"
+    if not state_path.is_file():
+        return set()
+    deferred: set[str] = set()
+    content = state_path.read_text(encoding="utf-8")
+    entries = re.split(r"(?m)^\s{2}-\s+id:\s*", content)[1:]
+    for entry in entries:
+        status = yaml_scalar(entry, "status", indent=4)
+        evidence = yaml_scalar(entry, "evidence", indent=4)
+        if status in {"pending", "ready", "in_progress", "blocked"} and evidence:
+            candidate = Path(evidence)
+            if (
+                not candidate.is_absolute()
+                and ".." not in candidate.parts
+                and candidate.parts
+                and candidate.parts[0] == "evidence"
+                and candidate.suffix.lower() == ".md"
+            ):
+                deferred.add(candidate.as_posix())
+    return deferred
+
+
+def check_v2_evidence_references(initiative: Path, report: Report) -> None:
+    """Require cited v2 evidence packs to exist inside this initiative."""
+    initiative_root = initiative.resolve()
+    deferred = deferred_task_evidence(initiative)
+    for source in V2_EVIDENCE_REFERENCE_SOURCES:
+        source_path = initiative / source
+        if not source_path.is_file():
+            continue
+        for reference in sorted(evidence_references(source_path.read_text(encoding="utf-8"))):
+            if reference.replace("\\", "/") in deferred:
+                continue
+            candidate = Path(reference)
+            invalid = (
+                candidate.is_absolute()
+                or ".." in candidate.parts
+                or not candidate.parts
+                or candidate.parts[0] != "evidence"
+                or candidate.suffix.lower() != ".md"
+            )
+            if invalid:
+                report.structural.append(
+                    "invalid v2 evidence reference in " + source
+                    + ": must be an initiative-relative evidence/*.md path without traversal or absolute path"
+                )
+                continue
+            resolved = (initiative_root / candidate).resolve()
+            try:
+                relative = resolved.relative_to(initiative_root)
+            except ValueError:
+                report.structural.append(
+                    "invalid v2 evidence reference in " + source
+                    + ": must resolve inside the initiative evidence directory"
+                )
+                continue
+            if not relative.parts or relative.parts[0] != "evidence":
+                report.structural.append(
+                    "invalid v2 evidence reference in " + source
+                    + ": must resolve inside the initiative evidence directory"
+                )
+                continue
+            if not resolved.is_file():
+                report.structural.append(
+                    f"missing referenced v2 evidence artifact: {relative.as_posix()} (cited by {source})"
+                )
 
 
 def check_v2_coverage_rows(parser: BriefParser, report: Report) -> None:
@@ -321,17 +692,565 @@ def check_v2_coverage_rows(parser: BriefParser, report: Report) -> None:
             report.structural.append(f"missing v2 coverage register entry: {source}")
 
 
-def check_v2_provenance(html: str, report: Report) -> None:
+def check_v2_support_provenance(initiative: Path, parser: BriefParser, report: Report) -> None:
+    """Bind the fixed v2 support source to local bytes without judging its meaning."""
+    for source in V2_SUPPORT_SOURCES:
+        blocks = [block for block in parser.provenance_blocks if block.get("data-source") == source]
+        if not blocks:
+            report.structural.append(f"missing v2 provenance block for required support source: {source}")
+            continue
+        source_path = initiative / source
+        if not source_path.is_file():
+            continue
+        source_text = source_path.read_text(encoding="utf-8")
+        expected_digest = f"sha256:{digest(source_path)}"
+        for block in blocks:
+            section = block.get("data-source-section", "")
+            fragment = block.get("data-source-fragment", "")
+            fragment_digest = block.get("data-source-fragment-sha256", "")
+            coverage = block.get("data-coverage", "")
+            if coverage not in {"represented", "synthesized"}:
+                report.structural.append(f"v2 support source must be represented or synthesized: {source}")
+            if not section or section not in source_text:
+                report.structural.append(f"v2 support provenance section is not present in the local source: {source}")
+            if block.get("data-source-digest") != expected_digest:
+                report.structural.append(f"v2 support provenance digest does not bind the current local source: {source}")
+            if not fragment or fragment not in source_text:
+                report.structural.append(f"v2 support provenance fragment is not present in the current local source: {source}")
+            elif fragment not in block.get("__text", ""):
+                report.structural.append(f"v2 support provenance fragment is not visible in its rendered source block: {source}")
+            expected_fragment_digest = f"sha256:{hashlib.sha256(fragment.encode('utf-8')).hexdigest()}"
+            if fragment_digest != expected_fragment_digest:
+                report.structural.append(f"v2 support provenance fragment digest does not bind the declared source fragment: {source}")
+
+
+def check_v2_represented_source_digests(initiative: Path, parser: BriefParser, report: Report) -> None:
+    """Bind every declared represented local source to its current bytes.
+
+    This is deliberately attribute-driven: a visible phrase never creates a
+    validation obligation.  Decision records retain their separately scoped
+    digest contract; every filesystem-backed represented source is compared
+    directly to the source bytes it declares.
+    """
+    root = initiative.resolve()
+    snapshot_digest = None
+    snapshots = [
+        attrs for tag, attrs in parser.nodes
+        if attrs.get("data-lifecycle-marker") == "rendered-state-digest"
+    ]
+    snapshot_blocks = [
+        block for block in parser.provenance_blocks
+        if (block.get("data-source") == "run-state.yaml"
+            and block.get("data-lifecycle-marker") == "rendered-state-source-digest")
+    ]
+    if snapshot_blocks and len(snapshots) != 1:
+        report.structural.append(
+            "rendered state snapshot requires exactly one data-lifecycle-marker=rendered-state-digest meta"
+        )
+        snapshot_digest = None
+    elif snapshots:
+        snapshot = snapshots[0]
+        if (snapshot.get("data-lifecycle-source") != "run-state.yaml"
+                or snapshot.get("data-lifecycle-fragment") != "rendered run-state bytes"
+                or not re.fullmatch(r"[0-9a-f]{64}", snapshot.get("content", ""))):
+            report.structural.append("rendered state snapshot meta has invalid source, fragment, or digest content")
+            snapshot_digest = None
+        else:
+            snapshot_digest = "sha256:" + snapshot["content"]
+    for block in parser.provenance_blocks:
+        if block.get("data-coverage") != "represented":
+            continue
+        source = block.get("data-source", "")
+        if source == "decision-log.md":
+            continue
+        candidate = initiative / source
+        try:
+            candidate.resolve().relative_to(root)
+        except ValueError:
+            continue
+        if not candidate.is_file():
+            continue
+        snapshot_bound = (
+            source == "run-state.yaml"
+            and block.get("data-lifecycle-marker") == "rendered-state-source-digest"
+        )
+        if snapshot_bound:
+            if not block.get("data-source-fragment") or block["data-source-fragment"] not in block.get("__text", ""):
+                report.structural.append("rendered-state-source-digest block requires a non-empty visible provenance fragment")
+            expected = snapshot_digest
+        else:
+            expected = f"sha256:{digest(candidate)}"
+        if expected is None:
+            continue
+        if block.get("data-source-digest") != expected:
+            report.structural.append(
+                ("v2 represented run-state provenance digest does not bind the rendered snapshot"
+                 if snapshot_bound else
+                 f"v2 represented provenance digest does not bind the current local source: {source}")
+            )
+
+
+def strip_javascript_comments(source: str) -> str:
+    """Return source with comments blanked while retaining executable tokens.
+
+    This is intentionally a small lexical pass, not a JavaScript evaluator.
+    It prevents a comment containing a copied handler from satisfying the
+    static contract while preserving quoted values used by real event calls.
+    """
+    output: list[str] = []
+    index = 0
+    quote: str | None = None
+    while index < len(source):
+        character = source[index]
+        following = source[index + 1] if index + 1 < len(source) else ""
+        if quote:
+            output.append(character)
+            if character == "\\" and index + 1 < len(source):
+                output.append(source[index + 1])
+                index += 2
+                continue
+            if character == quote:
+                quote = None
+            index += 1
+            continue
+        if character in {"'", '"', "`"}:
+            quote = character
+            output.append(character)
+            index += 1
+            continue
+        if character == "/" and following == "/":
+            while index < len(source) and source[index] not in "\r\n":
+                output.append(" ")
+                index += 1
+            continue
+        if character == "/" and following == "*":
+            output.extend((" ", " "))
+            index += 2
+            while index < len(source) - 1 and not (source[index] == "*" and source[index + 1] == "/"):
+                output.append("\n" if source[index] == "\n" else " ")
+                index += 1
+            if index < len(source):
+                output.extend((" ", " "))
+                index += 2
+            continue
+        output.append(character)
+        index += 1
+    return "".join(output)
+
+
+def _matching_javascript_brace(source: str, opening: int) -> int | None:
+    """Find a matching brace outside quoted literals in a bounded source body."""
+    depth = 0
+    index = opening
+    quote: str | None = None
+    while index < len(source):
+        character = source[index]
+        if quote:
+            if character == "\\":
+                index += 2
+                continue
+            if character == quote:
+                quote = None
+            index += 1
+            continue
+        if character in {"'", '"', "`"}:
+            quote = character
+        elif character == "{":
+            depth += 1
+        elif character == "}":
+            depth -= 1
+            if depth == 0:
+                return index
+        index += 1
+    return None
+
+
+def _matching_javascript_parenthesis(source: str, opening: int) -> int | None:
+    """Find a matching parenthesis outside quoted literals in a bounded body."""
+    depth = 0
+    index = opening
+    quote: str | None = None
+    while index < len(source):
+        character = source[index]
+        if quote:
+            if character == "\\" and index + 1 < len(source):
+                index += 2
+                continue
+            if character == quote:
+                quote = None
+            index += 1
+            continue
+        if character in {"'", '"', "`"}:
+            quote = character
+        elif character == "(":
+            depth += 1
+        elif character == ")":
+            depth -= 1
+            if depth == 0:
+                return index
+        index += 1
+    return None
+
+
+def remove_unreachable_javascript_blocks(source: str) -> str:
+    """Blank simple literal-false blocks so copied dead handlers are not proof.
+
+    We do not attempt to prove all JavaScript reachability.  This narrow guard
+    rejects the common `if (false) { ... }` or `if (0) { ... }` token dump and
+    keeps the contract candidly static rather than pretending to execute code.
+    """
+    output = source
+    pattern = re.compile(r"\bif\s*\(\s*(?:false|0)\s*\)\s*\{")
+    search_from = 0
+    while match := pattern.search(output, search_from):
+        opening = output.find("{", match.start(), match.end())
+        closing = _matching_javascript_brace(output, opening)
+        if closing is None:
+            break
+        output = output[:match.start()] + (" " * (closing + 1 - match.start())) + output[closing + 1:]
+        search_from = closing + 1
+    return output
+
+
+def mask_javascript_strings(source: str) -> str:
+    """Blank literals while retaining offsets for code-only method detection."""
+    output: list[str] = []
+    index = 0
+    quote: str | None = None
+    while index < len(source):
+        character = source[index]
+        if quote:
+            output.append("\n" if character == "\n" else " ")
+            if character == "\\" and index + 1 < len(source):
+                output.append(" ")
+                index += 2
+                continue
+            if character == quote:
+                quote = None
+            index += 1
+            continue
+        if character in {"'", '"', "`"}:
+            quote = character
+            output.append(" ")
+        else:
+            output.append(character)
+        index += 1
+    return "".join(output)
+
+
+def _javascript_string_at(source: str, index: int) -> tuple[str, int] | None:
+    while index < len(source) and source[index].isspace():
+        index += 1
+    if index >= len(source) or source[index] not in {"'", '"'}:
+        return None
+    quote = source[index]
+    start = index + 1
+    index += 1
+    value: list[str] = []
+    while index < len(source):
+        character = source[index]
+        if character == "\\" and index + 1 < len(source):
+            value.append(source[index + 1])
+            index += 2
+            continue
+        if character == quote:
+            return "".join(value), index + 1
+        value.append(character)
+        index += 1
+    return None
+
+
+def has_javascript_method_call(source: str, masked: str, method: str, first_argument: str) -> bool:
+    """Find a real method call with its expected first literal argument."""
+    for match in re.finditer(rf"\.{re.escape(method)}\s*\(", masked):
+        value = _javascript_string_at(source, match.end())
+        if value and value[0] == first_argument:
+            return True
+    return False
+
+
+def javascript_key_values(source: str, masked: str) -> set[str]:
+    """Return literal values compared to event.key/event.code in live code."""
+    values: set[str] = set()
+    for match in re.finditer(r"\.(?:key|code)\s*={2,3}", masked):
+        value = _javascript_string_at(source, match.end())
+        if value:
+            values.add(value[0])
+    return values
+
+
+def javascript_tab_initializers(script_bodies: list[str]) -> list[tuple[str, str, str]]:
+    """Discover live, tablist-scoped initializers invoked for every tablist.
+
+    The grammar intentionally permits arbitrary function names and arbitrary
+    tab counts/layout.  It proves the important association: the initializer
+    receives one tablist and bootstrap iterates every declared tablist, rather
+    than relying on document-wide tabs or a canonical count.
+    """
+    source = remove_unreachable_javascript_blocks(strip_javascript_comments("\n".join(script_bodies)))
+    candidates: list[tuple[str, str, str]] = []
+    patterns = (
+        re.compile(r"\bfunction\s+([A-Za-z_$][\w$]*)\s*\(\s*([A-Za-z_$][\w$]*)\s*\)\s*\{"),
+        re.compile(r"\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?\(\s*([A-Za-z_$][\w$]*)\s*\)\s*=>\s*\{"),
+    )
+    for pattern in patterns:
+        for match in pattern.finditer(source):
+            closing = _matching_javascript_brace(source, match.end() - 1)
+            if closing is not None:
+                candidates.append((match.group(1), match.group(2), source[match.end():closing]))
+
+    live: list[tuple[str, str, str]] = []
+    for name, parameter, body in candidates:
+        bootstrap = re.compile(
+            rf"document\s*\.\s*querySelectorAll\s*\(\s*['\"]\[role\s*=\s*['\"]tablist['\"]\]\s*['\"]\s*\)\s*\.\s*forEach\s*\(\s*{re.escape(name)}\s*\)"
+        )
+        if bootstrap.search(source):
+            live.append((name, parameter, body))
+    return live
+
+
+def javascript_named_function_bodies(source: str) -> dict[str, tuple[tuple[str, ...], str]]:
+    """Return bounded named function bodies for a local static call path.
+
+    This deliberately recognizes only ordinary declarations and block-bodied
+    arrow assignments.  The tab contract needs a reviewable proof that a
+    listener is attached for each scoped tab, not a JavaScript interpreter.
+    """
+    functions: dict[str, tuple[tuple[str, ...], str]] = {}
+    patterns = (
+        re.compile(r"\bfunction\s+([A-Za-z_$][\w$]*)\s*\(([^)]*)\)\s*\{"),
+        re.compile(r"\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?\(([^)]*)\)\s*=>\s*\{"),
+        re.compile(r"\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?([A-Za-z_$][\w$]*)\s*=>\s*\{"),
+    )
+    for pattern in patterns:
+        for match in pattern.finditer(source):
+            opening = source.find("{", match.start(), match.end())
+            closing = _matching_javascript_brace(source, opening)
+            if closing is None:
+                continue
+            raw_parameters = match.group(2)
+            parameters = tuple(
+                parameter.strip()
+                for parameter in raw_parameters.split(",")
+                if re.fullmatch(r"[A-Za-z_$][\w$]*", parameter.strip())
+            )
+            functions[match.group(1)] = (parameters, source[opening + 1:closing])
+    return functions
+
+
+def javascript_scoped_tab_collections(body: str, parameter: str) -> set[str]:
+    """Return collection variables sourced directly from this tablist only."""
+    source_pattern = (
+        rf"(?:\[\s*\.\.\.\s*)?\b{re.escape(parameter)}"
+        r"\.querySelectorAll\s*\(\s*['\"]\[role\s*=\s*['\"]tab['\"]\]\s*['\"]\s*\)"
+    )
+    array_source_pattern = (
+        rf"Array\.from\s*\(\s*\b{re.escape(parameter)}"
+        r"\.querySelectorAll\s*\(\s*['\"]\[role\s*=\s*['\"]tab['\"]\]\s*['\"]\s*\)\s*\)"
+    )
+    return {
+        match.group(1)
+        for match in re.finditer(
+            rf"\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:{source_pattern}|{array_source_pattern})",
+            body,
+        )
+    }
+
+
+def _javascript_callback_body(callback: str, functions: dict[str, tuple[tuple[str, ...], str]]) -> tuple[tuple[str, ...], str] | None:
+    """Parse the bounded callback grammar accepted for scoped `forEach`."""
+    callback = callback.strip()
+    named = re.fullmatch(r"([A-Za-z_$][\w$]*)", callback)
+    if named:
+        return functions.get(named.group(1))
+    arrow = re.match(r"(?:\(([^)]*)\)|([A-Za-z_$][\w$]*))\s*=>\s*", callback)
+    function = re.match(r"function\s*\(([^)]*)\)\s*", callback)
+    match = arrow or function
+    if not match:
+        return None
+    raw_parameters = match.group(1) if match.group(1) is not None else match.group(2)
+    parameters = tuple(
+        parameter.strip()
+        for parameter in raw_parameters.split(",")
+        if re.fullmatch(r"[A-Za-z_$][\w$]*", parameter.strip())
+    )
+    remainder = callback[match.end():].strip()
+    if remainder.startswith("{"):
+        closing = _matching_javascript_brace(remainder, 0)
+        if closing is None:
+            return None
+        return parameters, remainder[1:closing]
+    # An expression-bodied callback can only be the activation call itself.
+    return parameters, remainder
+
+
+def _javascript_listener_events(source: str, receivers: tuple[str, ...]) -> set[str]:
+    """Return click/keydown listeners attached to one of the supplied values."""
+    masked = mask_javascript_strings(source)
+    events: set[str] = set()
+    for receiver in receivers:
+        for match in re.finditer(rf"\b{re.escape(receiver)}\.addEventListener\s*\(", masked):
+            value = _javascript_string_at(source, match.end())
+            if value and value[0] in {"click", "keydown"}:
+                events.add(value[0])
+    return events
+
+
+def _javascript_callback_listener_events(
+    callback: tuple[tuple[str, ...], str],
+    functions: dict[str, tuple[tuple[str, ...], str]],
+    visited: set[str],
+) -> set[str]:
+    """Follow a callback's explicit per-tab helper calls, without globals.
+
+    A helper is considered only when the callback passes one of its tab
+    parameters to it.  This rejects a no-op `tabs.forEach` paired with
+    listeners wired solely to a particular DOM element elsewhere.
+    """
+    parameters, body = callback
+    events = _javascript_listener_events(body, parameters)
+    for match in re.finditer(r"\b([A-Za-z_$][\w$]*)\s*\(([^()]*)\)", mask_javascript_strings(body)):
+        name, raw_arguments = match.group(1), match.group(2)
+        helper = functions.get(name)
+        if not helper or name in visited:
+            continue
+        arguments = {argument.strip() for argument in raw_arguments.split(",")}
+        if not arguments.intersection(parameters):
+            continue
+        visited.add(name)
+        events.update(_javascript_callback_listener_events(helper, functions, visited))
+    return events
+
+
+def javascript_scoped_tab_listener_events(body: str, parameter: str) -> set[str]:
+    """Find listeners attached in a callback of a tablist-scoped collection.
+
+    This static grammar permits arbitrary tab counts and arbitrary numbers of
+    tablists.  It only requires that the listener proof belongs to a callback
+    of a collection queried from the initializer's own tablist (or a local
+    helper explicitly invoked with that callback's tab).
+    """
+    functions = javascript_named_function_bodies(body)
+    events: set[str] = set()
+    for collection in javascript_scoped_tab_collections(body, parameter):
+        for match in re.finditer(rf"\b{re.escape(collection)}\.forEach\s*\(", body):
+            closing = _matching_javascript_parenthesis(body, body.find("(", match.start(), match.end()))
+            if closing is None:
+                continue
+            callback = _javascript_callback_body(body[body.find("(", match.start(), match.end()) + 1:closing], functions)
+            if callback is not None:
+                events.update(_javascript_callback_listener_events(callback, functions, set()))
+    return events
+
+
+def check_v2_tab_contract(parser: BriefParser, report: Report) -> None:
+    """Validate the bounded static contract for each declared rendered tablist.
+
+    This deliberately does not execute JavaScript or certify browser/AT
+    behaviour.  It proves that the canonical, progressive-enhancement surface
+    has locally inspectable structural wiring and handler evidence.  The
+    script body is the only accepted location for handler/key tokens, so
+    visible prose cannot mask click-only controls.
+    """
+    if not parser.tablist_groups:
+        return
+
+    nodes_by_id: dict[str, tuple[str, dict[str, str]]] = {
+        attrs["id"]: (tag, attrs)
+        for tag, attrs in parser.nodes
+        if attrs.get("id")
+    }
+    for position, group in enumerate(parser.tablist_groups, start=1):
+        tabs = [parser.nodes[index][1] for index in group]
+        label = f"v2 tablist {position}"
+        if not tabs:
+            report.structural.append(f"{label} has no contained role=tab controls; add a tab or remove the tablist role")
+            continue
+        selected = [tab for tab in tabs if tab.get("aria-selected") == "true"]
+        if len(selected) != 1:
+            report.structural.append(f'{label} must have exactly one aria-selected="true" tab')
+        for tab in tabs:
+            tab_id = tab.get("id", "")
+            if not tab_id:
+                report.structural.append(f"{label} tab requires a non-empty id for aria-labelledby reciprocity")
+                continue
+            panel_id = tab.get("aria-controls", "")
+            panel = nodes_by_id.get(panel_id)
+            if not panel:
+                report.structural.append(f"{label} tab aria-controls must reference a rendered role=tabpanel")
+                continue
+            panel_tag, panel_attrs = panel
+            if panel_attrs.get("role") != "tabpanel" or panel_attrs.get("aria-labelledby") != tab_id:
+                report.structural.append(f"{label} tab/panel aria-controls and aria-labelledby must be reciprocal")
+            if tab.get("aria-selected") == "true":
+                if tab.get("tabindex") != "0":
+                    report.structural.append(f'{label} selected tab must use tabindex="0"')
+            elif tab.get("tabindex") != "-1":
+                report.structural.append(f'{label} unselected tabs must use tabindex="-1"')
+
+    initializers = javascript_tab_initializers(parser.script_bodies)
+    if not initializers:
+        report.structural.append(
+            "v2 tab handler missing a live per-tablist initializer; initialize each rendered tablist without a fixed tab count"
+        )
+        return
+
+    # A single reusable initializer is enough because bootstrap applies it to
+    # every declared tablist.  Conversely, all candidate initializers must be
+    # complete: an alternate live initializer cannot become a weak bypass.
+    for name, parameter, body in initializers:
+        masked = mask_javascript_strings(body)
+        if not re.search(
+            rf"\b{re.escape(parameter)}\.querySelectorAll\s*\(\s*['\"]\[role\s*=\s*['\"]tab['\"]\]\s*['\"]\s*\)",
+            body,
+        ):
+            report.structural.append(f"v2 tab handler initializer {name} must query tabs within its tablist parameter")
+        listener_events = javascript_scoped_tab_listener_events(body, parameter)
+        if not listener_events:
+            report.structural.append(f"v2 tab handler initializer {name} must attach controls for its tab collection")
+        for requirement, event in (("click listener", "click"), ("keydown listener", "keydown")):
+            if event not in listener_events:
+                report.structural.append(f"v2 tab handler initializer {name} missing static {requirement} evidence")
+        if not has_javascript_method_call(body, masked, "setAttribute", "aria-selected"):
+            report.structural.append(f"v2 tab handler initializer {name} missing static selection mutation evidence")
+        if not (re.search(r"\.hidden\s*=", masked) or has_javascript_method_call(body, masked, "setAttribute", "hidden") or has_javascript_method_call(body, masked, "toggleAttribute", "hidden")):
+            report.structural.append(f"v2 tab handler initializer {name} missing static active-panel mutation evidence")
+        if not re.search(r"\.focus\s*\(", masked):
+            report.structural.append(f"v2 tab handler initializer {name} missing static focus mutation evidence")
+        if not (re.search(r"\bhistory\.(?:replaceState|pushState)\s*\(", masked) or re.search(r"(?:\blocation|\bwindow\.location)\.hash\s*=", masked)):
+            report.structural.append(f"v2 tab handler initializer {name} missing static hash/history mutation evidence")
+        key_values = javascript_key_values(body, masked)
+        missing_keys = [key for key in ("ArrowLeft", "ArrowRight", "Home", "End", "Enter") if key not in key_values]
+        if not ({" ", "Space", "Spacebar"} & key_values):
+            missing_keys.append("Space")
+        if missing_keys:
+            report.structural.append(
+                f"v2 tab handler initializer {name} missing static keyboard evidence for: " + ", ".join(missing_keys)
+            )
+
+
+def check_v2_provenance(html: str, report: Report, initiative: Path | None = None) -> None:
     parser = BriefParser()
     try:
         parser.feed(html)
+        parser.close()
     except Exception:
         report.structural.append("invalid v2 stakeholder brief HTML")
         return
     ids = {attrs.get("id") for _, attrs in parser.nodes}
+    duplicate_ids = sorted({identifier for identifier in parser.rendered_ids if parser.rendered_ids.count(identifier) > 1})
+    for identifier in duplicate_ids:
+        report.structural.append(f"duplicate rendered HTML id: {identifier}; make every rendered id unique")
+    if parser.tail_tokens:
+        report.structural.append("rendered content appears after terminal </html>; remove trailing document content")
+    check_v2_tab_contract(parser, report)
+    report.structural.extend(architecture_visual_errors(html))
     if "coverage-register" not in ids:
         report.structural.append("missing v2 human-readable coverage register: coverage-register")
     check_v2_coverage_rows(parser, report)
+    if initiative is not None:
+        check_v2_support_provenance(initiative, parser, report)
+        check_v2_represented_source_digests(initiative, parser, report)
     for tag, attrs in parser.nodes:
         if "data-source" not in attrs:
             continue
@@ -354,10 +1273,21 @@ def check_v2_provenance(html: str, report: Report) -> None:
 
 def check_brief(initiative: Path, report: Report, not_applicable: bool) -> str | None:
     brief = initiative / "stakeholder-brief.html"
+    state_path = initiative / "run-state.yaml"
+    state = state_path.read_text(encoding="utf-8") if state_path.is_file() else ""
+    phase = yaml_scalar(state, "brief_phase") if state else None
     if not brief.is_file():
+        if phase in {"authored", "rendered", "reviewed", "approved"}:
+            report.structural.append(
+                f"run-state brief_phase '{phase}' requires stakeholder-brief.html"
+            )
         if not not_applicable:
             report.structural.append("missing stakeholder brief: stakeholder-brief.html")
         return None
+    if phase is not None and phase not in {"rendered", "reviewed", "approved"}:
+        report.structural.append(
+            "stakeholder-brief.html exists before run-state brief_phase is rendered"
+        )
     html = brief.read_text(encoding="utf-8")
     lineage = brief_lineage(html)
     if lineage is None:
@@ -383,8 +1313,48 @@ def check_brief(initiative: Path, report: Report, not_applicable: bool) -> str |
         else:
             report.structural.extend(design_errors)
     if lineage == "v2":
-        check_v2_provenance(html, report)
+        if phase is None:
+            report.structural.append("v2 stakeholder brief requires run-state brief_phase")
+        if re.search(r'\bdata-brief-phase\s*=\s*["\']scaffold["\']', html):
+            report.gate.append("scaffolded v2 stakeholder brief cannot cross Human Visibility; author and render the source-backed brief first")
+        if "data-lifecycle-marker" in html:
+            lifecycle_failure = lifecycle_error(
+                html, state, initiative, allow_rendered_state_snapshot=True,
+            )
+            if lifecycle_failure:
+                report.structural.append("rendered lifecycle does not bind current run-state: " + lifecycle_failure)
+        check_v2_provenance(html, report, initiative)
     return lineage
+
+
+def check_reviewed_editorial_exceptions(initiative: Path, report: Report) -> None:
+    """Keep a rendered exception visible without mistaking it for a gate pass."""
+    brief = initiative / "stakeholder-brief.html"
+    state_path = initiative / "run-state.yaml"
+    if not brief.is_file() or not state_path.is_file():
+        return
+    html = brief.read_text(encoding="utf-8")
+    if not re.search(r'''(?is)<html\b[^>]*\bdata-composition-contract\s*=\s*["']v3["']''', html):
+        return
+    state = state_path.read_text(encoding="utf-8")
+    record_ref = yaml_scalar(state, "review_record", indent=2)
+    record = None
+    if record_ref and record_ref.startswith("decision-log.md#"):
+        record = decision_record(initiative / "decision-log.md", record_ref.partition("#")[2])
+    findings = composition_editorial_findings(initiative, html)
+    error = reviewed_editorial_exception_error(html, record or "", findings, True)
+    if error:
+        report.structural.append("invalid reviewed editorial exception: " + error)
+        return
+    identifiers = sorted(set(re.findall(r'''\bdata-composition-exception-id\s*=\s*["']([^"']+)["']''', html)))
+    if not identifiers:
+        return
+    report.editorial_exceptions.append(
+        "Open reviewed editorial exception(s) in rendered brief: " + ", ".join(identifiers)
+        + ". They are visible decision debt, not Human Visibility or Tasks Ready approval."
+    )
+    if yaml_bool(state, "human_visibility_ready") or yaml_bool(state, "tasks_ready"):
+        report.gate.append("open reviewed editorial exceptions require Human Visibility and Tasks Ready to remain false")
 
 
 def changed_paths_from_git(root: Path, base_ref: str, initiative: Path) -> tuple[set[str] | None, str | None]:
@@ -536,6 +1506,9 @@ def validate(initiative: Path, root: Path, base_ref: str | None, *, skip_freshne
     lineage = check_brief(initiative, report, exception_scope == "not_applicable")
     if lineage == "v2":
         check_v2_gate_state(initiative, report)
+        check_v2_evidence_references(initiative, report)
+        check_v2_projection(initiative, report)
+    check_reviewed_editorial_exceptions(initiative, report)
     if not skip_freshness and exception_scope != "not_applicable":
         if lineage is not None:
             check_freshness(initiative, root, base_ref, report, exception_scope, lineage)
@@ -567,7 +1540,7 @@ def main() -> int:
         return 0
     report = validate(initiative, root, args.base_ref)
     print("Human Visibility deterministic design-contract validation")
-    for label, entries in (("STRUCTURAL FAILURES", report.structural), ("GATE/STATE INCONSISTENCIES", report.gate), ("FRESHNESS FAILURES", report.freshness), ("LIMITATIONS", report.limitations), ("HUMAN REVIEW REQUIRED", report.human_review)):
+    for label, entries in (("STRUCTURAL FAILURES", report.structural), ("GATE/STATE INCONSISTENCIES", report.gate), ("FRESHNESS FAILURES", report.freshness), ("EDITORIAL EXCEPTIONS (VISIBLE, NOT A GATE PASS)", report.editorial_exceptions), ("LIMITATIONS", report.limitations), ("HUMAN REVIEW REQUIRED", report.human_review)):
         print(f"\n{label}:")
         for entry in entries or ("none",):
             print(f"- {entry}")

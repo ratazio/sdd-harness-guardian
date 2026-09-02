@@ -46,6 +46,11 @@ closed
 - `human_visibility_ready` for v2 requires the corrected render after coverage
   review; `tasks_ready` additionally requires post-meeting decision propagation,
   refreshed coverage/freshness and the regenerated brief;
+- when `brief_review.quality_review_required` is true, the decision-quality
+  record must resolve inside `evidence/`, be nonempty, declare exact
+  `approve`, name a reviewer distinct from `brief_review.author`, and
+  locate/digest the rendered artifact; this is record integrity, never
+  automated prose scoring. Initiatives may add contextual review lenses;
 - before changing `tasks_ready` for v2, record the meeting decision in
   `decision-log.md`, update every affected canonical source, rerun the
   applicable checks and regenerate the derived brief in that order;
@@ -68,5 +73,14 @@ closed
   evidence: "evidence/T-001.md"
   last_transition_at: null
 ```
+
+Use this block-item form for every task that advertises an evidence
+destination. For a v2 planning package, a missing `evidence/T-XXX.md` is
+deferred only while its ledger status is `pending`, `ready`, `in_progress`, or
+`blocked`; that lets preliminary task contracts remain visible without
+fabricating proof. At `needs_evaluation`, `approved`, or `done`, the evidence
+file is required and a missing cited path fails Human Visibility validation.
+This deferral is lifecycle-scoped, not a waiver of containment, source-to-brief
+projection, independent evaluation, or evidence requirements.
 
 Consumers may extend the schema, but protected fields and invariants remain.

@@ -15,9 +15,9 @@ Na raiz do projeto consumidor:
 
 ```bash
 git submodule add https://github.com/SUA-ORG/sdd-harness-guardian.git vendor/sdd-harness-guardian
-git -C vendor/sdd-harness-guardian checkout v0.1.2
+git -C vendor/sdd-harness-guardian checkout v0.4.0
 git add .gitmodules vendor/sdd-harness-guardian
-git commit -m "vendor sdd-harness-guardian@0.1.2"
+git commit -m "vendor sdd-harness-guardian@0.4.0"
 ```
 
 Clones posteriores devem inicializar o submódulo:
@@ -78,9 +78,9 @@ legada sem número com o mesmo slug. Ele apenas copia templates, cria
 `evidence/` e `handoffs/`, atualiza o índice e não executa o workflow.
 
 Sem Python, crie `specs/NNN-<initiative>/`, mantenha `specs/INDEX.md`, e copie
-os arquivos listados em `.harness/templates/README.md`. Substitua os placeholders antes do
-Outcome/Spec Review e mantenha `stakeholder-brief.html` sincronizado para
-iniciativas não triviais.
+somente os artefatos fonte listados em `.harness/templates/README.md`. Não copie,
+abra ou crie `stakeholder-brief.html` nesta fase: ele só pode ser promovido pelo
+comando de renderização depois de fontes e cobertura revisadas.
 
 Iniciativas históricas/pinned com brief v1 continuam válidas sob o contrato
 v1. Não as reescreva automaticamente: em refresh material, siga o diagnóstico
@@ -146,12 +146,12 @@ No repositório fonte:
 
 ```bash
 git add .
-git commit -m "sdd-harness-guardian 0.1.2"
+git commit -m "sdd-harness-guardian 0.4.0"
 git branch -M main
 git remote add origin https://github.com/SUA-ORG/sdd-harness-guardian.git
 git push -u origin main
-git tag -a v0.1.2 -m "sdd-harness-guardian 0.1.2"
-git push origin v0.1.2
+git tag -a v0.4.0 -m "sdd-harness-guardian 0.4.0"
+git push origin v0.4.0
 ```
 
 Nunca mova uma tag publicada. Correções exigem nova versão SemVer.

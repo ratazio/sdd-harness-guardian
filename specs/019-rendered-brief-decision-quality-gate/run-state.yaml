@@ -1,0 +1,101 @@
+schema_version: 1
+initiative_id: "019-rendered-brief-decision-quality-gate"
+initiative_sequence: "019"
+initiative_slug: "rendered-brief-decision-quality-gate"
+initiative_kind: "feature"
+status: "completed"
+summary: "All SPEC-019 tasks are independently approved; r15 proves qualitative mock review without claiming delivery for its disposable consumers."
+brief_lineage: "v2"
+brief_phase: "authored"
+current_phase: "validation_done"
+current_task: null
+last_safe_checkpoint: "T-004 r15 crosswalk independently approved: eight current bindings and 112 review records establish AC-005/V-005 without importing a delivery claim."
+updated_at: "2026-08-30"
+updated_by: "/root/review_t004_arch_system"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "codex-root"
+  coverage_reviewer: "spec019_planning_review"
+  reviewed_at: "2026-08-27"
+  review_record: "decision-log.md#D-006"
+  findings_status: "coverage pass; rendered review pass after D-005 source-to-HTML correction"
+
+execution:
+  builder_id: null
+  evaluator_id: "/root/review_t004_arch_system"
+  started_at: null
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "Independent planning review approved adaptive five-lens protocol."
+    - "T-004 r15 crosswalk independently approved after exact binding and repair-lineage review."
+  repository_revision: null
+  working_tree_summary: "Repository contains pre-existing and active SPEC 009–019 work; preserve unrelated changes."
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    title: "Calibrate five-lens decision-quality review with adaptive fixtures"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    title: "Enforce review-record integrity and lifecycle blocking without semantic scoring"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    title: "Publish reusable rendered-review protocol and source-to-HTML repair guidance"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    title: "Execute and independently assess the full mock suite through all five lenses"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: false
+  pending: []
+  granted:
+    - "D-004: user authorized execution of SPEC 019."
+
+risks:
+  level: "high"
+  open:
+    - "Avoid turning qualitative decision recovery into a fixed visual checklist."
+    - "Future adoption must preserve adaptive human review and must not turn r15's extra coverage into a fixed visual quota."
+
+evidence:
+  latest: "evidence/T-004.md"
+  approved:
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+    - "evidence/T-004.md"
+
+next_safe_step: "SPEC-019 is complete. Preserve the r15 consumer boundary: no baseline, Human Visibility, Tasks Ready, promotion or delivery conclusion is implied for those disposable roots."

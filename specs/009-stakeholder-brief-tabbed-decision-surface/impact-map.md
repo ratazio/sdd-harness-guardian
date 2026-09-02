@@ -75,13 +75,13 @@ complete ordered document.
 
 ## 6. Unknowns
 
-| ID | Unknown | Why it matters | Resolution task/owner | Blocks implementation? |
-|---|---|---|---|---|
-| U-001 | Which native-first tab pattern meets current no-script, keyboard and print contract without a framework? | Interaction choice can otherwise regress accessibility. | T-001 / planner + accessibility reviewer; prototype and inspect browser behavior. | yes |
-| U-002 | Which existing skill/agent is the authoritative authoring entrypoint for a source-sufficiency question? | Adding duplicate guidance would create inconsistent discovery behavior. | T-001 / planner; inventory guidance and select reuse points. | yes |
-| U-003 | Which task fields are stable enough for a detailed card across current consumer templates? | The card must project canonical fields, not invent a new task schema. | T-003 / planner; compare template, 008 and news/blog sandbox. | yes |
-| U-004 | Which validation fields can be consistently recovered when a project has no command? | A mandatory command table would punish legitimate non-software work. | T-004 / planner; use non-software fixture and skip rationale. | no; blocks only contract finalization |
-| U-005 | Whether the current v2 validator can express tab/fallback structure without coupling to prose. | Determines smallest safe test boundary. | T-005 / maintainer; fixture failure-mode comparison. | no |
+| ID | Unknown | Why it matters | Decision impact | Resolution task/owner | Blocks implementation? |
+|---|---|---|---|---|---|
+| U-001 | Resolved by D-015: anchors/panels remain static; inline ARIA enhancement selects at runtime; print CSS reveals all. | Interaction choice was an accessibility risk. | The team can implement the focused view without static hidden content; T-002 repeats proof on the canonical template. | T-001 / planner + accessibility reviewer; approved prototype/evidence. | no |
+| U-002 | Resolved by D-015: design standard authors questions; Spec Guardian/spec-review review; `new_initiative.py` scaffolds. | Duplicate guidance would create inconsistent discovery behavior. | The team can add protocol to existing surfaces without a competing skill/schema. | T-001 / planner; approved entrypoint inventory. | no |
+| U-003 | Resolved by D-021: the existing non-empty task-template contract and validation AC trace are the stable projection fields; optional absence uses concise N/A or a material owned question. | The card must project canonical fields, not invent a new task schema. | T-004 can project those details with child provenance without silently creating a parallel schema. | T-003 / planner + `/root/sandbox_coverage_review`; evidence/T-003.md. | no |
+| U-004 | Resolved by D-025: no-command proof preserves claim, method/manual context, fixture/data when relevant, oracle, evidence, owner and residual skip/limitation. | A mandatory command table would punish legitimate non-software work. | The compact validation view is truthful when it keeps those fields and does not pretend a CLI exists. | T-004 / planner + `/root/sandbox_coverage_review`; evidence/T-004.md. | no |
+| U-005 | Resolved by D-030: `test_tabbed_brief_surface.py` expresses stable tab/fallback/print invariants without coupling to prose. | Determines the smallest safe test boundary. | The team can preserve a targeted structural check while rendered meaning stays independently reviewed. | T-005 / `/root/sandbox_coverage_review`; evidence/T-005.md. | no |
 
 ## 7. Recommended reviewers and checks
 
@@ -103,6 +103,5 @@ complete ordered document.
 review; consumer business questions require their stakeholder owner.  
 **Approval/evidence:** user request in this conversation; planning sources
 complete enough for discovery tasks, not implementation.  
-**Conditions before implementation:** resolve U-001–U-003, keep v1 untouched,
-retain one HTML/fallback, preserve canonical provenance, and keep checks out
-of semantic judgment.
+**Conditions before implementation:** U-001/U-002 are resolved by D-015 and U-003 by D-021. Keep v1 untouched, retain one HTML/fallback,
+preserve canonical provenance, and keep checks out of semantic judgment.

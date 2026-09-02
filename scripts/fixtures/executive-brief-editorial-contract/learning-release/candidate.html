@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><body>
+<section id="architecture" aria-labelledby="architecture-title">
+  <header id="architecture-opening" data-source="source.md" data-source-section="Decision boundary" data-coverage="synthesized">
+    <h1 id="architecture-title">Release confirmation is the decision boundary for a learner result.</h1>
+    <p><strong>Thesis:</strong> a learner result becomes visible only after the publishing contract confirms the release.</p>
+    <p><strong>Decision pillars:</strong> confirmation precedes visibility; the learner shell is the receiving surface; the entitlement guard remains the refusal control.</p>
+    <p><strong>Material limit:</strong> the source names no data store or API. <strong>Next conversation:</strong> determine whether the release is confirmed before exposing the result.</p>
+  </header>
+  <div id="architecture-macro" data-source="source.md" data-source-section="Decision boundary" data-coverage="represented">
+    Learner shell receives the confirmed release from the publishing contract; the entitlement guard remains the refusal control.
+  </div>
+  <div id="architecture-change-map" data-source="source.md" data-source-section="Change surfaces" data-coverage="represented">
+    Changed: learner shell, publishing contract, entitlement guard. Preserved context: reporting warehouse.
+  </div>
+  <div id="architecture-scale" data-source="source.md" data-source-section="Change surfaces" data-coverage="represented">
+    Scale: 3 changed source-supported surfaces / 4 named surfaces. Unit: named surfaces.
+  </div>
+  <div id="learner-shell-zoom" data-source="source.md" data-source-section="Learner-shell zoom" data-coverage="represented">
+    Zoom: the result panel consumes the confirmed release event; route transition and entitlement message remain unchanged.
+  </div>
+</section>
+</body></html>

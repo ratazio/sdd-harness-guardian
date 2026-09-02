@@ -1,0 +1,1817 @@
+<!doctype html>
+<html
+  lang="pt-BR"
+  data-harness-brief-design="v2"
+  data-client-identity-profile="pearson"
+  data-harness-template-kind="composed"
+  data-brief-phase="authored"
+  data-harness-brief-structure="executive-brief-v3"
+  data-harness-brief-profile-template="pearson-selected"
+  data-composition-base="brief-candidates/stakeholder-brief.skeleton.html"
+  data-composition-base-sha256="30379351d23f13f41451b78aa5212eb3efcba85062b0aef55f1dc1436db03db0"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SPEC 025 · candidate de stakeholder brief</title>
+    <style data-harness-pearson-shell>
+      :root {
+        --navy: #0b004a;
+        --violet: #4c30a5;
+        --lav: #edecf5;
+        --lavender: #c1bffa;
+        --paper: #fff;
+        --ink: #0b004a;
+        --muted: #475061;
+        --aqua: #7fdfe0;
+        --green: #007a53;
+        --amber: #8a6800;
+        --danger: #b42318;
+        --line: #c1bffa;
+        --r: 22px;
+        --shadow: 0 16px 40px rgb(11 0 74 / 0.09);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        background: var(--lav);
+        font-family: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
+        color: var(--ink);
+      }
+      body {
+        margin: 0;
+        line-height: 1.55;
+        background: linear-gradient(180deg, #fff 0 15rem, var(--lav) 15rem);
+      }
+      a {
+        color: inherit;
+        text-underline-offset: 0.2em;
+      }
+      a:focus-visible,
+      [role="tab"]:focus-visible {
+        outline: 3px solid var(--aqua);
+        outline-offset: 3px;
+      }
+      .brief-shell {
+        min-width: 1200px;
+      }
+      .top {
+        height: 96px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 64px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .brand img {
+        display: block;
+        width: 175px;
+        height: auto;
+      }
+      .top__meta {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 14px;
+      }
+      .top__tag {
+        padding: 7px 12px;
+        border: 1px solid rgb(255 255 255 / 0.42);
+        border-radius: 999px;
+      }
+      .shell {
+        width: 1440px;
+        margin: auto;
+        padding: 38px 56px 96px;
+      }
+      .notice {
+        margin-bottom: 22px;
+        padding: 15px 20px;
+        border: 1px solid var(--lavender);
+        border-radius: 16px;
+        background: #fff9e7;
+        color: #614b00;
+      }
+      .route-nav {
+        position: sticky;
+        top: 0;
+        z-index: 6;
+        display: flex;
+        gap: 9px;
+        margin-bottom: 34px;
+        padding: 16px 0;
+        background: linear-gradient(90deg, #fff 86%, transparent);
+      }
+      .route-nav a {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 10px 14px;
+        color: var(--navy);
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .route-nav a[aria-current="page"] {
+        border-color: var(--violet);
+        background: var(--violet);
+        color: #fff;
+      }
+      .route {
+        display: grid;
+        gap: 28px;
+        min-height: 660px;
+      }
+      .route[hidden] {
+        display: none;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.38fr 0.62fr;
+        gap: 28px;
+        padding: 44px 52px;
+        border-radius: 30px;
+        background: var(--navy);
+        color: #fff;
+        overflow: hidden;
+        position: relative;
+      }
+      .hero:after {
+        content: "";
+        position: absolute;
+        right: -120px;
+        bottom: -180px;
+        width: 480px;
+        height: 480px;
+        border: 72px solid var(--aqua);
+        border-radius: 50%;
+        opacity: 0.9;
+      }
+      .hero > * {
+        position: relative;
+        z-index: 1;
+      }
+      .eyebrow,
+      .label {
+        margin: 0 0 13px;
+        color: var(--aqua);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .hero h1 {
+        max-width: 20ch;
+        margin: 0;
+        font-size: 51px;
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+        font-weight: 600;
+      }
+      .hero .intro {
+        max-width: 62ch;
+        margin: 16px 0 0;
+        font-size: 18px;
+        color: #edeafd;
+      }
+      .question {
+        align-self: end;
+        padding: 24px;
+        border: 1px solid rgb(255 255 255 / 0.36);
+        border-radius: 18px;
+        background: rgb(11 0 74 / 0.38);
+      }
+      .question b {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--aqua);
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .question p {
+        margin: 0;
+      }
+      .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 30px;
+      }
+      .heading h2 {
+        margin: 0;
+        font-size: 38px;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+      }
+      .heading p {
+        max-width: 64ch;
+        margin: 0;
+        color: var(--muted);
+      }
+      .grid,
+      .snapshot {
+        display: grid;
+        gap: 20px;
+      }
+      .snapshot {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .two {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .three {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .metric,
+      .card,
+      .task,
+      .proof,
+      .zoom,
+      .diagram,
+      .timeline,
+      .gateboard,
+      .matrix,
+      .table-wrap {
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: var(--paper);
+      }
+      .metric {
+        padding: 20px;
+      }
+      .metric h2 {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .metric p,
+      .card p {
+        margin: 0;
+      }
+      .card {
+        padding: 28px;
+      }
+      .card h2,
+      .card h3 {
+        margin: 8px 0 12px;
+        line-height: 1.2;
+      }
+      .card h2 {
+        font-size: 26px;
+      }
+      .card h3 {
+        font-size: 20px;
+      }
+      .slot {
+        position: relative;
+      }
+      .slot:after {
+        content: "a preencher a partir das fontes canônicas";
+        display: block;
+        margin-top: 17px;
+        color: var(--violet);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      [data-brief-phase="authored"] .slot:after {
+        content: none;
+      }
+      .placeholder {
+        margin: 0;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .topology {
+        overflow: auto;
+        padding: 30px;
+      }
+      .topology h2 {
+        margin: 0;
+        font-size: 29px;
+      }
+      .topology-grid {
+        display: grid;
+        grid-template-columns: 1fr 52px 1fr 52px 1fr;
+        align-items: center;
+        min-width: 900px;
+        margin-top: 20px;
+        padding: 28px;
+        background: #f3f2fe;
+        border-radius: 18px;
+      }
+      .node {
+        min-height: 126px;
+        padding: 22px;
+        border: 2px dashed var(--violet);
+        border-radius: 16px;
+        background: #fff;
+      }
+      .node strong {
+        display: block;
+        font-size: 19px;
+      }
+      .node span {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+      }
+      .arrow {
+        color: var(--violet);
+        font-size: 36px;
+        text-align: center;
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 18px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .legend span:before {
+        content: "";
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        margin-right: 6px;
+        border-radius: 50%;
+        background: var(--violet);
+      }
+      .legend .preserved:before {
+        background: var(--green);
+      }
+      .legend .boundary:before {
+        background: #fff;
+        border: 2px dashed var(--amber);
+      }
+      .zoom {
+        padding: 26px;
+        border-top: 7px solid var(--violet);
+      }
+      .zoom h3 {
+        margin: 8px 0;
+        font-size: 23px;
+      }
+      .fields {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 10px 16px;
+        margin: 20px 0 0;
+        font-size: 14px;
+      }
+      .fields dt {
+        font-weight: 700;
+      }
+      .fields dd {
+        margin: 0;
+        color: var(--muted);
+      }
+      .lanes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+      }
+      .lanes article {
+        padding: 30px;
+      }
+      .lanes article:first-child {
+        border-right: 1px solid var(--line);
+        background: #f3f2fe;
+      }
+      .lanes article:last-child {
+        background: #fff6ff;
+      }
+      .lanes h2 {
+        margin: 0 0 10px;
+        font-size: 28px;
+      }
+      .footprint,
+      .riskchain,
+      .guarantees {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .footprint article,
+      .riskchain article,
+      .guarantees article {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .footprint article {
+        border-top: 7px solid var(--violet);
+      }
+      .riskchain article {
+        border-top: 7px solid var(--danger);
+      }
+      .guarantees article {
+        border-top: 7px solid var(--green);
+      }
+      .footprint h3,
+      .riskchain h3,
+      .guarantees h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+      }
+      .rollback {
+        padding: 30px;
+        border: 1px solid #efa99f;
+        border-radius: var(--r);
+        background: #fff8f7;
+      }
+      .rollback h2 {
+        margin: 0 0 8px;
+      }
+      .epics {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .epic {
+        position: relative;
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .epic:not(:last-child):after {
+        content: "→";
+        position: absolute;
+        right: -19px;
+        top: 42%;
+        z-index: 2;
+        color: var(--violet);
+        font-size: 30px;
+      }
+      .epic b {
+        display: block;
+        color: var(--violet);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+      }
+      .epic h3 {
+        margin: 8px 0;
+        font-size: 23px;
+      }
+      .task {
+        padding: 30px;
+        border-top: 7px solid var(--violet);
+      }
+      .task h3 {
+        margin: 8px 0;
+        font-size: 28px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chips span {
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: #f3f2fe;
+        color: var(--violet);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .validation-flow {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .validation-flow article {
+        position: relative;
+        min-height: 140px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+      }
+      .validation-flow article:not(:last-child):after {
+        content: "→";
+        position: absolute;
+        right: -17px;
+        top: 40%;
+        z-index: 2;
+        color: var(--violet);
+        font-size: 27px;
+      }
+      .validation-flow h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+      .proof {
+        padding: 26px;
+        border-top: 7px solid var(--green);
+      }
+      .proof h3 {
+        margin: 8px 0;
+        font-size: 24px;
+      }
+      .matrix {
+        overflow: auto;
+      }
+      .matrix table,
+      .table-wrap table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .matrix th,
+      .matrix td,
+      .table-wrap th,
+      .table-wrap td {
+        padding: 16px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid #e0def8;
+      }
+      .matrix th,
+      .table-wrap th {
+        background: #f3f2fe;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .timeline {
+        padding: 32px;
+      }
+      .timeline article {
+        position: relative;
+        padding: 0 0 28px 28px;
+        border-left: 2px solid var(--lavender);
+      }
+      .timeline article:last-child {
+        padding-bottom: 0;
+      }
+      .timeline article:before {
+        content: "";
+        position: absolute;
+        left: -9px;
+        top: 4px;
+        width: 16px;
+        height: 16px;
+        border: 4px solid var(--lav);
+        border-radius: 50%;
+        background: var(--violet);
+      }
+      .timeline h3 {
+        margin: 0 0 8px;
+        font-size: 21px;
+      }
+      .gateboard {
+        padding: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .gateboard h2 {
+        margin: 0 0 20px;
+        font-size: 30px;
+      }
+      .gates {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .gate {
+        padding: 16px;
+        border: 1px solid rgb(255 255 255 / 0.35);
+        border-radius: 14px;
+      }
+      .gate b {
+        display: block;
+        font-size: 13px;
+      }
+      .gate span {
+        color: var(--aqua);
+        font-weight: 700;
+      }
+      .decision-call {
+        padding: 34px;
+        border: 1px solid var(--line);
+        border-left: 7px solid var(--violet);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .decision-call h2 {
+        margin: 0 0 12px;
+        font-size: 32px;
+      }
+      .footer {
+        margin-top: 60px;
+        padding: 44px 54px;
+        border-radius: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .footer img {
+        width: 175px;
+      }
+      .footer p {
+        max-width: 78ch;
+        margin: 14px 0 0;
+        color: #e5e2f5;
+      }
+      .footer .label {
+        color: var(--aqua);
+      }
+      @media print {
+        .top,
+        .notice,
+        .route-nav,
+        .footer {
+          display: none;
+        }
+        .route,
+        .route[hidden] {
+          display: grid !important;
+          break-after: page;
+        }
+        .shell {
+          width: 100%;
+          padding: 0;
+        }
+        .brief-shell {
+          min-width: 0;
+        }
+        .hero {
+          background: #fff;
+          color: var(--navy);
+          border: 1px solid var(--line);
+        }
+        .hero:after {
+          display: none;
+        }
+        .hero .intro {
+          color: var(--muted);
+        }
+      }
+    </style>
+  </head>
+  <body class="brief-shell" data-router="fallback">
+    <header class="top brief-header">
+      <a
+        class="brand brief-client-logo"
+        href="?view=scope"
+        aria-label="Pearson — visão de escopo"
+        ><img
+          data-pearson-logo
+          src="../../.harness/assets/brand/pearson-logo-white.png"
+          width="175"
+          height="53"
+          alt=""
+      /></a>
+      <div class="top__meta">
+        <span>Stakeholder brief · SPEC 025</span
+        ><span class="top__tag">candidate composto · revisão pendente</span>
+      </div>
+    </header>
+    <main class="shell">
+      <div class="notice">
+        <strong>Candidate fonte-apoiado, ainda não promovido.</strong> Esta
+        composição nasceu da cópia rastreável do skeleton aprovado e recupera
+        as fontes canônicas da SPEC 025. A revisão independente e a atestação
+        exata continuam obrigatórias; Human Visibility e Tasks Ready seguem
+        bloqueados.
+      </div>
+      <nav
+        class="route-nav"
+        role="tablist"
+        aria-label="Visões do stakeholder brief"
+      >
+        <a
+          id="tab-scope"
+          role="tab"
+          href="?view=scope"
+          aria-controls="scope"
+          aria-selected="true"
+          tabindex="0"
+          >Valor e escopo</a
+        ><a
+          id="tab-architecture"
+          role="tab"
+          href="?view=architecture"
+          aria-controls="architecture"
+          aria-selected="false"
+          tabindex="-1"
+          >Arquitetura</a
+        ><a
+          id="tab-impact"
+          role="tab"
+          href="?view=impact"
+          aria-controls="impact"
+          aria-selected="false"
+          tabindex="-1"
+          >Impacto</a
+        ><a
+          id="tab-execution"
+          role="tab"
+          href="?view=execution"
+          aria-controls="execution"
+          aria-selected="false"
+          tabindex="-1"
+          >Execução</a
+        ><a
+          id="tab-validation"
+          role="tab"
+          href="?view=validation"
+          aria-controls="validation"
+          aria-selected="false"
+          tabindex="-1"
+          >Validação</a
+        ><a
+          id="tab-evolution"
+          role="tab"
+          href="?view=evolution"
+          aria-controls="evolution"
+          aria-selected="false"
+          tabindex="-1"
+          >Evolução</a
+        ><a
+          id="tab-decision"
+          role="tab"
+          href="?view=decision"
+          aria-controls="decision"
+          aria-selected="false"
+          tabindex="-1"
+          >Decisão</a
+        ><a
+          id="tab-coverage"
+          role="tab"
+          href="?view=coverage"
+          aria-controls="coverage"
+          aria-selected="false"
+          tabindex="-1"
+          >Cobertura</a
+        >
+      </nav>
+      <section
+        id="scope"
+        class="route"
+        role="tabpanel"
+        aria-labelledby="tab-scope"
+        tabindex="0"
+      >
+        <div class="snapshot">
+          <article class="metric">
+            <h2>Resultado</h2>
+            <p>Uma cadeia única e revisável dos Markdown até o brief humano.</p>
+          </article>
+          <article class="metric">
+            <h2>Decisão</h2>
+            <p>Aprovar o caminho de composição; não uma entrega de produto.</p>
+          </article>
+          <article class="metric">
+            <h2>Limite</h2>
+            <p>Sem renderer semântico, segunda fonte ou reescrita de históricos.</p>
+          </article>
+          <article class="metric">
+            <h2>Autoridade</h2>
+            <p>Candidate em revisão; visibilidade humana e tasks continuam falsas.</p>
+          </article>
+        </div>
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Visão de valor e escopo</p>
+            <h1>
+              Por que esta mudança importa e qual decisão ela torna possível.
+            </h1>
+            <p class="intro" id="scope-outcome">
+              A SPEC 025 torna a composição do stakeholder brief uma passagem
+              explícita e revisável: fontes canônicas orientam um plano editorial,
+              um skeleton visual e um candidate que pode ser entendido sem caçar
+              Markdown.
+            </p>
+          </div>
+          <aside class="question">
+            <b>Pergunta decisória</b>
+            <p>Autorizar um processo de composição confiável, sabendo com
+              precisão o que ele protege e o que ele não autoriza.</p>
+          </aside>
+        </div>
+        <div class="heading">
+          <h2>Pilares de valor</h2>
+          <p>
+            Três compromissos de resultado sustentados pela SPEC, pelo plano e
+            pelos gates de revisão.
+          </p>
+        </div>
+        <div class="three grid">
+          <article class="card">
+            <p class="label">Pilar 01</p>
+            <h3>Decisão recuperável</h3>
+            <p>Outcome, impacto, tasks, provas, limites e próxima decisão ficam
+              legíveis no mesmo artefato offline.</p>
+          </article>
+          <article class="card">
+            <p class="label">Pilar 02</p>
+            <h3>Handoff sem lacunas</h3>
+            <p>O `plan.md` transforma fato material em destino visual antes de
+              o compositor escrever o candidate.</p>
+          </article>
+          <article class="card">
+            <p class="label">Pilar 03</p>
+            <h3>Julgamento preservado</h3>
+            <p>Automação protege integridade; agentes e revisores escolhem
+              narrativa, diagrama, densidade e suficiência.</p>
+          </article>
+        </div>
+        <article class="card" id="scope-boundary">
+          <h2>Dentro, fora e pressupostos</h2>
+          <p>
+            Dentro: mapa editorial, skeleton, composição fonte-apoiada, revisão
+            distinta e promoção guardada. Fora: Python escolhendo forma ou
+            escrevendo conteúdo, segunda fonte MD/JSON, atualização automática
+            de laboratório/histórico e autorização de produto. Pressuposto:
+            fontes canônicas sustentam cada escolha editorial ou uma ausência
+            explicitamente assumida.
+          </p>
+        </article>
+      </section>
+      <section
+        id="architecture"
+        class="route"
+        role="tabpanel"
+        aria-labelledby="tab-architecture"
+        tabindex="0"
+      >
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Visão de arquitetura</p>
+            <h1>
+              Onde a mudança vive, quais relações a sustentam e o que permanece
+              protegido.
+            </h1>
+            <p class="intro">
+              A solução não é um gerador de HTML: é uma cadeia de decisões
+              humana-assistidas. Markdown continua como verdade; o candidate
+              projeta essa verdade visualmente; o renderer apenas promove bytes
+              já atestados.
+            </p>
+          </div>
+          <aside class="question">
+            <b>Pergunta decisória</b>
+            <p>Concordar que integridade estrutural pode ser determinística sem
+              delegar a um script a escolha do que uma SPEC precisa explicar.</p>
+          </aside>
+        </div>
+        <div class="three grid">
+          <article class="card">
+            <p class="label">Pilar 01</p>
+            <h3>Responsabilidades</h3>
+            <p>Compositor escreve; revisor julga; renderer promove; state keeper
+              registra. Nenhum papel substitui o outro.</p>
+          </article>
+          <article class="card">
+            <p class="label">Pilar 02</p>
+            <h3>Fluxo e contratos</h3>
+            <p>Fonte → mapa → skeleton → candidate → atestação → render →
+              revisão, com lifecycle e proveniência explícitos.</p>
+          </article>
+          <article class="card">
+            <p class="label">Pilar 03</p>
+            <h3>Assurance e recuperação</h3>
+            <p>Placeholder, ID perdido, fonte sem alvo ou lifecycle incorreto
+              bloqueiam; suficiência executiva exige revisão humana distinta.</p>
+          </article>
+        </div>
+        <article class="topology diagram" id="architecture-landscape">
+          <p class="label">Panorama da solução</p>
+          <h2>O ecossistema de composição: onde a mudança entra e onde ela para</h2>
+          <div class="topology-grid">
+            <article class="node">
+              <strong>Fontes canônicas da iniciativa</strong
+              ><span>SPEC, plano, impacto, tasks, validação, decisões e estado — preservados como verdade.</span>
+            </article>
+            <span class="arrow">→</span>
+            <article class="node">
+              <strong>Camada alterada: composição editorial</strong
+              ><span>Mapa revisado, skeleton copiado e candidate HTML escrito por agente.</span>
+            </article>
+            <span class="arrow">→</span>
+            <article class="node">
+              <strong>Guarda e decisão humana</strong
+              ><span>Atestação, promoção guardada, revisão renderizada e gate de reunião.</span>
+            </article>
+          </div>
+          <div class="legend">
+            <span>alterado</span><span class="preserved">preservado</span
+            ><span class="boundary">fora da fronteira</span>
+          </div>
+        </article>
+        <article class="topology diagram" id="architecture-relationship-flow">
+          <p class="label">Fluxo da relação material</p>
+          <h2>Como uma fonte ganha forma visual sem perder sua autoridade</h2>
+          <div class="topology-grid">
+            <article class="node">
+              <strong>Gatilho: fato material em Markdown</strong
+              ><span>Outcome, risco, task, prova ou decisão exige um destino visível.</span>
+            </article>
+            <span class="arrow">→</span>
+            <article class="node">
+              <strong>Transição: plano editorial e autoria</strong
+              ><span>O mapa escolhe relação e forma; o agente constrói narrativa, diagrama e dossiê.</span>
+            </article>
+            <span class="arrow">→</span>
+            <article class="node">
+              <strong>Estado observável: candidate revisável</strong
+              ><span>Revisor recupera a decisão; promoção só ocorre com hash, proveniência e lifecycle válidos.</span>
+            </article>
+          </div>
+          <div class="legend">
+            <span>transição material</span><span class="preserved">contrato estável</span
+            ><span class="boundary">não aplicável / fora do fluxo</span>
+          </div>
+        </article>
+        <div class="heading">
+          <h2>Zoom por domínio arquitetural</h2>
+          <p>Zooms tornam explícitas as duas mudanças materiais, sem fingir que
+            a SPEC trata de uma aplicação de software convencional.</p>
+        </div>
+        <div class="two grid">
+          <article class="zoom" data-repeat="architecture-domain">
+            <p class="label">Zoom de arquitetura</p>
+            <h3>Plano editorial e skeleton</h3>
+            <dl class="fields">
+              <dt>Papel / owner</dt>
+              <dd>Compositor visual e revisor de cobertura.</dd>
+              <dt>O que muda</dt>
+              <dd>O plano passa a declarar pergunta, relações, forma, fichas e
+                ausência; o skeleton passa a ser a base física do candidate.</dd>
+              <dt>O que não muda</dt>
+              <dd>Markdown canônico continua dono de fatos, decisões e estado.</dd>
+              <dt>Contrato</dt>
+              <dd>Fonte e locator → bloco visual e motivo; ausência vira
+                descoberta com owner, impacto e resolução.</dd>
+              <dt>Tasks ligadas</dt>
+              <dd>T-001, T-002, T-005 e T-006.</dd>
+              <dt>Falha / recovery</dt>
+              <dd>Omissão ou superfície genérica retorna ao plano; nada é
+                promovido por acabamento aparente.</dd>
+            </dl>
+          </article>
+          <article class="zoom" data-repeat="architecture-domain">
+            <p class="label">Zoom de arquitetura</p>
+            <h3>Candidate, controle e promoção</h3>
+            <dl class="fields">
+              <dt>Papel / owner</dt>
+              <dd>Compositor, avaliador independente, renderer e state keeper.</dd>
+              <dt>O que muda</dt>
+              <dd>Candidate declara a cópia-base e exibe panorama/fluxo distintos;
+                checks passam a testar essa integridade.</dd>
+              <dt>O que não muda</dt>
+              <dd>Renderer não interpreta Markdown nem escolhe diagrama.</dd>
+              <dt>Contrato</dt>
+              <dd>Hash exato, proveniência, slots completos, revisão distinta e
+                lifecycle correto antecedem qualquer promoção.</dd>
+              <dt>Tasks ligadas</dt>
+              <dd>T-003, T-004 e T-006.</dd>
+              <dt>Falha / recovery</dt>
+              <dd>Falha determinística bloqueia; falha editorial gera REVISE,
+                correção na fonte/plano e nova composição.</dd>
+            </dl>
+          </article>
+        </div>
+        <div class="lanes" id="architecture-assurance">
+          <article>
+            <p class="label">Faixa determinística</p>
+            <h2>O que o sistema pode verificar</h2>
+            <p>IDs, slots, proveniência, lifecycle e integridade.</p>
+          </article>
+          <article>
+            <p class="label">Faixa de julgamento</p>
+            <h2>O que pessoas e agentes precisam decidir</h2>
+            <p>Proporcionalidade, forma, clareza e utilidade executiva.</p>
+          </article>
+        </div>
+        <div class="notice" id="architecture-state">
+          <strong>Ausência tratada:</strong> não existe arquitetura de produto,
+          API ou banco de dados nesta SPEC; o objeto arquitetural material é a
+          cadeia de composição e controle. A ausência de uma topologia de
+          aplicação não é um buraco: é uma fronteira fonte-apoiada.
+        </div>
+      </section>
+      <section
+        id="impact"
+        class="route"
+        role="tabpanel"
+        aria-labelledby="tab-impact"
+        tabindex="0"
+      >
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Visão de impacto</p>
+            <h1>
+              Quem e o que muda, quais exposições surgem e como cada uma será
+              controlada.
+            </h1>
+            <p class="intro">
+              A mudança atua sobre sete superfícies do bundle: plano, lifecycle
+              do candidate, promoção, revisão humana, papéis, laboratório e
+              briefs futuros. Ela reduz perda de contexto sem reclassificar o
+              HTML como fonte canônica.
+            </p>
+          </div>
+          <aside class="question">
+            <b>Pergunta decisória</b>
+            <p>Autorizar uma camada visual mais profunda sem permitir que ela
+              vire um caminho concorrente, um gerador semântico ou uma falsa
+              aprovação de entrega.</p>
+          </aside>
+        </div>
+        <div class="heading">
+          <h2>Footprint de mudança</h2>
+          <p>Uma ficha por superfície material afetada.</p>
+        </div>
+        <div class="footprint" id="impact-footprint">
+          <article>
+            <h3>Plano e composição</h3>
+            <p>O mapa editorial ganha pergunta, relação, forma e ficha;
+              compositor e revisor distintos controlam perda de fonte.</p>
+          </article>
+          <article>
+            <h3>Candidate e promoção</h3>
+            <p>O skeleton vira base declarada do candidate; renderer conserva
+              hash, lifecycle, proveniência e recusa de placeholders.</p>
+          </article>
+          <article>
+            <h3>Leitura humana</h3>
+            <p>Arquitetura, impacto, execução e validação ficam recuperáveis;
+              revisão humana continua dona de utilidade e proporcionalidade.</p>
+          </article>
+        </div>
+        <div class="heading">
+          <h2>Cadeias de risco e controle</h2>
+          <p>Sinal → consequência → controle → owner → próxima ação.</p>
+        </div>
+        <div class="riskchain" id="impact-risks">
+          <article>
+            <h3>Forma vira regra fixa</h3>
+            <p>Sinal: diagrama genérico. Consequência: overfitting. Controle:
+              plano seleciona paisagem e fluxo por fonte; owner: compositor.</p>
+          </article>
+          <article>
+            <h3>Acabamento mascara omissão</h3>
+            <p>Sinal: task ou prova ausente. Consequência: decisão cega.
+              Controle: paridade de IDs e revisão fonte → bloco; owner: reviewer.</p>
+          </article>
+          <article>
+            <h3>HTML assume autoridade indevida</h3>
+            <p>Sinal: candidate tratado como entrega. Consequência: gate falso.
+              Controle: lifecycle, faixa visível e promoção guardada; owner: state keeper.</p>
+          </article>
+        </div>
+        <div class="two grid">
+          <article class="rollback" id="impact-rollback">
+            <h2>Rollback e recuperação</h2>
+            <p>
+              Gatilho: composição inventa forma/fato, rompe proveniência ou
+              reduz uma decisão a cartão vazio. Ação: abandonar o candidate,
+              corrigir fonte/plano e recompor; preservar Markdown, evidência e
+              históricos. Owner: compositor com revisão distinta.
+            </p>
+          </article>
+          <article class="card" id="impact-lab-boundary">
+            <p class="label">Fronteira protegida</p>
+            <h2>O que esta mudança não toca</h2>
+            <p>
+              `build_spec024_heterogeneous_references.py`, `testes/mock-runs/`
+              e briefs históricos não são regenerados nem adotados. O HTML
+              continua derivado; decisões e tasks continuam nos Markdown.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section
+        id="execution"
+        class="route"
+        role="tabpanel"
+        aria-labelledby="tab-execution"
+        tabindex="0"
+      >
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Visão de execução</p>
+            <h1>
+              Como os incrementos seguros se conectam ao resultado, aos gates e
+              às evidências.
+            </h1>
+            <p class="intro">
+              A execução foi deliberadamente encadeada: primeiro tornar o
+              handoff visível, depois impedir omissões, provar a cadeia em
+              M-003 e, agora, compor o primeiro candidate diretamente do
+              skeleton aprovado.
+            </p>
+          </div>
+          <aside class="question">
+            <b>Pergunta decisória</b>
+            <p>T-006 pode ser composto e revisado; promoção, Human Visibility
+              e Tasks Ready permanecem bloqueados até os gates próprios.</p>
+          </aside>
+        </div>
+        <div class="heading">
+          <h2>Arco de épicos ou fases</h2>
+          <p>
+            Três ondas reais de trabalho, cada uma reduzindo uma classe
+            diferente de perda ou ambiguidade.
+          </p>
+        </div>
+        <div class="epics">
+          <article class="epic">
+            <b>ÉPICO / FASE 01</b>
+            <h3>Definir o handoff</h3>
+            <p>T-001 e T-002 tornam mapa e skeleton recuperáveis antes de
+              qualquer redação.</p>
+          </article>
+          <article class="epic">
+            <b>ÉPICO / FASE 02</b>
+            <h3>Blindar a composição</h3>
+            <p>T-003 e T-004 verificam paridade e demonstram a cadeia em caso
+              rico, sem tocar referências históricas.</p>
+          </article>
+          <article class="epic">
+            <b>ÉPICO / FASE 03</b>
+            <h3>Comprometer e preencher a forma</h3>
+            <p>T-005 criou o contrato visual; T-006 materializa-o como candidate
+              da própria SPEC 025 para revisão.</p>
+          </article>
+        </div>
+        <div class="heading">
+          <h2>Dossiês de task</h2>
+          <p>
+            Cada task material possui esta ficha inteira. Status não substitui
+            contexto, risco nem critério de saída.
+          </p>
+        </div>
+        <article class="task" id="task-T-001">
+          <div class="chips">
+            <span>T-001</span><span>done · contrato A2</span
+            ><span>cobertura revisada</span>
+          </div>
+          <h3>Tornar o handoff editorial executável</h3>
+          <dl class="fields">
+            <dt>Outcome</dt>
+            <dd>Mapa por rota/bloco com fonte, fato, forma, alvo e estado.</dd>
+            <dt>Escopo / anti-escopo</dt>
+            <dd>Plano, guidance e workflow; não há promoção nem geração factual.</dd>
+            <dt>Dependência</dt>
+            <dd>D-025-008; fontes canônicas e revisão de cobertura.</dd>
+            <dt>Risco / controle</dt>
+            <dd>Material perdido ou duplicado; controle: locator e revisor distinto.</dd>
+            <dt>Validação / aceite</dt>
+            <dd>V-025-01: item material possui destino ou ausência justificada.</dd>
+            <dt>Evidência</dt>
+            <dd>`evidence/T-001.md` e D-025-009.</dd>
+            <dt>Exit / por que agora</dt>
+            <dd>Handoff pronto antes de criar qualquer skeleton; evita improviso.</dd>
+          </dl>
+        </article>
+        <article class="task" id="task-T-002">
+          <div class="chips">
+            <span>T-002</span><span>done · contrato A2</span
+            ><span>lifecycle protegido</span>
+          </div>
+          <h3>Materializar skeleton não promocionável</h3>
+          <dl class="fields">
+            <dt>Outcome</dt>
+            <dd>O plano aprovado aparece como slots visíveis em oito rotas.</dd>
+            <dt>Escopo / anti-escopo</dt>
+            <dd>Identidade, slots e recusa; não existe prosa factual gerada.</dd>
+            <dt>Dependência</dt>
+            <dd>T-001 e perfil de identidade selecionado.</dd>
+            <dt>Risco / controle</dt>
+            <dd>Casca apresentada como entrega; controle: fase skeleton e recusa do renderer.</dd>
+            <dt>Validação / aceite</dt>
+            <dd>V-025-02: rotas/slots existem e a promoção é negada.</dd>
+            <dt>Evidência</dt>
+            <dd>`evidence/T-002.md` e fixtures de lifecycle.</dd>
+            <dt>Exit / por que agora</dt>
+            <dd>O compromisso visual vem antes do preenchimento para expor lacunas cedo.</dd>
+          </dl>
+        </article>
+        <article class="task" id="task-T-003">
+          <div class="chips">
+            <span>T-003</span><span>done · contrato A2</span
+            ><span>integridade determinística</span>
+          </div>
+          <h3>Proteger a integridade da composição</h3>
+          <dl class="fields">
+            <dt>Outcome</dt>
+            <dd>IDs, slots, tarefas, provas, proveniência e exceções visíveis são verificáveis.</dd>
+            <dt>Escopo / anti-escopo</dt>
+            <dd>Checks estreitos; não há score de prosa, arquitetura ou beleza.</dd>
+            <dt>Dependência</dt>
+            <dd>T-002 e candidate com alvos estáveis.</dd>
+            <dt>Risco / controle</dt>
+            <dd>Brief polido omite material; controle: paridade positiva/negativa antes da promoção.</dd>
+            <dt>Validação / aceite</dt>
+            <dd>V-025-03, V-025-04 e V-025-08.</dd>
+            <dt>Evidência</dt>
+            <dd>`evidence/T-003.md`; testes de composição e renderer.</dd>
+            <dt>Exit / por que agora</dt>
+            <dd>Preserva controle mínimo sem converter uma decisão humana em regra.</dd>
+          </dl>
+        </article>
+        <article class="task" id="task-T-004">
+          <div class="chips">
+            <span>T-004</span><span>done · piloto A2</span
+            ><span>revisão renderizada</span>
+          </div>
+          <h3>Provar o handoff no piloto M-003</h3>
+          <dl class="fields">
+            <dt>Outcome</dt>
+            <dd>Um M-003 fresco recupera cinco tasks, sete provas, impactos e rollback.</dd>
+            <dt>Escopo / anti-escopo</dt>
+            <dd>Root descartável; não altera referências SPEC 024 nem histórias.</dd>
+            <dt>Dependência</dt>
+            <dd>T-003, fontes M-003 e avaliador distinto.</dd>
+            <dt>Risco / controle</dt>
+            <dd>Piloto herda autoridade errada; controle: revisão fonte → render e hashes.</dd>
+            <dt>Validação / aceite</dt>
+            <dd>V-025-05, V-025-06 e V-025-07.</dd>
+            <dt>Evidência</dt>
+            <dd>`evidence/T-004.md` e revisão renderizada do piloto.</dd>
+            <dt>Exit / por que agora</dt>
+            <dd>Confirma a cadeia em caso rico antes de endurecer o contrato visual.</dd>
+          </dl>
+        </article>
+        <article class="task" id="task-T-005">
+          <div class="chips">
+            <span>T-005</span><span>done · contrato A2</span
+            ><span>revisão independente</span>
+          </div>
+          <h3>Fazer o contrato visual ser real</h3>
+          <dl class="fields">
+            <dt>Outcome</dt>
+            <dd>Template e skeleton passam a ter oito subpáginas e componentes de storytelling.</dd>
+            <dt>Escopo / anti-escopo</dt>
+            <dd>Plano profundo, design, slots e contratos; não há promoção nem conteúdo de produto.</dd>
+            <dt>Dependência</dt>
+            <dd>T-001–T-004 e feedback do requester sobre a insuficiência visual.</dd>
+            <dt>Risco / controle</dt>
+            <dd>Esqueleto virar página de âncoras; controle: rotas reais, paridade e revisão.</dd>
+            <dt>Validação / aceite</dt>
+            <dd>V-025-09: arquitetura, tasks e provas têm modelos completos antes da composição.</dd>
+            <dt>Evidência</dt>
+            <dd>`evidence/T-005.md` e D-025-011.</dd>
+            <dt>Exit / por que agora</dt>
+            <dd>O agente ganha forma visual deliberada antes de começar a escrever.</dd>
+          </dl>
+        </article>
+        <article class="task" id="task-T-006">
+          <div class="chips"><span>T-006</span><span>in progress · candidate only</span><span>revisão pendente</span></div>
+          <h3>Compor a SPEC 025 a partir do skeleton</h3>
+          <dl class="fields">
+            <dt>Outcome</dt><dd>Candidate rastreável recupera seis tasks, dez validações, impacto, autoridade e o panorama/fluxo arquitetural.</dd>
+            <dt>Escopo / anti-escopo</dt><dd>Cópia-base, autoria HTML/CSS/JS e revisão; não promove nem substitui o brief histórico.</dd>
+            <dt>Dependência</dt><dd>T-005, D-025-012 e fontes canônicas atualizadas.</dd>
+            <dt>Risco / controle</dt><dd>Divergência ou invenção; hash-base, mapa, paridade e avaliador independente.</dd>
+            <dt>Validação / aceite</dt><dd>V-025-10: base declarada, sem slots materiais pendentes e leitura recuperável por rota.</dd>
+            <dt>Evidência</dt><dd>`evidence/T-006.md` após revisão do candidate.</dd>
+            <dt>Exit / por que agora</dt><dd>Primeira prova de que o skeleton é base de trabalho, não exemplo.</dd>
+          </dl>
+        </article>
+      </section>
+      <section
+        id="validation"
+        class="route"
+        role="tabpanel"
+        aria-labelledby="tab-validation"
+        tabindex="0"
+      >
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Visão de validação</p>
+            <h1>
+              Como a iniciativa merece confiança e quais limites a evidência
+              ainda mantém.
+            </h1>
+            <p class="intro">
+              A confiança vem de duas fontes complementares: checks repetíveis
+              recusam integridade/lifecycle incorretos, enquanto revisão distinta
+              verifica que uma pessoa consegue recuperar a decisão no HTML.
+            </p>
+          </div>
+          <aside class="question">
+            <b>Pergunta decisória</b>
+            <p>Para T-006, provar que a cópia-base é explícita, que as relações
+              arquiteturais foram escolhidas pelas fontes e que nenhum fato
+              material se perdeu antes de qualquer promoção.</p>
+          </aside>
+        </div>
+        <div class="heading">
+          <h2>Pilares e fluxo de validação</h2>
+          <p>
+            Cada camada responde a uma pergunta diferente; nenhuma delas, sozinha,
+            autoriza Human Visibility.
+          </p>
+        </div>
+        <div class="validation-flow">
+          <article>
+            <h3>1. Checagens estruturais</h3>
+            <p>Rotas, IDs, slots, perfil, hash-base, lifecycle e proveniência.</p>
+          </article>
+          <article>
+            <h3>2. Comportamento / integração</h3>
+            <p>Fixture M-003, renderer guardado e regressões dos contratos v2/v3.</p>
+          </article>
+          <article>
+            <h3>3. Revisão humana</h3>
+            <p>O avaliador recupera decisão, impacto, tasks, provas e limites.</p>
+          </article>
+          <article>
+            <h3>4. Evidência e gate</h3>
+            <p>Evidence pack, decisão independente e gate explicitamente falso ou verdadeiro.</p>
+          </article>
+        </div>
+        <div class="heading">
+          <h2>Dossiês de prova e critérios de aceite</h2>
+          <p>
+            Uma ficha por validação ou AC; uma linha de comando isolada jamais
+            basta.
+          </p>
+        </div>
+        <article class="proof" id="proof-V-025-01">
+          <p class="label">V-025-01</p>
+          <h3>O mapa editorial recupera o material do piloto M-003</h3>
+          <dl class="fields">
+            <dt>Elemento / objetivo</dt>
+            <dd>Confirmar que fonte, rota e bloco preservam cada item material do caso rico.</dd>
+            <dt>Método / contexto</dt>
+            <dd>Compositor e revisor comparam as fontes M-003 ao mapa de cobertura em plan.md.</dd>
+            <dt>Critério de aceite / oracle</dt>
+            <dd>Nenhum outcome, impacto, task, prova, decisão ou limite material fica sem destino ou ausência justificada.</dd>
+            <dt>Evidência / owner</dt>
+            <dd>Mapa e revisão de T-001; owner: compositor e revisor de cobertura distinto.</dd>
+            <dt>Limite</dt>
+            <dd>Paridade não julga se a narrativa final é útil; essa decisão é humana.</dd>
+          </dl>
+        </article>
+        <article class="proof" id="proof-V-025-02">
+          <p class="label">V-025-02</p>
+          <h3>O skeleton expõe o contrato, mas recusa promoção</h3>
+          <dl class="fields">
+            <dt>Elemento / objetivo</dt>
+            <dd>Provar que a casca por iniciativa permanece claramente distinta de um brief entregue.</dd>
+            <dt>Método / contexto</dt>
+            <dd>Fixture verifica a identidade skeleton, slots e estado fonte-only; renderer tenta a promoção e a recusa.</dd>
+            <dt>Critério de aceite / oracle</dt>
+            <dd>O arquivo fica em brief-candidates, declara skeleton/not_rendered e não pode ser entrada do renderer.</dd>
+            <dt>Evidência / owner</dt>
+            <dd>Fixtures e evidência T-002; owner: builder de lifecycle e mantenedor do renderer.</dd>
+            <dt>Limite</dt>
+            <dd>Essa recusa não prova que a composição futura seja completa.</dd>
+          </dl>
+        </article>
+        <article class="proof" id="proof-V-025-03">
+          <p class="label">V-025-03</p>
+          <h3>Tasks e provas projetadas não desaparecem entre mapa e candidate</h3>
+          <dl class="fields">
+            <dt>Elemento / objetivo</dt>
+            <dd>Checar a presença e a rota correta dos IDs materiais.</dd>
+            <dt>Método / contexto</dt>
+            <dd>Fixtures positivas e negativas confrontam targets do mapa com o DOM do candidate M-003.</dd>
+            <dt>Critério de aceite / oracle</dt>
+            <dd>Task pertence a Execução; prova/AC pertence a Validação; slot, ID ou link ausente falha antes da promoção.</dd>
+            <dt>Evidência / owner</dt>
+            <dd>Testes T-003 e candidate piloto; owner: builder de contrato.</dd>
+            <dt>Limite</dt>
+            <dd>O DOM não determina se a explicação de uma task é suficiente para um executivo.</dd>
+          </dl>
+        </article>
+        <article class="proof" id="proof-V-025-04">
+          <p class="label">V-025-04</p>
+          <h3>Impacto, controle, owner e autoridade continuam recuperáveis</h3>
+          <dl class="fields">
+            <dt>Elemento / objetivo</dt>
+            <dd>Evitar que a forma visual apague controle, responsabilidade ou limite decisório.</dd>
+            <dt>Método / contexto</dt>
+            <dd>Revisor percorre fonte → bloco no candidate → consequência para a decisão.</dd>
+            <dt>Critério de aceite / oracle</dt>
+            <dd>Cada cadeia material revela superfície, exposição, controle e owner; o HTML não recebe autoridade canônica.</dd>
+            <dt>Evidência / owner</dt>
+            <dd>Revisão de T-003; owner: executive brief reviewer.</dd>
+            <dt>Limite</dt>
+            <dd>É revisão de julgamento; não há score automático de clareza.</dd>
+          </dl>
+        </article>
+        <article class="proof" id="proof-V-025-05">
+          <p class="label">V-025-05</p>
+          <h3>A experiência renderizada é revisada depois da promoção, não antes</h3>
+          <dl class="fields">
+            <dt>Elemento / objetivo</dt>
+            <dd>Confirmar a sequência de lifecycle que separa candidate de artefato renderizado.</dd>
+            <dt>Método / contexto</dt>
+            <dd>Revisor distinto inspeciona o M-003 promovido em desktop, mobile, no-script e impressão, com fontes e mapa.</dd>
+            <dt>Critério de aceite / oracle</dt>
+            <dd>Atestação de hash antecede promoção; revisão de experiência ocorre sobre os bytes promovidos.</dd>
+            <dt>Evidência / owner</dt>
+            <dd>Capturas e registro de revisão T-004; owner: revisor pós-render.</dd>
+            <dt>Limite</dt>
+            <dd>Uma revisão aprovada não abre Tasks Ready; a reunião continua sendo gate separado.</dd>
+          </dl>
+        </article>
+        <article class="proof" id="proof-V-025-06">
+          <p class="label">V-025-06</p>
+          <h3>A nova cadeia não rompe as garantias existentes</h3>
+          <dl class="fields">
+            <dt>Elemento / objetivo</dt>
+            <dd>Preservar promoção, v1/v2, template, perfil Pearson, arquitetura, no-script e impressão.</dd>
+            <dt>Método / contexto</dt>
+            <dd>Suite focada de renderer, composição, Human Visibility, arquitetura e validação do bundle.</dd>
+            <dt>Critério de aceite / oracle</dt>
+            <dd>Os contratos protegidos seguem verdes sem ampliar o renderer para autoria semântica.</dd>
+            <dt>Evidência / owner</dt>
+            <dd>Logs T-002–T-004; owner: mantenedor Guardian.</dd>
+            <dt>Limite</dt>
+            <dd>Regressão verde não substitui a revisão de uma composição concreta.</dd>
+          </dl>
+        </article>
+        <article class="proof" id="proof-V-025-07">
+          <p class="label">V-025-07</p>
+          <h3>Laboratórios e históricos permanecem fora da cadeia</h3>
+          <dl class="fields">
+            <dt>Elemento / objetivo</dt>
+            <dd>Evitar que a correção do processo reescreva evidência histórica ou resultados descartáveis.</dd>
+            <dt>Método / contexto</dt>
+            <dd>Inventário de caminhos e hashes antes/depois do piloto M-003.</dd>
+            <dt>Critério de aceite / oracle</dt>
+            <dd>Gerador SPEC 024 continua evidence-only; mock runs e briefs históricos não sofrem refresh em massa.</dd>
+            <dt>Evidência / owner</dt>
+            <dd>Preservation hashes T-004; owner: mock-lab maintainer.</dd>
+            <dt>Limite</dt>
+            <dd>Preservação não torna automaticamente os artefatos antigos adequados ao novo contrato.</dd>
+          </dl>
+        </article>
+        <article class="proof" id="proof-V-025-08">
+          <p class="label">V-025-08</p>
+          <h3>Uma exceção editorial é dívida visível, não bypass</h3>
+          <dl class="fields">
+            <dt>Elemento / objetivo</dt>
+            <dd>Permitir ressalva mecânica somente quando a decisão e o risco permanecem explícitos.</dd>
+            <dt>Método / contexto</dt>
+            <dd>Fixture v3 positiva/negativa verifica finding atual, hash/manifesto, owner, prazo, ação e decisão de proceder.</dd>
+            <dt>Critério de aceite / oracle</dt>
+            <dd>Sem ressalva exata e não expirada a promoção recusa; integridade, lifecycle, proveniência e identidade continuam bloqueantes.</dd>
+            <dt>Evidência / owner</dt>
+            <dd>Teste T-003 e piloto T-004; owner: revisor distinto e decision owner.</dd>
+            <dt>Limite</dt>
+            <dd>A exceção jamais torna Human Visibility ou Tasks Ready verdadeiros.</dd>
+          </dl>
+        </article>
+        <article class="proof" id="proof-V-025-09">
+          <p class="label">V-025-09</p>
+          <h3>O contrato visual é compreensível antes da composição factual</h3>
+          <dl class="fields">
+            <dt>Elemento / objetivo</dt>
+            <dd>Garantir que as oito rotas já expressem storytelling, arquitetura, tasks, provas e aceite.</dd>
+            <dt>Método / contexto</dt>
+            <dd>Teste estrutural verifica template e skeleton; reviewer distinto inspeciona em desktop.</dd>
+            <dt>Critério de aceite / oracle</dt>
+            <dd>Rotas, tabpanels, modelos de componente e fichas materiais aparecem antes da redação, sem inventar fatos.</dd>
+            <dt>Evidência / owner</dt>
+            <dd>`scripts/test_spec025_visual_skeleton.py`, evidence/T-005.md e D-025-011; owner: visual-contract builder.</dd>
+            <dt>Limite</dt>
+            <dd>O skeleton é forma de trabalho, não candidate composto nem aprovação de conteúdo.</dd>
+          </dl>
+        </article>
+        <article class="proof" id="proof-V-025-10">
+          <p class="label">V-025-10</p>
+          <h3>Este candidate vem do skeleton e escolhe arquitetura pelo contexto real</h3>
+          <dl class="fields">
+            <dt>Elemento / objetivo</dt>
+            <dd>Demonstrar que a primeira composição da SPEC 025 parte da cópia-base e não de uma releitura do layout.</dd>
+            <dt>Método / contexto</dt>
+            <dd>Checar metadata da base/hash, ausência de slots materiais e revisão fonte → paisagem da solução e fluxo de controle.</dd>
+            <dt>Critério de aceite / oracle</dt>
+            <dd>O candidate identifica o skeleton, contém seis tasks e dez provas, separa panorama de fluxo e continua não promovido.</dd>
+            <dt>Evidência / owner</dt>
+            <dd>Candidate T-006, atestação exata e revisão independente ainda pendentes; owner: visual-composer e executive brief reviewer.</dd>
+            <dt>Limite</dt>
+            <dd>Esta composição não substitui stakeholder-brief.html, não abre gates e não dispensa a avaliação distinta.</dd>
+          </dl>
+        </article>
+        <div class="matrix">
+          <table>
+            <thead>
+              <tr>
+                <th>Elemento</th>
+                <th>Validação</th>
+                <th>Critério de aceite</th>
+                <th>Evidência / owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Integridade da projeção</td><td>V-025-01–03</td><td>Mapa, IDs, rotas e slots mantêm fonte → destino.</td><td>T-001–T-003 · compositor/reviewer</td></tr>
+              <tr><td>Autoridade e experiência</td><td>V-025-04–05</td><td>Controle e lifecycle são recuperáveis; revisão ocorre após promoção.</td><td>T-003–T-004 · reviewer distinto</td></tr>
+              <tr><td>Preservação e exceções</td><td>V-025-06–08</td><td>Contratos, história e hard gates não são relaxados.</td><td>T-003–T-004 · maintainers/decision owner</td></tr>
+              <tr><td>Contrato e candidate atual</td><td>V-025-09–10</td><td>Forma visual existe antes da composição; base e arquitetura contextual são recuperáveis.</td><td>T-005–T-006 · visual reviewer</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="guarantees" id="validation-guarantees">
+          <article>
+            <h3>Garantia preservada</h3>
+            <p>Um único workflow e papéis distintos; HTML offline, perfil Pearson quando selecionado, acessibilidade, no-script, impressão, v1/v2 e promoção guardada continuam compatíveis.</p>
+          </article>
+          <article>
+            <h3>Limite conhecido</h3>
+            <p>Checks verificam integridade, não a qualidade executiva. O candidate atual ainda exige atestação de hash e avaliação distinta antes de qualquer promoção.</p>
+          </article>
+          <article>
+            <h3>Próxima revisão</h3>
+            <p>Gatilho: candidate T-006 sem slots materiais. Owner: executive brief reviewer; ação: confrontar fontes, mapa e rotas antes de autorizar render.</p>
+          </article>
+        </div>
+      </section>
+      <section
+        id="evolution"
+        class="route"
+        role="tabpanel"
+        aria-labelledby="tab-evolution"
+        tabindex="0"
+      >
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Visão de evolução</p>
+            <h1>
+              Decisões, gates e recuperação que tornam o progresso confiável.
+            </h1>
+            <p class="intro">
+              A iniciativa saiu de uma tabela editorial livre para uma cadeia
+              única: plano de construção, skeleton não promocionável, candidate
+              composto, atestação exata, promoção guardada e revisão renderizada.
+              O contrato visual foi aprofundado após o requester apontar que a
+              casca não comprometia a narrativa nem os componentes necessários.
+            </p>
+          </div>
+          <aside class="question">
+            <b>Pergunta decisória</b>
+            <p>O candidate da T-006 pode ser escrito e revisado; ele não está
+              promovido e nenhum gate humano ou de tasks foi aberto.</p>
+          </aside>
+        </div>
+        <div class="two grid">
+          <div class="timeline" id="evolution-decisions">
+            <p class="label">Linha do tempo decisória</p>
+            <article>
+              <h3>D-025-001–003 · caminho único e lifecycle reparado</h3>
+              <p>Guardian maintainers escolheram plan.md como handoff único,
+                skeleton externo e renderer de promoção. A revisão independente
+                aceitou a ordem candidate → atestação → render → revisão.</p>
+            </article>
+            <article>
+              <h3>D-025-008–011 · execução e contrato visual controlados</h3>
+              <p>O requester autorizou execução com hard gates preservados; a
+                T-005 corrigiu o contrato visual e recebeu aprovação independente,
+                sem transformar skeleton em entrega.</p>
+            </article>
+            <article>
+              <h3>D-025-012 · skeleton passa a ser a base obrigatória</h3>
+              <p>O requester autorizou somente a composição do candidate T-006:
+                cópia rastreável do skeleton, paisagem contextual e fluxo distinto
+                quando a relação material justificar ambos.</p>
+            </article>
+          </div>
+          <aside class="gateboard" id="evolution-state">
+            <p class="label">Board de gates</p>
+            <h2>Autoridade explícita, nunca inferida do acabamento visual.</h2>
+            <div class="gates">
+              <div class="gate">
+                <b>Spec / plano</b><span>prontos</span>
+              </div>
+              <div class="gate"><b>Cobertura</b><span>pronta</span></div>
+              <div class="gate">
+                <b>Visibilidade humana</b><span>falsa · revisão renderizada não ocorreu para este candidate</span>
+              </div>
+              <div class="gate"><b>Tasks ready</b><span>falsa · reunião/propagação não ocorreram</span></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+      <section
+        id="decision"
+        class="route"
+        role="tabpanel"
+        aria-labelledby="tab-decision"
+        tabindex="0"
+      >
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Visão de decisão</p>
+            <h1>
+              Pedido claro, owner responsável, alternativas e próximo passo
+              seguro.
+            </h1>
+            <p class="intro">
+              A decisão em pauta não é aprovar um produto nem promover este
+              candidate. É confirmar que a T-006 deve seguir para atestação e
+              revisão distinta como demonstração da cadeia corrigida.
+            </p>
+          </div>
+          <aside class="question">
+            <b>Pergunta decisória</b>
+            <p>Manter o candidate em revisão e autorizar somente a avaliação
+              independente quando sua composição fonte-apoiada estiver atestada.</p>
+          </aside>
+        </div>
+        <article class="decision-call" id="decision-call">
+          <p class="label">Decisão solicitada</p>
+          <h2>Aprovar a passagem controlada de candidate composto para revisão independente — não para entrega</h2>
+          <dl class="fields">
+            <dt>Por que agora</dt>
+            <dd>O requester aceitou o skeleton como base e autorizou a T-006; este candidate é a primeira prova de preenchimento in situ.</dd>
+            <dt>Alternativas / trade-offs</dt>
+            <dd>Parar no skeleton preserva segurança, mas não prova a autoria; promover agora aceleraria a aparência de conclusão, mas violaria atestação e revisão.</dd>
+            <dt>Autoridade / limite</dt>
+            <dd>D-025-012 permite somente composição do candidate. O requester não autorizou promoção, substituição do brief ou abertura de gates.</dd>
+            <dt>Próximo passo seguro</dt>
+            <dd>Owner: executive brief reviewer. Ação: comparar fontes, mapa, base/hash e oito rotas; retorno somente com decisão independente e evidência T-006.</dd>
+          </dl>
+        </article>
+        <div class="table-wrap" id="decision-audience">
+          <table>
+            <thead>
+              <tr>
+                <th>Público</th>
+                <th>Precisa entender</th>
+                <th>Suporte à decisão</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Compositor</td><td>O que cada fonte deve preencher sem inventar relação ou forma.</td><td>Plano, slots, metadata de base e dossiês por rota.</td></tr>
+              <tr><td>Revisor independente</td><td>Se decisão, impacto, tasks, provas, autoridade e limites podem ser recuperados.</td><td>Comparação fonte → bloco → decisão e atestação do candidate exato.</td></tr>
+              <tr><td>Decisor executivo</td><td>O que a iniciativa melhora e o que ainda não está autorizado.</td><td>Estado explícito, trade-offs, next step e fronteiras.</td></tr>
+              <tr><td>Mantenedor Guardian</td><td>Se existe apenas um caminho canônico sem regressão ou concorrência.</td><td>Garantias preservadas, testes e fronteira do laboratório.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section
+        id="coverage"
+        class="route"
+        role="tabpanel"
+        aria-labelledby="tab-coverage"
+        tabindex="0"
+      >
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Visão de cobertura</p>
+            <h1>
+              Por que este brief é confiável sem transformar HTML em segunda
+              fonte de verdade.
+            </h1>
+            <p class="intro">
+              Este candidate projeta fatos dos Markdown indicados no plano;
+              ele não substitui SPEC, tasks, decisões ou estado. Cada rota usa
+              a disposição representado ou sintetizado do mapa editorial, e a
+              única pendência é a revisão independente da T-006 antes de render.
+            </p>
+          </div>
+          <aside class="question">
+            <b>Pergunta decisória</b>
+            <p>As fontes materiais têm alvo em rota; o revisor deve testar se a
+              projeção preserva o fato e sua consequência decisória, não apenas
+              se uma tabela contém o nome do arquivo.</p>
+          </aside>
+        </div>
+        <div class="guarantees">
+          <article>
+            <h3>Representado</h3>
+            <p>Fato fonte aparece diretamente no brief.</p>
+          </article>
+          <article>
+            <h3>Sintetizado</h3>
+            <p>Várias fontes formam síntese limitada e rastreável.</p>
+          </article>
+          <article>
+            <h3>Ausência justificada</h3>
+            <p>Ausência é owned, não perdida em silêncio.</p>
+          </article>
+        </div>
+        <div class="table-wrap" id="coverage-register">
+          <table>
+            <thead>
+              <tr>
+                <th>Fonte / locator</th>
+                <th>Fato decisório</th>
+                <th>Bloco visual</th>
+                <th>Disposição / razão</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>spec.md §§1–8, 12</td><td>Problema, outcome, requisitos, fronteiras, decisão e públicos.</td><td>Valor, Arquitetura, Decisão</td><td>Representado; define o que a cadeia pode e não pode autorizar.</td></tr>
+              <tr><td>plan.md §§2–4, 7</td><td>Sequência, construção profunda, seleção de arquitetura e mapa fonte → alvo.</td><td>Arquitetura, Execução, Validação, Cobertura</td><td>Representado/sintetizado; escolhe componentes sem se tornar nova verdade.</td></tr>
+              <tr><td>tasks.md T-001–T-006</td><td>Incrementos, dependências, risco, saída e evidence.</td><td>Execução</td><td>Representado; um dossiê por task material.</td></tr>
+              <tr><td>validation-plan.md V-025-01–10</td><td>Método, oracle, evidência e limite de cada afirmação.</td><td>Validação</td><td>Representado; um dossiê por prova/critério.</td></tr>
+              <tr><td>impact-map.md; decision-log.md; run-state.yaml</td><td>Superfícies, limites, decisões, gates e próximo passo autorizado.</td><td>Impacto, Evolução, Decisão</td><td>Representado; autoridade segue no Markdown e estado canônico.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <footer class="footer">
+        <img
+          data-pearson-logo
+          src="../../.harness/assets/brand/pearson-logo-white.png"
+          width="175"
+          height="53"
+          alt="Pearson"
+        />
+        <p class="label">Candidate composto · ainda não promovido</p>
+        <p>
+          Cópia declarada do skeleton da SPEC 025, preenchida a partir das
+          fontes canônicas. A atestação exata e a revisão independente ainda
+          são obrigatórias; este arquivo não substitui stakeholder-brief.html
+          nem autoriza Human Visibility ou Tasks Ready.
+        </p>
+      </footer>
+    </main>
+    <script>
+      (() => {
+        if (
+          location.pathname.replace(/\\/g, "/").includes("/brief-candidates/")
+        )
+          document
+            .querySelectorAll("[data-pearson-logo]")
+            .forEach(
+              (img) =>
+                (img.src =
+                  "../../../.harness/assets/brand/pearson-logo-white.png"),
+            );
+        const tabs = [...document.querySelectorAll('[role="tab"]')],
+          routes = tabs.map((tab) =>
+            document.getElementById(tab.getAttribute("aria-controls")),
+          );
+        tabs.forEach(
+          (tab) =>
+            (tab.dataset.view =
+              new URL(tab.href, location.href).searchParams.get("view") ||
+              tab.getAttribute("aria-controls")),
+        );
+        const current = () => {
+          const view = new URL(location.href).searchParams.get("view");
+          return tabs.find((tab) => tab.dataset.view === view) || tabs[0];
+        };
+        let active = tabs[0];
+        const activate = (tab, focus = false, write = false) => {
+          active = tab;
+          tabs.forEach((candidate, index) => {
+            const selected = candidate === tab;
+            candidate.setAttribute("aria-selected", String(selected));
+            candidate.setAttribute("aria-current", selected ? "page" : "false");
+            candidate.tabIndex = selected ? 0 : -1;
+            routes[index].hidden = !selected;
+          });
+          if (write) {
+            const url = new URL(location.href);
+            url.searchParams.set("view", tab.dataset.view);
+            url.hash = "";
+            history.pushState({ briefView: tab.dataset.view }, "", url);
+          }
+          if (focus) routes[tabs.indexOf(tab)].focus();
+          document.body.dataset.router = "active";
+        };
+        activate(current());
+        tabs.forEach((tab, index) => {
+          tab.addEventListener("click", (event) => {
+            event.preventDefault();
+            activate(tab, true, true);
+          });
+          tab.addEventListener("keydown", (event) => {
+            const next = {
+              ArrowRight: (index + 1) % tabs.length,
+              ArrowLeft: (index - 1 + tabs.length) % tabs.length,
+              Home: 0,
+              End: tabs.length - 1,
+            }[event.key];
+            if (next !== undefined) {
+              event.preventDefault();
+              tabs[next].focus();
+              activate(tabs[next], false, true);
+            }
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              activate(tab, true, true);
+            }
+          });
+        });
+        addEventListener("popstate", () => activate(current()));
+        addEventListener("beforeprint", () =>
+          routes.forEach((route) => (route.hidden = false)),
+        );
+        addEventListener("afterprint", () => activate(active));
+      })();
+    </script>
+  </body>
+</html>

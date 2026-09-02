@@ -1,0 +1,85 @@
+schema_version: 1
+initiative_id: "025-brief-composition-handoff-skeleton"
+initiative_sequence: "025"
+initiative_slug: "brief-composition-handoff-skeleton"
+initiative_kind: "feature"
+status: "awaiting_human_visibility"
+summary: "T-006 candidate was independently approved for inspection; it remains unpromoted and awaits stakeholder direction."
+brief_lineage: "v2"
+brief_phase: "rendered"
+current_phase: "candidate_inspection"
+current_task: null
+last_safe_checkpoint: "T-006 candidate copied from the approved skeleton, passed regression checks and independent composition review; no promotion occurred."
+updated_at: "2026-09-01"
+updated_by: "/root"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: false
+  tasks_ready: false
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "/root"
+  coverage_reviewer: "/root/spec025_prerender_brief_review"
+  reviewed_at: "2026-09-01"
+  review_record: "decision-log.md#D-025-007"
+  findings_status: "pass"
+  quality_review_required: true
+  quality_review_record: "evidence/post-render-review.md"
+  quality_review_status: "approve"
+  quality_review_reviewer: "/root/spec025_postrender_brief_review"
+  quality_review_inputs: "rendered=stakeholder-brief.html@sha256:b071f06e3345a772e44ae0d5388ea6ffbce30dc49bfb797a6b1c91dab0f569a8"
+
+execution:
+  builder_id: "/root"
+  evaluator_id: "/root/spec025_contract_audit"
+  started_at: "2026-09-01"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint: []
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger: []
+
+approvals:
+  human_required: false
+  pending: []
+  granted: []
+
+risks:
+  level: "high"
+  open:
+    - "Do not add a second source of truth or a competing semantic renderer."
+    - "Do not turn structural slot checks into a quality or aesthetic score."
+
+evidence:
+  latest: "evidence/T-006.md"
+  approved:
+    - "evidence/T-005.md"
+    - "evidence/T-006.md"
+
+next_safe_step: "Have the stakeholder inspect the composed candidate and decide whether to request changes, authorize exact pre-render attestation, or keep it as a demonstration only."

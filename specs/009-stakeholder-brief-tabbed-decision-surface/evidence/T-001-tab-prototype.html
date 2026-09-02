@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Protótipo T-001 — abas progressivas em um brief</title>
+  <style>
+    :root { color-scheme: light; font: 16px/1.5 system-ui, sans-serif; }
+    body { margin: 0; color: #17211f; background: #f4f1ea; }
+    main { max-width: 62rem; margin: auto; padding: 1.5rem; }
+    .tablist { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+    [role="tab"] { border: 1px solid #78948e; border-radius: .4rem; background: #fffdf8; color: #084b45; padding: .55rem .8rem; text-decoration: none; }
+    [role="tab"][aria-selected="true"] { border-color: #084b45; background: #084b45; color: #fff; font-weight: 700; }
+    [role="tab"]:focus-visible, [role="tabpanel"]:focus-visible { outline: 3px solid #e6a632; outline-offset: 3px; }
+    [role="tabpanel"] { border: 1px solid #d9d5ca; border-radius: .8rem; background: #fffdf8; padding: 1.25rem; }
+    [role="tabpanel"] + [role="tabpanel"] { margin-top: 1rem; }
+    .note { border-left: .3rem solid #0e665d; padding-left: .75rem; color: #45514f; }
+    @media (max-width: 390px) { main { padding: .75rem; } .tablist { display: grid; grid-template-columns: 1fr 1fr; } [role="tab"] { min-width: 0; overflow-wrap: anywhere; } }
+    @media print { .tablist { display: none; } [role="tabpanel"][hidden] { display: block !important; } }
+  </style>
+</head>
+<body data-tab-enhancement="fallback">
+  <main>
+    <h1>Uma fonte, oito lentes</h1>
+    <p class="note">Sem JavaScript, todas as seções abaixo permanecem visíveis em ordem de documento; os links funcionam como âncoras.</p>
+    <nav class="tablist" aria-label="Visões do brief" role="tablist">
+      <a id="tab-scope" role="tab" href="#scope" aria-controls="scope" aria-selected="true">Valor e escopo</a>
+      <a id="tab-architecture" role="tab" href="#architecture" aria-controls="architecture" aria-selected="false">Arquitetura</a>
+      <a id="tab-impact" role="tab" href="#impact" aria-controls="impact" aria-selected="false">Impacto</a>
+      <a id="tab-execution" role="tab" href="#execution" aria-controls="execution" aria-selected="false">Execução</a>
+      <a id="tab-validation" role="tab" href="#validation" aria-controls="validation" aria-selected="false">Validação</a>
+      <a id="tab-evolution" role="tab" href="#evolution" aria-controls="evolution" aria-selected="false">Evolução</a>
+      <a id="tab-decision" role="tab" href="#decision" aria-controls="decision" aria-selected="false">Decisão</a>
+      <a id="tab-coverage" role="tab" href="#coverage" aria-controls="coverage" aria-selected="false">Cobertura</a>
+    </nav>
+    <section id="scope" role="tabpanel" aria-labelledby="tab-scope" tabindex="0"><h2>Valor e escopo</h2><p>Missão, benefício, limites, risco e autoridade atual.</p></section>
+    <section id="architecture" role="tabpanel" aria-labelledby="tab-architecture" tabindex="0"><h2>Arquitetura</h2><p>Visão proporcional: componentes, fronteiras ou N/A fundamentado.</p></section>
+    <section id="impact" role="tabpanel" aria-labelledby="tab-impact" tabindex="0"><h2>Impacto</h2><p>Superfícies afetadas, risco, controle, owner e contingência.</p></section>
+    <section id="execution" role="tabpanel" aria-labelledby="tab-execution" tabindex="0"><h2>Execução</h2><p>Contrato de task, dependência, evidence e próximo passo seguro.</p></section>
+    <section id="validation" role="tabpanel" aria-labelledby="tab-validation" tabindex="0"><h2>Validação</h2><p>AC, método, ambiente, fixture, oracle, evidence e limite.</p></section>
+    <section id="evolution" role="tabpanel" aria-labelledby="tab-evolution" tabindex="0"><h2>Evolução</h2><p>Decisões, gates, estado e checkpoint.</p></section>
+    <section id="decision" role="tabpanel" aria-labelledby="tab-decision" tabindex="0"><h2>Decisão</h2><p>Autoridade, consequência e próxima ação exata.</p></section>
+    <section id="coverage" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0"><h2>Cobertura</h2><p>Fonte, destino, proveniência e disposição.</p></section>
+  </main>
+  <script>
+    (() => {
+      const tabs = [...document.querySelectorAll('[role="tab"]')];
+      const panels = tabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
+      const tabForHash = () => tabs.find(tab => tab.hash === location.hash) || tabs[0];
+      let active = tabForHash();
+      const activate = (tab, { focusPanel = false, writeHash = false } = {}) => {
+        active = tab;
+        tabs.forEach((candidate, index) => {
+          const selected = candidate === tab;
+          candidate.setAttribute('aria-selected', String(selected));
+          candidate.tabIndex = selected ? 0 : -1;
+          panels[index].hidden = !selected;
+        });
+        if (writeHash && tab.hash) history.replaceState(null, '', tab.hash);
+        if (focusPanel) document.getElementById(tab.getAttribute('aria-controls')).focus();
+      };
+      const revealForPrint = () => panels.forEach(panel => { panel.hidden = false; });
+      const restoreAfterPrint = () => activate(active);
+      document.body.dataset.tabEnhancement = 'active';
+      activate(active);
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', event => {
+          event.preventDefault();
+          activate(tab, { writeHash: true });
+        });
+        tab.addEventListener('keydown', event => {
+          let next = null;
+          if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+          if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === 'Home') next = 0;
+          if (event.key === 'End') next = tabs.length - 1;
+          if (next !== null) {
+            event.preventDefault();
+            tabs[next].focus();
+            activate(tabs[next], { writeHash: true });
+          }
+          if (event.key === ' ' || event.key === 'Enter') {
+            event.preventDefault();
+            activate(tab, { focusPanel: event.key === ' ' || event.key === 'Enter', writeHash: true });
+          }
+        });
+      });
+      window.addEventListener('hashchange', () => activate(tabForHash()));
+      window.addEventListener('beforeprint', revealForPrint);
+      window.addEventListener('afterprint', restoreAfterPrint);
+    })();
+  </script>
+</body>
+</html>

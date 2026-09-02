@@ -1,0 +1,90 @@
+schema_version: 1
+initiative_id: "012-stakeholder-brief-evidence-projection-enforcement"
+initiative_sequence: "012"
+initiative_slug: "stakeholder-brief-evidence-projection-enforcement"
+initiative_kind: "bugfix"
+status: "validation_done"
+summary: "Close deterministic v2 brief blind spots: referenced evidence integrity and risk/API projection completeness."
+brief_lineage: "v2"
+current_phase: "needs_evaluation"
+current_task: null
+last_safe_checkpoint: "T-005 repaired the second fixture's canonical keyboard/hash/print tab contract; syntax, suite, bundle, compile, baseline/recheck and diff checks pass; fresh semantic evaluation is required."
+updated_at: "2026-08-27"
+updated_by: "delivery orchestrator"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "platform-engineering planner"
+  coverage_reviewer: "spec012_coverage_review"
+  reviewed_at: "2026-08-27"
+  review_record: "decision-log.md#D-008"
+  findings_status: "pass — independent coverage/provenance review approved after D-006/D-007 propagation"
+
+execution:
+  builder_id: "spec012_t005_release_builder"
+  evaluator_id: null
+  started_at: "2026-08-27"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint: ["T-005 repaired the local-kiosk fixture tab contract (IDs, labelled panels, roving focus, keyboard, hash and print); full release checks and fresh fixture baseline/recheck passed."]
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/T-004.md"
+  - id: "T-005"
+    status: "done"
+    evidence: "evidence/T-005.md"
+
+approvals:
+  human_required: true
+  pending: ["Per-task evidence and distinct evaluator before completion."]
+  granted: ["User authorized corrective planning on 2026-08-26.", "D-006: user authorized local implementation and fresh synthetic-spec generation/validation on 2026-08-27."]
+
+risks:
+  level: "medium"
+  open: ["IR-001", "IR-002", "IR-003", "IR-004", "IR-005", "U-001", "U-002"]
+
+evidence:
+  latest: "evidence/T-005.md"
+  approved: ["evidence/T-001.md", "evidence/T-002.md", "evidence/T-003.md"]
+
+next_safe_step: "A distinct semantic evaluator reviews T-005 rendered brief quality and release evidence; do not self-approve."

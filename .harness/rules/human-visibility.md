@@ -42,6 +42,15 @@ JSON index. Every principal applicable item has exactly one disposition:
 | `not_applicable` | The item does not affect this initiative; record the source-backed reason. |
 | `link_only` | The source is linked but not rendered; record stakeholder relevance and reason. |
 
+After that map is reviewed, instantiate an initiative-local
+`brief-candidates/stakeholder-brief.skeleton.html`. The visual author copies
+that exact file to the candidate path and fills its existing routed component
+structure in place. Before qualitative review, run
+`validate_brief_candidate_inheritance.py` with both the initiative and that
+local skeleton. The check is a hard mirror for lineage, route/component
+surface and unfinished slots only; it never authors prose, selects a visual or
+judges stakeholder usefulness.
+
 For each rendered v2 block, use stable `data-source`, `data-source-section`
 and `data-coverage` attributes. `data-source` is one canonical relative source
 path; `data-source-section` is its stable Markdown heading locator and optional
@@ -81,6 +90,32 @@ status and the review record locator in the existing `decision-log.md` and
 Visibility Ready. If a distinct agent is unavailable, a named human reviewer
 performs and records the same review; otherwise the gate remains blocked.
 
+A `REVISE` blocks the transition it evaluates; it does not authorize the
+author to skip the skeleton, provenance or independent review. When the
+required canonical sources are available, the orchestrator returns immediately
+to correction and re-review in the same run rather than waiting for routine
+requester approval. Escalate only a genuinely missing authority, scope choice
+or material source fact. When a candidate already has its initiative-local
+skeleton lineage, source bindings and a matching `pending` or `revise` review
+record, the orchestrator may publish a recovery surface with:
+
+```text
+python vendor/sdd-harness-guardian/scripts/render_stakeholder_brief.py <initiative> \
+  --candidate <candidate> --render-unapproved
+```
+
+This is a post-candidate recovery path, not a pre-skeleton bypass, a promotion
+approval or a new gate. It never makes Human Visibility Ready or Tasks Ready
+true.
+
+For v2 preliminary task contracts, future `evidence/T-XXX.md` destinations
+remain visible and may be cited before their pack exists only when the matching
+block-form `run-state.yaml` ledger entry is `pending`, `ready`, `in_progress`
+or `blocked`. The deterministic validator defers only those lifecycle states.
+A missing destination for `needs_evaluation`, `approved` or `done` fails; this
+does not weaken initiative-relative path containment or substitute for the
+distinct evaluator decision.
+
 Coverage review and rendered-meaning review are different moments with the
 same existing reviewer responsibility, not new roles or persistent state.
 Coverage review occurs before final rendering and verifies that applicable
@@ -94,6 +129,33 @@ material decision remains impossible without the Markdown?” Correct the source
 and regenerate HTML; never edit HTML alone. This is qualitative independent
 judgment, not a word score, prose parser, semantic schema or deterministic
 semantic gate.
+
+The exact pre-render attestation remains a promotion prerequisite: it binds the
+candidate's SHA-256 and the reviewed composition manifest. An editorial finding
+does not relax that binding, nor any integrity, provenance, lifecycle or
+security control. Only an editorial finding may receive a **reviewed editorial
+exception** after explicit accountable decision; it is a visible, time-bounded
+record that permits the identified finding to be promoted for review, not a
+replacement for correction or re-review. The decision-log record and its HTML
+projection name the exception ID, finding, source → rendered target, decision
+impact, residual risk, accountable owner, decision to proceed, expiry and next
+action. Keep the candidate SHA-256 and composition-manifest SHA-256 in that
+same decision record. The exception never makes `human_visibility_ready` or
+`tasks_ready` true; both remain false until the ordinary corrected-render and
+lifecycle requirements are satisfied.
+
+For each v2 decision view, apply the conditional mission in
+`stakeholder-brief-design.md`: source-backed value/scope; proportional
+architecture and impact; detailed execution/validation when their canonical
+contracts contain the facts; and truthful evolution/decision/coverage state.
+Before composition, a missing fact is either a concise source-backed N/A or an
+owned material question. Ask only when its absence blocks or changes a
+requested decision, AC, risk control, authority or next safe step. Record the
+exact needed fact, owner, decision impact and resolution path in the existing
+plan, decision log or progress artifact; never hide it in HTML or ask a generic
+question merely to fill a section. This preserves a usable brief for
+non-software, sparse and localized initiatives without invented APIs,
+architecture or tests.
 
 After the final render and Human Visibility review, the meeting may decide.
 Meeting decisions are appended to `decision-log.md`, propagated to every
@@ -171,6 +233,9 @@ Block or request revision when:
 - stakeholder-visible uncertainty is hidden in technical language.
 - provenance, heading coverage or a structural validator pass is treated as
   proof that a material decision is recoverable after rendering.
+- an integrity, provenance, lifecycle or security finding is presented as an
+  editorial exception, or a purported editorial exception is absent from the
+  visible HTML, decision log, exact candidate binding or composition manifest.
 
 When the brief exposes a missing business, product or priority decision,
 request human clarification. Do not infer it.
@@ -193,3 +258,9 @@ Plan Ready architecture profiles with focused fixtures.
 
 Recommended check: `validate-human-visibility` plus
 `test-brief-v2-contracts`.
+
+For a decision-quality claim, use
+`.harness/skills/rendered-brief-decision-review/SKILL.md`. Its contextual
+review lenses and canonical-source repair protocol are qualitative evidence;
+the validator checks only the opt-in evidence-record integrity fields and
+never converts this rule into a prose, DOM or visual score.

@@ -1,0 +1,79 @@
+schema_version: 1
+initiative_id: "026-spec-generation-depth-guide"
+initiative_sequence: "026"
+initiative_slug: "spec-generation-depth-guide"
+initiative_kind: "feature"
+status: "complete"
+summary: "Guia agêntico de profundidade para SPEC e revisão independente; não altera renderer nem gera conteúdo automaticamente."
+brief_lineage: null
+brief_phase: "not_rendered"
+current_phase: "validation_done"
+current_task: null
+last_safe_checkpoint: "T-005 aprovada: R3 confirmou todos os oito mocks melhores que a baseline, sem HTML."
+updated_at: "2026-09-01"
+updated_by: "spec-author"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: false
+  human_visibility_ready: false
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+spec_depth_review:
+  author: "spec-author"
+  reviewer: "spec-depth-reviewer"
+  reviewed_at: "2026-09-01"
+  status: "pass"
+  record: "evidence/spec-depth-review.md"
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+    evaluation: "approve by /root/spec026_independent_evaluation"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+    evaluation: "approve by /root/spec026_independent_evaluation"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+    evaluation: "approve by /root/spec026_independent_evaluation"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/T-004.md"
+    evaluation: "approve by /root/spec026_independent_evaluation"
+  - id: "T-005"
+    status: "done"
+    evidence: "evidence/T-005.md"
+    evaluation: "approve by /root/spec026r3_review_a and /root/spec026r3_review_b"
+
+approvals:
+  human_required: false
+  pending: []
+  granted:
+    - "2026-09-01: usuário autorizou o desenvolvimento da SPEC 026."
+
+next_safe_step: "SPEC 026 concluída; iniciar composição visual somente mediante autorização e gates próprios."

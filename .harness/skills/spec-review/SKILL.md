@@ -18,7 +18,7 @@ risk_level: medium
 ## When not to use
 
 - The task is only formatting text.
-- The task has no software delivery implications.
+- The task is brainstorming only and no initiative or decision brief is being reviewed.
 - A human explicitly asks for brainstorming only.
 
 ## Procedure
@@ -34,7 +34,8 @@ risk_level: medium
    responsibilities, contracts, data/trust, critical/failure flows, NFR,
    migration, observability, rollback, alternatives and unknowns. Missing
    material facts must block or become bounded discovery; do not infer them.
-7. Check whether `stakeholder-brief.html` is present for non-trivial work,
+7. For a v2 brief, read `.harness/templates/stakeholder-brief-design.md` and
+   check whether `stakeholder-brief.html` is present for non-trivial work,
    derived from the source artifacts, concise enough for review, and consistent
    with them. Use the conditional checklist in `human-visibility.md`: verify
    outcome/benefit, scope/anti-scope, affected surfaces, S/M/L rationale,
@@ -56,7 +57,30 @@ risk_level: medium
     names the canonical source, lost/weakened fact and source correction. Ask:
     “Which material decision remains impossible without opening Markdown?” This
     is qualitative independent judgment, never a score, prose parser or
-    automatic semantic gate.
+    automatic semantic gate. Check each of the eight views against its
+    conditional mission: value/scope recovers mission, material value/operating
+    pillars, limits, main risk and authority; architecture and impact introduce
+    their mission/vision without inventing technical detail; execution recovers
+    the existing detailed task contract when it exists; validation recovers the
+    AC/proof context and honest no-command/skip limit. Evolution, decision and
+    coverage expose truthful state, authority and provenance. These are
+    source-backed content contracts, not field quotas.
+    For a missing fact, ask only if it changes or blocks a decision, AC, risk
+    control, authority or next safe step. A material question states the exact
+    fact needed, accountable owner, decision impact and resolution path in an
+    existing canonical source. A non-material absence is concise justified N/A
+    or omitted optional detail; never accept filler, a fake diagram/API or a
+    vague “to be confirmed”.
+   For a decision-quality delivery claim, use the rendered-brief-decision-review
+   skill: compare the originating request, source locators and locally served
+   HTML through architect, system designer, executive, general stakeholder and
+   delivery lenses. Material relations need an accessible connected model or a
+   justified proportional alternative; no tab/card/SVG quota is implied.
+   When a review finding is recoverable from the request and canonical sources,
+   return it directly to composition and repeat the relevant review in the same
+   run. Do not turn ordinary completeness, diagram or wording repairs into a
+   requester approval checkpoint; escalate only a new authority, scope, or
+   genuinely absent material fact.
 8. Classify issues as blocking or non-blocking.
 9. Return Outcome Ready yes/no, Spec Ready yes/no and Human Visibility Ready
    yes/no.

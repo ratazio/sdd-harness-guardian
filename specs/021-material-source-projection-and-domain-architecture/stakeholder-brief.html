@@ -1,0 +1,1087 @@
+<!doctype html>
+<html
+  lang="pt-BR"
+  data-lifecycle-marker="brief-phase"
+  data-lifecycle-source="run-state.yaml"
+  data-lifecycle-fragment="brief_phase"
+  data-harness-brief-design="v2"
+  data-client-identity-profile="vendor-neutral"
+  data-harness-template-kind="composed"
+  data-brief-phase="rendered"
+  data-composition-review-record="D-021-118"
+  data-composition-provenance="pending"
+>
+  <head>
+    <meta data-lifecycle-marker="rendered-state-digest" data-lifecycle-source="run-state.yaml" data-lifecycle-fragment="rendered run-state bytes" content="07a5b303b3c4fd9e7a893ec1c0748d3b1399ecfbb216d0a59d57d9ff077fd0f0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SPEC 021 — fontes materiais e arquitetura por domínio</title>
+    <style data-harness-brief-shell>
+      :root {
+        --canvas: #f5f7f6;
+        --paper: #fff;
+        --ink: #16322d;
+        --muted: #52625f;
+        --line: #c8d6d2;
+        --accent: #176b5b;
+        --dark: #104b42;
+        --green: #0c6b46;
+        --red: #9a3412;
+        --subtle: #e8f2ef;
+        --radius: 18px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--canvas);
+        color: var(--ink);
+        font:
+          16px/1.55 system-ui,
+          "Segoe UI",
+          Arial,
+          sans-serif;
+      }
+      a {
+        color: var(--accent);
+      }
+      a:focus-visible,
+      summary:focus-visible,
+      [role="tab"]:focus-visible,
+      [role="tabpanel"]:focus-visible {
+        outline: 3px solid #267b6b;
+        outline-offset: 3px;
+      }
+      main {
+        max-width: 1180px;
+        margin: auto;
+        padding: 28px 22px 64px;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+      .tag {
+        padding: 5px 9px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--dark);
+        font-weight: 750;
+      }
+      .brief-header,
+      section,
+      .metric {
+        border: 1px solid var(--line);
+        background: var(--paper);
+        border-radius: var(--radius);
+      }
+      .brief-header {
+        display: grid;
+        grid-template-columns: 1.45fr 0.55fr;
+        gap: 28px;
+        margin: 0;
+        padding: 36px;
+        background: linear-gradient(135deg, #fff, var(--subtle));
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(2.4rem, 4vw, 3.8rem);
+        line-height: 1;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      .eyebrow {
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .ask {
+        padding: 20px;
+        border-radius: 14px;
+        background: var(--dark);
+        color: #fff;
+      }
+      .tablist {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 20px 0;
+      }
+      .tablist a {
+        padding: 7px 10px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        text-decoration: none;
+      }
+      .tablist [role="tab"][aria-selected="true"] {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+        font-weight: 750;
+      }
+      .snapshot,
+      .grid,
+      .flow {
+        display: grid;
+        gap: 14px;
+        margin: 18px 0;
+      }
+      .snapshot {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      }
+      .flow {
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #f6faf8;
+      }
+      .metric,
+      .card,
+      .node {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: #fff;
+      }
+      .metric strong {
+        display: block;
+        color: var(--muted);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+      }
+      .node {
+        border-left: 5px solid var(--accent);
+      }
+      .node.control {
+        border-left-color: var(--green);
+      }
+      .node.limit,
+      .risk {
+        border-left-color: var(--red);
+      }
+      section {
+        margin: 18px 0;
+        padding: 28px;
+      }
+      .intro {
+        color: var(--muted);
+      }
+      .callout {
+        padding: 16px;
+        border-left: 5px solid var(--accent);
+        background: var(--subtle);
+      }
+      .danger {
+        border-left-color: var(--red);
+        background: #fff4f2;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        color: var(--muted);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+      }
+      details {
+        margin-top: 14px;
+        padding: 14px;
+        border: 1px dashed #9db5af;
+        border-radius: 12px;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 800;
+      }
+      .status {
+        font-weight: 800;
+        color: var(--red);
+      }
+      code {
+        font-size: 0.92em;
+      }
+      @media (max-width: 700px) {
+        main {
+          padding: 18px 12px;
+        }
+        .brief-header,
+        .snapshot {
+          grid-template-columns: 1fr;
+        }
+        .tablist {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .tablist a {
+          min-width: 0;
+          overflow-wrap: anywhere;
+        }
+        table {
+          display: block;
+          overflow-x: auto;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        main {
+          max-width: none;
+          padding: 0;
+        }
+        .tablist {
+          display: none;
+        }
+        .tab-panel[hidden] {
+          display: block !important;
+        }
+        details:not([open]) > :not(summary) {
+          display: block !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="brief-shell" data-tab-enhancement="fallback">
+    <p data-lifecycle-marker="rendered-authority" data-lifecycle-source="run-state.yaml" data-lifecycle-projection="lifecycle-authority" data-lifecycle-fragment="current lifecycle authority">Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</p>
+    <p data-lifecycle-marker="rendered-next-safe-step" data-lifecycle-source="run-state.yaml" data-lifecycle-projection="lifecycle-next-safe-step" data-lifecycle-fragment="current lifecycle next step">Retain the recorded post-render review; any Human Visibility or delivery decision remains separate, and Tasks Ready remains false.</p>
+    <main>
+      <div class="topbar">
+        <span class="tag">SPEC 021 · candidato de composição</span
+        ><span>30 ago. 2026 · risco alto / A2 · vendor-neutral</span>
+      </div>
+      <header
+        class="brief-header"
+        data-source="spec.md"
+        data-source-section="Problem; Objective and outcome"
+        data-coverage="synthesized"
+        data-source-digest="sha256:fa87200f4dbb682ef57e0a6ece834268032ce312ecb3932d2b36dfb2b817c1d8"
+        data-source-fragment="FR-021-01"
+        data-source-fragment-sha256="sha256:c2c0122f61fb7d9b6c0d5f3432f5849b649dcc877e03b93b0a57186b405e620f"
+      >
+        <div>
+          <p class="eyebrow">Projeção de governança e relações</p>
+          <h1>
+            Uma fonte material ou uma relação de domínio não pode desaparecer
+            numa composição genérica.
+          </h1>
+        <p>
+          FR-021-01 orienta o objetivo: esta SPEC corrige a perda de regras preventivas e de relações entre
+            componentes, dados, fronteiras de confiança, falhas e recuperação. O
+            resultado esperado é um brief que permita ao leitor recuperar a
+            decisão material sem inventar uma taxonomia de domínios ou reduzir a
+            revisão humana a uma pontuação.
+          </p>
+        </div>
+        <aside class="ask">
+          <strong>Decisão solicitada agora</strong>
+          <p>
+            O revisor independente deve decidir se este candidato representa
+            fielmente o corpus e se ainda há uma decisão impossível só pelo
+            HTML.
+          </p>
+          <p>
+            <strong>Não solicita:</strong> promoção, baseline, Human Visibility,
+            Tasks Ready ou execução de T-001.
+          </p>
+        </aside>
+      </header>
+      <nav
+        class="tablist"
+        aria-label="Visões de decisão da SPEC 021"
+        role="tablist"
+      >
+        <a
+          id="tab-scope"
+          role="tab"
+          href="#scope"
+          aria-controls="scope"
+          aria-selected="true"
+          tabindex="0"
+          >Valor e escopo</a
+        ><a
+          id="tab-architecture"
+          role="tab"
+          href="#architecture"
+          aria-controls="architecture"
+          aria-selected="false"
+          tabindex="-1"
+          >Arquitetura</a
+        ><a
+          id="tab-impact"
+          role="tab"
+          href="#impact"
+          aria-controls="impact"
+          aria-selected="false"
+          tabindex="-1"
+          >Impacto</a
+        ><a
+          id="tab-execution"
+          role="tab"
+          href="#execution"
+          aria-controls="execution"
+          aria-selected="false"
+          tabindex="-1"
+          >Execução</a
+        ><a
+          id="tab-validation"
+          role="tab"
+          href="#validation"
+          aria-controls="validation"
+          aria-selected="false"
+          tabindex="-1"
+          >Validação</a
+        ><a
+          id="tab-evolution"
+          role="tab"
+          href="#evolution"
+          aria-controls="evolution"
+          aria-selected="false"
+          tabindex="-1"
+          >Evolução</a
+        ><a
+          id="tab-decision"
+          role="tab"
+          href="#decision"
+          aria-controls="decision"
+          aria-selected="false"
+          tabindex="-1"
+          >Decisão</a
+        ><a
+          id="tab-coverage"
+          role="tab"
+          href="#coverage"
+          aria-controls="coverage"
+          aria-selected="false"
+          tabindex="-1"
+          >Cobertura</a
+        >
+      </nav>
+      <div id="decision-snapshot" class="snapshot">
+        <article
+          class="metric"
+          data-source="spec.md"
+          data-source-section="Objective and outcome"
+          data-coverage="represented"
+          data-source-digest="sha256:fa87200f4dbb682ef57e0a6ece834268032ce312ecb3932d2b36dfb2b817c1d8"
+          data-source-fragment="FR-021-01"
+          data-source-fragment-sha256="sha256:c2c0122f61fb7d9b6c0d5f3432f5849b649dcc877e03b93b0a57186b405e620f"
+        >
+          <strong>Resultado</strong>FR-021-01:
+          fontes e relações que mudam decisão permanecem recuperáveis.
+        </article>
+        <article
+          class="metric"
+          data-source="plan.md"
+          data-source-section="Approach 5"
+          data-coverage="represented"
+          data-source-digest="sha256:697e155339be1ca6d434df59a1d988c69f11004b819a505ccc84623d076bfa06"
+          data-source-fragment="Ratchet é fonte condicional material"
+          data-source-fragment-sha256="sha256:56ab371bdd28d3c1245f064241981ff1e254deaeff6d9fb121c8251d49945ed6"
+        >
+          <strong>Limite de código</strong>Ratchet é fonte condicional material;
+          valida somente manifesto declarado, identidade, integridade e escopo.
+        </article>
+        <article
+          class="metric"
+          data-source="ratchet.md"
+          data-source-section="RATCHET-021-001"
+          data-coverage="represented"
+          data-source-digest="sha256:d4fee0a2206b445d837b4325acd3133cda882e1c052dab07a1b72667c5e043e7"
+          data-source-fragment="RATCHET-021-001"
+          data-source-fragment-sha256="sha256:eaab53f0e9d2889745c7d47627cdba3e7ce6f176e35434f90cc71eb9f1fec95f"
+        >
+          <strong>Ratchet condicional</strong>RATCHET-021-001: há uma entrada
+          proposta, material e ainda não implementada.
+        </article>
+        <article
+          class="metric"
+          data-source="run-state.yaml"
+          data-source-section="quality_gates"
+          data-coverage="represented"
+        data-source-digest="sha256:07a5b303b3c4fd9e7a893ec1c0748d3b1399ecfbb216d0a59d57d9ff077fd0f0"
+        data-source-fragment="brief_coverage_ready: true"
+        data-source-fragment-sha256="sha256:844cc1170d722caa67916ee4eb04ccb29c0525c35ea8a632aee0110c3ace9eee"
+        >
+          <strong>Estado</strong>brief_coverage_ready: true.
+          <span class="status"
+            >Human Visibility e Tasks Ready continuam pendentes.</span
+          >
+        </article>
+      </div>
+      <section
+        id="scope"
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby="tab-scope"
+        tabindex="0"
+        data-source="spec.md"
+        data-source-section="Problem; Objective and outcome; Functional requirements"
+        data-coverage="synthesized"
+        data-source-digest="sha256:fa87200f4dbb682ef57e0a6ece834268032ce312ecb3932d2b36dfb2b817c1d8"
+        data-source-fragment="FR-021-01"
+        data-source-fragment-sha256="sha256:c2c0122f61fb7d9b6c0d5f3432f5849b649dcc877e03b93b0a57186b405e620f"
+      >
+        <h2>Valor e escopo</h2>
+        <p class="intro">
+          <strong>Missão:</strong> FR-021-01 preserva o que muda uma decisão: fonte
+          canônica material, estado vazio justificado e relação de arquitetura
+          escolhida pelo caso.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <strong>Em escopo</strong>
+            <p>
+              Inventário de fontes condicionais, hook semântico com revisor
+              distinto, proveniência por bloco, disposição de relações materiais
+              e regressões positivas/negativas.
+            </p>
+          </article>
+          <article class="card">
+            <strong>Fora de escopo</strong>
+            <p>
+              Implementar os produtos mock, impor uma taxonomia fixa de
+              domínios, ou transformar julgamento humano em score
+              determinístico.
+            </p>
+          </article>
+          <article class="card risk">
+            <strong>Risco principal</strong>
+            <p>
+              Uma página decorativa pode aparentar cobertura e ainda ocultar a
+              decisão sobre governança, fronteira, falha ou recuperação.
+            </p>
+          </article>
+        </div>
+        <div class="callout">
+          <strong>Critério de valor:</strong> um leitor decide o que está
+          material e qual passo seguro segue sem abrir Markdown para suprir uma
+          omissão que a página deveria recuperar.
+        </div>
+      </section>
+      <section
+        id="architecture"
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby="tab-architecture"
+        tabindex="0"
+        data-source="plan.md"
+        data-source-section="Approach 1–5; D-021-01–04"
+        data-coverage="represented"
+        data-source-digest="sha256:697e155339be1ca6d434df59a1d988c69f11004b819a505ccc84623d076bfa06"
+        data-source-fragment="Ratchet é fonte condicional material"
+        data-source-fragment-sha256="sha256:56ab371bdd28d3c1245f064241981ff1e254deaeff6d9fb121c8251d49945ed6"
+      >
+        <h2>Arquitetura da decisão</h2>
+        <p class="intro">
+          <strong>Missão:</strong> separar a recuperação semântica feita por
+          pessoas do contrato de integridade verificável por código.
+          <strong>Visão:</strong> o corpus concreto determina a relação que deve
+          ser mostrada; o formato é proporcional, não obrigatório.
+        </p>
+        <div class="flow" aria-label="Cadeia de governança da composição">
+          <article class="node">
+              <strong>Fontes condicionais</strong><br />Ratchet é fonte condicional material. Spec, impacto, plano,
+            tasks, validação e <em>ratchet</em> quando há regra — ou seu vazio
+            com razão.
+          </article>
+          <article class="node">
+            <strong>Hook semântico distinto</strong><br />Compara pedido, corpus
+            e candidato; localiza o que impede uma decisão e pede reparo/N/A
+            justificado.
+          </article>
+          <article class="node">
+            <strong>Disposição</strong><br />Representar ou sintetizar a relação
+            material; jamais preencher ausência com caixa genérica ou setas
+            textuais.
+          </article>
+          <article class="node">
+            <strong>Composição</strong><br />Projeta responsabilidade, direção,
+            boundary, dado, falha e recuperação somente quando as fontes os
+            tornam materiais.
+          </article>
+          <article class="node control">
+            <strong>Revisão e baseline</strong><br />Revisor decide
+            APPROVE/REVISE; só depois há promoção, re-render e as passagens
+            humanas exigidas.
+          </article>
+        </div>
+        <table
+          aria-label="Fronteira entre revisão humana e contrato determinístico"
+        >
+          <thead>
+            <tr>
+              <th>Camada</th>
+              <th>Responsabilidade</th>
+              <th>Limite explícito</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Revisor semântico</td>
+              <td>
+                Deriva materialidade de pedido + corpus + candidato e registra
+                decisão impossível, locator, impacto, reparo e N/A.
+              </td>
+              <td>
+                Não usa resposta-modelo, checklist de mocks ou taxonomia de
+                domínio.
+              </td>
+            </tr>
+            <tr>
+              <td>Contrato determinístico</td>
+              <td>
+                Valida o manifesto <em>declarado</em> pelo revisor:
+                caminhos/identidades, digests e escopo do record.
+              </td>
+              <td>
+                Não infere materialidade, não pontua prosa, não conta
+                componentes, não reconhece domínio e não declara suficiência.
+              </td>
+            </tr>
+            <tr>
+              <td>Controle contra selo automático</td>
+              <td>
+                Hook corpus-driven e record citado tornam recuperáveis razão,
+                locator e impacto; o avaliador permanece distinto.
+              </td>
+              <td>
+                Mesmo resultado para corpora materialmente distintos é sinal de
+                falha semântica a revisar, não aprovação determinística.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section
+        id="impact"
+        class="tab-panel impact-evidence"
+        role="tabpanel"
+        aria-labelledby="tab-impact"
+        tabindex="0"
+        data-source="impact-map.md"
+        data-source-section="Source inventory; Brief composition; IR-021-01–04"
+        data-coverage="represented"
+        data-source-digest="sha256:7145d3a9733ba9a6e7dd98c1b8b75de96a379a1c12f495256b7905e8e05f0db9"
+        data-source-fragment="IR-021-01"
+        data-source-fragment-sha256="sha256:3b9c5a05ef9de70155a4cdf5c36f0eb01c5e9c009c16015e39f8f43e5e2fecaa"
+      >
+        <h2>Impacto e controles — IR-021-01 a IR-021-04</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Superfície</th>
+              <th>Impacto decisório</th>
+              <th>Controle / owner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Inventário e coverage</td>
+              <td>
+                Uma regra de ratchet real não pode sumir; um ratchet vazio
+                também precisa de razão recuperável.
+              </td>
+              <td>Fonte condicional material e V-021-01; maintainer.</td>
+            </tr>
+            <tr>
+              <td><strong>IR-021-02 · relação reduzida</strong></td>
+              <td>
+                Sinal: o leitor não decide boundary, falha ou recuperação só
+                pela página porque a relação material virou quatro nós genéricos
+                ou uma frase com setas.
+              </td>
+              <td>
+                Representação estruturada escolhida pela fonte; review lead;
+                V-021-02/V-021-03 verificam que a forma continua proporcional.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>IR-021-03 · integridade vendida como aprovação</strong></td>
+              <td>
+                Sinal: baseline aparece sem sete pareceres, embora um PASS de
+                integridade não seja aprovação de visibilidade.
+              </td>
+              <td>Gate humano separado, revisor distinto e V-021-04.</td>
+            </tr>
+            <tr>
+              <td><strong>IR-021-04 · hook automático</strong></td>
+              <td>
+                Sinal: mesmo resultado para corpora materialmente distintos, ou
+                aprovação sem razão/locator, impede confiar que o parecer veio
+                das fontes efetivas.
+              </td>
+              <td>
+                Prompt corpus-driven, record citado e avaliador distinto;
+                V-021-02 detecta a perda e V-021-04 limita código à integridade,
+                nunca à suficiência.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout danger">
+          <strong>Contingência:</strong> se o revisor não consegue decidir
+          boundary, falha, recuperação ou obrigação de regressão apenas pela
+          página, registra REVISE material; nenhuma promoção/baseline segue até
+          reparo, rerender e nova revisão.
+        </div>
+      </section>
+      <section
+        id="execution"
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby="tab-execution"
+        tabindex="0"
+        data-source="tasks.md"
+        data-source-section="T-001–T-004"
+        data-coverage="represented"
+        data-source-digest="sha256:4dfb6b00035682a3caeebed27b1e85d8bc306499210137f8f723999aeb64d28d"
+        data-source-fragment="T-001"
+        data-source-fragment-sha256="sha256:a938512bd32f1ec15eac4af291ae9e2da4956cff404b907fff39bd7def608bfc"
+      >
+        <h2>Execução concluída — gates de lifecycle ainda separados</h2>
+        <p class="intro">
+          <strong>Missão:</strong> mostrar o incremento, prova e dependência de
+          cada task material sem apresentar uma task preliminar como pronta.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Task / estado</th>
+              <th>Incremento e limite</th>
+              <th>Dependência, prova e autoridade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>T-001 · done</strong></td>
+              <td>
+                Define fonte condicional, estado vazio e hook; não cria um
+                detector universal de materialidade.
+              </td>
+              <td>
+                Sem dependência; V-021-01/02, positivos/negativos,
+                evidence/T-001.md e avaliador distinto.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>T-002 · done</strong></td>
+              <td>
+                Integra a disposição semântica à composição de duas relações de
+                domínios reais, sem quota ou formato fixo.
+              </td>
+              <td>
+                Depende de T-001; V-021-03, revisão distinta e
+                evidence/T-002.md.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>T-003 · done</strong></td>
+              <td>
+                Protege identidade/digest/escopo do hook e prova que código não
+                o substitui por score ou aprovação.
+              </td>
+              <td>Depende de T-001/T-002; V-021-04 e evidence/T-003.md.</td>
+            </tr>
+            <tr>
+              <td><strong>T-004 · done</strong></td>
+              <td>
+                Só inicia após evidence/T-001.md, evidence/T-002.md e
+                evidence/T-003.md aprovadas independentemente. Em raiz nova,
+                recompõe M-001–M-008 como oito consumidores e guarda digests de
+                request/fonte/HTML.
+              </td>
+              <td>
+                Depende de T-001–T-003; V-021-05, sete lentes em dois passes e
+                evidence/T-004.md. Todo REVISE material corrige fontes,
+                rerenderiza e repete ambos os passes antes de baseline.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="status">T-001–T-004 estão done; Human Visibility e Tasks Ready permanecem falsos e separados.</p>
+      </section>
+      <section
+        id="validation"
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby="tab-validation"
+        tabindex="0"
+        data-source="validation-plan.md"
+        data-source-section="V-021-01–05; Regressões obrigatórias"
+        data-coverage="represented"
+        data-source-digest="sha256:b745ef38e11b7b51bfdfeb4a0b90d58fa012331b4ff19eb813e7be833d09aee0"
+        data-source-fragment="V-021-01"
+        data-source-fragment-sha256="sha256:abc82bfb02313bbb1e957f03737ce4863c1c635277ce22e14c167906e67aabf4"
+      >
+        <h2>Validação e limite da prova — V-021-01 a V-021-05</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Afirmação</th>
+              <th>Método / oráculo</th>
+              <th>Limitação honesta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ratchet material ou vazio justificado é recuperável.</td>
+              <td>
+                Fixture material projeta gatilho/check/owner; fixture vazio
+                expõe estado e razão.
+              </td>
+              <td>
+                O teste confere recuperação/proveniência, não a relevância
+                semântica de toda fonte.
+              </td>
+            </tr>
+            <tr>
+              <td>Uma relação omitida em domínio não predefinido é achada.</td>
+              <td>
+                Revisor lê corpus completo e registra locator, impacto e reparo.
+              </td>
+              <td>
+                O hook é parecer citado; não é score nem resposta automática.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Duas arquiteturas distintas usam representação proporcional.
+              </td>
+              <td>
+                Arquiteto, system designer e stakeholder comparam
+                pedido/fontes/HTML.
+              </td>
+              <td>Nenhum formato visual é obrigatório.</td>
+            </tr>
+            <tr>
+              <td>Integridade do hook é preservada.</td>
+              <td>
+                Testes rejeitam identidade, manifesto, digest ou record
+                inválidos.
+              </td>
+              <td>
+                Passar o teste não aprova materialidade ou suficiência do brief.
+              </td>
+            </tr>
+            <tr>
+              <td>Baseline cross-domain só sucede após prova íntegra.</td>
+              <td>
+                V-021-05: em raiz nova, oito consumidores M-001–M-008 retêm
+                digests request/fonte/HTML e recebem sete pareceres em dois
+                passes.
+              </td>
+              <td>
+                REVISE material corrige fontes, rerenderiza e repete os dois
+                passes; T-004 só começa após as três evidences anteriores
+                aprovadas independentemente.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <details open>
+          <summary>Regressões obrigatórias</summary>
+          <p>
+            <code>python scripts/test_render_stakeholder_brief.py</code>,
+            <code>python scripts/test_source_render_isolation.py</code>,
+            <code>python scripts/test_validate_human_visibility.py</code> e
+            <code>python scripts/validate_bundle.py</code>. A execução futura
+            também exige as duas passagens de sete lentes em oito consumidores
+            novos.
+          </p>
+        </details>
+      </section>
+      <section
+        id="evolution"
+        class="tab-panel decision-register"
+        role="tabpanel"
+        aria-labelledby="tab-evolution"
+        tabindex="0"
+        data-source="decision-log.md"
+        data-source-section="D-021-001–004; D-021-118"
+        data-coverage="represented"
+        data-source-digest="decision-record-sha256:4a2e975e1899e5e2c7051733645baa0fb1e5c8c7aa1a75a5ce7d6171c5618851"
+        data-source-fragment="D-021-118"
+        data-source-fragment-sha256="sha256:1e5cb332c5d3afeacade408c817b54f0bbea7a1871cbef04606d5c53ef191cec"
+      >
+        <h2>Evolução e estado verdadeiro</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Decisão</th>
+              <th>Consequência atual</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>D-021-001–003 · accepted</td>
+              <td>
+                A correção é sistêmica: ratchet condicional, relações orientadas
+                por fontes e hook humano corpus-driven.
+              </td>
+            </tr>
+            <tr>
+              <td>D-021-004 · accepted</td>
+              <td>
+                O pacote de fontes foi aprovado para a etapa gated de
+                composição; isso não autoriza tasks.
+              </td>
+            </tr>
+            <tr>
+              <td>D-021-118 · status projetado pelo hook fechado</td>
+              <td>O status operacional visível é exclusivamente o hook abaixo.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p data-lifecycle-marker="rendered-review-status" data-lifecycle-source="run-state.yaml" data-lifecycle-projection="lifecycle-review-status" data-lifecycle-fragment="evolution review lifecycle status">Exact pre-render and independent post-render reviews are recorded; Human Visibility and Tasks Ready remain separate false decisions.</p>
+        <div
+          id="gates"
+          class="callout"
+          data-source="run-state.yaml"
+          data-source-section="quality_gates"
+          data-coverage="represented"
+          data-source-digest="sha256:07a5b303b3c4fd9e7a893ec1c0748d3b1399ecfbb216d0a59d57d9ff077fd0f0"
+          data-source-fragment="brief_coverage_ready: true"
+          data-source-fragment-sha256="sha256:844cc1170d722caa67916ee4eb04ccb29c0525c35ea8a632aee0110c3ace9eee"
+        >
+          <strong>Gates:</strong> brief_coverage_ready: true para a composição
+          pendente D-021-118. Human Visibility Ready e Tasks Ready permanecem
+          falsos.
+        </div>
+      </section>
+      <section
+        id="decision"
+        class="tab-panel decision-actions"
+        role="tabpanel"
+        aria-labelledby="tab-decision"
+        tabindex="0"
+        data-source="progress.md"
+        data-source-section="Exact next safe step"
+        data-coverage="represented"
+        data-source-digest="sha256:0e3de43aee6c1ce18e410c4fccc8608dbc11275c7780c7249843eb22318f0bb3"
+        data-source-fragment="Do not infer a lifecycle release"
+        data-source-fragment-sha256="sha256:286bf73e56f5616316dd7e8aa1ed54a021b8db74027ecaa40e4ed89fe0b3b8a2"
+      >
+        <h2>Decisão, autoridade e próximo passo</h2>
+        <div class="callout">
+          <p data-lifecycle-marker="rendered-review-status" data-lifecycle-source="run-state.yaml" data-lifecycle-projection="lifecycle-review-status" data-lifecycle-fragment="decision review lifecycle status">Exact pre-render and independent post-render reviews are recorded; Human Visibility and Tasks Ready remain separate false decisions.</p>
+          <strong>Autoridade histórica:</strong> D-021-116 é a assinatura
+          pré-render anterior; não concede Human Visibility ou Tasks Ready.
+          <strong>Revisor independente:</strong> compara o candidato ao corpus
+          atual, registra APPROVE ou REVISE, locators, impacto, reparo e N/A
+          justificado. <code>Do not infer a lifecycle release</code>: a promoção continua
+          não sendo entrega e lifecycle gates permanecem falsos.
+        </div>
+      </section>
+      <section
+        id="coverage"
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby="tab-coverage"
+        tabindex="0"
+        data-source="plan.md"
+        data-source-section="Coverage composition candidate — proposed"
+        data-coverage="represented"
+        data-source-digest="sha256:697e155339be1ca6d434df59a1d988c69f11004b819a505ccc84623d076bfa06"
+        data-source-fragment="Ratchet é fonte condicional material"
+        data-source-fragment-sha256="sha256:56ab371bdd28d3c1245f064241981ff1e254deaeff6d9fb121c8251d49945ed6"
+      >
+        <h2>Cobertura e proveniência</h2>
+        <p class="intro">
+          Ratchet é fonte condicional material. Este registro humano complementa os atributos locais. É uma proposta
+          revisável, não um selo de materialidade.
+        </p>
+        <table id="coverage-register">
+          <thead>
+            <tr>
+              <th>Fonte / heading</th>
+              <th>Alvo</th>
+              <th>Disposição / razão</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>spec.md / problema, resultado, FR/AC</td>
+              <td>
+                <a href="#scope">#scope</a>
+              </td>
+              <td>synthesized: objetivo, limites e provas.</td>
+            </tr>
+            <tr>
+              <td>impact-map.md / superfícies e IR-021</td>
+              <td><a href="#impact">#impact</a></td>
+              <td>represented: riscos, sinais, controles e owners.</td>
+            </tr>
+            <tr>
+              <td>plan.md / approach e D-021</td>
+              <td>
+                <a href="#architecture">#architecture</a>,
+                <a href="#coverage">#coverage</a>
+              </td>
+              <td>
+                represented: relação orientada por corpus e fronteira
+                determinística.
+              </td>
+            </tr>
+            <tr>
+              <td>tasks.md / T-001–T-004</td>
+              <td><a href="#execution">#execution</a></td>
+              <td>represented: sequência concluída, evidências independentes e gates ainda separados.</td>
+            </tr>
+            <tr>
+              <td>validation-plan.md / V-021</td>
+              <td><a href="#validation">#validation</a></td>
+              <td>represented: oráculo, raiz nova/oito consumidores/digests, re-review e limitação.</td>
+            </tr>
+            <tr>
+              <td>decision-log.md / D-021-118</td>
+              <td><a href="#evolution">#evolution</a></td>
+              <td>represented: recomposição pendente distinta; o histórico é explícito e não é reutilizado.</td>
+            </tr>
+            <tr>
+              <td>run-state.yaml / quality_gates</td>
+              <td><a href="#gates">#gates</a></td>
+              <td>represented: gates, sem inferir autorização.</td>
+            </tr>
+            <tr>
+              <td>progress.md / Exact next safe step</td>
+              <td><a href="#decision">#decision</a></td>
+              <td>represented: checkpoint e próximo passo seguro.</td>
+            </tr>
+            <tr>
+              <td>ratchet.md / RATCHET-021-001</td>
+              <td><a href="#ratchet">#ratchet</a></td>
+              <td>represented: fonte condicional atualmente material.</td>
+            </tr>
+          </tbody>
+        </table>
+        <aside class="callout">
+          <strong>Inventário adicional para a revisão humana:</strong>
+          <code>ratchet.md</code> é uma regra preventiva condicional já
+          representada acima. Além das cinco fontes do manifesto de composição,
+          o revisor deve consultar <code>decision-log.md</code>,
+          <code>run-state.yaml</code>, <code>progress.md</code>,
+          <code>handoffs/latest-handoff.md</code>,
+          <code>evidence/T-000-mock-lab-reproduction.md</code> e
+          <code>evidence/T-000-source-package-review.md</code>. Elas explicam
+          a recusa histórica, checkpoint, escopo de retomada e origem das oito
+          execuções; não são participantes da transação de recuperação do
+          renderer.
+        </aside>
+        <article
+          id="ratchet"
+          class="callout danger"
+          data-source="ratchet.md"
+          data-source-section="RATCHET-021-001"
+          data-coverage="represented"
+          data-source-digest="sha256:d4fee0a2206b445d837b4325acd3133cda882e1c052dab07a1b72667c5e043e7"
+          data-source-fragment="RATCHET-021-001"
+          data-source-fragment-sha256="sha256:eaab53f0e9d2889745c7d47627cdba3e7ce6f176e35434f90cc71eb9f1fec95f"
+        >
+          <strong>Ratchet recuperável:</strong> RATCHET-021-001 é uma prevenção
+          proposta para a perda de fonte material e relação por composição
+          genérica. Owner: Guardian maintainer. Check de regressão: V-021-01 a
+          V-021-04. Consequência: não está implementado até que T-001–T-004
+          tenham evidence aprovada.
+        </article>
+      </section>
+      <footer>
+        <p data-lifecycle-marker="rendered-review-status" data-lifecycle-source="run-state.yaml" data-lifecycle-projection="lifecycle-review-status" data-lifecycle-fragment="footer review lifecycle status">Exact pre-render and independent post-render reviews are recorded; Human Visibility and Tasks Ready remain separate false decisions.</p>
+        Projeção de reunião derivada: as fontes canônicas continuam autoridade;
+        o status operacional é projetado exclusivamente acima.
+      </footer>
+    </main>
+    <script>
+      (() => {
+        function init(list) {
+          const tabs = [...list.querySelectorAll('[role="tab"]')],
+            panels = tabs.map((t) =>
+              document.getElementById(t.getAttribute("aria-controls")),
+            );
+          if (!tabs.length || !panels.every(Boolean)) return;
+          let active = tabs.find((t) => t.hash === location.hash) || tabs[0];
+          const activate = (tab, focus) => {
+            active = tab;
+            tabs.forEach((t, i) => {
+              const on = t === tab;
+              t.setAttribute("aria-selected", String(on));
+              t.tabIndex = on ? 0 : -1;
+              panels[i].hidden = !on;
+            });
+            if (focus)
+              document
+                .getElementById(tab.getAttribute("aria-controls"))
+                .focus();
+          };
+          document.body.dataset.tabEnhancement = "active";
+          activate(active);
+          tabs.forEach((t, i) => {
+            t.addEventListener("click", (e) => {
+              e.preventDefault();
+              history.replaceState(null, "", t.hash);
+              activate(t);
+            });
+            t.addEventListener("keydown", (e) => {
+              let n = null;
+              if (e.key === "ArrowRight") n = (i + 1) % tabs.length;
+              if (e.key === "ArrowLeft")
+                n = (i + tabs.length - 1) % tabs.length;
+              if (e.key === "Home") n = 0;
+              if (e.key === "End") n = tabs.length - 1;
+              if (n !== null) {
+                e.preventDefault();
+                tabs[n].focus();
+                activate(tabs[n]);
+              }
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                activate(t, true);
+              }
+            });
+          });
+          addEventListener("beforeprint", () =>
+            panels.forEach((p) => (p.hidden = false)),
+          );
+          addEventListener("afterprint", () => activate(active));
+          addEventListener("hashchange", () => {
+            const tab = tabs.find((t) => t.hash === location.hash);
+            if (tab) activate(tab);
+          });
+        }
+        document.querySelectorAll('[role="tablist"]').forEach(init);
+      })();
+    </script>
+  </body>
+</html>

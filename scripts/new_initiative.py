@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import re
+import shutil
 import tempfile
 from datetime import date
 from pathlib import Path
@@ -12,7 +14,6 @@ from pathlib import Path
 
 TEMPLATE_MAP = {
     "spec.md": "spec.md",
-    "stakeholder-brief.html": "stakeholder-brief.html",
     "impact-map.md": "impact-map.md",
     "plan.md": "plan.md",
     "validation-plan.md": "validation-plan.md",
@@ -23,6 +24,9 @@ TEMPLATE_MAP = {
     "ratchet.md": "ratchet.md",
     "handoff.md": "handoffs/latest-handoff.md",
 }
+
+PEARSON_LOGO_RELATIVE_PATH = Path(".harness/assets/brand/pearson-logo-white.png")
+PEARSON_LOGO_SHA256 = "8EEE1FA799766BF385A307191D38C361677D442457D7CC0F92E5F3FCCC2282F7"
 
 SLUG_PATTERN = r"[a-z0-9][a-z0-9._-]*"
 NUMBERED_INITIATIVE_PATTERN = re.compile(rf"(?P<sequence>\d{{3}})-(?P<slug>{SLUG_PATTERN})")
@@ -114,6 +118,55 @@ def render_template(
     if source.name == "run-state.yaml":
         text = text.replace('initiative_kind: "feature"', f'initiative_kind: "{kind}"')
     return text
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest().upper()
+
+
+def assert_pearson_logo_compatible(bundle_root: Path, consumer_root: Path) -> tuple[Path, Path]:
+    """Validate source and any consumer-owned destination before scaffolding mutates state."""
+    source = bundle_root / PEARSON_LOGO_RELATIVE_PATH
+    if not source.is_file():
+        raise FileNotFoundError(f"Missing official Pearson logo in bundle: {source}")
+    source_hash = sha256(source)
+    if source_hash != PEARSON_LOGO_SHA256:
+        raise ValueError(
+            "Official Pearson logo in bundle has an unexpected SHA-256: "
+            f"expected {PEARSON_LOGO_SHA256}, got {source_hash}"
+        )
+
+    destination = consumer_root / PEARSON_LOGO_RELATIVE_PATH
+    if destination.exists():
+        if not destination.is_file():
+            raise FileExistsError(
+                "Refusing to overwrite consumer Pearson logo path because it is not a file: "
+                f"{destination}"
+            )
+        destination_hash = sha256(destination)
+        if destination_hash != PEARSON_LOGO_SHA256:
+            raise FileExistsError(
+                "Refusing to overwrite consumer Pearson logo with unexpected SHA-256: "
+                f"expected {PEARSON_LOGO_SHA256}, got {destination_hash} at {destination}"
+            )
+    return source, destination
+
+
+def provision_pearson_logo(bundle_root: Path, consumer_root: Path) -> Path:
+    """Copy the required local Pearson logo without replacing consumer-owned bytes."""
+    source, destination = assert_pearson_logo_compatible(bundle_root, consumer_root)
+    if destination.is_file():
+        return destination
+
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(source, destination)
+    copied_hash = sha256(destination)
+    if copied_hash != PEARSON_LOGO_SHA256:
+        raise ValueError(
+            "Copied Pearson logo has an unexpected SHA-256: "
+            f"expected {PEARSON_LOGO_SHA256}, got {copied_hash}"
+        )
+    return destination
 
 
 def index_row(initiative_sequence: int, initiative_id: str, kind: str) -> str:
@@ -238,8 +291,9 @@ def main() -> int:
 
     print(f"Created {args.kind} initiative: {target}")
     print(
-        "Next step: complete canonical sources, keep the v2 brief derived, "
-        "and request Outcome/Spec Guardian review. Draft tasks are not authorization."
+        "No stakeholder-brief.html was created. Complete and review canonical sources, "
+        "then render the derived brief through the approved composition workflow. "
+        "Draft tasks are not authorization."
     )
     return 0
 

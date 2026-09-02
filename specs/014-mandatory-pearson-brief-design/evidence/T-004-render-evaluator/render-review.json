@@ -1,0 +1,58 @@
+{
+  "consumer": "fresh temporary scaffold",
+  "brief_route": "/specs/001-render-control/stakeholder-brief.html",
+  "logo_route": "/.harness/assets/brand/pearson-logo-white.png",
+  "logo_statuses": [
+    200
+  ],
+  "request_origins_same_as_consumer": true,
+  "viewports": [
+    "320x700",
+    "390x844",
+    "768x900",
+    "1024x900",
+    "1440x960"
+  ],
+  "viewport_metrics": [
+    {
+      "viewport": "320x700",
+      "h1_font_size_px": 36.8,
+      "logo_width_px": 166.391,
+      "root_scroll_width": 320,
+      "body_scroll_width": 320
+    },
+    {
+      "viewport": "390x844",
+      "h1_font_size_px": 36.8,
+      "logo_width_px": 175,
+      "root_scroll_width": 390,
+      "body_scroll_width": 390
+    },
+    {
+      "viewport": "768x900",
+      "h1_font_size_px": 46.08,
+      "logo_width_px": 175,
+      "root_scroll_width": 768,
+      "body_scroll_width": 768
+    },
+    {
+      "viewport": "1024x900",
+      "h1_font_size_px": 61.44,
+      "logo_width_px": 175,
+      "root_scroll_width": 1024,
+      "body_scroll_width": 1024
+    },
+    {
+      "viewport": "1440x960",
+      "h1_font_size_px": 73.6,
+      "logo_width_px": 175,
+      "root_scroll_width": 1440,
+      "body_scroll_width": 1440
+    }
+  ],
+  "keyboard": "ArrowRight activates #tab-execution from #tab-impact",
+  "zoom": "200% at 1440px without root/body overflow",
+  "reduced_motion": "Playwright emulation matched prefers-reduced-motion: reduce",
+  "no_script": "all 8 tab panels visible at 390px",
+  "print": "PDF generated with backgrounds"
+}

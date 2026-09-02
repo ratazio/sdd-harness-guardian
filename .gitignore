@@ -3,4 +3,6 @@ __pycache__/
 .venv/
 .DS_Store
 Thumbs.db
-testes/
+testes/*
+!testes/mock-tests/
+!testes/mock-tests/**

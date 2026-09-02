@@ -3,7 +3,7 @@
 Bundle agêntico, versionado em Git e vendor-neutral para governar Spec Driven
 Development com gates, evidência, memória de execução e retomada.
 
-**Versão:** `0.1.2`  
+**Versão:** `0.4.0`  
 **Entrypoint:** `.harness/AGENTS.md`  
 **Instalação recomendada:** submódulo em
 `vendor/sdd-harness-guardian`  
@@ -57,7 +57,7 @@ No projeto consumidor:
 
 ```bash
 git submodule add https://github.com/SUA-ORG/sdd-harness-guardian.git vendor/sdd-harness-guardian
-git -C vendor/sdd-harness-guardian checkout v0.1.2
+git -C vendor/sdd-harness-guardian checkout v0.4.0
 python vendor/sdd-harness-guardian/scripts/new_initiative.py minha-feature
 ```
 
@@ -68,12 +68,13 @@ AGENTS.md do projeto consumidor
 vendor/sdd-harness-guardian/.harness/AGENTS.md
 specs/INDEX.md
 specs/001-minha-feature/spec.md
-specs/001-minha-feature/stakeholder-brief.html
+specs/001-minha-feature/run-state.yaml
 ```
 
-O script de scaffolding é conveniência; os templates também podem ser copiados
-manualmente. Veja `INSTALL.md` para instalação, pin, upgrade, rollback,
-adaptação local e versionamento.
+O script de scaffolding é conveniência; os artefatos fonte também podem ser
+copiados manualmente. Ele nunca cria um brief HTML. Veja `INSTALL.md` para a
+promoção do brief após revisão, instalação, pin, upgrade, rollback, adaptação
+local e versionamento.
 
 Novas iniciativas usam `specs/NNN-slug/`. O número é identidade sequencial e
 ordem cronológica, não prioridade. `specs/INDEX.md` é o mapa compacto lido antes

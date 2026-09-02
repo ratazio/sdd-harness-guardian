@@ -1,0 +1,110 @@
+schema_version: 1
+initiative_id: "013-brief-dom-integrity-a11y-hardening"
+initiative_sequence: "013"
+initiative_slug: "brief-dom-integrity-a11y-hardening"
+initiative_kind: "bugfix"
+status: "done"
+summary: "Correct Human Visibility false passes for rendered duplicate IDs, post-document content and declared-tab accessibility mechanics."
+brief_lineage: "v2"
+current_phase: "complete"
+current_task: null
+last_safe_checkpoint: "2026-08-27: T-004 independently approved; SPEC 013 complete."
+updated_at: "2026-08-27"
+updated_by: "Codex / State Keeper"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "Codex / planning author"
+  coverage_reviewer: "review_brief013 / independent evaluator"
+  reviewed_at: "2026-08-27"
+  review_record: "decision-log.md#D-006"
+  findings_status: "pass"
+
+execution:
+  builder_id: "Codex / implementation builder"
+  evaluator_id: "evaluate_t004_013"
+  started_at: "2026-08-27"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "D-009 independently approved T-001 rendered parser/static-contract discovery."
+    - "D-011 independently approved T-002 rendered DOM integrity."
+    - "D-013 independently approved T-003 conditional per-tablist mechanics."
+    - "D-014 authorized T-004 release evidence without granting self-approval."
+    - "D-015 records T-004 focused/bundle PASS and baseline recheck."
+    - "D-016: evaluate_t004_013 independently approved T-004; SPEC 013 is complete."
+  repository_revision: null
+  working_tree_summary: "Repository contains unrelated in-progress work; SPEC 013 stays isolated until a task is authorized."
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: false
+  pending:
+    - "none"
+  granted:
+    - "D-003: independent Outcome Ready and Spec Ready approval."
+    - "D-006: independent plan/coverage approval."
+    - "D-009: independent T-001 approval."
+    - "D-011: independent T-002 approval."
+    - "D-013: independent T-003 approval."
+    - "D-014: T-004 release-evidence authorization only."
+    - "D-016: evaluate_t004_013 independent T-004 approval."
+
+risks:
+  level: "medium"
+  open: []
+
+evidence:
+  latest: "evidence/T-004.md"
+  approved:
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+    - "evidence/T-004.md"
+
+lifecycle:
+  decisions_propagated: true
+  brief_regenerated: true
+  propagation_record: "decision-log.md#D-006"
+
+next_safe_step: "SPEC 013 complete; SPEC 014 T-002 dependency is satisfied."

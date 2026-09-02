@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="pt-BR" data-harness-brief-design="v2" data-client-identity-profile="pearson" data-harness-template-kind="composed" data-composition-provenance="reviewed" data-composition-review-record="D-023-034" data-brief-phase="rendered" data-lifecycle-marker="brief-phase" data-lifecycle-source="run-state.yaml" data-lifecycle-fragment="brief_phase">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta data-lifecycle-marker="rendered-state-digest" data-lifecycle-source="run-state.yaml" data-lifecycle-fragment="rendered run-state bytes" content="d0433a703f8fa340564ff87a7ab8f9f8177511f74802a0f9913d9bd38cdd50cd">
+<title>SPEC 023 · recuperação de lifecycle e coverage</title>
+<style data-harness-pearson-shell data-harness-brief-shell>
+:root{--navy:#0b004a;--violet:#4c30a5;--lavender:#edecf5;--lav:var(--lavender);--paper:#fff;--ink:#20144c;--muted:#5d5874;--line:#d9d6e8;--r:20px}*{box-sizing:border-box}body{margin:0;background:var(--lavender);color:var(--ink);font:16px/1.6 "Plus Jakarta Sans","Segoe UI",Arial,sans-serif}.bar,.footer{background:var(--navy);color:#fff}.brief-client-logo{display:inline-flex}.bar{padding:18px 4vw;display:flex;justify-content:space-between;align-items:center;gap:20px}.bar img{width:128px;height:auto;display:block}.wrap{max-width:1080px;margin:auto;padding:30px 22px 72px}.nav{display:flex;gap:8px;overflow:auto;padding:8px 0 26px}.nav a{white-space:nowrap;padding:8px 12px;border:1px solid #bdb6d9;border-radius:999px;background:#fff;text-decoration:none;font-weight:700}.nav a[aria-current]{color:#fff;background:var(--navy);border-color:var(--navy)}a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--violet);outline-offset:4px}.page{display:grid;gap:20px}.page[hidden]{display:none}.hero,.card,.callout,table{background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}.hero{padding:clamp(28px,5vw,54px)}.eyebrow{margin:0 0 10px;color:var(--violet);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.78rem}h1{margin:0;font-size:clamp(2.5rem,6vw,4.3rem);line-height:1.05;letter-spacing:-.045em}.thesis{border-left:5px solid var(--violet);padding-left:16px;font-size:1.15rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}.card,.callout{padding:20px}.card h2{margin-top:0}.source{display:block;margin-top:13px;color:var(--muted);font-size:.78rem}.topology{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center}.node{padding:18px;border:2px solid var(--line);border-radius:14px;background:#fff;font-weight:700}.changed{border-color:var(--violet)}.unknown{border-style:dashed;color:var(--muted)}.arrow{font-size:1.5rem;color:var(--violet);text-align:center}.legend{color:var(--muted);font-size:.88rem}.draft{color:#8a3b14;font-weight:700}table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden}th,td{padding:13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{color:var(--muted);font-size:.76rem;text-transform:uppercase}tr:last-child td{border-bottom:0}.footer{padding:28px 4vw;margin-top:48px}.footer p{max-width:1080px;margin:auto;color:#e3e0f4}.print-note{display:none}@media(max-width:720px){.bar{align-items:flex-start;flex-direction:column}.wrap{padding:22px 14px 50px}.topology{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}table{display:block;overflow:auto}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}@media print{body{background:#fff}.bar,.nav{display:none}.page,.page[hidden]{display:grid!important;page-break-after:always}.print-note{display:block}.footer{background:#fff}.footer p{color:#20144c}}
+body:not([data-router="active"]) .page[hidden]{display:grid}.bar img{width:128px}
+</style>
+</head>
+<body class="brief-shell">
+<header class="brief-header bar">
+<a class="brief-client-logo" href="#overview" aria-label="Pearson — visão geral">
+<img src="../../.harness/assets/brand/pearson-logo-white.png" alt="" width="175" height="53">
+</a>
+<small>SPEC 023 · briefing executivo com gates explícitos de assurance</small>
+</header>
+<main id="brief-main" class="wrap" tabindex="-1">
+<nav class="nav" aria-label="Subpáginas">
+<a data-route href="#overview" aria-current="page">Visão geral</a>
+<a data-route href="#scope">Valor e escopo</a>
+<a data-route href="#architecture">Arquitetura</a>
+<a data-route href="#impact">Impacto</a>
+<a data-route href="#execution">Execução</a>
+<a data-route href="#validation">Validação</a>
+<a data-route href="#evolution">Evolução</a>
+<a data-route href="#trust">Confiança</a>
+</nav>
+<p class="print-note">Impressão: subpáginas em ordem de fonte.</p>
+
+<section id="overview" class="page" aria-labelledby="overview-title">
+<div id="decision-snapshot" class="hero snapshot" data-source="spec.md" data-source-section="2 Objetivo" data-coverage="synthesized" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 2. Objetivo" data-source-fragment-sha256="sha256:373ad14a744aea6574ef34eb116625a70179f37996fe9d493ac7c3eede0daa38">
+<p class="eyebrow">Visão geral</p>
+<h1 id="overview-title" tabindex="-1">Uma conversa de decisão, não uma página que exige reconstrução mental.</h1>
+<p class="thesis">Fazer com que um stakeholder brief seja uma experiência executiva, navegável como subpáginas completas dentro de um único HTML.</p>
+<span class="source">## 2. Objetivo</span>
+</div>
+<article id="overview-problem" class="card" data-source="spec.md" data-source-section="1 Problema" data-coverage="synthesized" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 1. Problema" data-source-fragment-sha256="sha256:ec1e766279a80c1d2a036a5c702d43f4f511335d5a86eb8f70d9b82489ada35f">
+<h2>O problema que a reunião não pode carregar</h2><p>Hoje o leitor recompõe o contexto ao navegar; na arquitetura, relações, perímetro, escala e zoom podem virar caixas genéricas. A decisão é trocar essa reconstrução mental por uma conversa completa por domínio.</p><span class="source">## 1. Problema</span>
+</article>
+<article id="overview-outcome" class="card" data-source="spec.md" data-source-section="3 Resultado de entrega" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 3. Resultado de entrega" data-source-fragment-sha256="sha256:1cabc86caf48b2f47519724ff357cce591bd01ae8473420523e3f5293f766c2c">
+<h2>O que esta frente entrega</h2><p>Uma pessoa C-level abre qualquer domínio, entende valor, mudança, preservação e próxima conversa; o incremento é shell de rotas, composição semântica e regressões heterogêneas. A fronteira é o brief, não os produtos descritos por ele.</p><span class="source">## 3. Resultado de entrega</span>
+</article>
+<article id="overview-decision" class="card"
+  data-source="spec.md"
+  data-source-section="4 Pessoas e decisões atendidas" data-coverage="represented"
+  data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 4. Pessoas e decisões atendidas"
+  data-source-fragment-sha256="sha256:e48382112b981d0e8b694359b65db71ac1deb25f7649f0d89c197b9be35422e4">
+<h2>Decisão</h2>
+<p>Patrocinador, operação, tecnologia e assurance precisam localizar pergunta, perímetro e próximo diálogo sem remontar o contexto anterior.</p>
+<span class="source">## 4. Pessoas e decisões atendidas</span>
+</article>
+<article id="overview-observables" class="card" data-source="spec.md" data-source-section="5 Resultados observáveis" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 5. Resultados observáveis" data-source-fragment-sha256="sha256:54b6fed1c40c5106bbbbecacbf717fb1fa5e283e706a0c2325481da4b2b80a89">
+<h2>Quatro sinais para não confundir apresentação com efeito</h2><p>A rota troca a região principal; cada abertura traz tese, pilares, limite e próximo passo; arquitetura material mostra macro, superfícies, escala e zoom ou N/A; e a narrativa parece preparada para reunião sem ocultar incerteza.</p><span class="source">## 5. Resultados observáveis</span>
+</article>
+<article id="overview-strategy" class="callout" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-028" data-source-fragment-sha256="sha256:9a2c2eab5f7bc2665b29d7be771ec58041c8d35f82f0f16939c14e69d786a3a2">
+<strong>Checkpoint atual:</strong> D-023-023 corrigiu a hipótese histórica de defeito do validador: o contrato verificável é <code>disposição: razão</code>, e este snapshot o usa. D-023-028 é uma aprovação pré-render histórica, limitada ao refresh guardado. <strong>Próxima atenção:</strong> D-023-029 é o REVISE pós-render corrente; D-023-032 apenas recompõe a recuperabilidade exigida antes de nova revisão. Nenhuma task é autorizada. <span class="source">D-023-032</span>
+</article>
+<article class="callout" data-source="spec.md" data-source-section="5 Resultados observáveis" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="O-023-02" data-source-fragment-sha256="sha256:69d7dd856252049cf08d1a751251929a42c64294e2ec2b2f6964dfc13de7f9e9">
+<strong>Próxima conversa:</strong> confirmar, em revisão independente, que cada domínio abre com tese, pilares, limite e próximo passo — não apenas com conteúdo trocado. <span class="source">O-023-02</span>
+</article>
+</section>
+
+<section id="scope" class="page decision-actions" aria-labelledby="scope-title" hidden>
+<div class="hero" data-source="spec.md" data-source-section="6 Não objetivos" data-coverage="synthesized" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 6. Não objetivos" data-source-fragment-sha256="sha256:e69c67929c0e3c3007c88bdc93b5e6eb307d3d39194c4883b3b0dba66a864f5d">
+<p class="eyebrow">Valor e escopo</p>
+<h1 id="scope-title" tabindex="-1">Melhorar a explicação sem reescrever a verdade.</h1>
+<p>Camada adicional sobre fontes Markdown: melhora a conversa, mas não substitui a autoridade canônica.</p>
+<span class="source">## 6. Não objetivos</span>
+</div>
+<div class="grid">
+<article id="scope-boundary" class="card" data-source="spec.md" data-source-section="3 Resultado de entrega" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="Fronteira do slice" data-source-fragment-sha256="sha256:b1eafaf28cdc14c80737575d01de5db985a90931d344dd4a1debd3d93eac5745">
+<h2 id="decision">Inclui</h2>
+<p>Geração e revisão do brief: shell, rotas, mapa editorial, arquitetura explicável e revisão independente — sem implementar os produtos descritos pelos briefs.</p>
+<span class="source">Fronteira do slice</span>
+</article>
+<article id="scope-thesis" class="card" data-source="spec.md" data-source-section="6 Não objetivos" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 6. Não objetivos" data-source-fragment-sha256="sha256:e69c67929c0e3c3007c88bdc93b5e6eb307d3d39194c4883b3b0dba66a864f5d">
+<h2>Preserva</h2>
+<p>Fatos de consumidores, briefs históricos e julgamento humano; não há score que declare compreensão.</p>
+<span class="source">## 6. Não objetivos</span>
+</article>
+<article id="scope-pillars" class="card" data-source="spec.md" data-source-section="4 Pessoas e decisões atendidas" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 4. Pessoas e decisões atendidas" data-source-fragment-sha256="sha256:e48382112b981d0e8b694359b65db71ac1deb25f7649f0d89c197b9be35422e4">
+<h2>Pilares da decisão</h2><p>Patrocinador, operação, tecnologia e assurance veem a mesma fronteira, cada qual com a pergunta que lhe cabe.</p><span class="source">## 4. Pessoas e decisões atendidas</span>
+</article>
+<article class="card" data-source="spec.md" data-source-section="6 Não objetivos" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 6. Não objetivos" data-source-fragment-sha256="sha256:e69c67929c0e3c3007c88bdc93b5e6eb307d3d39194c4883b3b0dba66a864f5d">
+<h2>Limite</h2>
+<p>Não se inventa frontend, API, contagem, dependência ou relação para tornar a visão mais convincente.</p>
+<span class="source">## 6. Não objetivos</span>
+</article>
+</div>
+<article class="callout" data-source="spec.md" data-source-section="6 Não objetivos" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 6. Não objetivos" data-source-fragment-sha256="sha256:e69c67929c0e3c3007c88bdc93b5e6eb307d3d39194c4883b3b0dba66a864f5d">
+<strong>Limite aceito:</strong> a camada enriquece a apresentação, mas não substitui Markdown, não altera históricos e não transforma compreensão em score. <strong>Próxima decisão:</strong> só avançar após a leitura independente confirmar essa fronteira. <span class="source">## 6. Não objetivos</span>
+</article>
+<article id="scope-limit" class="callout" data-source="spec.md" data-source-section="6 Não objetivos" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 6. Não objetivos" data-source-fragment-sha256="sha256:e69c67929c0e3c3007c88bdc93b5e6eb307d3d39194c4883b3b0dba66a864f5d"><strong>Limite de produto:</strong> isto não vira site de marketing, quota de cards, frontend inventado, score de compreensão ou mutação silenciosa de históricos. <span class="source">## 6. Não objetivos</span></article>
+<article id="scope-functional-contract" class="card" data-source="spec.md" data-source-section="7 Requisitos funcionais" data-coverage="synthesized" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 7. Requisitos funcionais" data-source-fragment-sha256="sha256:57a5ab41a7dace93afca6868de078e1ba374b6ccd15e22015cf5ef3b36425e60"><h2>Contrato que estamos comprando</h2><p>Oito domínios viram rotas integrais; a composição tem mapa revisável; arquitetura só cresce quando a fonte sustenta; e confiança mantém proveniência e lifecycle sem dominar a conversa executiva.</p><span class="source">## 7. Requisitos funcionais</span></article>
+<article id="scope-acceptance" class="card" data-source="spec.md" data-source-section="8 Critérios de aceite" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 8. Critérios de aceite" data-source-fragment-sha256="sha256:f22416370ad5350e2f91f12e7cc1c5922ee531f7584a62916475dd8e9073a1fd"><h2>Atenção antes de avançar</h2><p>O aceite exige subpáginas realmente distintas, acesso recuperável, revisão qualitativa, arquitetura proporcional, Pearson literal e corpus M-001–M-008. A camada só avança quando esses critérios se mantêm verificáveis — sem tratar um refresh ou um parecer histórico como abertura de Human Visibility ou Tasks Ready.</p><span class="source">## 8. Critérios de aceite</span></article>
+<article id="scope-visual-direction" class="card" data-source="spec.md" data-source-section="10 Direção visual documentada — base para os mocks" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 10. Direção visual documentada — base para os mocks" data-source-fragment-sha256="sha256:a4f4c337e804e24740e6187f334eb70b9060f8b7b5a5a700529cb837e633b995"><h2>Gramática da reunião</h2><p>Barra Pearson navy, território próprio por rota, placa lavanda de tese e espaço vertical: não dashboard, não landing page e nunca tabs que só levam a uma âncora.</p><span class="source">## 10. Direção visual documentada — base para os mocks</span></article>
+</section>
+
+<section id="architecture" class="page" aria-labelledby="architecture-title" hidden>
+<div id="architecture-hero" class="hero" data-source="plan.md" data-source-section="Estratégia" data-coverage="synthesized" data-source-digest="sha256:383cd4d2b1e206efcfd194d60db80337e7c50c519221c42e01759d3612f63b67" data-source-fragment="## Estratégia" data-source-fragment-sha256="sha256:bf693737a196d72ab9a8f88d8bf4d80e5e2be454edcdc43481475cc3430b259e">
+<p class="eyebrow">Arquitetura</p>
+<h1 id="architecture-title" tabindex="-1">A camada nova fica entre a fonte e a reunião — não dentro da verdade canônica.</h1>
+<p>Fontes passam para composição, renderer/template e review/controle antes de qualquer entrega.</p>
+<span class="source">## Estratégia</span>
+</div>
+<div id="architecture-macro" class="topology" data-source="plan.md" data-source-section="Topologia conceitual a implementar somente quando fontes a suportarem" data-coverage="represented" data-source-digest="sha256:383cd4d2b1e206efcfd194d60db80337e7c50c519221c42e01759d3612f63b67" data-source-fragment="## Topologia conceitual a implementar somente quando fontes a suportarem" data-source-fragment-sha256="sha256:2187ad9cd4123d79664537cdd1b158489284fcb60dcb0c220d2e89993ffa10d0">
+<div class="node">Pessoa / operação<br><small>intenção, decisão ou handoff</small></div><div class="arrow">↓</div>
+<div class="node">Contexto preservado<br><small>fontes e governança</small></div><div class="arrow">⇄ relação material ⇄</div>
+<div class="node changed">Superfície alterada<br><small>composição, shell e review previstos</small></div><div class="arrow">↓ contrato / evento / dado</div>
+<div class="node">Controle ou dependência<br><small>gates e revisão distinta</small></div>
+<span class="source">## Topologia conceitual a implementar somente quando fontes a suportarem</span>
+</div>
+<article id="architecture-design-decisions" class="card" data-source="plan.md" data-source-section="Decisões de desenho" data-coverage="represented" data-source-digest="sha256:383cd4d2b1e206efcfd194d60db80337e7c50c519221c42e01759d3612f63b67" data-source-fragment="## Decisões de desenho" data-source-fragment-sha256="sha256:6a2835c570193d948b785e86c9694882c44c347556691836cf40df06efa4c511"><h2>O contrato que preserva a conversa</h2><p>Subpágina é rota, não âncora; HTML é único e progressivo; mapa editorial não vira fonte; arquitetura só aparece quando material; escala declara unidade; Pearson é sistema, não decoração.</p><span class="source">## Decisões de desenho</span></article>
+<p class="legend" data-source="plan.md" data-source-section="Limites de mudança previstos" data-coverage="represented" data-source-digest="sha256:383cd4d2b1e206efcfd194d60db80337e7c50c519221c42e01759d3612f63b67" data-source-fragment="## Limites de mudança previstos" data-source-fragment-sha256="sha256:343ad3c3c2ab89c499efc72ab4260125d295099ab4e6ce1e5e7c758d4c01cbab">Previsto: template, scripts, fixtures/testes e esta SPEC. Preservado: fontes canônicas e gates. Fora do escopo: fatos do consumidor e briefs históricos sem refresh. <span class="source">## Limites de mudança previstos</span></p>
+<div class="grid">
+<article id="architecture-change-map" class="card"
+  data-source="plan.md"
+  data-source-section="Limites de mudança previstos" data-coverage="represented"
+  data-source-digest="sha256:383cd4d2b1e206efcfd194d60db80337e7c50c519221c42e01759d3612f63b67" data-source-fragment="## Limites de mudança previstos"
+  data-source-fragment-sha256="sha256:343ad3c3c2ab89c499efc72ab4260125d295099ab4e6ce1e5e7c758d4c01cbab">
+<h2>Escala declarada</h2>
+<p>
+<strong>Unidade:</strong> 4 áreas do bundle previstas, ainda não executadas: <code>.harness/templates/</code>, <code>scripts/</code>, <code>scripts/fixtures/</code> + <code>testes/mock-tests/</code>, e <code>specs/</code>. Em cada área, a fronteira preservada é respectivamente fatos consumidores; decisão automática de suficiência; corpus histórico descartável; e briefs antigos sem refresh.</p>
+<span class="source">## Limites de mudança previstos</span>
+</article>
+<article id="architecture-limits" class="card unknown"
+  data-source="ratchet.md"
+  data-source-section="RATCHET-023-001" data-coverage="represented"
+  data-source-digest="sha256:70c3cf55559d3dc93e757c7ef56523293c010d4296ee6e7fe9faa77d74764738" data-source-fragment="RATCHET-023-001"
+  data-source-fragment-sha256="sha256:bfa9f9de84c4f368a1d0039c49c02eb7c0da3d5fcedf3ff6874ad4cc0051a5e3">
+<h2>Zoom honesto</h2>
+<p><strong>Lacuna acionável:</strong> ainda não há subsistema consumidor fonte-apoiado para abrir. O owner é Guardian maintainer; o caminho é revisão humana/agêntica distinta sobre corpus heterogêneo, registrando a lacuna no mapa editorial antes de representar qualquer interior. Até lá, não há zoom de frontend fictício.</p>
+<span class="source">RATCHET-023-001</span>
+</article>
+<article class="callout" data-source="ratchet.md" data-source-section="RATCHET-023-001" data-coverage="represented" data-source-digest="sha256:70c3cf55559d3dc93e757c7ef56523293c010d4296ee6e7fe9faa77d74764738" data-source-fragment="RATCHET-023-001" data-source-fragment-sha256="sha256:bfa9f9de84c4f368a1d0039c49c02eb7c0da3d5fcedf3ff6874ad4cc0051a5e3">
+<strong>Responsável pela descoberta:</strong> Guardian maintainer; a resolução é a revisão humana/agêntica sobre corpus heterogêneo, não inferência de frontend. <span class="source">RATCHET-023-001</span>
+</article>
+<article id="architecture-zoom" class="callout unknown" data-source="plan.md" data-source-section="Topologia conceitual a implementar somente quando fontes a suportarem" data-coverage="represented" data-source-digest="sha256:383cd4d2b1e206efcfd194d60db80337e7c50c519221c42e01759d3612f63b67" data-source-fragment="Zoom: Superfície alterada" data-source-fragment-sha256="sha256:d6e29de5a4599d159f28bac7b5cca57e0096ee9ab796dd4822c2e8a08f51ec65"><strong>Zoom / descoberta:</strong> o plano permite abrir a superfície alterada como “ponto interno alterado — contrato — ponto preservado”; este corpus ainda não nomeia um interior de consumidor. A descoberta permanece com o Guardian maintainer via mapa editorial e revisão distinta, sem frontend fictício. <span class="source">Zoom: Superfície alterada</span></article>
+</div>
+</section>
+
+<section id="impact" class="page impact-evidence" aria-labelledby="impact-title" hidden>
+<div class="hero" data-source="impact-map.md" data-source-section="Mudança e beneficiários" data-coverage="represented" data-source-digest="sha256:b515470f193817b306655ae329dc9293e3f702ad68ff8d82318e01808c031103" data-source-fragment="## Mudança e beneficiários" data-source-fragment-sha256="sha256:41122fda7e53f04252d31a5f03923f3fab231614ed540255ca6997659ea00de4">
+<p class="eyebrow">Impacto</p>
+<h1 id="impact-title" tabindex="-1">A mudança melhora a leitura e mantém seus freios visíveis.</h1>
+<p>Leitura executiva, composição, arquitetura, identidade e assurance são superfícies afetadas; nenhum sistema consumidor é inferido.</p>
+<span class="source">## Mudança e beneficiários</span>
+</div>
+<div class="grid">
+<article id="impact-footprint" class="card" data-source="impact-map.md" data-source-section="Mudança e beneficiários" data-coverage="represented" data-source-digest="sha256:b515470f193817b306655ae329dc9293e3f702ad68ff8d82318e01808c031103" data-source-fragment="## Mudança e beneficiários" data-source-fragment-sha256="sha256:41122fda7e53f04252d31a5f03923f3fab231614ed540255ca6997659ea00de4">
+<h2>Footprint</h2>
+<p>Brief por rota; fontes continuam autoridade; logo e proveniência continuam locais.</p>
+<span class="source">## Mudança e beneficiários</span>
+</article>
+<article id="impact-risk-chain" class="card" data-source="impact-map.md" data-source-section="Cadeias de impacto e controle" data-coverage="represented" data-source-digest="sha256:b515470f193817b306655ae329dc9293e3f702ad68ff8d82318e01808c031103" data-source-fragment="## Cadeias de impacto e controle" data-source-fragment-sha256="sha256:685c99c2a2ea22ad561266158e15948c4cd748d505654ba60b1096321975637e">
+<h2>Controle</h2>
+<p>Rota errada ou narrativa sem fonte retorna a browser/no-script, mapa editorial e revisor distinto.</p>
+<span class="source">## Cadeias de impacto e controle</span>
+</article>
+<article id="impact-exclusions" class="card" data-source="impact-map.md" data-source-section="Fora do alcance desta iniciativa" data-coverage="represented" data-source-digest="sha256:b515470f193817b306655ae329dc9293e3f702ad68ff8d82318e01808c031103" data-source-fragment="## Fora do alcance desta iniciativa" data-source-fragment-sha256="sha256:34be82e25fa8f5384705a1a224c94f394c6bab86eee8760bd65285c34c0623c4">
+<h2>Exclusão</h2>
+<p>Sem entrega de negócio consumidor, migração silenciosa ou certificação automática C-level.</p>
+<span class="source">## Fora do alcance desta iniciativa</span>
+</article>
+</div>
+<article id="impact-next" class="callout" data-source="impact-map.md" data-source-section="Cadeias de impacto e controle" data-coverage="represented" data-source-digest="sha256:b515470f193817b306655ae329dc9293e3f702ad68ff8d82318e01808c031103" data-source-fragment="## Cadeias de impacto e controle" data-source-fragment-sha256="sha256:685c99c2a2ea22ad561266158e15948c4cd748d505654ba60b1096321975637e">
+<strong>Fechamento para decisão:</strong> o risco é uma rota que perde região principal/foco, narrativa sem fonte, arquitetura fictícia ou rebrand que rompe o contrato. Os controles são browser/no-script + revisão de rota, mapa editorial + revisor distinto, caso negativo + N/A, e oráculos + refresh. Donos: builder + accessibility reviewer; composer + semantic reviewer; architecture reviewer; lifecycle owner. <strong>Próxima ação:</strong> o revisor distinto confronta a composição vinculada com essas cadeias antes do refresh guardado.
+<span class="source">## Cadeias de impacto e controle</span>
+</article>
+</section>
+
+<section id="execution" class="page" aria-labelledby="execution-title" hidden>
+<div id="execution-authority" class="hero" data-source="tasks.md" data-source-section="Contrato de autorização A2" data-coverage="represented" data-source-digest="sha256:5430dd0573d3cdcab0afc8bb272ff9ee0bd630e29c8b45b18a20c5b1839bc209" data-source-fragment="## Contrato de autorização A2" data-source-fragment-sha256="sha256:a880cd62377e8985ba2144beadac513ae3106516a5d78dbccb2ba5f335750b8a">
+<p class="eyebrow">Execução</p>
+<h1 id="execution-title" tabindex="-1">Quatro incrementos ainda são contratos preliminares, sem autorização.</h1>
+<p class="draft">Todos permanecem <code>pending</code>; cada um só pode virar <code>ready</code> depois de Brief Coverage Ready, Human Visibility Ready e da propagação da decisão de reunião que produz Tasks Ready.</p>
+<span class="source">## Contrato de autorização A2</span>
+</div>
+<div id="execution-drafts" class="grid">
+<article id="task-001" class="card"
+  data-source="tasks.md"
+  data-source-section="T-001" data-coverage="represented"
+  data-source-digest="sha256:5430dd0573d3cdcab0afc8bb272ff9ee0bd630e29c8b45b18a20c5b1839bc209" data-source-fragment="T-001 — Contrato editorial e fixtures de arquitetura explicável"
+  data-source-fragment-sha256="sha256:6a054df03b6028f866efcddaa8ca7c83c2772039b5334e2360736e54c24bafa1">
+<h2>T-001</h2>
+<p>Contrato e fixtures; evidence/T-001.md.</p>
+<span class="source">T-001 — Contrato editorial e fixtures de arquitetura explicável</span>
+</article>
+<article id="task-002" class="card"
+  data-source="tasks.md"
+  data-source-section="T-002" data-coverage="represented"
+  data-source-digest="sha256:5430dd0573d3cdcab0afc8bb272ff9ee0bd630e29c8b45b18a20c5b1839bc209" data-source-fragment="T-002 — Shell Pearson e router de subpáginas internas"
+  data-source-fragment-sha256="sha256:1c5eaf2c9d9e4d93776d06274ebb97cafdaea24d63f9209f65b494caa3c97f3d">
+<h2>T-002</h2>
+<p>Shell/router após T-001 aprovado.</p>
+<span class="source">T-002 — Shell Pearson e router de subpáginas internas</span>
+</article>
+<article id="task-003" class="card"
+  data-source="tasks.md"
+  data-source-section="T-003" data-coverage="represented"
+  data-source-digest="sha256:5430dd0573d3cdcab0afc8bb272ff9ee0bd630e29c8b45b18a20c5b1839bc209" data-source-fragment="T-003 — Composição executiva, topologia, change map e zoom"
+  data-source-fragment-sha256="sha256:c413559da69ca694cb0c7bac880385e0c3942a1c5b39394c81acfcbbbfb6ea16">
+<h2>T-003</h2>
+<p>Projeções e review após T-001/T-002.</p>
+<span class="source">T-003 — Composição executiva, topologia, change map e zoom</span>
+</article>
+<article id="task-004" class="card"
+  data-source="tasks.md"
+  data-source-section="T-004" data-coverage="represented"
+  data-source-digest="sha256:5430dd0573d3cdcab0afc8bb272ff9ee0bd630e29c8b45b18a20c5b1839bc209" data-source-fragment="T-004 — Recompose, revisão C-level e adoção controlada"
+  data-source-fragment-sha256="sha256:213ad70b369e3311b2b514a20eb8350ee86df354c28b1fece6bddda8a0da9ae1">
+<h2>T-004</h2>
+<p>Corpus M-001–M-008 após T-003.</p>
+<span class="source">T-004 — Recompose, revisão C-level e adoção controlada</span>
+</article>
+</div>
+<article id="execution-sequence" class="card" data-source="plan.md" data-source-section="Sequência de implementação após D-023-001" data-coverage="represented" data-source-digest="sha256:383cd4d2b1e206efcfd194d60db80337e7c50c519221c42e01759d3612f63b67" data-source-fragment="## Sequência de implementação após D-023-001" data-source-fragment-sha256="sha256:153daeb86970da9047ddb5130006abb50bd3f5a9bf1d555b10d77424c956fb82"><h2>Sequência que protege o resultado</h2><p>Primeiro fixtures e mapa editorial; depois rota e shell; depois narrativa, topologia e review; por fim M-001–M-008. Os contratos abaixo são consequência dessa ordem, não permissão para iniciá-la agora.</p><span class="source">## Sequência de implementação após D-023-001</span></article>
+<article class="callout" data-source="run-state.yaml" data-source-section="quality_gates.human_visibility_ready" data-coverage="represented" data-source-digest="sha256:d0433a703f8fa340564ff87a7ab8f9f8177511f74802a0f9913d9bd38cdd50cd" data-source-fragment="human_visibility_ready: false" data-source-fragment-sha256="sha256:5e85e4f6700bc3539ba9089312bc1fca2877f0a02aebab94aa19488021790726">
+<strong>Ordem segura:</strong> T-001 estabelece o contrato e as fixtures; T-002 só começa após T-001 aprovado; T-003 depende de ambos; T-004 recompõe o corpus. <strong>Dependência:</strong> antes de todos eles, coverage, Human Visibility e decisão de reunião precisam abrir Tasks Ready. <strong>Limite de decisão:</strong> a sequência preserva revisão independente, refresh guardado e parecer pós-render antes de qualquer abertura de Tasks Ready. <span class="source">human_visibility_ready: false</span>
+</article>
+</section>
+
+<section id="validation" class="page" aria-labelledby="validation-title" hidden>
+<div id="validation-strategy" class="hero" data-source="validation-plan.md" data-source-section="Estratégia de validação" data-coverage="synthesized" data-source-digest="sha256:6fadbf9990f8272e0f702b46a48bddde6de220ef10d4523c37d3b197d26798c9" data-source-fragment="| ID | Afirmação / risco | Método e contexto | Oráculo / evidência | Limite honesto |" data-source-fragment-sha256="sha256:59a61a69548613c8844cc5d59a83de5287c3ee3c3022fb32cf80bd56835fc389">
+<p class="eyebrow">Validação</p>
+<h1 id="validation-title" tabindex="-1">A estrutura prova contrato; outro agente julga se a conversa ficou boa.</h1>
+<span class="source">| ID | Afirmação / risco | Método e contexto | Oráculo / evidência | Limite honesto |</span>
+</div>
+<div id="validation-proof" class="grid">
+<article id="validation-route" class="card"
+  data-source="validation-plan.md"
+  data-source-section="V-023-01" data-coverage="represented"
+  data-source-digest="sha256:6fadbf9990f8272e0f702b46a48bddde6de220ef10d4523c37d3b197d26798c9" data-source-fragment="V-023-01 | Rotas são subpáginas reais."
+  data-source-fragment-sha256="sha256:141f1cf478ce91cecf57d8e69a1429b386633bd43ed20ca6498938b80d51be99">
+<h2>Rotas e acesso</h2>
+<p>URL, histórico, conteúdo inativo, foco, no-script e ausência de scrollIntoView.</p>
+<span class="source">V-023-01 | Rotas são subpáginas reais.</span>
+</article>
+<article id="validation-narrative" class="card"
+  data-source="validation-plan.md"
+  data-source-section="V-023-03" data-coverage="represented"
+  data-source-digest="sha256:6fadbf9990f8272e0f702b46a48bddde6de220ef10d4523c37d3b197d26798c9" data-source-fragment="V-023-03 | Narrativa é executiva e fonte-apoiada."
+  data-source-fragment-sha256="sha256:57e723690f861f15d7c64c3cb6ee6b5c3d1be3eb3060dbb7fe2104a3b71ce82d">
+<h2>Narrativa sob revisão</h2>
+<p>Nenhum score decide compreensão; revisor distinto devolve APPROVE/REVISE com fonte, impacto e reparo.</p>
+<span class="source">V-023-03 | Narrativa é executiva e fonte-apoiada.</span>
+</article>
+<article id="validation-validator-audit" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-028" data-source-fragment-sha256="sha256:9a2c2eab5f7bc2665b29d7be771ec58041c8d35f82f0f16939c14e69d786a3a2"><span id="validation-validator-defect"></span><h2>Validador: correção factual, não exceção</h2><p>D-023-021 registrou uma hipótese histórica: que o checker lia só o primeiro caractere da disposição. A auditoria D-023-023 a refutou. O contrato é <code>disposição: razão</code>; o travessão era o defeito real, este snapshot usa dois-pontos e nenhum patch ou dispensa de Human Visibility é necessário.</p><span class="source">D-023-023 · D-023-028</span></article>
+<article id="validation-limits" class="card" data-source="validation-plan.md" data-source-section="Evidência futura" data-coverage="represented" data-source-digest="sha256:6fadbf9990f8272e0f702b46a48bddde6de220ef10d4523c37d3b197d26798c9" data-source-fragment="## Evidência futura" data-source-fragment-sha256="sha256:6507bd07c51de84de54064d2631b98fe5aa4e85bf0dd20a716469aff974001b3">
+<h2>Limite de evidência</h2><p>Os pacotes <code>evidence/T-001.md</code>, <code>evidence/T-002.md</code>, <code>evidence/T-003.md</code> e <code>evidence/T-004.md</code> permanecem futuros: mostram onde a prova será registrada, não concluem uma entrega antes do parecer independente.</p><span class="source">## Evidência futura</span>
+</article>
+<article id="validation-access" class="card" data-source="validation-plan.md" data-source-section="V-023-02" data-coverage="represented" data-source-digest="sha256:6fadbf9990f8272e0f702b46a48bddde6de220ef10d4523c37d3b197d26798c9" data-source-fragment="V-023-02" data-source-fragment-sha256="sha256:320c382f03b0a40b448eaf789ff250ea84506eef4851640b9aa3fb8a89dc88cf">
+<h2>Acesso e resiliência</h2><p>As larguras 320/768/1024/1440, 200%, teclado, no-JS, impressão e movimento reduzido têm oráculos próprios: foco, landmark, aria-current e fallback recuperável.</p><span class="source">V-023-02</span>
+</article>
+<article id="validation-architecture" class="card" data-source="validation-plan.md" data-source-section="V-023-04" data-coverage="represented" data-source-digest="sha256:6fadbf9990f8272e0f702b46a48bddde6de220ef10d4523c37d3b197d26798c9" data-source-fragment="V-023-04" data-source-fragment-sha256="sha256:5f67fee14213179b0c74fa709259536bd21f4a5fa649d5302fc801e83d9473ab">
+<h2>Arquitetura proporcional</h2><p>Dois casos materiais e um operacional devem recuperar macro, change map, unidade e zoom ou N/A justificado. Isso não certifica arquitetura fora do corpus.</p><span class="source">V-023-04</span>
+</article>
+<article id="validation-scale" class="card" data-source="validation-plan.md" data-source-section="V-023-05" data-coverage="represented" data-source-digest="sha256:6fadbf9990f8272e0f702b46a48bddde6de220ef10d4523c37d3b197d26798c9" data-source-fragment="V-023-05" data-source-fragment-sha256="sha256:9270aab8d1227f32dd119e20adcc99b17c84815def7ac46e6255602f1ee4c56a">
+<h2>Ausência não é zero</h2><p>O caso negativo flaggea contagem sem unidade, frontend inferido e detalhe ausente; código não decide o que é material.</p><span class="source">V-023-05</span>
+</article>
+<article id="validation-pearson" class="card" data-source="validation-plan.md" data-source-section="V-023-06" data-coverage="represented" data-source-digest="sha256:6fadbf9990f8272e0f702b46a48bddde6de220ef10d4523c37d3b197d26798c9" data-source-fragment="V-023-06" data-source-fragment-sha256="sha256:cc697f702e008bd593afdcbdb4aa40c7a309df0f6a93790856bd8ed3b8d5d8c1">
+<h2>Marca é evidência visual</h2><p>Origem local, tokens, shell, contraste, foco e screenshots sustentam a inspeção; julgamento de marca permanece humano.</p><span class="source">V-023-06</span>
+</article>
+<article id="validation-mocks" class="card" data-source="validation-plan.md" data-source-section="V-023-07" data-coverage="represented" data-source-digest="sha256:6fadbf9990f8272e0f702b46a48bddde6de220ef10d4523c37d3b197d26798c9" data-source-fragment="V-023-07" data-source-fragment-sha256="sha256:b6427424af5115ed8f13e99c0d646ab8fbb79f04d0e9a0f1bc4e802576eec786">
+<h2>Direção confirmada</h2><p>M-023-A/B/C foram apresentados antes do refactor e D-023-001 preserva a decisão do requester; mock não é implementação nem prova de acessibilidade.</p><span class="source">V-023-07</span>
+</article>
+<article id="validation-corpus" class="card" data-source="validation-plan.md" data-source-section="V-023-08" data-coverage="represented" data-source-digest="sha256:6fadbf9990f8272e0f702b46a48bddde6de220ef10d4523c37d3b197d26798c9" data-source-fragment="V-023-08" data-source-fragment-sha256="sha256:b43340751172498fc00f41766ca5fd30eaeed2a367c8e7d56bfd19d46a9340fd">
+<h2>Generalização sem apagar o corpus</h2><p>M-001–M-008 e a regressão do bundle verificam digests, provenance, lifecycle e avaliações independentes; PASS isolado não aprova estética ou semântica.</p><span class="source">V-023-08</span>
+</article>
+</div>
+<article id="execution-review-limit" class="callout" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-028" data-source-fragment-sha256="sha256:9a2c2eab5f7bc2665b29d7be771ec58041c8d35f82f0f16939c14e69d786a3a2">
+<strong>Limite e próxima ação:</strong> D-023-023 corrigiu a alegação histórica sobre o validador: a tabela usa <code>disposição: razão</code>, que é o contrato exigido; não há patch nem exceção. D-023-028 permanece aprovação histórica, limitada ao refresh guardado. D-023-029 é o REVISE pós-render corrente; D-023-032 não abre gate algum. <span class="source">D-023-032</span>
+</article>
+</section>
+
+<section id="evolution" class="page decision-register" aria-labelledby="evolution-title" hidden>
+<div id="evolution-d001" class="hero" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-001" data-source-fragment-sha256="sha256:33ac18b7a94f1bc8193a5ac9d848b33c87ee4c13127a3d49c6fd75fb4a402a0d">
+<p class="eyebrow">Evolução</p>
+<h1 id="evolution-title" tabindex="-1">A direção foi aprovada; cada reparo seguinte protegeu uma parte verificável da conversa.</h1>
+<p>D-023-001 autorizou a execução vertical sem avatar/login, mas preservou os gates. O registro abaixo mantém a origem específica de cada evolução; não transforma a sequência em aprovação automática.</p>
+<span class="source">D-023-001 · D-023-028</span>
+</div>
+<div class="grid">
+<article id="evolution-d002" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-002" data-source-fragment-sha256="sha256:4f6f8647107c2df6f2716e8c28406d6a42b4e5345e2364cb66ce8724c5f632fc">
+<h2>D-023-002 · Subpágina e fonte</h2><p>O primeiro candidato voltou: usava âncoras e tinha proveniência, escala e Pearson incompletos.</p><span class="source">D-023-002 · D-023-028</span>
+</article>
+<article id="evolution-d003" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-003" data-source-fragment-sha256="sha256:cacafe07f37c6e4ff0e9d79fab9c0f284495d7214c5d3c7e290a9a61e684cfd2">
+<h2>D-023-003 · Estado e Pearson</h2><p>O router evoluiu, mas blocos, digests, zoom e hooks Pearson ainda precisavam de reparo.</p><span class="source">D-023-003 · D-023-028</span>
+</article>
+<article id="evolution-d004" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-004" data-source-fragment-sha256="sha256:70a1cf9acc99fb73b3f79cf4e3014986644c9e4f8d60b53ec1278e48522951bb">
+<h2>D-023-004 · Cobertura e arquitetura</h2><p>O review manteve as rotas, mas exigiu targets completos, escala real e descoberta de zoom.</p><span class="source">D-023-004 · D-023-028</span>
+</article>
+<article id="evolution-d005" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-005" data-source-fragment-sha256="sha256:688f69b2fd9600bf94cda1c2a351e0333f59fea79580a59aa0561a3306ebfe69">
+<h2>D-023-005 · Lifecycle v2</h2><p>O shell passou, porém o candidato ainda precisava dos markers v2, profundidade por rota e coverage completo.</p><span class="source">D-023-005 · D-023-028</span>
+</article>
+<article id="evolution-d006" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-006" data-source-fragment-sha256="sha256:ae206269b28587b2e4edfe7f63b4dd33e548fdc5c699418dc75ba13205922d49">
+<h2>D-023-006 · Profundidade</h2><p>Os contratos mecânicos ficaram corretos; o revisor devolveu ainda narrativa, validação, checkpoint e zoom acionável.</p><span class="source">D-023-006 · D-023-028</span>
+</article>
+<article id="evolution-d007" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-007" data-source-fragment-sha256="sha256:5bdafa097fd53a29283afba05ec215f402f7ace39bbf7d4bd0538e9e62e85e91">
+<h2>D-023-007 · Fechamentos</h2><p>O sexto review retornou impacto, escala de quatro áreas, fonte histórica, escopo positivo e confiança para reparo.</p><span class="source">D-023-007 · D-023-028</span>
+</article>
+<article id="evolution-d008" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-008" data-source-fragment-sha256="sha256:1f3366fb98966481285cee8efe0d8a2fecd27888a23472155f084f65af2af1bb"><h2>D-023-008 · Profundidade e relações</h2><p>O sétimo review preservou a mecânica, mas retornou source→target granular, conversa por rota e a topologia relacional completa.</p><span class="source">D-023-008 · D-023-028</span></article>
+<article id="evolution-d009" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-009" data-source-fragment-sha256="sha256:fade1288040ecfcdcc51b1d73c791621ab7f038f07dcbd8df6b48c5c6b33b639"><h2>D-023-009 · Granularidade final</h2><p>O oitavo review preservou a experiência e devolveu somente fonte, heading, alvo e fragmento locais antes do próximo parecer independente.</p><span class="source">D-023-009 · D-023-028</span></article>
+<article id="evolution-d010" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-010" data-source-fragment-sha256="sha256:1af8a0c7bc6910f331f2a20d3484f6b6801cee15d8ba06fe93b1a03b9fdfed9d"><h2>D-023-010 · Projeções correntes</h2><p>A nona revisão confirmou a substância e devolveu projeções defasadas e provenance ampla em wrappers.</p><span class="source">D-023-010 · D-023-028</span></article>
+<article id="evolution-d011" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-011" data-source-fragment-sha256="sha256:532fcbbe1839530a9de943a4e5513ea736a219b43e63a5b17d3ea2060b3668fd"><h2>D-023-011 · Separação local</h2><p>A décima revisão confirmou rotas, estado e design, e devolveu quatro projeções multi-heading para separar.</p><span class="source">D-023-011 · D-023-028</span></article>
+<article id="evolution-d012" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-012" data-source-fragment-sha256="sha256:6bf6edc2f44b8476bd71df536ad08e981b00f3eb51ed26786130380dbbdacc9c"><h2>D-023-012 · Hash e fato unívoco</h2><p>A décima primeira revisão devolveu o hash presente, uma relação por fato, D-023-010 na evolução e o vínculo futuro D-023-013.</p><span class="source">D-023-012 · D-023-028</span></article>
+<article id="evolution-d013" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-013" data-source-fragment-sha256="sha256:d7996dd7ab6f220f92a80b2a482760558a8541809cfe6c895d991cd3d5653ef0"><h2>D-023-013 · Aprovação pré-render histórica</h2><p>O snapshot anterior recebeu aprovação somente para renderização guardada; não abriu Human Visibility, Tasks Ready nem uma task.</p><span class="source">D-023-013 · D-023-028</span></article>
+<article id="evolution-d014" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-014" data-source-fragment-sha256="sha256:4a4a4ea9529f12aff4e6c50d7cd5c5f0890012a201506fba18b246c943066ab7"><h2>D-023-014 · Recuperação pós-render</h2><p>A revisão independente devolveu o primeiro artefato para corrigir registro de coverage, destinos de evidência e autoridade da execução antes de um novo snapshot.</p><span class="source">D-023-014 · D-023-028</span></article>
+<article id="evolution-d015" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-015" data-source-fragment-sha256="sha256:dd806ed427b8eb859039c9d8a0869c372731835a29c4feeb73bc43f1ce991dee"><h2>D-023-015 · Projeção corrente</h2><p>A revisão pré-render confirmou os três reparos materiais, mas devolveu o snapshot por estado defasado, provenance não renovada e markup Pearson inválido.</p><span class="source">D-023-015 · D-023-028</span></article>
+<article id="evolution-d017" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-017" data-source-fragment-sha256="sha256:21a05b683219bfecd73549dee6dc0b3fc0591d317fe08ac2a6752d2fa77c425a"><h2>D-023-017 · Vínculo de composição</h2><p>A revisão confirmou os reparos, mas devolveu o candidato porque o manifesto de composição ainda estava defasado; não houve assinatura nem refresh.</p><span class="source">D-023-017 · D-023-028</span></article>
+<article id="evolution-d018" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-018" data-source-fragment-sha256="sha256:f7d6fd48b858786b43247d0502b50f8f094666406ecf2601ebbed61c31e51db6"><h2>D-023-018 · Aprovação pré-render histórica</h2><p>A revisão independente aprovou o snapshot então exato apenas para refresh guardado. É um fato histórico: não abriu Human Visibility, Tasks Ready ou qualquer task.</p><span class="source">D-023-018 · D-023-028</span></article>
+<article id="evolution-d019" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-019" data-source-fragment-sha256="sha256:9846e21b23a1730309420e92e347c0abcb25b9634f5d0a2daf82862686007dba"><h2>D-023-019 · REVISE pós-render</h2><p>O artefato renderizado preservou rotas, Pearson e arquitetura honesta, mas foi devolvido para retirar a aparência de pré-render e tornar o registro uma linha, um fato e um alvo.</p><span class="source">D-023-019 · D-023-028</span></article>
+<article id="evolution-d020" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-020" data-source-fragment-sha256="sha256:a7e462fc98f03ee491ee548d268a3f128349a6a86011438eb32a367d977d7d1d"><h2>D-023-020 · Envelope de revisão corrente</h2><p>D-023-020 registrou um envelope de revisão da recomposição; como fato histórico, ele não autorizou refresh, entrega, Human Visibility, Tasks Ready ou execução.</p><span class="source">D-023-020 · D-023-028</span></article>
+<article id="evolution-d021" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-021" data-source-fragment-sha256="sha256:e9880401901c60c7377bbfe7df6bd72c5744b9d882a74063acc6462178d3ea62"><h2>D-023-021 · Vínculo e hipótese de validador</h2><p>A revisão manteve a experiência e a cobertura granular, mas devolveu o snapshot por vínculo de decisão defasado e levantou uma hipótese sobre o checker. D-023-023 a refutou: o formato com dois-pontos é o contrato e não exige patch ou exceção.</p><span class="source">D-023-021 · D-023-028</span></article>
+<article id="evolution-d016" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-016" data-source-fragment-sha256="sha256:bdf0d6b14bf9c992a309f5a2469f52ebd63eeb4da2d27c015aa324a470e1e6d6"><h2>D-023-016 · Envelope de recuperação</h2><p>O record pendente fixou que a recuperação do primeiro render exigia parecer independente exato antes de qualquer refresh.</p><span class="source">D-023-016 · D-023-028</span></article>
+<article id="evolution-d022" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-022" data-source-fragment-sha256="sha256:4e1866e9e3ae2b5d0f532b352a71591cefa5406e2025c19123902c5cf6153948"><h2>D-023-022 · Reancoragem sem exceção</h2><p>O envelope seguinte conservou o bloqueio de gates enquanto o vínculo de decisão era recomposto; D-023-023 eliminou a hipótese de bloqueio no validador.</p><span class="source">D-023-022 · D-023-028</span></article>
+<article id="evolution-d023" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-023" data-source-fragment-sha256="sha256:d545932f5f8dcd1849124e489744fd983d3ea87c8f73c69911fae5498d2dbfe6"><h2>D-023-023 · Correção do diagnóstico</h2><p>A auditoria independente confirmou que a célula inteira é lida pelo checker: o padrão válido é <code>disposição: razão</code>. Não há patch de produção, exceção de validação ou atalho de readiness.</p><span class="source">D-023-023 · D-023-028</span></article>
+<article id="evolution-d025" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-025" data-source-fragment-sha256="sha256:e7958e94702bec7f2aa7df9fd4651d6e2fcac89e020cb4dcb2ed34e41c8bc711"><h2>D-023-025 · Projeções que não sobreviviam ao refresh</h2><p>A revisão confirmou a substância, mas devolveu duas projeções que ficariam falsas após assinatura e refresh: o gate de coverage e o próximo passo congelado. A sequência foi então recomposta em termos seguros de lifecycle.</p><span class="source">D-023-025 · D-023-032</span></article>
+<article id="evolution-d024" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-024" data-source-fragment-sha256="sha256:14a10615f17bac99de2c9c28551a0d463955feff05a4d66f7c28b0b3002fb3b4"><h2>D-023-024 · Reancoragem corrigida</h2><p>O envelope reuniu a correção factual do validador e pediu um vínculo exato antes do refresh; não transformou cobertura, Human Visibility ou tarefas em aprovação.</p><span class="source">D-023-024</span></article>
+<article id="evolution-d026" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-026" data-source-fragment-sha256="sha256:31c13a4b871626e86fae084fd7e7149f7c9b274c6989e2c632864a3e0f0b7620"><h2>D-023-026 · Lifecycle seguro</h2><p>A recomposição retirou projeções que ficariam falsas depois do refresh; a etapa seguinte ainda precisava provar que o marcador dinâmico era também um bloco v2 resolúvel.</p><span class="source">D-023-026</span></article>
+<article id="evolution-d027" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-027" data-source-fragment-sha256="sha256:ee66890619bbea63d977d77652663dd02d95047600d934b066b900e5a16f6c53"><h2>D-023-027 · Proveniência do marcador</h2><p>A revisão confirmou narrativa, rotas e lifecycle, mas devolveu somente a identidade v2 do próximo passo. A vinculação ao booleano estável preservou Human Visibility bloqueada.</p><span class="source">D-023-027 · D-023-032</span></article>
+<article id="evolution-d028" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-028" data-source-fragment-sha256="sha256:9a2c2eab5f7bc2665b29d7be771ec58041c8d35f82f0f16939c14e69d786a3a2"><h2>D-023-028 · Autorização pré-render histórica</h2><p>D-023-028 concluiu a revisão pré-render exata deste snapshot e autorizou exclusivamente o refresh guardado. Não concedeu Human Visibility, Tasks Ready nem entrega; após a promoção, o controle independente aberto é o parecer pós-render.</p><span class="source">D-023-028 · D-023-032</span></article>
+<article id="evolution-d029" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-029" data-source-fragment-sha256="sha256:172c393fa0e1b8876b48ae9a214999ab672ecc4edc0bf8a3d85981e2bd9f474f"><h2>D-023-029 · REVISE pós-render corrente</h2><p>O HTML promovido passou em estrutura, router, Pearson e narrativa, mas três frases ainda o apresentavam como pré-render. Este é o parecer pós-render corrente: recuperar D-023-028 como aprovação histórica e refazer composição, revisão, refresh e novo parecer sem abrir Human Visibility, Tasks Ready ou tasks.</p><span class="source">D-023-029 · D-023-032</span></article>
+<article id="evolution-d030" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-030" data-source-fragment-sha256="sha256:1887a475d1bdc55e0b5f42f49f085679b9af15111a122fc327bd9e77333b5a66"><h2>D-023-030 · Comunicação pós-render</h2><p>O envelope pendente reescreveu a comunicação para tratar D-023-028 como fato histórico e D-023-029 como controle corrente; não autorizou refresh, entrega ou qualquer gate.</p><span class="source">D-023-030 · D-023-032</span></article>
+<article id="evolution-d031" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-031" data-source-fragment-sha256="sha256:985c08076641f7a913b02e8b84f2ff42e06a48622073c7d410352ef4cb2448a2"><h2>D-023-031 · Recuperabilidade exigida</h2><p>A revisão pré-render confirmou a linguagem pós-render, mas devolveu a composição por faltar a representação de D-023-029 e por rotular D-023-028 como envelope corrente. D-023-032 corrige somente esses fatos antes de nova revisão.</p><span class="source">D-023-031 · D-023-032</span></article>
+<article id="evolution-d033" class="card" data-source="decision-log.md" data-source-section="D-023-034" data-coverage="represented" data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7" data-source-fragment="D-023-033" data-source-fragment-sha256="sha256:5b8d2785c6bdc0f1c57b5a75cc6d6f708654bfd27d705940af978576b7ce55b7"><h2>D-023-033 · Fonte de aceite preservada</h2><p>A revisão confirmou a recuperação de D-023-029, mas devolveu somente a troca indevida da fonte canônica do aceite. D-023-034 restaura <code>spec.md — 8 Critérios de aceite</code> em seu próprio cartão e mantém o REVISE pós-render no cartão de evolução.</p><span class="source">D-023-033 · D-023-034</span></article>
+</div>
+<article id="evolution-state" class="callout"
+  data-source="run-state.yaml"
+  data-source-section="status" data-coverage="represented"
+  data-source-digest="sha256:d0433a703f8fa340564ff87a7ab8f9f8177511f74802a0f9913d9bd38cdd50cd" data-source-fragment="status: &quot;executing&quot;"
+  data-source-fragment-sha256="sha256:abef3ff5c91024ac417d7ac2c7b815662ca97272b91e74831390951d286d890c">
+<strong>Estado atual:</strong> a iniciativa está em execução e mantém a composição sob gates de lifecycle, coverage e revisão independente; o estado renderizado é projetado pelos marcadores próprios abaixo. <span class="source">status: "executing"</span>
+</article>
+<article id="evolution-review" class="callout"
+  data-source="decision-log.md"
+  data-source-section="D-023-034" data-coverage="represented"
+  data-source-digest="decision-record-sha256:8830e3598e8e242f5133f153aaecc75338e598992be55ef08378375e78ee9ec7"
+  data-source-fragment="D-023-028"
+  data-source-fragment-sha256="sha256:9a2c2eab5f7bc2665b29d7be771ec58041c8d35f82f0f16939c14e69d786a3a2">
+<strong>Último parecer factual:</strong> D-023-029 devolveu o HTML promovido apenas por três frases pré-render obsoletas e continua sendo o REVISE pós-render corrente. D-023-032 recompõe a recuperabilidade: D-023-028 permanece aprovação histórica limitada ao refresh guardado, sem abrir gates. <span class="source">D-023-032</span>
+</article>
+<article id="evolution-next" class="callout"
+  data-source="run-state.yaml" data-source-section="quality_gates.human_visibility_ready" data-coverage="represented"
+  data-source-digest="sha256:d0433a703f8fa340564ff87a7ab8f9f8177511f74802a0f9913d9bd38cdd50cd"
+  data-source-fragment="false" data-source-fragment-sha256="sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+  data-lifecycle-marker="rendered-next-safe-step" data-lifecycle-source="run-state.yaml" data-lifecycle-fragment="next_safe_step" data-lifecycle-projection="lifecycle-next-safe-step">Retain the recorded post-render review; any Human Visibility or delivery decision remains separate, and Tasks Ready remains false.</article>
+<article id="evolution-progress" class="callout"
+  data-source="progress.md"
+  data-source-section="Recuperação pré-render — REVISE 2026-08-31" data-coverage="represented"
+  data-source-digest="sha256:eee89ecd0625983e118ab3aa59b1d1eb3d175d78527950a3aee2327d0b08fb1a" data-source-fragment="## Recuperação pré-render — REVISE 2026-08-31"
+  data-source-fragment-sha256="sha256:3ad92d2adbc36b6529a8115181919a031e03f3220438bfdafc9ce5a162eea732">
+<strong>Memória operacional:</strong> D-023-019 preservou a experiência promovida, mas devolveu lifecycle e o registro humano para recomposição; D-023-023 confirmou o contrato da tabela; D-023-028 autorizou só o refresh guardado; e D-023-029 identificou três frases a corrigir no artefato promovido. <span class="source">## Recuperação pré-render — REVISE 2026-08-31</span>
+</article>
+</section>
+
+<section id="trust" class="page" aria-labelledby="trust-title" hidden>
+<div id="trust-state" class="hero" data-source="run-state.yaml" data-source-section="quality_gates.human_visibility_ready" data-coverage="represented" data-source-digest="sha256:d0433a703f8fa340564ff87a7ab8f9f8177511f74802a0f9913d9bd38cdd50cd" data-source-fragment="human_visibility_ready: false" data-source-fragment-sha256="sha256:5e85e4f6700bc3539ba9089312bc1fca2877f0a02aebab94aa19488021790726">
+<p class="eyebrow">Confiança</p>
+<h1 id="trust-title" tabindex="-1">A confiança vem de separar composição, refresh e revisão independente.</h1>
+<p>D-023-023 corrigiu a alegação histórica de defeito: <code>disposição: razão</code> é o contrato aceito pelo validador, sem patch ou exceção. Human Visibility e Tasks Ready permanecem gates distintos.</p>
+<span class="source">human_visibility_ready: false</span>
+</div>
+<p data-lifecycle-marker="rendered-authority" data-lifecycle-source="run-state.yaml" data-lifecycle-fragment="brief_review.findings_status" data-lifecycle-projection="lifecycle-authority">Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</p>
+<p data-lifecycle-marker="rendered-review-status" data-lifecycle-source="run-state.yaml" data-lifecycle-fragment="brief_review.findings_status" data-lifecycle-projection="lifecycle-review-status">Exact pre-render and independent post-render reviews are recorded; Human Visibility and Tasks Ready remain separate false decisions.</p>
+<p data-lifecycle-marker="rendered-next-safe-step" data-lifecycle-source="run-state.yaml" data-lifecycle-fragment="next_safe_step" data-lifecycle-projection="lifecycle-next-safe-step">Retain the recorded post-render review; any Human Visibility or delivery decision remains separate, and Tasks Ready remains false.</p>
+<article id="trust-delivery" class="card" data-source="run-state.yaml" data-source-section="quality_gates.human_visibility_ready" data-coverage="represented" data-source-digest="sha256:d0433a703f8fa340564ff87a7ab8f9f8177511f74802a0f9913d9bd38cdd50cd" data-source-fragment="human_visibility_ready: false" data-source-fragment-sha256="sha256:5e85e4f6700bc3539ba9089312bc1fca2877f0a02aebab94aa19488021790726"><h2>Entrega continua bloqueada</h2><p>A promoção de um HTML e a revisão independente posterior são etapas distintas. Human Visibility continua falsa até a evidência do artefato renderizado; isto não é entrega.</p><span class="source">human_visibility_ready: false</span></article>
+<article id="trust-approval" class="card" data-source="run-state.yaml" data-source-section="approvals.human_required" data-coverage="represented" data-source-digest="sha256:d0433a703f8fa340564ff87a7ab8f9f8177511f74802a0f9913d9bd38cdd50cd" data-source-fragment="human_required: true" data-source-fragment-sha256="sha256:67c00f2d13023abb65b4042f58a23ee36a79ce66492ef8bfb1f59be7ea5c2fce"><h2>Autoridade permanece humana</h2><p>O processo mantém aprovação humana requerida; a revisão independente preserva a separação entre composição e decisão.</p><span class="source">human_required: true</span></article>
+<article id="trust-next" class="card" data-source="run-state.yaml" data-source-section="quality_gates.human_visibility_ready" data-coverage="represented" data-source-digest="sha256:d0433a703f8fa340564ff87a7ab8f9f8177511f74802a0f9913d9bd38cdd50cd" data-source-fragment="human_visibility_ready: false" data-source-fragment-sha256="sha256:5e85e4f6700bc3539ba9089312bc1fca2877f0a02aebab94aa19488021790726"><h2>Próximo freio</h2><p>A sequência segura preserva revisão independente, refresh guardado e parecer pós-render antes de qualquer decisão de Human Visibility; Tasks Ready permanece falso.</p><span class="source">human_visibility_ready: false</span></article>
+<article id="trust-ratchet" class="card"
+  data-source="ratchet.md"
+  data-source-section="RATCHET-023-001" data-coverage="represented"
+  data-source-digest="sha256:70c3cf55559d3dc93e757c7ef56523293c010d4296ee6e7fe9faa77d74764738" data-source-fragment="Explicação não é uma camada decorativa"
+  data-source-fragment-sha256="sha256:29e4fdb946ed0d23d2c25c04de52e6a6f44d30f31ab02200e6a1dd37d886c9bf">
+<h2>Ratchet</h2>
+<p>Explicação não é uma camada decorativa: CSS, score ou diagrama genérico não fecham a regressão.</p>
+<span class="source">Explicação não é uma camada decorativa</span>
+</article>
+<article id="trust-constraints" class="card" data-source="spec.md" data-source-section="9 Comportamentos de borda e falha" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 9. Comportamentos de borda e falha" data-source-fragment-sha256="sha256:5bc85dd6a2fc5e04741ac9035c50dac35edafd3fe71a05ca7a5aada1011d2228">
+<h2>Condições de confiança</h2><p>Rota desconhecida, ausência de JavaScript, impressão e redução de movimento não podem apagar a leitura; arquitetura sem fonte vira lacuna explícita.</p><span class="source">## 9. Comportamentos de borda e falha</span>
+</article>
+<article id="trust-nfr" class="card" data-source="spec.md" data-source-section="11 Restrições não funcionais" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 11. Restrições não funcionais" data-source-fragment-sha256="sha256:4232bcda3e3b417a4d82f97126aaf3ef36bd84a366bc34207fe0734f1909e735"><h2>O que sustenta a confiança</h2><p>Sem runtime ou recurso remoto, com semântica, foco, contraste, privacidade e fonte canônica preservados; qualidade humana continua uma revisão, não uma nota.</p><span class="source">## 11. Restrições não funcionais</span></article>
+<article id="trust-assumptions" class="card" data-source="spec.md" data-source-section="12 Premissas e dependências" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 12. Premissas e dependências" data-source-fragment-sha256="sha256:90fb98a23ceca9509fcd561b3a48326011a835be618735e8ff27b80410e9c374">
+<h2>Premissas que sustentam esta leitura</h2><p>A cópia local Pearson e o logo permanecem autoridade visual; as fontes canônicas precisam permitir locators; o requester revisou M-023-A/B/C; e M-001–M-008 precisam continuar cobrindo domínios heterogêneos. Cada uma tem owner/validação no contrato da SPEC.</p><span class="source">## 12. Premissas e dependências</span>
+</article>
+<article id="trust-risks" class="card" data-source="spec.md" data-source-section="13 Riscos" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 13. Riscos" data-source-fragment-sha256="sha256:bbebd2b76a3d3d0f4c8245053435a1e4601b249280579f8e97ae37a3a574997a">
+<h2>Riscos ainda ativos</h2><p>A experiência pode virar telas genéricas, dar falsa precisão à arquitetura, quebrar no-script/foco, reduzir Pearson a paleta ou alterar autoridade histórica. As respostas declaradas são mapa+revisor, fonte/N/A, fallback+testes, checklist+ativo local e refresh explícito.</p><span class="source">## 13. Riscos</span>
+</article>
+<article id="decision-boundary" class="card" data-source="spec.md" data-source-section="14 Decisão da SPEC" data-coverage="represented" data-source-digest="sha256:45a64209820d5d3c4cb56535142db324b7a57e8c485b5dffe82585123d0d9949" data-source-fragment="## 14. Decisão da SPEC" data-source-fragment-sha256="sha256:9e27fc5d7ab8f593e999c15bf0e21275600b1cd67e9b8fe9ad922df4c49877ca">
+<h2>Limite de autoridade</h2><p>A direção visual está aprovada; coverage, renderização, Human Visibility e Tasks Ready continuam sendo gates distintos.</p><span class="source">## 14. Decisão da SPEC</span>
+</article>
+<section id="coverage-register-panel" class="card"
+  data-source="plan.md"
+  data-source-section="Brief coverage composition (v2)" data-coverage="represented"
+  data-source-digest="sha256:383cd4d2b1e206efcfd194d60db80337e7c50c519221c42e01759d3612f63b67" data-source-fragment="Nenhum heading material de fonte core usa `link_only`."
+  data-source-fragment-sha256="sha256:2150577822eaa8a4c58ea634dd663e7d37d73939b0d3fbe6db1e7676a68396c9">
+<h2 id="coverage">Registro humano de coverage</h2>
+<table id="coverage-register">
+<thead>
+<tr>
+<th>Fonte</th>
+<th>Alvo</th>
+<th>Disposição e razão</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>spec.md — 1 Problema</td><td>#overview-problem</td><td>synthesized: a reconstrução mental vira problema explícito.</td></tr>
+<tr><td>spec.md — 2 Objetivo</td><td>#decision-snapshot</td><td>synthesized: a tese da subpágina fica recuperável.</td></tr>
+<tr><td>spec.md — 3 Resultado de entrega</td><td>#overview-outcome</td><td>represented: resultado e incremento recuperáveis.</td></tr>
+<tr><td>spec.md — 4 Pessoas e decisões atendidas</td><td>#overview-decision</td><td>represented: perguntas dos públicos.</td></tr>
+<tr><td>spec.md — 5 Resultados observáveis</td><td>#overview-observables</td><td>represented: quatro sinais sem métrica inventada.</td></tr>
+<tr><td>spec.md — 6 Não objetivos</td><td>#scope-limit</td><td>represented: limite da camada editorial.</td></tr>
+<tr><td>spec.md — 7 Requisitos funcionais</td><td>#scope-functional-contract</td><td>synthesized: contrato de rotas, arquitetura e provenance.</td></tr>
+<tr><td>spec.md — 8 Critérios de aceite</td><td>#scope-acceptance</td><td>represented: atenção que antecede execução.</td></tr>
+<tr><td>spec.md — 9 Comportamentos de borda e falha</td><td>#trust-constraints</td><td>represented: fallback e ausência de fonte legíveis.</td></tr>
+<tr><td>spec.md — 10 Direção visual documentada — base para os mocks</td><td>#scope-visual-direction</td><td>represented: Pearson vertical e sem âncora.</td></tr>
+<tr><td>spec.md — 11 Restrições não funcionais</td><td>#trust-nfr</td><td>represented: acesso, privacidade e qualidade humana.</td></tr>
+<tr><td>spec.md — 12 Premissas e dependências</td><td>#trust-assumptions</td><td>represented: premissas, donos e validações.</td></tr>
+<tr><td>spec.md — 13 Riscos</td><td>#trust-risks</td><td>represented: riscos e respostas declaradas.</td></tr>
+<tr><td>spec.md — 14 Decisão da SPEC</td><td>#decision-boundary</td><td>represented: aprovação não vira autorização de task.</td></tr>
+<tr><td>plan.md — Estratégia</td><td>#architecture-hero</td><td>synthesized: composição/review é camada derivada.</td></tr>
+<tr><td>plan.md — Decisões de desenho</td><td>#architecture-design-decisions</td><td>represented: escolhas de rota, escala e Pearson.</td></tr>
+<tr><td>plan.md — Topologia conceitual a implementar somente quando fontes a suportarem</td><td>#architecture-macro</td><td>represented: relações e zoom condicional.</td></tr>
+<tr><td>plan.md — Sequência de implementação após D-023-001</td><td>#execution-sequence</td><td>represented: ordem segura.</td></tr>
+<tr><td>plan.md — Limites de mudança previstos</td><td>#architecture-change-map</td><td>represented: quatro áreas previstas e preservadas.</td></tr>
+<tr><td>impact-map.md — Mudança e beneficiários</td><td>#impact-footprint</td><td>represented: benefício sem consumidor inferido.</td></tr>
+<tr><td>impact-map.md — Cadeias de impacto e controle</td><td>#impact-risk-chain</td><td>represented: cadeia, controle e dono.</td></tr>
+<tr><td>impact-map.md — Fora do alcance desta iniciativa</td><td>#impact-exclusions</td><td>represented: impede expansão do escopo.</td></tr>
+<tr><td>tasks.md — Contrato de autorização A2</td><td>#execution-authority</td><td>represented: quatro contratos seguem pending.</td></tr>
+<tr><td>tasks.md — T-001</td><td>#task-001</td><td>represented: primeiro draft e evidence futura.</td></tr>
+<tr><td>tasks.md — T-002</td><td>#task-002</td><td>represented: segundo draft e dependência.</td></tr>
+<tr><td>tasks.md — T-003</td><td>#task-003</td><td>represented: terceiro draft e dependências.</td></tr>
+<tr><td>tasks.md — T-004</td><td>#task-004</td><td>represented: quarto draft e corpus.</td></tr>
+<tr><td>validation-plan.md — Estratégia de validação</td><td>#validation-strategy</td><td>synthesized: estrutura não substitui juízo.</td></tr>
+<tr><td>validation-plan.md — V-023-01</td><td>#validation-route</td><td>represented: rota, URL e foco.</td></tr>
+<tr><td>validation-plan.md — V-023-02</td><td>#validation-access</td><td>represented: acesso e resiliência.</td></tr>
+<tr><td>validation-plan.md — V-023-03</td><td>#validation-narrative</td><td>represented: revisão sem score.</td></tr>
+<tr><td>validation-plan.md — V-023-04</td><td>#validation-architecture</td><td>represented: arquitetura proporcional.</td></tr>
+<tr><td>validation-plan.md — V-023-05</td><td>#validation-scale</td><td>represented: ausência não vira zero.</td></tr>
+<tr><td>validation-plan.md — V-023-06</td><td>#validation-pearson</td><td>represented: Pearson como sistema.</td></tr>
+<tr><td>validation-plan.md — V-023-07</td><td>#validation-mocks</td><td>represented: mock não é implementação.</td></tr>
+<tr><td>validation-plan.md — V-023-08</td><td>#validation-corpus</td><td>represented: corpus e regressão.</td></tr>
+<tr><td>validation-plan.md — Evidência futura</td><td>#validation-limits</td><td>represented: destino futuro, não conclusão.</td></tr>
+<tr><td>decision-log.md — D-023-001</td><td>#evolution-d001</td><td>represented: direção aprovada.</td></tr>
+<tr><td>decision-log.md — D-023-002</td><td>#evolution-d002</td><td>represented: primeiro REVISE.</td></tr>
+<tr><td>decision-log.md — D-023-003</td><td>#evolution-d003</td><td>represented: segundo REVISE.</td></tr>
+<tr><td>decision-log.md — D-023-004</td><td>#evolution-d004</td><td>represented: terceiro REVISE.</td></tr>
+<tr><td>decision-log.md — D-023-005</td><td>#evolution-d005</td><td>represented: quarto REVISE.</td></tr>
+<tr><td>decision-log.md — D-023-006</td><td>#evolution-d006</td><td>represented: quinto REVISE.</td></tr>
+<tr><td>decision-log.md — D-023-007</td><td>#evolution-d007</td><td>represented: sexto REVISE.</td></tr>
+<tr><td>decision-log.md — D-023-008</td><td>#evolution-d008</td><td>represented: sétimo REVISE.</td></tr>
+<tr><td>decision-log.md — D-023-009</td><td>#evolution-d009</td><td>represented: oitavo REVISE.</td></tr>
+<tr><td>decision-log.md — D-023-010</td><td>#evolution-d010</td><td>represented: projeções correntes e wrappers.</td></tr>
+<tr><td>decision-log.md — D-023-011</td><td>#evolution-d011</td><td>represented: quatro projeções a separar.</td></tr>
+<tr><td>decision-log.md — D-023-012</td><td>#evolution-d012</td><td>represented: hash, fato unívoco e D-023-013 pendente.</td></tr>
+<tr><td>decision-log.md — D-023-013</td><td>#evolution-d013</td><td>represented: aprovação histórica só para renderização guardada.</td></tr>
+<tr><td>decision-log.md — D-023-014</td><td>#evolution-d014</td><td>represented: primeiro REVISE pós-render e recuperação exigida.</td></tr>
+<tr><td>decision-log.md — D-023-015</td><td>#evolution-d015</td><td>represented: REVISE pré-render por projeções, provenance e logo.</td></tr>
+<tr><td>decision-log.md — D-023-017</td><td>#evolution-d017</td><td>represented: REVISE do vínculo de manifesto, sem assinatura ou refresh.</td></tr>
+<tr><td>decision-log.md — D-023-018</td><td>#evolution-d018</td><td>represented: aprovação pré-render histórica, limitada ao refresh guardado.</td></tr>
+<tr><td>decision-log.md — D-023-019</td><td>#evolution-d019</td><td>represented: REVISE pós-render por lifecycle e coverage multi-alvo.</td></tr>
+<tr><td>decision-log.md — D-023-020</td><td>#evolution-d020</td><td>represented: envelope pendente da revisão exata desta recomposição.</td></tr>
+<tr><td>decision-log.md — D-023-021</td><td>#evolution-d021</td><td>represented: revisão por vínculo defasado e coverage granular; alvo único.</td></tr>
+<tr><td>decision-log.md — D-023-016</td><td>#evolution-d016</td><td>represented: envelope histórico da recuperação.</td></tr>
+<tr><td>decision-log.md — D-023-022</td><td>#evolution-d022</td><td>represented: reancoragem pendente sem liberação de gates.</td></tr>
+<tr><td>decision-log.md — D-023-023</td><td>#validation-validator-audit</td><td>represented: auditoria confirma disposição: razão, sem patch/exceção.</td></tr>
+<tr><td>decision-log.md — D-023-023</td><td>#evolution-d023</td><td>represented: correção histórica preservada na linha do tempo.</td></tr>
+<tr><td>decision-log.md — D-023-025</td><td>#evolution-d025</td><td>represented: revisão devolve somente projeções estáticas inseguras para recomposição lifecycle-safe.</td></tr>
+<tr><td>decision-log.md — D-023-024</td><td>#evolution-d024</td><td>represented: envelope histórico reancora a correção sem liberar gates.</td></tr>
+<tr><td>decision-log.md — D-023-026</td><td>#evolution-d026</td><td>represented: recomposição torna projeções seguras para lifecycle.</td></tr>
+<tr><td>decision-log.md — D-023-027</td><td>#evolution-d027</td><td>represented: review devolve a identidade v2 do marcador dinâmico.</td></tr>
+<tr><td>decision-log.md — D-023-028</td><td>#evolution-d028</td><td>represented: aprovação pré-render histórica limitada ao refresh guardado; nunca envelope, corrente ou pendente.</td></tr>
+<tr><td>decision-log.md — D-023-029</td><td>#evolution-d029</td><td>represented: REVISE pós-render corrente recupera três frases obsoletas e mantém todos os gates fechados.</td></tr>
+<tr><td>decision-log.md — D-023-030</td><td>#evolution-d030</td><td>represented: envelope histórico da recomposição da linguagem pós-render, sem autorização.</td></tr>
+<tr><td>decision-log.md — D-023-031</td><td>#evolution-d031</td><td>represented: REVISE pré-render exige recuperabilidade de D-023-029 e o rótulo histórico de D-023-028.</td></tr>
+<tr><td>decision-log.md — D-023-033</td><td>#evolution-d033</td><td>represented: REVISE restaura a proveniência canônica de aceite sem apagar D-023-029.</td></tr>
+<tr><td>progress.md — Décima primeira pre-render review 2026-08-31</td><td>#evolution-progress</td><td>represented: checkpoint seguro.</td></tr>
+<tr><td>ratchet.md — RATCHET-023-001</td><td>#trust-ratchet</td><td>represented: explicação não é CSS/score.</td></tr>
+<tr><td>run-state.yaml — status</td><td>#evolution-state</td><td>represented: checkpoint factual em execução.</td></tr>
+<tr><td>run-state.yaml — quality_gates.human_visibility_ready</td><td>#evolution-next</td><td>represented: o marcador de lifecycle projeta o próximo passo, ancorado no booleano estável false que mantém Human Visibility bloqueada.</td></tr>
+<tr><td>run-state.yaml — quality_gates.human_visibility_ready</td><td>#trust-state</td><td>represented: Human Visibility falsa permanece estável; entrega segue bloqueada.</td></tr>
+<tr><td>run-state.yaml — brief_phase</td><td>#trust-delivery</td><td>represented: lifecycle separa composição, refresh e revisão do artefato.</td></tr>
+<tr><td>run-state.yaml — approvals.human_required</td><td>#trust-approval</td><td>represented: autoridade humana requerida.</td></tr>
+</tbody>
+</table>
+<span class="source">Nenhum heading material de fonte core usa `link_only`.</span>
+</section>
+</section>
+</main>
+<footer class="footer">
+<p>Artefato isolado: router usa JavaScript; sem JavaScript e na impressão, todas as subpáginas continuam lineares. Tasks seguem rascunhos e sem autorização.</p>
+</footer>
+<script>(()=>{const pages=[...document.querySelectorAll('.page')],links=[...document.querySelectorAll('[data-route]')],main=document.querySelector('#brief-main');document.body.dataset.router='active';const id=()=>location.hash.slice(1)||'overview';const activate=(wanted,focus)=>{const page=pages.find(p=>p.id===wanted)||pages[0];pages.forEach(p=>{p.hidden=p!==page;p.inert=p!==page});links.forEach(a=>{if(a.hash==='#'+page.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});if(focus)(page.querySelector('h1')||main).focus()};links.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();history.pushState({route:a.hash.slice(1)},'',a.hash);activate(a.hash.slice(1),true)}));window.addEventListener('popstate',()=>activate(id(),true));window.addEventListener('hashchange',()=>activate(id(),true));activate(id(),false)})();</script>
+</body>
+</html>

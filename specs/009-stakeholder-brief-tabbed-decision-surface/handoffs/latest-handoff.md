@@ -1,74 +1,40 @@
 # Handoff: 009-stakeholder-brief-tabbed-decision-surface
 
 **From:** Codex / State Keeper  
-**Intended role/recipient:** distinct coverage reviewer  
+**Intended role/recipient:** future maintainer  
 **Created at:** 2026-08-26  
-**Current phase/status:** coverage_composition / tasks_drafted  
-**Current task/status:** none; T-001–T-005 are pending and not authorized  
-**Last safe checkpoint:** D-001–D-005 and all planning sources are synchronized; no template, fixture, validator or consumer HTML was changed for this initiative.  
-**Repository revision/working-tree summary:** Preserve unrelated dirty changes; scope review to 009 planning sources and existing reference artifacts only.
+**Current phase/status:** complete / validation_done  
+**Current task/status:** T-001–T-005 done  
+**Last safe checkpoint:** D-030 independently accepted bundle release evidence; no external deployment is in scope.
 
-## 1. Completed and approved work
+## Delivered and accepted
 
-- Outcome/Spec Ready, impact map, Plan Ready, Validation Ready and preliminary task drafts are complete.
-- D-001 records user intent: one HTML with focused tabs, deeper source-supported views and explicit missing-information discovery.
-- D-002–D-005 bound interaction discovery, proportionality, task/validation fidelity and no-semantic-gate behavior.
+- One offline v2 stakeholder brief surface with exactly eight accessible,
+  progressively enhanced tabs and complete no-script/print fallback.
+- Source-sufficiency guidance: source-backed detail, compact N/A or owned
+  material question; no fixed quota, fabricated architecture or score.
+- Rich task cards and AC/proof matrix in the 009 and news/blog calibration
+  briefs, including an honest no-command form.
+- `scripts/test_tabbed_brief_surface.py`, a structural-only test for the v2
+  template/reference tab mapping, fallback, offline script and print contract.
+- D-015/D-018/D-021/D-025 accepted T-001–T-004; D-029 accepted T-005 review
+  and baseline authority; D-030 accepted bundle release evidence only.
 
-## 2. Partial or unverified work
+## Final evidence
 
-- Plan §9 is author composition, not independent coverage approval.
-- The planning brief is derived and coherent with current sources but has not received coverage or post-render Human Visibility review.
-- U-001–U-003 are intentionally unresolved discovery questions; no Builder may infer answers or start a task.
+| Item | Result |
+|---|---|
+| Tab surface, v1/v2 contracts, validator fixtures, calibration | pass |
+| Bundle | 267 checks pass |
+| 009 Human Visibility baseline | writer-generated for final D-030 provenance |
+| News/blog calibration baseline | writer-generated for D-010 calibration authority |
+| Independent release decision | D-030 / `/root/sandbox_coverage_review` |
 
-## 3. Files changed
+## Guardrails for future changes
 
-| File | State | Reason |
-|---|---|---|
-| `spec.md` | spec_ready | Defines tabbed one-document outcome, detail/discovery boundary and ACs. |
-| `impact-map.md` | reviewed | Maps accessibility, fidelity, privacy and bureaucracy risks. |
-| `plan.md` | plan_ready | Defines architecture, composition and bounded unknowns. |
-| `validation-plan.md` | validation_ready | Maps every AC to deterministic/manual/eval evidence. |
-| `tasks.md` | tasks_drafted | Five detailed preliminary tasks; all pending. |
-| `stakeholder-brief.html` | planning projection | Shows source-derived decision surface but is not a final template implementation. |
-
-## 4. Validations and evidence
-
-| Task/check | Result | Evidence |
-|---|---|---|
-| Source/AC/task trace | planned and complete | plan §9; validation plan §2; tasks.md |
-| Independent coverage review | pending | decision log after reviewer decision |
-| Rendered meaning/accessibility review | pending | decision log and future evidence |
-
-## 5. Decisions and approvals
-
-- D-001: user authorized planning, not implementation.
-- D-002: discover native-first accessible tabs and existing authoring entrypoints first.
-- D-003: use conditional detail and owned questions, not filler or quotas.
-- D-004: project canonical task/validation contracts, not a parallel model.
-- D-005: preserve structural-only deterministic validation.
-
-## 6. Blockers, unknowns and risks
-
-- U-001/U-002/U-003 block implementation but not the current coverage review.
-- Risks IR-001, IR-003 and IR-004 are the active delivery controls.
-- Do not treat `tasks_drafted`, coverage, Human Visibility or Tasks Ready as interchangeable.
-
-## 7. Exact next safe step
-
-Reviewer compares every core source heading with plan §9 and the planning brief, records recoverable/superficial/absent/N/A for product, architecture/operations and delivery, and returns source → lost fact → correction findings. If approved, State Keeper records the decision and only then advances to rendered review; no task starts.
-
-## 8. Resume reading order
-
-1. `run-state.yaml`
-2. `progress.md`
-3. this handoff
-4. repository status
-5. `tasks.md`
-6. `validation-plan.md` and `decision-log.md`
-
-## 9. Do not do
-
-- Do not implement tabs, modify the current brief template or regenerate the sandbox as part of planning.
-- Do not create multiple HTML files, a router, framework, remote asset, score, prose parser or LLM judge.
-- Do not fabricate architecture, task, validation or business facts; make a bounded question/unknown instead.
-- Do not approve your own coverage or move any task from `pending` before Tasks Ready.
+Start from canonical Markdown/YAML, regenerate the HTML, obtain independent
+rendered/semantic review, then rewrite the affected baseline with the
+validator. The structural test must not become a prose/semantic judge. Keep
+v1, external deployment, application code, parser/score/LLM judge, router and
+remote assets out of this bundle change unless a new authorized initiative
+changes scope.

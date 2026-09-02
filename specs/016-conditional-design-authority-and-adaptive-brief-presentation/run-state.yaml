@@ -1,0 +1,75 @@
+schema_version: 1
+initiative_id: "016-conditional-design-authority-and-adaptive-brief-presentation"
+initiative_sequence: "016"
+initiative_slug: "conditional-design-authority-and-adaptive-brief-presentation"
+initiative_kind: "feature"
+status: "superseded"
+summary: "Superseded before review by SPEC 018 pending a root-cause delivery-integrity decision."
+brief_lineage: null
+current_phase: "specify"
+current_task: null
+last_safe_checkpoint: null
+updated_at: null
+updated_by: null
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: false
+  spec_ready: false
+  impact_mapped: false
+  plan_ready: false
+  validation_ready: false
+  tasks_drafted: false
+  brief_coverage_ready: false
+  human_visibility_ready: false
+  tasks_ready: false
+  implementation_done: false
+  independent_evaluation_done: false
+  evidence_pack_ready: false
+  validation_done: false
+
+brief_review:
+  author: null
+  coverage_reviewer: null
+  reviewed_at: null
+  review_record: null
+  findings_status: "not_started"
+
+execution:
+  builder_id: null
+  evaluator_id: null
+  started_at: null
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint: []
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger: []
+
+approvals:
+  human_required: false
+  pending: []
+  granted: []
+
+risks:
+  level: "unknown"
+  open: []
+
+evidence:
+  latest: null
+  approved: []
+
+next_safe_step: "Do not execute; consult SPEC 018."

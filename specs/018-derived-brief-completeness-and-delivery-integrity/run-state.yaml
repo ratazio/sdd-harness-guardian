@@ -1,0 +1,99 @@
+schema_version: 1
+initiative_id: "018-derived-brief-completeness-and-delivery-integrity"
+initiative_sequence: "018"
+initiative_slug: "derived-brief-completeness-and-delivery-integrity"
+initiative_kind: "feature"
+status: "validation_done"
+summary: "Root cause authored: scaffolded HTML can be misclassified as rendered; SPEC 018 connects lifecycle truth, source coverage, validation and HTML-first delivery without fixing a domain/layout schema."
+brief_lineage: "v2"
+current_phase: "validation_complete"
+current_task: null
+last_safe_checkpoint: "T-004 approved in D-018-T004; all tasks have approved evidence."
+updated_at: "2026-08-27T00:00:00-03:00"
+updated_by: "root"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "root"
+  coverage_reviewer: "audit_018_root_cause"
+  reviewed_at: "2026-08-27"
+  review_record: "decision-log.md#D-018-04"
+  findings_status: "resolved_pass — independent rendered review accepted; screenshot limitation recorded in D-018-04"
+
+execution:
+  builder_id: null
+  evaluator_id: null
+  started_at: null
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint: []
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    title: "Reproduce and inventory the empty-brief bypass"
+    builder: "root"
+    evaluator: "audit_018_root_cause"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    title: "Define the flexible source-to-brief completeness contract"
+    builder: "root"
+    evaluator: "audit_018_root_cause"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    title: "Enforce lifecycle and completeness at scaffold and delivery gates"
+    builder: "root"
+    evaluator: "audit_018_root_cause"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    builder: "root"
+    evaluator: "audit_018_root_cause"
+    title: "Prove broad-domain briefs and rendered delivery quality"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: false
+  pending: []
+  granted: []
+
+risks:
+  level: "unknown"
+  open: []
+
+evidence:
+  latest: null
+  approved: []
+
+next_safe_step: "Initiative complete; retain the HTML brief and approved evidence as the delivery record."

@@ -59,6 +59,18 @@ Use only when deterministic validation is insufficient.
 |---|---|---|---|
 | | | | |
 
+## Stakeholder brief projection (v2, when material)
+
+The Validation view projects this existing AC trace; it does not create a
+separate proof schema or require a command for every initiative. For each
+material proof, make recoverable the AC/claim, method, command **or** manual
+steps and environment, fixture/data when relevant, expected result/oracle,
+evidence destination, owner and any legitimate skip/limitation with residual
+risk. A no-command or non-software check is valid when this context and its
+oracle remain explicit. Do not fabricate a command, fixture or oracle; use a
+concise source-backed N/A or an owned material question only when the absence
+blocks a decision, AC, risk control or next safe step.
+
 ## 8. Validation decision
 
 **Validation Ready:** no  

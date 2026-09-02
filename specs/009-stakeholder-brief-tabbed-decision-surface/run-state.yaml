@@ -3,12 +3,12 @@ initiative_id: "009-stakeholder-brief-tabbed-decision-surface"
 initiative_sequence: "009"
 initiative_slug: "stakeholder-brief-tabbed-decision-surface"
 initiative_kind: "feature"
-status: "tasks_drafted"
+status: "validation_done"
 summary: "Organizar o stakeholder brief v2 em abas acessíveis e proporcionais, aprofundando conteúdo somente quando fontes canônicas o sustentam."
 brief_lineage: "v2"
-current_phase: "coverage_composition"
+current_phase: "complete"
 current_task: null
-last_safe_checkpoint: "D-001 registra escopo de planejamento; fontes, plano, validação e tasks preliminares estão preenchidos, mas nenhuma task está autorizada."
+last_safe_checkpoint: "D-030 records independent bundle release-evidence acceptance; final baseline refresh and deterministic checks are the closing mechanical record."
 updated_at: "2026-08-26"
 updated_by: "Codex / State Keeper"
 
@@ -32,57 +32,68 @@ quality_gates:
   plan_ready: true
   validation_ready: true
   tasks_drafted: true
-  brief_coverage_ready: false
-  human_visibility_ready: false
-  tasks_ready: false
-  implementation_done: false
-  independent_evaluation_done: false
-  evidence_pack_ready: false
-  validation_done: false
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
 
 brief_review:
   author: "Codex / brief author"
-  coverage_reviewer: null
-  reviewed_at: null
-  review_record: null
-  findings_status: "not_started — coverage and rendered-meaning review require a distinct identity"
+  coverage_reviewer: "/root/sandbox_coverage_review"
+  reviewed_at: "2026-08-26"
+  review_record: "decision-log.md#D-030"
+  findings_status: "pass_after_D030 — distinct maintainer accepted bundle release evidence; D-011 remains the completed propagated lifecycle record"
 
 execution:
-  builder_id: null
-  evaluator_id: null
-  started_at: null
+  builder_id: "Codex / Builder-009"
+  evaluator_id: "/root/sandbox_coverage_review"
+  started_at: "2026-08-26"
   interrupted: false
   resume_required: false
   work_since_checkpoint:
     - "D-001 captured the explicit user direction for one-document tabbed v2 briefs."
-    - "Canonical planning sources and preliminary task contracts were completed without implementation authorization."
+    - "D-018 independently accepted the T-002 template/fixture increment and fallback behavior."
+    - "D-019 selected T-003 only to establish proportional tab guidance and resolve U-003."
+    - "D-020 records the T-003 guidance/template increment and evidence; evaluation is pending."
+    - "D-021 independently accepted T-003 guidance and resolved U-003."
+    - "D-022 selected T-004 only for rich Execution/Validation projections."
+    - "D-023 records rich 009/sandbox projections, fixture comparison and live behavior evidence; evaluation is pending."
+    - "D-024 reconciles the derived 009 brief with canonical needs_evaluation state after distinct review requested that correction."
+    - "D-025 independently accepted T-004 and resolved U-004 as guidance; it did not authorize T-005."
+    - "D-026 selects only T-005 for final compatibility, accessibility and release evidence."
+    - "D-027 records the focused non-semantic tab-surface test and final evidence; evaluation is pending."
+    - "D-028 reconciles progress.md with the regenerated D-027 brief after distinct review returned that authority mismatch."
+    - "D-029 independently approves T-005 evidence and baseline writing only; release remains a separate decision."
+    - "D-030 independently accepts bundle release evidence without authorizing external deployment."
   repository_revision: null
   working_tree_summary: "Repository may contain unrelated in-progress changes; keep 009 isolated."
 
 task_ledger:
   - id: "T-001"
-    status: "pending"
+    status: "done"
     evidence: "evidence/T-001.md"
   - id: "T-002"
-    status: "pending"
+    status: "done"
     evidence: "evidence/T-002.md"
   - id: "T-003"
-    status: "pending"
+    status: "done"
     evidence: "evidence/T-003.md"
   - id: "T-004"
-    status: "pending"
+    status: "done"
     evidence: "evidence/T-004.md"
   - id: "T-005"
-    status: "pending"
+    status: "done"
     evidence: "evidence/T-005.md"
 
 approvals:
   human_required: false
-  pending:
-    - "Distinct coverage reviewer before brief_coverage_ready."
-    - "Stakeholder meeting decision and propagation before tasks_ready."
+  pending: []
   granted:
     - "D-001 user authorized planning of the tabbed decision surface."
+    - "D-006 user approved execution after the remaining v2 quality gates."
 
 risks:
   level: "medium"
@@ -92,7 +103,18 @@ risks:
     - "IR-004: discovery could become generic bureaucracy instead of a material question."
 
 evidence:
-  latest: null
-  approved: []
+  latest: "evidence/T-005.md"
+  approved:
+    - "T-001 / D-015"
+    - "T-002 / D-018"
+    - "T-003 / D-021"
+    - "T-004 / D-025"
+    - "T-005 review / D-029 — baseline authority only"
+    - "T-005 bundle release evidence / D-030"
 
-next_safe_step: "Obtain a distinct pre-render coverage review of populated sources and composition; do not implement T-001 before meeting propagation and Tasks Ready."
+lifecycle:
+  decisions_propagated: true
+  brief_regenerated: true
+  propagation_record: "decision-log.md#D-011"
+
+next_safe_step: "Initiative complete: refresh the two writer-generated baselines for D-030 final hashes, run the final deterministic suite, and preserve the evidence; no external deployment is in scope."

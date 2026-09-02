@@ -1,0 +1,112 @@
+schema_version: 1
+initiative_id: "024-executive-brief-visual-fidelity"
+initiative_sequence: "024"
+initiative_slug: "executive-brief-visual-fidelity"
+initiative_kind: "bugfix"
+status: "complete"
+summary: "M-005 reference, reusable material-architecture contract and eight heterogeneous disposable renders are independently approved; T-004 and historical briefs remain preserved."
+brief_lineage: "v2"
+brief_phase: "not_rendered"
+current_phase: "validation_done"
+current_task: null
+last_safe_checkpoint: "SPEC 024 complete: evidence is approved, new visual-reference roots are non-promoted, and T-004/historical artifacts remain untouched."
+updated_at: "2026-08-31"
+updated_by: "/root/spec024_visual_contract_builder"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "/root/spec024_visual_reference_builder"
+  coverage_reviewer: "/root/spec024_visual_contract_reviewer"
+  reviewed_at: "2026-08-31"
+  review_record: "evidence/T-002.md"
+  findings_status: "pass"
+  quality_review_required: true
+  quality_review_record: null
+  quality_review_status: "approve"
+  quality_review_reviewer: "/root/spec024_visual_contract_reviewer"
+  quality_review_inputs: "architecture contract@sha256:F632A51875F24677A7D4D6879CD45B9C55B855831AF8B888164C037535D5FC5C; regression@sha256:7BAA6AC781BE78FEC52F9439E264DC0C4EAD8761292989471DEFAE39E47B6F32"
+
+execution:
+  builder_id: "/root/spec024_visual_heterogeneous_builder"
+  evaluator_id: "/root/spec024_visual_heterogeneous_reviewer"
+  started_at: "2026-08-31"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "T-004 candidate is a neutral disposable corpus artifact, not Pearson executive reference."
+    - "Requester requires real graphics, design.md fidelity and render-first review."
+    - "T-001 approved: isolated M-005 reference has visible macro topology, change register, service zoom and assurance visual."
+    - "T-002 frozen: material architecture now requires structural topology, legend, surface unit and zoom/N/A instead of a text-only fallback."
+    - "T-002 REVISE repaired: primitives must belong to their projection; relation endpoints connect declared node IDs; empty SVG/semantic labels cannot pass."
+    - "T-002 second REVISE repaired: every relation validates exact relation-from/to endpoint attributes; valid edges cannot mask missing or self edges."
+    - "T-002 approved after independent REVISE findings were repaired with regressions."
+    - "T-003 built eight new disposable Pearson references under testes/visual-reference-runs/20260831-spec024-heterogeneous; all material routes pass the architecture visual contract and browser render checks."
+    - "T-003 approved after independent render, print, mobile, factual and preservation review."
+  repository_revision: null
+  working_tree_summary: "New SPEC 024 and isolated reference only; no historical mutation authorized."
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    builder_id: "/root/spec024_visual_reference_builder"
+    evaluator_id: "/root/spec024_visual_reference_reviewer"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    builder_id: "/root/spec024_visual_contract_builder"
+    evaluator_id: "/root/spec024_visual_contract_reviewer"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    builder_id: "/root/spec024_visual_heterogeneous_builder"
+    evaluator_id: "/root/spec024_visual_heterogeneous_reviewer"
+    evidence: "evidence/T-003.md"
+
+approvals:
+  human_required: true
+  pending:
+    - "No pending approval; historical promotion remains a separate human decision outside this SPEC."
+  granted:
+    - "Requester authorized visual evolution execution and agentic semantic/visual review on 2026-08-31."
+
+risks:
+  level: "high"
+  open:
+    - "Do not equate structural pass with missing visual semantics."
+    - "Do not promote reference or alter T-004/histories before separate adoption decision."
+
+evidence:
+  latest: "evidence/T-003.md"
+  approved:
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+
+next_safe_step: "Use the approved reference outputs for a future explicit adoption/migration decision; do not overwrite T-004 or historical briefs automatically."

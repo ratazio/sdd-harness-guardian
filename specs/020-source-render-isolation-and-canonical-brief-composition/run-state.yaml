@@ -1,0 +1,100 @@
+schema_version: 1
+initiative_id: "020-source-render-isolation-and-canonical-brief-composition"
+initiative_sequence: "020"
+initiative_slug: "source-render-isolation-and-canonical-brief-composition"
+initiative_kind: "feature"
+status: "completed"
+summary: "Isolar composição fonte→brief e executar mocks com revisão humana em duas passagens, sem baseline falso."
+brief_lineage: "v2"
+brief_phase: "not_rendered"
+current_phase: "completed"
+current_task: null
+last_safe_checkpoint: "T-004 independently approved as an honest execution record; r5 M-001–M-008 remain without baselines and SPEC 021 holds the systemic remediation."
+updated_at: "2026-08-28"
+updated_by: "codex-orchestrator"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: false
+  human_visibility_ready: false
+  tasks_ready: false
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: null
+  coverage_reviewer: null
+  reviewed_at: null
+  review_record: null
+  findings_status: "not_started"
+  quality_review_required: false
+  quality_review_record: null
+  quality_review_status: "not_started"
+  quality_review_roles: null
+  quality_review_inputs: null
+  quality_review_findings: "not_started"
+
+execution:
+  builder_id: "codex-builder-020"
+  evaluator_id: "/root/t004_completion_audit"
+  started_at: "2026-08-28"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "T-004 ran M-001–M-008 in fresh r5; seven lenses found two systemic P1 composition gaps."
+    - "Independent task-completion audit approved the r5 execution/evidence only; no mock baseline was granted."
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: false
+  pending: []
+  granted: []
+
+risks:
+  level: "unknown"
+  open: []
+
+evidence:
+  latest: "evidence/T-004.md"
+  approved:
+    - "evidence/T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/T-003.md"
+    - "evidence/T-004.md"
+
+next_safe_step: "Independently plan and execute source-only SPEC 021 before any corrected mock rerender/review; do not approve an r5 baseline."

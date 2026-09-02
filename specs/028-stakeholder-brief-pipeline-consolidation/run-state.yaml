@@ -1,0 +1,109 @@
+schema_version: 1
+initiative_id: "028-stakeholder-brief-pipeline-consolidation"
+initiative_sequence: "028"
+initiative_slug: "stakeholder-brief-pipeline-consolidation"
+initiative_kind: "bugfix"
+status: "completed"
+summary: "Consolidar lifecycle resiliente, proveniência e revisão final autônoma do stakeholder brief."
+brief_lineage: null
+brief_phase: "not_rendered"
+current_phase: "completed"
+current_task: null
+last_safe_checkpoint: "T-001…T-005 concluídas com evidência e avaliação independente; matriz M001–M008 permanece explicitamente não aprovada como fixture."
+updated_at: "2026-09-02"
+updated_by: "Codex (builder)"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: false
+  human_visibility_ready: false
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "Guardian maintainer"
+  coverage_reviewer: null
+  reviewed_at: null
+  review_record: null
+  findings_status: "not_started"
+  quality_review_required: true
+  quality_review_record: null
+  quality_review_status: "not_started"
+  quality_review_reviewer: null
+  quality_review_inputs: null
+
+execution:
+  builder_id: "Codex (builder)"
+  evaluator_id: "pipeline_audit (independent T-001)"
+  started_at: "2026-09-01"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "T-001/T-004 approved: resilient lifecycle, v3 skeleton boundary and preview-bound rendered review contract."
+    - "T-002/T-003 approved: source-backed agent composition and loopback 64-route surface audit."
+    - "T-005 approved: M001–M008 heterogeneous matrix, with transparent recompositions and no readiness promotion."
+  repository_revision: null
+  working_tree_summary: "SPEC 028 concluída. A árvore pode conter alterações preexistentes não relacionadas; as evidências desta iniciativa registram os arquivos e checks concluídos."
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    title: "Unificar lifecycle resiliente e autoridade de afirmação"
+  - id: "T-002"
+    status: "done"
+    title: "Ligar plano, skeleton e contratos de conteúdo material"
+  - id: "T-003"
+    status: "done"
+    title: "Tornar preview HTTP e rotas internas parte da revisão final"
+  - id: "T-004"
+    status: "done"
+    title: "Vincular revisão renderizada e inventariar validações existentes"
+  - id: "T-005"
+    status: "done"
+    title: "Executar matriz fresca M001–M008 e decidir a qualidade"
+
+approvals:
+  human_required: true
+  pending: []
+  granted:
+    - "Direção da SPEC: consolidar a esteira sem gerador rígido de HTML."
+    - "Autoria resiliente: checks retêm aprovação, não a construção do HTML."
+    - "Autorização de execução recebida no objetivo ativo desta tarefa."
+
+risks:
+  level: "high"
+  open:
+    - "Mocks permanecem superfícies não aprovadas até que cada iniciativa possua seu próprio record de review renderizado."
+    - "M007 mantém labels de proveniência mais visíveis do que o ideal; ressalva editorial não bloqueante da matriz."
+
+evidence:
+  latest: "evidence/T-005.md"
+  approved:
+    - "T-001 — independent evaluation APPROVE"
+    - "T-004 — independent evaluation APPROVE"
+    - "T-002 — independent evaluation APPROVE"
+    - "T-003 — independent evaluation APPROVE"
+    - "T-005 — independent evaluation APPROVE"
+
+next_safe_step: "Iniciativa concluída. Em nova execução, usar o fluxo consolidado: fontes → construction review → skeleton local → composição agêntica → review HTTP → recuperação autônoma quando necessária."

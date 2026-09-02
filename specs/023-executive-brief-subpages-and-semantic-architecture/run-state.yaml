@@ -1,0 +1,139 @@
+schema_version: 1
+initiative_id: "023-executive-brief-subpages-and-semantic-architecture"
+initiative_sequence: "023"
+initiative_slug: "executive-brief-subpages-and-semantic-architecture"
+initiative_kind: "feature"
+status: "complete"
+summary: "All four tasks completed with independent evaluation; M-001–M-008 histories preserved by explicit C-level adoption decisions."
+brief_lineage: "v2"
+brief_phase: "rendered"
+current_phase: "rendered_decision_review_recorded"
+current_task: null
+last_safe_checkpoint: "T-003 repaired the reservoir authorization and unknown physical-scale projection; its eight-route editorial handoff and three source-attributed examples await distinct evaluation, while the derived SPEC candidate remains stale and unpromoted."
+updated_at: "2026-08-31"
+updated_by: "Codex"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "/root/spec023_d034_acceptance_source_composer"
+  coverage_reviewer: "/root/spec023_d034_prerender_reviewer"
+  reviewed_at: "2026-08-31"
+  review_record: "decision-log.md#D-023-034"
+  findings_status: "pass"
+  quality_review_required: true
+  quality_review_record: "evidence/post-render-review.md"
+  quality_review_status: "approve"
+  quality_review_reviewer: "/root/spec023_d034_postrender_reviewer"
+  quality_review_inputs: "rendered=stakeholder-brief.html@sha256:e1f2a5daf5329178d736bdcfdf7eaa2f83035b78154fd0bc6fa288e019c4db14"
+
+execution:
+  builder_id: "/root/spec023_t003_builder"
+  evaluator_id: null
+  started_at: null
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "Created the source-only SPEC and documented the visual direction before implementation."
+    - "D-023-002 independently returned the initial coverage candidate for repair."
+    - "D-023-003 confirmed the router repair but returned provenance, prospective-state and Pearson-hook defects."
+    - "D-023-004 confirmed internal subpages but returned stale task digests, block provenance, coverage-register, architecture-source and Pearson-base defects."
+    - "D-023-005 confirmed Pearson/subpages but returned missing v2 structural/lifecycle hooks, coverage, architecture and route-narrative defects."
+    - "R2 candidate passed structural and Pearson preflight; it remains an authored input to the fifth distinct pre-render review."
+    - "D-023-006 confirmed mechanics but returned route depth, source coverage, current checkpoint, zoom discovery and aria-current repairs."
+    - "D-023-007 confirmed mechanics and returned source-grounded impact, scale, evolution, scope and trust repairs."
+    - "D-023-008 confirmed mechanics and returned granular coverage, complete route conversation and macro-topology repairs."
+    - "D-023-009 confirmed the executive experience and returned only source-heading-to-target provenance separation."
+    - "D-023-010 confirmed substance and returned only current-state projection plus wrapper-provenance repairs."
+    - "D-023-011 confirmed routes/state/design and returned only four multi-heading material projections."
+    - "D-023-012 reviewed the actual snapshot and returned a hash freeze, one-fact mapping, D-023-010 and future-record binding repair."
+    - "D-023-013 independently approved the frozen candidate for guarded rendering only."
+    - "D-023-014 independently returned the first rendered artifact for coverage-register, evidence-destination and execution-authority source recovery."
+    - "D-023-015 independently returned the recovery candidate for stale source projections, current lifecycle and malformed logo repair."
+    - "D-023-017 independently confirmed the recovery but returned the pending record for a stale composition-manifest binding."
+    - "D-023-018 independently approved the exact recovered candidate for guarded refresh only."
+    - "D-023-019 independently returned the refreshed HTML for lifecycle projection and coverage-register recovery."
+    - "D-023-021 independently confirmed the corrected coverage but returned stale D-023-020 decision digests and exposed a validator false-positive blocker."
+    - "D-023-023 independently refuted the validator false-positive diagnosis: the colon format is the required contract and no harness patch is needed."
+    - "D-023-024 rebound the candidate to the corrected decision record; D-023-025 independently returned only the static coverage and next-step projections that would become false after refresh."
+    - "D-023-026 made the projections lifecycle-safe; D-023-027 independently returned only the next-step marker because it lacked a v2 data-source binding."
+    - "D-023-028 approved the marker-bound candidate for guarded refresh; D-023-029 independently returned the promoted HTML for stale pre-render statements."
+    - "D-023-030 repaired the post-render language; D-023-031 independently returned only the missing D-023-029 representation and the stale D-023-028 current-envelope label."
+    - "D-023-032 repaired recoverability; D-023-033 independently returned only the accidental replacement of spec.md provenance on #scope-acceptance."
+    - "T-001 independent REVISE returned two fixture maps for assigning discovery owner/path beyond their sources; builder removed those assignments and returned to needs_evaluation pending rerun and distinct re-evaluation."
+    - "T-002 made the reusable shell more vertical and route-addressed (`?view=`); the builder captured local Pearson fixture behavior and left the task for an independent evaluator."
+    - "T-003 added source-locator editorial mapping for all eight decision domains plus source-attributed material, operational and macro-only architecture projections; no canonical Markdown or delivery HTML was altered."
+    - "T-003 REVISE repair restored water-quality-lead authorization, replaced false operational-scale N/A with a source-limited unknown, and made each calibration opening state thesis, pillars, limit and next conversation."
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    builder_id: "/root/spec023_t001_builder"
+    evaluator_id: "/root/spec023_t001_final_evaluator"
+    evidence: "evidence/T-001.md"
+    last_transition_at: "2026-08-31"
+  - id: "T-002"
+    status: "done"
+    builder_id: "/root/spec023_t002_builder"
+    evaluator_id: "/root/spec023_t002_final_evaluator"
+    evidence: "evidence/T-002.md"
+    last_transition_at: "2026-08-31"
+  - id: "T-003"
+    status: "done"
+    builder_id: "/root/spec023_t003_builder"
+    evaluator_id: "/root/spec023_t003_reevaluator"
+    evidence: "evidence/T-003.md"
+    last_transition_at: "2026-08-31"
+  - id: "T-004"
+    status: "done"
+    builder_id: "/root/spec023_t004_builder"
+    evaluator_id: "/root/spec023_t004_clevel_reevaluator"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: true
+  pending:
+    - "Exact D-023-034 pre-render review, guarded refresh, independent post-render review, Human Visibility decision and meeting-decision propagation before Tasks Ready."
+  granted:
+    - "Requester authorized the creation and planning scope of the visual-evolution SPEC on 2026-08-31."
+    - "D-023-001 requester approved the visual direction and authorized execution on 2026-08-31."
+
+risks:
+  level: "high"
+  open:
+    - "Do not let route mechanics, generated imagery, or deterministic checks stand in for source-backed executive explanation."
+    - "D-023-033 confirms recovery semantics, but D-023-034 must restore the spec.md acceptance source before guarded refresh."
+
+evidence:
+  latest: "evidence/T-003.md"
+  approved: []
+
+next_safe_step: "Initiative complete; preserve the approved evidence and historical briefs unless a new authorized initiative requests migration."

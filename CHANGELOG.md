@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.4.0
+
+Evolução compatível da esteira de stakeholder briefs: a casca v3 passa a ser
+base física obrigatória de composição, e a autoria/revisão do conteúdo volta a
+ser agêntica, rastreável e recuperável.
+
+Inclui:
+
+- candidate local herdado do skeleton v3, com validação de herança antes de
+  qualquer renderização; scripts preservam lifecycle/integridade, sem gerar
+  narrativa, diagramas ou escolha de layout;
+- oito subpáginas internas reais em um único HTML, avaliadas via preview HTTP
+  loopback com rota, aba e painel ativo verificáveis;
+- revisão de construção e revisão renderizada distintas, com recuperação
+  autônoma de achados `REVISE` sem aguardar aprovação rotineira do usuário;
+- guia incremental para aprofundar fontes de SPEC, dossiês de arquitetura,
+  tasks e provas antes da composição;
+- matriz heterogênea M001–M008, com regressões para conteúdo genérico,
+  contaminação entre domínios, proveniência, herança e lifecycle honesto.
+
 ## 0.3.0
 
 Evolução compatível do Stakeholder Brief para uma superfície completa de

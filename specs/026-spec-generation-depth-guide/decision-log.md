@@ -1,0 +1,19 @@
+# Decision log — SPEC 026
+
+| ID | Data | Decisão | Motivo | Consequência |
+|---|---|---|---|---|
+| D-026-001 | 2026-09-01 | Resolver a lacuna na autoria da SPEC, não no renderer. | M005 perdeu relações antes de chegar ao brief. | A SPEC pede guia e revisão, sem mudança visual nesta iniciativa. |
+| D-026-002 | 2026-09-01 | Usar um guia agêntico curto e perguntas condicionais. | A entrada pode descrever qualquer domínio e exige julgamento semântico. | Não há schema de conteúdo, gerador, score ou Python de síntese. |
+| D-026-003 | 2026-09-01 | Nunca inferir caminho/arquitetura/teste na ausência de fonte acessível. | Generalidade não autoriza ficção técnica. | Limite de fonte ou descoberta é informação visível. |
+| D-026-004 | 2026-09-01 | Adicionar `spec-depth-reviewer` distinto do autor. | Um segundo olhar crítico foi solicitado para confrontar pedido e artefatos. | `Spec Ready` depende de `PASS` ou de reparo após `REVISE`. |
+| D-026-005 | 2026-09-01 | Não medir profundidade por quantidade de texto ou visuais. | Mais volume não preserva relações nem melhora decisão. | Avaliação permanece qualitativa, proporcional e rastreável. |
+| D-026-006 | 2026-09-01 | Só inspecionar caminho de código/teste fornecido ou inequivocamente localizado. | Revisão independente identificou que uma busca semântica a partir da raiz pode fabricar contexto. | Raiz ambígua vira limite e descoberta, não superfície escolhida pelo agente. |
+| D-026-007 | 2026-09-01 | Limitar T-004 a dois exemplos curtos de Markdown. | A calibração não pode virar uma segunda frente de mocks/HTML. | Sem renderização, fixture novo ou SPEC completa como parte desta task. |
+| D-026-008 | 2026-09-01 | Declarar a SPEC pronta após `PASS` do revisor independente. | O pacote corrigiu todos os achados sem ampliar escopo. | Tasks continuam `pending` até autorização humana posterior. |
+| D-026-009 | 2026-09-01 | Autorizar T-001 a T-004 para desenvolvimento. | Instrução explícita do usuário. | A execução continua limitada ao guia, referência, papel revisor e dois exemplos Markdown; nenhum HTML será renderizado. |
+| D-026-010 | 2026-09-01 | Registrar `spec-depth-authoring` como skill isolada e registrada no manifest. | T-001 requer guia curto e reutilizável, sem criar mecanismo de geração. | A skill direciona respostas aos Markdown canônicos; sua aceitação permanece condicionada a avaliação independente. |
+| D-026-011 | 2026-09-01 | Corrigir a referência do lifecycle para o nome canônico `spec-depth-authoring`. | T-002 usou um nome provisório diferente do guia efetivamente entregue por T-001. | O ponto de entrada agora alcança a skill registrada, sem nova etapa ou automação. |
+| D-026-012 | 2026-09-01 | Aprovar T-001..T-004 após avaliação independente. | O avaliador distinto confirmou os quatro contratos e os checks `validate_bundle.py`/`git diff --check`. | State Keeper transicionou as tasks `needs_evaluation → approved → done`; a iniciativa está completa. |
+| D-026-013 | 2026-09-01 | Reabrir a SPEC 026 com T-005. | A run completa mostrou melhora em quatro mocks, mas omitiu fatos fornecidos em M-001/M-004 e a entrega HTML/PDF em M-006. | Corrigir guia/revisor e repetir a suíte sem HTML antes de qualquer renderização. |
+| D-026-014 | 2026-09-01 | Refinar T-005 para preservar obrigações sem valor fixado. | R2 ainda reduziu criptografia, horários e retenção a tema genérico ou discovery, embora o pedido exigisse que fossem definidos/provados. | O dever e sua validação ficam canônicos; discovery guarda somente algoritmo, prazo, origem ou política ausentes. |
+| D-026-015 | 2026-09-01 | Aprovar T-005 e encerrar a SPEC 026. | R3 voltou a gerar M-001..M-008 sem HTML; duas revisões independentes classificaram todos como melhores que a baseline. | A fonte está pronta para a próxima fase, mas composição visual ainda requer seus gates próprios. |

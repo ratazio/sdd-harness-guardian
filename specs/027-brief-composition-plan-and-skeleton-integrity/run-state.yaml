@@ -1,0 +1,109 @@
+schema_version: 1
+initiative_id: "027-brief-composition-plan-and-skeleton-integrity"
+initiative_sequence: "027"
+initiative_slug: "brief-composition-plan-and-skeleton-integrity"
+initiative_kind: "feature"
+status: "validation_done"
+summary: "Define a reviewed composition plan and verifiable skeleton lineage without deterministic HTML composition."
+brief_lineage: "v2"
+brief_phase: "not_rendered"
+current_phase: "validation_done"
+current_task: null
+last_safe_checkpoint: "R2 complete: all eight plans, candidates, inheritance checks and qualitative reviews approved; candidates remain non-promoted."
+updated_at: "2026-09-01"
+updated_by: "/root"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: false
+  human_visibility_ready: false
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "/root"
+  coverage_reviewer: null
+  reviewed_at: null
+  review_record: null
+  findings_status: "not_started"
+  quality_review_required: true
+  quality_review_record: null
+  quality_review_status: "not_started"
+  quality_review_reviewer: null
+  quality_review_inputs: "Canonical sources plus candidate after T-003; no candidate exists in this SPEC yet."
+
+execution:
+  builder_id: "/root/spec027_composition_plan"
+  evaluator_id: "/root/spec027_eval_t001"
+  started_at: null
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "T-001 added a composition scaffold and qualitative pre-skeleton review; see evidence/T-001.md."
+    - "T-002 marked the template shell/slots and strengthened candidate inheritance; see evidence/T-002.md."
+    - "T-001 approved and done by distinct evaluator; see evidence/evaluation-T-001.md."
+    - "T-002 approved and done by distinct evaluator; see evidence/evaluation-T-002.md."
+    - "T-003/T-004 approved after complete R2 audit; see evidence/evaluation-T-003-T-004.md."
+  repository_revision: null
+  working_tree_summary: "Pre-existing dirty worktree preserved; SPEC 027 files added only."
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/evaluation-T-003-T-004.md"
+
+approvals:
+  human_required: true
+  pending: []
+  granted:
+    - "Independent spec-depth review PASS on 2026-09-01."
+    - "User explicitly authorized execution of the whole SPEC-027 on 2026-09-01."
+
+risks:
+  level: "medium"
+  open:
+    - "Fingerprint must reject shell replacement without blocking legitimate slot composition."
+    - "Composition scaffold must guide agents without becoming a mechanical score."
+
+evidence:
+  latest: "evidence/evaluation-T-003-T-004.md"
+  approved:
+    - "evidence/spec-depth-review.md"
+    - "evidence/T-001.md"
+    - "evidence/evaluation-T-001.md"
+    - "evidence/T-002.md"
+    - "evidence/evaluation-T-002.md"
+    - "evidence/T-003.md"
+    - "evidence/evaluation-T-003-T-004.md"
+
+next_safe_step: "No remaining implementation task. Preserve R2 as non-promoted regression evidence; consider its recorded manual-adjustment observations only in a separately authorized improvement SPEC."

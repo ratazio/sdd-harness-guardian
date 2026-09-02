@@ -1,21 +1,1613 @@
 <!doctype html>
-<html lang="en" data-harness-brief-design="v2">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Decision brief: {{initiative}}</title>
-<style>:root{--canvas:#f4f1ea;--paper:#fffdf8;--ink:#17211f;--muted:#5f6b68;--line:#d9d5ca;--brand:#0e665d;--dark:#084b45;--amber:#fff0ce}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:16px/1.55 system-ui,sans-serif}a{color:var(--dark)}a:focus-visible,summary:focus-visible{outline:3px solid #e6a632;outline-offset:3px}main{max-width:1180px;margin:auto;padding:28px 22px 64px}.topbar{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.86rem}.tag{padding:5px 9px;border:1px solid #a8cec7;border-radius:999px;color:var(--dark);font-weight:750}header,section,.metric{border:1px solid var(--line);background:var(--paper);border-radius:18px}header{display:grid;grid-template-columns:1.45fr .55fr;gap:28px;margin-top:22px;padding:36px;background:linear-gradient(135deg,#fffdf8,#edf7f3)}h1{margin:0;font-size:clamp(2.3rem,6vw,4.6rem);line-height:.98}.eyebrow{color:var(--brand);font-weight:800;letter-spacing:.1em;text-transform:uppercase}.ask{padding:20px;border-radius:14px;background:var(--dark);color:#fff}nav{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}nav a{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;text-decoration:none}.snapshot,.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.grid{grid-template-columns:repeat(2,1fr)}.metric,.card{padding:18px}.metric h2{margin:0;color:var(--muted);font-size:.75rem;text-transform:uppercase}section{margin:18px 0;padding:28px}.intro{color:var(--muted)}.card{border:1px solid var(--line);border-radius:13px;background:#fff}.diagram{overflow:auto;padding:14px;border:1px solid #c8dcd7;border-radius:14px;background:#f7fcfa}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--muted);font-size:.75rem;text-transform:uppercase}details{margin-top:14px;padding:14px;border:1px dashed #aeb8b5;border-radius:12px}summary{cursor:pointer;font-weight:800}.callout{padding:16px;border-left:5px solid #9a5b07;background:var(--amber)}@media(max-width:700px){main{padding:18px 12px}header,.snapshot,.grid{grid-template-columns:1fr}table,.diagram{display:block;overflow-x:auto}}@media print{nav{display:none}details:not([open])>:not(summary){display:block!important}}</style>
-<style>@media(max-width:700px){table{display:block;overflow-x:auto}table th,table td{min-width:10rem;overflow-wrap:normal;word-break:normal}}</style>
-</head>
-<body class="brief-shell"><main>
-<div class="topbar"><span class="tag">Spec {{initiative}} · v2 decision brief</span><span>{{date}} · {{risk}} · {{size}}</span></div>
-<header class="brief-header" data-source="spec.md" data-source-section="1-3" data-coverage="synthesized"><div><p class="eyebrow">Stakeholder decision brief</p><h1>State the outcome and decision plainly.</h1><p>Preserve the executive orientation; disclose complete decision depth in eight views.</p></div><aside class="ask"><strong>Requested decision</strong><p>State owner, status and trigger. HTML does not grant approval.</p></aside></header>
-<nav aria-label="Brief navigation"><a href="#scope">Value &amp; scope</a><a href="#architecture">Architecture</a><a href="#impact">Impact</a><a href="#execution">Execution</a><a href="#validation">Validation</a><a href="#evolution">Evolution</a><a href="#decision">Decision</a><a href="#coverage">Coverage</a></nav>
-<div class="snapshot" id="decision-snapshot"><article class="metric" data-source="spec.md" data-source-section="2-3" data-coverage="synthesized"><h2>Outcome</h2><p>Beneficiary and observable result.</p></article><article class="metric" data-source="spec.md" data-source-section="5" data-coverage="synthesized"><h2>Value</h2><p>Benefit or risk reduction.</p></article><article class="metric" data-source="plan.md" data-source-section="3" data-coverage="represented"><h2>Proportionality</h2><p>Why this depth fits.</p></article><article class="metric" data-source="run-state.yaml" data-source-section="quality_gates" data-coverage="represented"><h2>Authority</h2><p>Draft/ready/evidence state.</p></article></div>
-<section id="scope" data-source="spec.md" data-source-section="1-13" data-coverage="synthesized"><h2>Value and scope</h2><p class="intro">Smallest useful change, outcomes, non-goals, assumptions and dependencies.</p><div class="grid"><article class="card" data-source="spec.md" data-source-section="6" data-coverage="represented">In scope</article><article class="card" data-source="spec.md" data-source-section="6" data-coverage="represented">Deliberately out</article></div><details open data-progressive data-source="spec.md" data-source-section="5,9,11-13" data-coverage="synthesized"><summary>Outcomes and edge cases</summary><p>Use synthesized, represented, justified N/A or documented link-only only. A gap is a blocking finding; core material is never link-only.</p></details></section>
-<section id="architecture" data-source="plan.md" data-source-section="2-8" data-coverage="synthesized"><h2>Architecture</h2><p class="intro">Source-backed depth for S/M/L/high; unknown material detail is discovery or block.</p><div class="diagram" data-source="plan.md" data-source-section="4,6-8" data-coverage="represented">Replace with source-backed components, contracts, data/trust, failure and rollback; otherwise state justified N/A.</div><details open data-progressive data-source="plan.md" data-source-section="2,9" data-coverage="represented"><summary>Decisions and trade-offs</summary><p>Record source IDs behind claims.</p></details></section>
-<section id="impact" class="impact-evidence" data-source="impact-map.md" data-source-section="1-8" data-coverage="synthesized"><h2>Impact</h2><p class="intro">Affected people, surfaces, compatibility, risks, owners and mitigation.</p><details open data-progressive data-source="impact-map.md" data-source-section="5-7" data-coverage="represented"><summary>Risk and unknowns</summary><p>State consequence and next action; redact sensitive detail.</p></details></section>
-<section id="execution" data-source="tasks.md" data-source-section="ledger,T-001-T-005" data-coverage="represented"><h2>Execution — draft is not authorization</h2><p class="intro">Task order, dependency, outcome linkage, validation and evidence.</p><div class="diagram" data-source="plan.md" data-source-section="5" data-coverage="represented">Task draft → coverage review → meeting → source propagation → Tasks Ready</div><details open data-progressive data-source="tasks.md" data-source-section="T-001-T-005" data-coverage="represented"><summary>Task draft ledger</summary><p>State status, dependency, validation and evidence; label drafts non-authorizing.</p></details></section>
-<section id="validation" data-source="validation-plan.md" data-source-section="1-8" data-coverage="synthesized"><h2>Validation</h2><p class="intro">Map acceptance, risk and planned/observed/proved/uncertain evidence state.</p><details open data-progressive data-source="validation-plan.md" data-source-section="2-7" data-coverage="represented"><summary>Commands and limits</summary><p>Structural validation does not prove semantic usefulness.</p></details></section>
-<section id="evolution" class="decision-register" data-source="decision-log.md" data-source-section="all" data-coverage="represented"><h2>Evolution and state</h2><p class="intro">Material decision, supersession, freshness and checkpoint.</p><details open data-progressive data-source="run-state.yaml" data-source-section="status,quality_gates" data-coverage="represented"><summary>Gates</summary><p>Show truthful state and open risk.</p></details></section>
-<section id="decision" class="decision-actions" data-source="decision-log.md" data-source-section="relevant decisions" data-coverage="represented"><h2>Decision and next step</h2><p class="intro">Requested/accepted decision and authority boundary.</p><div class="callout">Append meeting decision and propagate sources before refresh.</div></section>
-<section id="coverage" data-source="spec.md" data-source-section="coverage register" data-coverage="represented"><h2>Coverage and provenance</h2><p class="intro">Human register complements local provenance; no JSON index.</p><table><thead><tr><th>Source / heading</th><th>Target ID</th><th>Disposition / rationale</th></tr></thead><tbody><tr><td>Canonical source / heading group</td><td>Stable rendered target</td><td>Synthesized, represented, justified N/A or documented link-only.</td></tr></tbody></table></section>
-<footer>Derived meeting projection: correct canonical sources, not HTML alone.</footer>
-</main><script>(()=>{const d=[...document.querySelectorAll('details[data-progressive]')];d.forEach(x=>x.open=false);window.addEventListener('beforeprint',()=>d.forEach(x=>x.open=true))})()</script></body></html>
+<html
+  lang="en"
+  data-harness-brief-design="v2"
+  data-client-identity-profile="vendor-neutral"
+  data-harness-template-kind="scaffold"
+  data-brief-phase="scaffold"
+  data-harness-brief-structure="executive-brief-v3"
+  data-brief-shell-contract="v1"
+  data-composition-slot-class="slot"
+  data-composition-extension="inside-slot-only"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title data-composition-slot="document-title">Decision brief: {{initiative}}</title>
+    <style data-harness-brief-shell data-brief-base-stylesheet="v1">
+      :root {
+        --navy: #0b004a;
+        --violet: #4c30a5;
+        --lavender: #c1bffa;
+        --canvas: #edecf5;
+        --paper: #fff;
+        --ink: #0b004a;
+        --muted: #475061;
+        --aqua: #7fdfe0;
+        --green: #007a53;
+        --amber: #8a6800;
+        --danger: #b42318;
+        --line: #c1bffa;
+        --r: 22px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        background: var(--canvas);
+        font-family: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
+        color: var(--ink);
+      }
+      body {
+        margin: 0;
+        line-height: 1.55;
+        background: linear-gradient(180deg, #fff 0 17rem, var(--canvas) 17rem);
+      }
+      a {
+        color: inherit;
+        text-underline-offset: 0.2em;
+      }
+      a:focus-visible,
+      [role="tab"]:focus-visible {
+        outline: 3px solid var(--violet);
+        outline-offset: 3px;
+      }
+      .brief-shell {
+        min-width: 0;
+      }
+      .brief-no-script {
+        width: min(calc(100% - 64px), 1440px);
+        margin: 24px auto 0;
+        padding: 18px 22px;
+        border: 1px solid var(--line);
+        border-left: 6px solid var(--violet);
+        border-radius: 14px;
+        background: var(--lavender);
+        color: var(--navy);
+      }
+      .shell {
+        width: min(calc(100% - 64px), 1440px);
+        margin: auto;
+        padding-bottom: 96px;
+      }
+      .topbar {
+        min-height: 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .tag {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: #fff;
+        font-weight: 700;
+      }
+      .brief-header {
+        position: relative;
+        overflow: hidden;
+        min-height: 360px;
+        padding: 60px 64px;
+        border-radius: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .brief-header:after {
+        content: "";
+        position: absolute;
+        width: 470px;
+        height: 470px;
+        right: -90px;
+        bottom: -185px;
+        border: 72px solid var(--aqua);
+        border-radius: 50%;
+        opacity: 0.9;
+      }
+      .brief-header > * {
+        position: relative;
+        z-index: 1;
+      }
+      .eyebrow,
+      .label {
+        margin: 0 0 13px;
+        color: var(--aqua);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .brief-header h1 {
+        max-width: 17ch;
+        margin: 0;
+        font-size: clamp(40px, 4.6vw, 68px);
+        font-weight: 600;
+        line-height: 1.06;
+        letter-spacing: -0.04em;
+      }
+      .lede {
+        max-width: 62ch;
+        margin: 22px 0 0;
+        color: #eeeefe;
+        font-size: 20px;
+      }
+      .header-call {
+        position: absolute;
+        right: 64px;
+        bottom: 38px;
+        width: min(320px, 29%);
+        padding: 20px;
+        border: 1px solid rgb(255 255 255 / 0.35);
+        border-radius: 18px;
+        background: rgb(11 0 74 / 0.35);
+      }
+      .header-call p {
+        margin: 6px 0 0;
+      }
+      .route-nav {
+        position: sticky;
+        top: 0;
+        z-index: 9;
+        display: flex;
+        gap: 9px;
+        overflow: auto;
+        margin: 28px 0 38px;
+        padding: 14px 0;
+        background: linear-gradient(90deg, #fff 84%, transparent);
+      }
+      .route-nav a {
+        flex: 0 0 auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 10px 14px;
+        color: var(--navy);
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .route-nav [role="tab"][aria-selected="true"] {
+        border-color: var(--violet);
+        background: var(--violet);
+        color: #fff;
+      }
+      .brief-route {
+        display: grid;
+        gap: 28px;
+        min-height: 620px;
+        outline: none;
+      }
+      .route-hero {
+        display: grid;
+        grid-template-columns: 1.35fr 0.65fr;
+        gap: 28px;
+        padding: 42px 48px;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: #f3f2fe;
+      }
+      .route-hero h1 {
+        max-width: 22ch;
+        margin: 0;
+        font-size: 48px;
+        line-height: 1.1;
+        letter-spacing: -0.035em;
+        font-weight: 600;
+      }
+      .intro {
+        max-width: 62ch;
+        margin: 16px 0 0;
+        font-size: 18px;
+      }
+      .question {
+        align-self: end;
+        padding: 24px;
+        border-radius: 18px;
+        background: #fff;
+        border-left: 6px solid var(--violet);
+      }
+      .question b {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--violet);
+        font-size: 13px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+      .question p {
+        margin: 0;
+      }
+      .snapshot,
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+      .snapshot {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .metric,
+      .card,
+      .brief-task-card,
+      .brief-proof-card,
+      .brief-architecture-cut,
+      .brief-impact-footprint > *,
+      .brief-risk-chain > *,
+      .brief-coverage-group > *,
+      .diagram,
+      .timeline,
+      .gateboard,
+      .matrix {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+      }
+      .metric {
+        padding: 20px;
+      }
+      .metric h2 {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .metric p,
+      .card p {
+        margin: 0;
+      }
+      .card {
+        padding: 28px;
+      }
+      .card h2,
+      .card h3 {
+        margin: 8px 0 12px;
+        line-height: 1.2;
+      }
+      .card h2 {
+        font-size: 26px;
+      }
+      .card h3 {
+        font-size: 20px;
+      }
+      .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 28px;
+      }
+      .heading h2 {
+        margin: 0;
+        font-size: 38px;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+      }
+      .heading p {
+        max-width: 64ch;
+        margin: 0;
+        color: var(--muted);
+      }
+      .slot {
+        position: relative;
+      }
+      html[data-harness-template-kind='scaffold'] .slot:after,
+      html[data-harness-template-kind='skeleton'] .slot:after {
+        content: "a preencher a partir das fontes canônicas";
+        display: block;
+        margin-top: 17px;
+        color: var(--violet);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .placeholder {
+        margin: 0;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .diagram {
+        overflow: auto;
+        padding: 30px;
+      }
+      .diagram h2 {
+        margin: 0;
+        font-size: 28px;
+      }
+      .topology {
+        display: grid;
+        grid-template-columns: 1fr 48px 1fr 48px 1fr;
+        align-items: center;
+        min-width: 840px;
+        margin-top: 20px;
+        padding: 28px;
+        border-radius: 18px;
+        background: #f3f2fe;
+      }
+      .node {
+        min-height: 118px;
+        padding: 20px;
+        border: 2px dashed var(--violet);
+        border-radius: 16px;
+        background: #fff;
+      }
+      .node strong {
+        display: block;
+        font-size: 19px;
+      }
+      .node span {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+      }
+      .arrow {
+        color: var(--violet);
+        font-size: 34px;
+        text-align: center;
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 13px;
+        margin-top: 18px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .legend span:before {
+        content: "";
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        margin-right: 6px;
+        border-radius: 50%;
+        background: var(--violet);
+      }
+      .legend .preserved:before {
+        background: var(--green);
+      }
+      .legend .boundary:before {
+        background: #fff;
+        border: 2px dashed var(--amber);
+      }
+      .brief-architecture-cut {
+        padding: 26px;
+        border-top: 7px solid var(--violet);
+      }
+      .brief-architecture-cut h3 {
+        margin: 8px 0;
+        font-size: 23px;
+      }
+      .fields {
+        display: grid;
+        grid-template-columns: 132px 1fr;
+        gap: 10px 16px;
+        margin: 20px 0 0;
+        font-size: 14px;
+      }
+      .fields dt {
+        font-weight: 700;
+      }
+      .fields dd {
+        margin: 0;
+        color: var(--muted);
+      }
+      .assurance {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+      }
+      .assurance article {
+        padding: 30px;
+      }
+      .assurance article:first-child {
+        border-right: 1px solid var(--line);
+        background: #f3f2fe;
+      }
+      .assurance article:last-child {
+        background: #fff6ff;
+      }
+      .assurance h2 {
+        margin: 0 0 10px;
+        font-size: 28px;
+      }
+      .brief-impact-footprint,
+      .brief-risk-chain,
+      .brief-coverage-group {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .brief-impact-footprint > *,
+      .brief-risk-chain > *,
+      .brief-coverage-group > * {
+        padding: 24px;
+      }
+      .brief-impact-footprint > * {
+        border-top: 7px solid var(--violet);
+      }
+      .brief-risk-chain > * {
+        border-top: 7px solid var(--danger);
+      }
+      .brief-coverage-group > * {
+        border-top: 7px solid var(--green);
+      }
+      .brief-impact-footprint h3,
+      .brief-risk-chain h3,
+      .brief-coverage-group h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+      }
+      .epics,
+      .validation-flow {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .epic,
+      .validation-flow article {
+        position: relative;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .epic:not(:last-child):after {
+        content: "→";
+        position: absolute;
+        right: -19px;
+        top: 42%;
+        z-index: 2;
+        color: var(--violet);
+        font-size: 30px;
+      }
+      .epic b {
+        display: block;
+        color: var(--violet);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+      }
+      .epic h3 {
+        margin: 8px 0;
+        font-size: 23px;
+      }
+      .brief-task-card {
+        padding: 30px;
+        border-top: 7px solid var(--violet);
+      }
+      .task-dossiers,
+      .validation-dossiers {
+        display: grid;
+        gap: 22px;
+      }
+      .brief-task-card h3 {
+        margin: 8px 0;
+        font-size: 28px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chips span {
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: #f3f2fe;
+        color: var(--violet);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .validation-flow {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .validation-flow article:not(:last-child):after {
+        content: "→";
+        position: absolute;
+        right: -17px;
+        top: 40%;
+        z-index: 2;
+        color: var(--violet);
+        font-size: 27px;
+      }
+      .validation-flow h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+      .brief-proof-card {
+        padding: 28px;
+        border-top: 7px solid var(--green);
+      }
+      .brief-proof-card h3 {
+        margin: 8px 0;
+        font-size: 24px;
+      }
+      .matrix {
+        overflow: auto;
+      }
+      .matrix table,
+      .audience,
+      .coverage {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .matrix th,
+      .matrix td,
+      .audience th,
+      .audience td,
+      .coverage th,
+      .coverage td {
+        padding: 16px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid #e0def8;
+      }
+      .matrix th,
+      .coverage th {
+        background: #f3f2fe;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .timeline {
+        padding: 32px;
+      }
+      .timeline article {
+        position: relative;
+        padding: 0 0 28px 28px;
+        border-left: 2px solid var(--lavender);
+      }
+      .timeline article:last-child {
+        padding-bottom: 0;
+      }
+      .timeline article:before {
+        content: "";
+        position: absolute;
+        left: -9px;
+        top: 4px;
+        width: 16px;
+        height: 16px;
+        border: 4px solid var(--canvas);
+        border-radius: 50%;
+        background: var(--violet);
+      }
+      .timeline h3 {
+        margin: 0 0 8px;
+        font-size: 21px;
+      }
+      .gateboard {
+        padding: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .gateboard h2 {
+        margin: 0 0 20px;
+        font-size: 30px;
+      }
+      .gates {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .gate {
+        padding: 16px;
+        border: 1px solid rgb(255 255 255 / 0.35);
+        border-radius: 14px;
+      }
+      .gate b {
+        display: block;
+        font-size: 13px;
+      }
+      .gate span {
+        color: var(--aqua);
+        font-weight: 700;
+      }
+      .brief-decision-call {
+        padding: 34px;
+        border-left: 7px solid var(--violet);
+      }
+      .brief-decision-call h2 {
+        margin: 0 0 12px;
+        font-size: 32px;
+      }
+      .audience {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .audience th {
+        background: var(--navy);
+        color: #fff;
+        font-size: 13px;
+      }
+      .coverage-wrap {
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .absence {
+        padding: 18px;
+        border-left: 5px solid var(--amber);
+        border-radius: 0 14px 14px 0;
+        background: #fff9e7;
+      }
+      .footer {
+        margin-top: 60px;
+        padding: 44px 54px;
+        border-radius: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .footer p {
+        max-width: 78ch;
+        margin: 10px 0 0;
+        color: #e5e2f5;
+      }
+      .footer .label {
+        color: var(--aqua);
+      }
+      .brief-route[hidden],
+      .route[hidden] {
+        display: none;
+      }
+      @media (max-width: 900px) {
+        .shell {
+          width: min(calc(100% - 32px), 1440px);
+        }
+        .brief-header {
+          padding: 40px;
+        }
+        .header-call {
+          position: static;
+          width: auto;
+          margin-top: 26px;
+        }
+        .route-hero {
+          grid-template-columns: 1fr;
+          padding: 32px;
+        }
+        .snapshot,
+        .three,
+        .brief-impact-footprint,
+        .brief-risk-chain,
+        .brief-coverage-group {
+          grid-template-columns: 1fr 1fr;
+        }
+        .epics,
+        .validation-flow {
+          grid-template-columns: 1fr;
+        }
+        .epic:not(:last-child):after,
+        .validation-flow article:not(:last-child):after {
+          content: "↓";
+          right: auto;
+          left: 48%;
+          top: auto;
+          bottom: -27px;
+        }
+        .two,
+        .assurance {
+          grid-template-columns: 1fr;
+        }
+        .assurance article:first-child {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+      }
+      @media (max-width: 560px) {
+        .shell {
+          width: min(calc(100% - 24px), 1440px);
+        }
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 10px 0;
+        }
+        .brief-header {
+          padding: 30px 24px;
+        }
+        .brief-header h1 {
+          font-size: 40px;
+        }
+        .route-hero {
+          padding: 26px 22px;
+        }
+        .route-hero h1 {
+          font-size: 38px;
+        }
+        .snapshot,
+        .three,
+        .brief-impact-footprint,
+        .brief-risk-chain,
+        .brief-coverage-group {
+          grid-template-columns: 1fr;
+        }
+        .heading {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .fields {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+        .fields dd {
+          margin-bottom: 12px;
+        }
+        .route-nav {
+          position: static;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .topbar,
+        .route-nav,
+        .footer {
+          display: none;
+        }
+        .shell {
+          width: 100%;
+          padding: 0;
+        }
+        .tab-panel[hidden] {
+          display: block !important;
+        }
+        .brief-route,
+        .route[hidden] {
+          display: grid !important;
+          break-after: page;
+        }
+        .brief-header {
+          min-height: 0;
+          border: 1px solid var(--line);
+          background: #fff;
+          color: var(--navy);
+        }
+        .brief-header:after {
+          display: none;
+        }
+        .lede {
+          color: var(--muted);
+        }
+      }
+    </style>
+  </head>
+  <body class="brief-shell" data-tab-enhancement="fallback">
+    <noscript>
+      <aside class="brief-no-script" data-noscript-fallback="continuous-reading" role="status">
+        <strong>Navegação por subpáginas indisponível.</strong> Este brief requer JavaScript para alternar as abas e recuperar a URL de cada visão. Abaixo está somente a alternativa de leitura contínua; ela não equivale à experiência de subpáginas.
+      </aside>
+    </noscript>
+    <main class="shell">
+      <div class="topbar" data-composition-slot="brief-metadata">
+        <span class="tag">Spec {{initiative}} · visual skeleton</span
+        ><span>{{date}} · {{risk}} · {{size}}</span>
+      </div>
+      <header class="brief-header" data-composition-slot="brief-header">
+        <p class="eyebrow">
+          Scaffolded — not ready for review, baseline or delivery
+        </p>
+        <h1>Author canonical sources, then render a decision brief.</h1>
+        <p class="lede">
+          The visual commitment already contains the executive question,
+          narrative arc and component shape for each route. Compose only
+          source-backed content after coverage review.
+        </p>
+        <aside class="header-call">
+          <strong>Next safe step</strong>
+          <p>
+            Map material sources to visible components, instantiate this shell,
+            then compose and review the candidate.
+          </p>
+        </aside>
+      </header>
+      <nav class="route-nav" aria-label="Brief decision views" role="tablist">
+        <a
+          id="tab-scope"
+          role="tab"
+          href="?view=scope"
+          aria-controls="scope"
+          aria-selected="true"
+          tabindex="0"
+          class="slot" data-composition-slot="tab-label-scope">Value &amp; scope</a
+        ><a
+          id="tab-architecture"
+          role="tab"
+          href="?view=architecture"
+          aria-controls="architecture"
+          aria-selected="false"
+          tabindex="-1"
+          class="slot" data-composition-slot="tab-label-architecture">Architecture</a
+        ><a
+          id="tab-impact"
+          role="tab"
+          href="?view=impact"
+          aria-controls="impact"
+          aria-selected="false"
+          tabindex="-1"
+          class="slot" data-composition-slot="tab-label-impact">Impact</a
+        ><a
+          id="tab-execution"
+          role="tab"
+          href="?view=execution"
+          aria-controls="execution"
+          aria-selected="false"
+          tabindex="-1"
+          class="slot" data-composition-slot="tab-label-execution">Execution</a
+        ><a
+          id="tab-validation"
+          role="tab"
+          href="?view=validation"
+          aria-controls="validation"
+          aria-selected="false"
+          tabindex="-1"
+          class="slot" data-composition-slot="tab-label-validation">Validation</a
+        ><a
+          id="tab-evolution"
+          role="tab"
+          href="?view=evolution"
+          aria-controls="evolution"
+          aria-selected="false"
+          tabindex="-1"
+          class="slot" data-composition-slot="tab-label-evolution">Evolution</a
+        ><a
+          id="tab-decision"
+          role="tab"
+          href="?view=decision"
+          aria-controls="decision"
+          aria-selected="false"
+          tabindex="-1"
+          class="slot" data-composition-slot="tab-label-decision">Decision</a
+        ><a
+          id="tab-coverage"
+          role="tab"
+          href="?view=coverage"
+          aria-controls="coverage"
+          aria-selected="false"
+          tabindex="-1"
+          class="slot" data-composition-slot="tab-label-coverage">Coverage</a
+        >
+      </nav>
+      <section
+        id="scope"
+        class="tab-panel brief-route"
+        role="tabpanel"
+        aria-labelledby="tab-scope"
+        tabindex="0"
+      >
+        <div class="snapshot" id="decision-snapshot">
+          <article class="metric slot">
+            <h2>Outcome</h2>
+            <p>What result is being bought?</p>
+          </article>
+          <article class="metric slot">
+            <h2>Decision</h2>
+            <p>What must be authorized now?</p>
+          </article>
+          <article class="metric slot">
+            <h2>Boundary</h2>
+            <p>What is explicitly outside?</p>
+          </article>
+          <article class="metric slot">
+            <h2>Authority</h2>
+            <p>What is truthful today?</p>
+          </article>
+        </div>
+        <h2 class="slot" data-composition-slot="scope-route-title">Value and scope</h2>
+        <div class="route-hero">
+          <div class="slot" data-composition-slot="scope-route-hero-copy">
+            <p class="label">Executive view</p>
+            <h1>Why this matters, for whom, and within which limit.</h1>
+            <p class="intro slot">
+              a preencher — beneficiary, outcome, decision and value narrative.
+            </p>
+          </div>
+          <aside class="question slot">
+            <b>Decision question</b>
+            <p class="placeholder">
+              a preencher — what must this route make possible?
+            </p>
+          </aside>
+        </div>
+        <div class="heading slot" data-composition-slot="scope-pillars-heading">
+          <h2>Value pillars</h2>
+          <p>Use three to five source-backed pillars only when material.</p>
+        </div>
+        <div class="three grid">
+          <article class="card slot">
+            <p class="label">Pillar 01</p>
+            <h3>a preencher — value driver</h3>
+            <p>Benefit, evidence and audience.</p>
+          </article>
+          <article class="card slot">
+            <p class="label">Pillar 02</p>
+            <h3>a preencher — operating driver</h3>
+            <p>Real-world change and owner.</p>
+          </article>
+          <article class="card slot">
+            <p class="label">Pillar 03</p>
+            <h3>a preencher — assurance driver</h3>
+            <p>Risk, control or limit.</p>
+          </article>
+        </div>
+        <div class="two grid">
+          <article class="card slot">
+            <h2>Outcome and measures</h2>
+            <p class="placeholder">
+              a preencher — observable result and signal.
+            </p>
+          </article>
+          <article class="card slot">
+            <h2>Scope and deliberate exclusions</h2>
+            <p class="placeholder">
+              a preencher — in-scope, out-of-scope and assumptions.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section
+        id="architecture"
+        class="tab-panel brief-route"
+        role="tabpanel"
+        aria-labelledby="tab-architecture"
+        tabindex="0"
+      >
+        <div class="route-hero">
+          <div class="slot" data-composition-slot="architecture-route-hero-copy">
+            <p class="label">Architecture view</p>
+            <h1>
+              Show where change lives, how it flows and what remains protected.
+            </h1>
+            <p class="intro slot">
+              a preencher — one plain-language architecture thesis.
+            </p>
+          </div>
+          <aside class="question slot">
+            <b>Decision question</b>
+            <p class="placeholder">
+              a preencher — which boundary or trade-off needs agreement?
+            </p>
+          </aside>
+        </div>
+        <div class="three grid">
+          <article class="card slot">
+            <p class="label">Pillar 01</p>
+            <h3>Responsibility boundaries</h3>
+            <p>Owner and separation of responsibilities.</p>
+          </article>
+          <article class="card slot">
+            <p class="label">Pillar 02</p>
+            <h3>Flow and contracts</h3>
+            <p>Information, trigger, output and dependency.</p>
+          </article>
+          <article class="card slot">
+            <p class="label">Pillar 03</p>
+            <h3>Assurance and recovery</h3>
+            <p>Failure, control and rollback.</p>
+          </article>
+        </div>
+        <div class="diagram slot" id="architecture-landscape">
+          <p class="label">Solution landscape</p>
+          <h2>Contextual architecture, changed surfaces and protected boundaries</h2>
+          <div class="topology">
+            <article class="node">
+              <strong>a preencher — material context</strong
+              ><span>application, operating domain, policy area or other source-backed environment</span>
+            </article>
+            <span class="arrow">→</span>
+            <article class="node">
+              <strong>a preencher — changed surface</strong
+              ><span>responsibility, change boundary, contract and task link</span>
+            </article>
+            <span class="arrow">→</span>
+            <article class="node">
+              <strong>a preencher — preserved or controlled surface</strong
+              ><span>dependency, output, gate, state or explicit boundary</span>
+            </article>
+          </div>
+          <div class="legend">
+            <span>changed</span><span class="preserved">preserved</span
+            ><span class="boundary">outside boundary</span>
+          </div>
+        </div>
+        <div class="diagram slot" id="architecture-relationship-flow">
+          <p class="label">Relationship flow</p>
+          <h2>Sequence chosen from the actual relationship the reader must understand</h2>
+          <div class="topology">
+            <article class="node">
+              <strong>a preencher — trigger or starting condition</strong
+              ><span>user action, event, decision, input or handoff</span>
+            </article>
+            <span class="arrow">→</span>
+            <article class="node">
+              <strong>a preencher — transition / contract</strong
+              ><span>data, navigation, use, integration, decision or control</span>
+            </article>
+            <span class="arrow">→</span>
+            <article class="node">
+              <strong>a preencher — outcome / observable state</strong
+              ><span>owner, evidence, guardrail or recovery condition</span>
+            </article>
+          </div>
+          <div class="legend">
+            <span>material transition</span><span class="preserved">stable contract</span
+            ><span class="boundary">not applicable / outside flow</span>
+          </div>
+        </div>
+        <div class="heading slot" data-composition-slot="architecture-zooms-heading">
+          <h2>Architecture zooms</h2>
+          <p>Duplicate this dossier for every affected domain.</p>
+        </div>
+        <div class="two grid slot" data-composition-slot="architecture-domains">
+          <article
+            class="brief-architecture-cut slot"
+            data-repeat="architecture-domain"
+          >
+            <p class="label">Domain zoom</p>
+            <h3>a preencher — component or operating domain</h3>
+            <dl class="fields">
+              <dt>Role</dt>
+              <dd>a preencher — responsibility and owner.</dd>
+              <dt>Change</dt>
+              <dd>a preencher — what changes.</dd>
+              <dt>Unchanged</dt>
+              <dd>a preencher — protected boundary.</dd>
+              <dt>Contract</dt>
+              <dd>a preencher — inputs, outputs and dependencies.</dd>
+              <dt>Tasks</dt>
+              <dd>a preencher — linked task IDs.</dd>
+              <dt>Recovery</dt>
+              <dd>a preencher — failure control or rollback.</dd>
+            </dl>
+          </article>
+          <article
+            class="brief-architecture-cut slot"
+            data-repeat="architecture-domain"
+          >
+            <p class="label">Domain zoom</p>
+            <h3>a preencher — component or operating domain</h3>
+            <dl class="fields">
+              <dt>Role</dt>
+              <dd>a preencher — responsibility and owner.</dd>
+              <dt>Change</dt>
+              <dd>a preencher — what changes.</dd>
+              <dt>Unchanged</dt>
+              <dd>a preencher — protected boundary.</dd>
+              <dt>Contract</dt>
+              <dd>a preencher — inputs, outputs and dependencies.</dd>
+              <dt>Tasks</dt>
+              <dd>a preencher — linked task IDs.</dd>
+              <dt>Recovery</dt>
+              <dd>a preencher — failure control or rollback.</dd>
+            </dl>
+          </article>
+        </div>
+        <div class="assurance">
+          <article class="slot">
+            <p class="label">Deterministic assurance</p>
+            <h2>What the system can prove</h2>
+            <p>Integrity, gates or repeatable evidence.</p>
+          </article>
+          <article class="slot">
+            <p class="label">Human / agent judgment</p>
+            <h2>What requires interpretation</h2>
+            <p>Usefulness, proportionality and clarity.</p>
+          </article>
+        </div>
+        <div class="absence slot">
+          a preencher — explicit source-backed absence or discovery if
+          architecture is immaterial.
+        </div>
+      </section>
+      <section
+        id="impact"
+        class="tab-panel brief-route impact-evidence"
+        role="tabpanel"
+        aria-labelledby="tab-impact"
+        tabindex="0"
+      >
+        <div class="route-hero">
+          <div class="slot" data-composition-slot="impact-route-hero-copy">
+            <p class="label">Impact view</p>
+            <h1>
+              Make the footprint, risk owners and protections visible before
+              delivery.
+            </h1>
+            <p class="intro slot">
+              a preencher — impact narrative across people, process, information
+              and interfaces.
+            </p>
+          </div>
+          <aside class="question slot">
+            <b>Decision question</b>
+            <p class="placeholder">
+              a preencher — which impact needs active approval?
+            </p>
+          </aside>
+        </div>
+        <div class="brief-impact-footprint">
+          <article class="slot">
+            <h3>a preencher — affected surface</h3>
+            <p>Delta, owner, dependency and control.</p>
+          </article>
+          <article class="slot">
+            <h3>a preencher — affected surface</h3>
+            <p>Delta, owner, dependency and control.</p>
+          </article>
+          <article class="slot">
+            <h3>a preencher — affected surface</h3>
+            <p>Delta, owner, dependency and control.</p>
+          </article>
+        </div>
+        <div class="brief-risk-chain">
+          <article class="slot">
+            <h3>a preencher — risk</h3>
+            <p>Signal → consequence → control → owner.</p>
+          </article>
+          <article class="slot">
+            <h3>a preencher — risk</h3>
+            <p>Signal → consequence → control → owner.</p>
+          </article>
+          <article class="slot">
+            <h3>a preencher — risk</h3>
+            <p>Signal → consequence → control → owner.</p>
+          </article>
+        </div>
+        <div class="two grid">
+          <article class="card slot">
+            <h2>Rollback and recovery</h2>
+            <p class="placeholder">
+              a preencher — trigger, safe reversal, evidence and owner.
+            </p>
+          </article>
+          <article class="card slot">
+            <h2>Protected boundary</h2>
+            <p class="placeholder">
+              a preencher — what this change deliberately does not touch.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section
+        id="execution"
+        class="tab-panel brief-route"
+        role="tabpanel"
+        aria-labelledby="tab-execution"
+        tabindex="0"
+      >
+        <div class="route-hero">
+          <div class="slot" data-composition-slot="execution-route-hero-copy">
+            <p class="label">Execution view</p>
+            <h1>Connect delivery to safe increments, not a list of chores.</h1>
+            <p class="intro slot">
+              a preencher — why this sequence is the safest path to outcome.
+            </p>
+          </div>
+          <aside class="question slot">
+            <b>Decision question</b>
+            <p class="placeholder">
+              a preencher — what can start now and what stays gated?
+            </p>
+          </aside>
+        </div>
+        <div class="epics">
+          <article class="epic slot">
+            <b>EPIC 01</b>
+            <h3>a preencher — foundation</h3>
+            <p>Outcome, dependency and handoff.</p>
+          </article>
+          <article class="epic slot">
+            <b>EPIC 02</b>
+            <h3>a preencher — controlled build</h3>
+            <p>Outcome, dependency and handoff.</p>
+          </article>
+          <article class="epic slot">
+            <b>EPIC 03</b>
+            <h3>a preencher — proof and release</h3>
+            <p>Outcome, dependency and handoff.</p>
+          </article>
+        </div>
+        <div class="task-dossiers slot" data-composition-slot="task-dossiers">
+          <article class="brief-task-card" data-repeat="task">
+            <div class="chips">
+              <span>a preencher — task ID</span
+              ><span>a preencher — status / authority</span
+              ><span>a preencher — assurance</span>
+            </div>
+            <h3>a preencher — task title</h3>
+            <dl class="fields">
+              <dt>Outcome</dt>
+              <dd>a preencher — safe observable increment.</dd>
+              <dt>Scope</dt>
+              <dd>a preencher — what changes and does not.</dd>
+              <dt>Dependency</dt>
+              <dd>a preencher — prerequisite and reason.</dd>
+              <dt>Risk / control</dt>
+              <dd>a preencher — exposure and guardrail.</dd>
+              <dt>Validation / evidence</dt>
+              <dd>a preencher — linked AC / proof and owner.</dd>
+              <dt>Exit / why now</dt>
+              <dd>a preencher — finish condition and sequencing rationale.</dd>
+            </dl>
+          </article>
+        </div>
+      </section>
+      <section
+        id="validation"
+        class="tab-panel brief-route"
+        role="tabpanel"
+        aria-labelledby="tab-validation"
+        tabindex="0"
+      >
+        <div class="route-hero">
+          <div class="slot" data-composition-slot="validation-route-hero-copy">
+            <p class="label">Validation view</p>
+            <h1>
+              Explain how the initiative earns trust — and where judgment
+              remains necessary.
+            </h1>
+            <p class="intro slot">
+              a preencher — validation thesis linking outcome, risk and proof
+              strategy.
+            </p>
+          </div>
+          <aside class="question slot">
+            <b>Decision question</b>
+            <p class="placeholder">
+              a preencher — what evidence is sufficient for the next gate?
+            </p>
+          </aside>
+        </div>
+        <div class="validation-flow">
+          <article class="slot">
+            <h3>Structural checks</h3>
+            <p>Integrity or policy checks.</p>
+          </article>
+          <article class="slot">
+            <h3>Behaviour / integration</h3>
+            <p>Scenario or fixture.</p>
+          </article>
+          <article class="slot">
+            <h3>Human review</h3>
+            <p>Field or decision assessment.</p>
+          </article>
+          <article class="slot">
+            <h3>Evidence and gate</h3>
+            <p>Record, owner and limitation.</p>
+          </article>
+        </div>
+        <div class="validation-dossiers slot" data-composition-slot="validation-dossiers">
+          <article class="brief-proof-card" data-repeat="validation">
+            <p class="label">Validation / acceptance criterion</p>
+            <h3>a preencher — proof title</h3>
+            <dl class="fields">
+              <dt>Element / objective</dt>
+              <dd>a preencher — claim and importance.</dd>
+              <dt>Method / context</dt>
+              <dd>
+                a preencher — code, integration, human or operational method.
+              </dd>
+              <dt>Acceptance / oracle</dt>
+              <dd>a preencher — observable pass condition and decision rule.</dd>
+              <dt>Evidence / owner</dt>
+              <dd>a preencher — retained record and reviewer.</dd>
+              <dt>Limit</dt>
+              <dd>a preencher — what this proof cannot establish.</dd>
+            </dl>
+          </article>
+        </div>
+        <div class="matrix slot">
+          <table>
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>Validation</th>
+                <th>Acceptance criterion</th>
+                <th>Evidence / owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>a preencher</td>
+                <td>a preencher</td>
+                <td>a preencher</td>
+                <td>a preencher</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="brief-coverage-group">
+          <article class="slot">
+            <h3>Guarantee retained</h3>
+            <p>Compatibility or invariant.</p>
+          </article>
+          <article class="slot">
+            <h3>Known limit</h3>
+            <p>Residual uncertainty.</p>
+          </article>
+          <article class="slot">
+            <h3>Next review</h3>
+            <p>Owner and trigger.</p>
+          </article>
+        </div>
+      </section>
+      <section
+        id="evolution"
+        class="tab-panel brief-route decision-register"
+        role="tabpanel"
+        aria-labelledby="tab-evolution"
+        tabindex="0"
+      >
+        <div class="route-hero">
+          <div class="slot" data-composition-slot="evolution-route-hero-copy">
+            <p class="label">Evolution view</p>
+            <h1>
+              Show the decisions, gates and recovery path that make progress
+              trustworthy.
+            </h1>
+            <p class="intro slot">
+              a preencher — what changed, why and what remains open.
+            </p>
+          </div>
+          <aside class="question slot">
+            <b>Decision question</b>
+            <p class="placeholder">
+              a preencher — what state is actually authorized?
+            </p>
+          </aside>
+        </div>
+        <div class="two grid">
+          <div class="timeline slot">
+            <article>
+              <h3>a preencher — decision ID and title</h3>
+              <p>Context, consequence and owner.</p>
+            </article>
+            <article>
+              <h3>a preencher — decision ID and title</h3>
+              <p>Context, consequence and owner.</p>
+            </article>
+          </div>
+          <aside class="gateboard slot">
+            <h2>Truthful gateboard</h2>
+            <div class="gates">
+              <div class="gate"><b>Spec / plan</b><span>a preencher</span></div>
+              <div class="gate"><b>Coverage</b><span>a preencher</span></div>
+              <div class="gate"><b>Visibility</b><span>a preencher</span></div>
+              <div class="gate"><b>Tasks ready</b><span>a preencher</span></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+      <section
+        id="decision"
+        class="tab-panel brief-route decision-actions"
+        role="tabpanel"
+        aria-labelledby="tab-decision"
+        tabindex="0"
+      >
+        <div class="route-hero">
+          <div class="slot" data-composition-slot="decision-route-hero-copy">
+            <p class="label">Decision view</p>
+            <h1>
+              End with a clear ask, accountable owner and one safe next step.
+            </h1>
+            <p class="intro slot">
+              a preencher — recommendation and decision context.
+            </p>
+          </div>
+          <aside class="question slot">
+            <b>Decision question</b>
+            <p class="placeholder">
+              a preencher — approve, reject, defer or request discovery?
+            </p>
+          </aside>
+        </div>
+        <article class="brief-decision-call slot">
+          <p class="label">Decision requested</p>
+          <h2>a preencher — recommendation</h2>
+          <dl class="fields">
+            <dt>Why now</dt>
+            <dd>a preencher</dd>
+            <dt>Alternatives</dt>
+            <dd>a preencher</dd>
+            <dt>Authority</dt>
+            <dd>a preencher</dd>
+            <dt>Next safe step</dt>
+            <dd>a preencher — owner, action and re-entry condition.</dd>
+          </dl>
+        </article>
+        <table class="audience slot">
+          <thead>
+            <tr>
+              <th>Audience</th>
+              <th>Needs to understand</th>
+              <th>Decision support</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>a preencher</td>
+              <td>a preencher</td>
+              <td>a preencher</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section
+        id="coverage"
+        class="tab-panel brief-route"
+        role="tabpanel"
+        aria-labelledby="tab-coverage"
+        tabindex="0"
+      >
+        <div class="route-hero">
+          <div class="slot" data-composition-slot="coverage-route-hero-copy">
+            <p class="label">Coverage view</p>
+            <h1>
+              Make the projection traceable without making the HTML a second
+              source of truth.
+            </h1>
+            <p class="intro slot">
+              a preencher — coverage narrative and honest boundary.
+            </p>
+          </div>
+          <aside class="question slot">
+            <b>Decision question</b>
+            <p class="placeholder">
+              a preencher — can a reader trust every material source reached a
+              destination?
+            </p>
+          </aside>
+        </div>
+        <div class="brief-coverage-group">
+          <article class="slot">
+            <h3>Represented</h3>
+            <p>Source fact appears directly in the brief.</p>
+          </article>
+          <article class="slot">
+            <h3>Synthesized</h3>
+            <p>Several sources form a bounded summary.</p>
+          </article>
+          <article class="slot">
+            <h3>Justified absence</h3>
+            <p>An absence is owned, not silently lost.</p>
+          </article>
+        </div>
+        <div class="coverage-wrap slot">
+          <table class="coverage">
+            <thead>
+              <tr>
+                <th>Source / locator</th>
+                <th>Decision fact</th>
+                <th>Visual target</th>
+                <th>Disposition / rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>a preencher</td>
+                <td>a preencher</td>
+                <td>a preencher</td>
+                <td>a preencher</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <footer class="footer slot" data-composition-slot="brief-footer">
+        <p class="label">Derived meeting projection</p>
+        <h2>
+          Source-backed composition, visual commitment and accountable
+          decisions.
+        </h2>
+        <p>
+          Canonical Markdown and decisions remain the source of truth. This
+          visual skeleton is intentionally not promotable until every selected
+          component is composed, reviewed and attested.
+        </p>
+      </footer>
+    </main>
+    <script data-brief-base-behavior="v1">
+      (() => {
+        const details = [
+          ...document.querySelectorAll("details[data-progressive]"),
+        ];
+        function initializeTablist(tablist) {
+          const tabs = [...tablist.querySelectorAll('[role="tab"]')];
+          const panels = tabs.map((tab) =>
+            document.getElementById(tab.getAttribute("aria-controls")),
+          );
+          if (!tabs.length || !panels.every(Boolean)) return;
+          const tabForRoute = () => {
+            const view = new URL(location.href).searchParams.get("view");
+            return tabs.find((tab) => tab.dataset.view === view) || tabs[0];
+          };
+          const routeFor = (tab) => tab.dataset.view;
+          let active = tabs[0];
+          tabs.forEach((tab) => {
+            tab.dataset.view =
+              new URL(tab.href, location.href).searchParams.get("view") ||
+              tab.getAttribute("aria-controls");
+          });
+          const activate = (
+            tab,
+            { focusPanel = false, writeRoute = false } = {},
+          ) => {
+            active = tab;
+            tabs.forEach((candidate, index) => {
+              const selected = candidate === tab;
+              candidate.setAttribute("aria-selected", String(selected));
+              candidate.setAttribute(
+                "aria-current",
+                selected ? "page" : "false",
+              );
+              candidate.tabIndex = selected ? 0 : -1;
+              panels[index].hidden = !selected;
+            });
+            if (writeRoute) {
+              const url = new URL(location.href);
+              url.searchParams.set("view", routeFor(tab));
+              url.hash = "";
+              history.pushState({ briefView: routeFor(tab) }, "", url);
+            }
+            if (focusPanel) panels[tabs.indexOf(tab)].focus();
+          };
+          const revealForPrint = () =>
+            panels.forEach((panel) => (panel.hidden = false));
+          const restoreAfterPrint = () => activate(active);
+          document.body.dataset.tabEnhancement = "active";
+          activate(tabForRoute());
+          tabs.forEach((tab, index) => {
+            tab.addEventListener("click", (event) => {
+              event.preventDefault();
+              activate(tab, { focusPanel: true, writeRoute: true });
+            });
+            tab.addEventListener("keydown", (event) => {
+              let next = null;
+              if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+              if (event.key === "ArrowLeft")
+                next = (index - 1 + tabs.length) % tabs.length;
+              if (event.key === "Home") next = 0;
+              if (event.key === "End") next = tabs.length - 1;
+              if (next !== null) {
+                event.preventDefault();
+                tabs[next].focus();
+                activate(tabs[next], { writeRoute: true });
+              }
+              if (event.key === " " || event.key === "Enter") {
+                event.preventDefault();
+                activate(tab, { focusPanel: true, writeRoute: true });
+              }
+            });
+          });
+          window.addEventListener("popstate", () => activate(tabForRoute()));
+          window.addEventListener("beforeprint", revealForPrint);
+          window.addEventListener("afterprint", restoreAfterPrint);
+        }
+        document
+          .querySelectorAll('[role="tablist"]')
+          .forEach(initializeTablist);
+        details.forEach((detail) => (detail.open = false));
+      })();
+    </script>
+  </body>
+</html>

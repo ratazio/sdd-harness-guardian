@@ -1,0 +1,1225 @@
+<!doctype html>
+<html
+  lang="en"
+  data-harness-brief-design="v2"
+  data-client-identity-profile="vendor-neutral"
+  data-harness-template-kind="composed"
+  data-composition-review-record="D-022-062"
+  data-composition-provenance="reviewed"
+  data-composition-review-status="approve"
+  data-brief-phase="rendered"
+  data-lifecycle-marker="brief-phase"
+  data-lifecycle-source="run-state.yaml"
+  data-lifecycle-fragment="brief_phase"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      data-lifecycle-marker="rendered-state-digest"
+      data-lifecycle-source="run-state.yaml"
+      data-lifecycle-fragment="rendered run-state bytes"
+      content="2df9044a24b73f6d007d1ab4c98109e1ef3d3db82ff09e771170442bb4375166"
+    />
+    <title>SPEC 022 — rendered brief lifecycle decision brief</title>
+    <style data-harness-brief-shell>
+      :root {
+        --canvas: #f4f7f6;
+        --paper: #fff;
+        --ink: #17332e;
+        --muted: #526761;
+        --line: #c9dad5;
+        --accent: #146b59;
+        --dark: #0f453b;
+        --warn: #9a4a12;
+        --danger: #9d2f28;
+        --soft: #e7f2ee;
+        --radius: 16px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--canvas);
+        color: var(--ink);
+        font:
+          16px/1.55 system-ui,
+          "Segoe UI",
+          Arial,
+          sans-serif;
+      }
+      main {
+        max-width: 1180px;
+        margin: auto;
+        padding: 28px 22px 64px;
+      }
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .pill {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-weight: 750;
+      }
+      .hero,
+      section,
+      .metric {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.5fr 0.7fr;
+        gap: 28px;
+        padding: 34px;
+        margin: 14px 0 20px;
+        background: linear-gradient(135deg, #fff, var(--soft));
+      }
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--accent);
+        font-size: 0.78rem;
+        font-weight: 850;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(2.25rem, 5vw, 4.2rem);
+        line-height: 1.02;
+      }
+      h2 {
+        margin-top: 0;
+        font-size: 1.5rem;
+      }
+      h3 {
+        margin: 0 0 6px;
+        font-size: 1rem;
+      }
+      .ask {
+        padding: 20px;
+        border-radius: 13px;
+        background: var(--dark);
+        color: white;
+      }
+      .ask p {
+        margin-bottom: 0;
+      }
+      .nav {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 18px 0;
+      }
+      .nav a {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 6px 10px;
+        color: var(--dark);
+        background: white;
+        text-decoration: none;
+      }
+      .metrics,
+      .grid,
+      .flow,
+      .cards {
+        display: grid;
+        gap: 14px;
+      }
+      .metrics {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .flow {
+        grid-template-columns: repeat(5, 1fr);
+        align-items: stretch;
+      }
+      .cards {
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      }
+      .metric,
+      .card {
+        padding: 18px;
+      }
+      .metric h2 {
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      section {
+        margin: 18px 0;
+        padding: 28px;
+        scroll-margin-top: 16px;
+      }
+      .intro {
+        color: var(--muted);
+        max-width: 76ch;
+      }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+      }
+      .flow .card {
+        position: relative;
+        border-top: 4px solid var(--accent);
+      }
+      .flow .card:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -13px;
+        top: 45%;
+        color: var(--accent);
+        font-weight: 900;
+        font-size: 1.4rem;
+      }
+      .callout {
+        border-left: 5px solid var(--accent);
+        background: var(--soft);
+        padding: 15px;
+      }
+      .warning {
+        border-left-color: var(--warn);
+        background: #fff7ed;
+      }
+      .danger {
+        border-left-color: var(--danger);
+        background: #fff1f0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 14px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+        text-align: left;
+      }
+      th {
+        font-size: 0.76rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .source {
+        font-size: 0.84rem;
+        color: var(--muted);
+      }
+      code {
+        font-family: ui-monospace, Consolas, monospace;
+        font-size: 0.9em;
+        overflow-wrap: anywhere;
+      }
+      .lifecycle-authority {
+        margin: 0;
+        padding: 9px 16px;
+        background: #fff7ed;
+        color: #7b3f16;
+        text-align: center;
+        font-weight: 800;
+      }
+      .diagram {
+        overflow: auto;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #f9fcfb;
+      }
+      .status {
+        font-weight: 800;
+        color: var(--warn);
+      }
+      footer {
+        color: var(--muted);
+        font-size: 0.88rem;
+        padding-top: 14px;
+      }
+      @media (max-width: 800px) {
+        .hero,
+        .metrics,
+        .grid,
+        .flow {
+          grid-template-columns: 1fr;
+        }
+        .flow .card:not(:last-child)::after {
+          content: "↓";
+          right: 50%;
+          top: auto;
+          bottom: -18px;
+        }
+        .flow {
+          gap: 26px;
+        }
+        main {
+          padding: 18px 12px;
+        }
+      }
+      @media print {
+        body {
+          background: white;
+        }
+        main {
+          max-width: none;
+          padding: 0;
+        }
+        .nav {
+          display: none;
+        }
+        section,
+        .hero,
+        .metric {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body class="brief-shell">
+    <main>
+      <div class="topline">
+        <span class="pill">Guardian bundle · corrective initiative</span
+        ><span>28 Aug 2026 · high / A2 · vendor-neutral</span>
+      </div>
+      <header
+        id="source-problem"
+        class="hero brief-header"
+        data-source="spec.md"
+        data-source-section="Problem"
+        data-coverage="synthesized"
+        data-source-digest="sha256:db8882d34e44b62abad3958099b5a75802209d00923ff81dc6179b562d1e93ef"
+        data-source-fragment="## Problem"
+        data-source-fragment-sha256="sha256:70a969dce32838240cf51560886c5158a613d5cb4258b7d7101d0b627acad35f"
+      >
+        <div>
+          <p
+            class="eyebrow"
+            data-lifecycle-marker="rendered-authority"
+            data-lifecycle-source="run-state.yaml"
+            data-lifecycle-projection="lifecycle-authority"
+            data-lifecycle-fragment="hero lifecycle authority"
+          >Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</p>
+          <h1>Make a promoted brief tell the truth about its own state.</h1>
+          <p>
+            SPEC 022 corrects a reusable lifecycle defect: a promotion could
+            copy authored input and then change canonical state, leaving the
+            delivered page with stale phase, authority and provenance.
+          </p>
+          <p class="source">Source anchor: <code>## Problem</code></p>
+        </div>
+        <aside class="ask">
+          <strong>Decision boundary</strong>
+          <p
+            data-lifecycle-marker="rendered-authority"
+            data-lifecycle-source="run-state.yaml"
+            data-lifecycle-projection="lifecycle-authority"
+            data-lifecycle-fragment="decision boundary lifecycle authority"
+          >Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</p>
+        </aside>
+      </header>
+
+      <nav class="nav" aria-label="Decision brief sections">
+        <a href="#scope">Value &amp; scope</a
+        ><a href="#architecture">Architecture</a
+        ><a href="#impact">Impact &amp; risk</a
+        ><a href="#execution">Execution</a><a href="#validation">Validation</a
+        ><a href="#evolution">Authority &amp; coverage</a>
+      </nav>
+
+      <div id="decision-snapshot" class="metrics snapshot">
+        <article
+          class="metric"
+          data-source="spec.md"
+          data-source-section="Objective and outcome"
+          data-coverage="represented"
+          data-source-digest="sha256:db8882d34e44b62abad3958099b5a75802209d00923ff81dc6179b562d1e93ef"
+          data-source-fragment="## Objective and outcome"
+          data-source-fragment-sha256="sha256:225622cbef5d006057f6eb4aba88849e6d1961a485ef982c9c2668da1317fd19"
+        >
+          <h2>Objective</h2>
+          <p>
+            Synchronize phase, identity, authority and current provenance
+            without semantic scoring.
+            <span class="source">## Objective and outcome</span>
+          </p>
+        </article>
+        <article
+          id="state-identity"
+          class="metric"
+          data-source="run-state.yaml"
+          data-source-section="initiative identity"
+          data-coverage="represented"
+          data-source-digest="sha256:2df9044a24b73f6d007d1ab4c98109e1ef3d3db82ff09e771170442bb4375166"
+          data-source-fragment="initiative_id:"
+          data-source-fragment-sha256="sha256:b4d74e936b454da0170f3d10eae73c86106edd3d898871ba9b68af0c8b4a3fe6"
+          data-lifecycle-marker="rendered-state-source-digest"
+          data-lifecycle-source="run-state.yaml"
+          data-lifecycle-fragment="initiative identity state binding"
+        >
+          <h2>Initiative identity</h2>
+          <p>
+            <code
+              >initiative_id:
+              "022-rendered-brief-lifecycle-freshness-and-authority"</code
+            >
+          </p>
+        </article>
+        <article
+          class="metric"
+          data-source="tasks.md"
+          data-source-section="Task ledger"
+          data-coverage="represented"
+          data-source-digest="sha256:2db442da876e127698cff93cbb3a6b8415990a6f1917b6c707caa4201cef29a6"
+          data-source-fragment="| ID | Status | Title | Dependency | Risk | Builder | Evaluator | Evidence |
+|---|---|---|---|---|---|---|---|
+| T-001 | done | Implementar o contrato mínimo atômico de lifecycle no promotor | none | high | `spec022_t001_builder` | `spec022_t001_evaluator_r4` | evidence/T-001.md |
+| T-002 | done | Integrar o contrato aos controles e caminhos de regressão | T-001 | high | `spec022_t002_builder` | `spec022_t002_evaluator_r4` | evidence/T-002.md |
+| T-003 | done | Provar recusas e limites não semânticos | T-001/T-002 | high | `spec022_t003_authority_builder`; `spec022_t003_coverage_fix` | `/root/final_reevaluate_spec022_t003` | evidence/T-003.md; evidence/T-003-final-evaluation-d022060.md |
+| T-004 | pending | Revalidar SPEC 021 em nova tentativa completa | T-001–T-003 | high | unassigned | independent | evidence/T-004.md |"
+          data-source-fragment-sha256="sha256:38615f03e6c54fdf54328cf43b70213be04037b1e642cadcbee2cb44dfe0374b"
+        >
+          <h2>Implemented increments</h2>
+          <p>
+            T-001, T-002 and T-003 are done; T-004 remains pending.
+          </p>
+          <pre class="source">| ID | Status | Title | Dependency | Risk | Builder | Evaluator | Evidence |
+|---|---|---|---|---|---|---|---|
+| T-001 | done | Implementar o contrato mínimo atômico de lifecycle no promotor | none | high | `spec022_t001_builder` | `spec022_t001_evaluator_r4` | evidence/T-001.md |
+| T-002 | done | Integrar o contrato aos controles e caminhos de regressão | T-001 | high | `spec022_t002_builder` | `spec022_t002_evaluator_r4` | evidence/T-002.md |
+| T-003 | done | Provar recusas e limites não semânticos | T-001/T-002 | high | `spec022_t003_authority_builder`; `spec022_t003_coverage_fix` | `/root/final_reevaluate_spec022_t003` | evidence/T-003.md; evidence/T-003-final-evaluation-d022060.md |
+| T-004 | pending | Revalidar SPEC 021 em nova tentativa completa | T-001–T-003 | high | unassigned | independent | evidence/T-004.md |</pre>
+        </article>
+        <article
+          id="progress-path"
+          class="metric"
+          data-source="progress.md"
+          data-source-section="Next step"
+          data-coverage="represented"
+          data-source-digest="sha256:4f55c290bb8298436e05922ce3c292dce489cdaa934cf1ed32abf6abad5817fc"
+          data-source-fragment="## Next step"
+          data-source-fragment-sha256="sha256:f91987aced515837d4f0410b271487ce2f7d510f8e91fa51df10dddfb3fdc8d9"
+        >
+          <h2>Review-gated path</h2>
+          <p
+            data-lifecycle-marker="rendered-authority"
+            data-lifecycle-source="run-state.yaml"
+            data-lifecycle-projection="lifecycle-authority"
+            data-lifecycle-fragment="progress lifecycle authority"
+          >Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</p>
+          <p
+            data-lifecycle-marker="rendered-next-safe-step"
+            data-lifecycle-source="run-state.yaml"
+            data-lifecycle-projection="lifecycle-next-safe-step"
+            data-lifecycle-fragment="progress next-safe-step lifecycle projection"
+          >Retain the recorded post-render review; any Human Visibility or delivery decision remains separate, and Tasks Ready remains false.</p>
+          <p class="source">progress.md / ## Next step</p>
+        </article>
+      </div>
+
+      <section
+        id="scope"
+        data-source="spec.md"
+        data-source-section="Objective and outcome"
+        data-coverage="synthesized"
+        data-source-digest="sha256:db8882d34e44b62abad3958099b5a75802209d00923ff81dc6179b562d1e93ef"
+        data-source-fragment="## Objective and outcome"
+        data-source-fragment-sha256="sha256:225622cbef5d006057f6eb4aba88849e6d1961a485ef982c9c2668da1317fd19"
+      >
+        <h2>Why this correction matters</h2>
+        <p class="intro">
+          A stakeholder page is an authority surface. If it says “candidate”
+          while canonical state says rendered, a reader cannot know which record
+          governs. The required outcome is a promotion that proves its actual
+          lifecycle in both source bindings and visible language, while leaving
+          domain meaning to humans.
+          <span class="source"><code>## Objective and outcome</code></span>
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>In scope</h3>
+            <p>
+              Closed lifecycle markers; synchronized phase and state digest;
+              recoverable promotion; byte/identity checks; and separate pre-
+              versus post-render review.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Deliberately out</h3>
+            <p
+              data-source="spec.md"
+              data-source-section="Objective and outcome"
+              data-coverage="represented"
+              data-source-digest="sha256:db8882d34e44b62abad3958099b5a75802209d00923ff81dc6179b562d1e93ef"
+              data-source-fragment="**Non-goals:**"
+              data-source-fragment-sha256="sha256:954e3118bf9010c6cfab1c2470486cb7c7892bf4b88eea676e8ec0c28120985e"
+            >
+              <code>**Non-goals:**</code> changing domain semantics, replacing
+              SPEC 021’s human hook, or letting a deterministic pass authorize a
+              baseline.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section
+        id="architecture"
+        data-source="plan.md"
+        data-source-section="Approach"
+        data-coverage="synthesized"
+        data-source-digest="sha256:c349ff4d24a8285cb0c0e4e637cbcf88f976fff328d9b5f72756320032d07299"
+        data-source-fragment="## Approach"
+        data-source-fragment-sha256="sha256:cbb88670af2d5e795d291f29214a9b4fcdeff4ffe4aeb1604e0b792716438c72"
+      >
+        <h2>Lifecycle architecture: a narrow, auditable rewrite</h2>
+        <p class="intro">
+          The renderer is not a content editor. It can derive only declared
+          lifecycle values from staged rendered state, including declared
+          repeatable authority projections. All other authored bytes, including
+          decision prose and ordinary source provenance, remain outside its
+          rewrite surface.
+        </p>
+        <div class="flow" aria-label="Review-gated promotion flow">
+          <article class="card">
+            <h3>1. Composition review</h3>
+            <p>
+              A reviewed composition declares the closed lifecycle-marker set
+              and binds material sections to current source bytes.
+            </p>
+          </article>
+          <article class="card">
+            <h3>2. Stage</h3>
+            <p>
+              Create in-memory rendered state and derive the allowlisted marker
+              values only.
+            </p>
+          </article>
+          <article class="card">
+            <h3>3. Validate</h3>
+            <p>
+              Reject unknown, duplicate, misplaced or non-lifecycle declarations
+              before exposure.
+            </p>
+          </article>
+          <article class="card">
+            <h3>4. Commit pair</h3>
+            <p>
+              Use temporary files, journal and backups; rename state and target
+              in a recoverable order.
+            </p>
+          </article>
+          <article class="card">
+            <h3>5. Human review</h3>
+            <p>
+              Review the exact rendered page after promotion; do not inherit
+              composition-review authority.
+            </p>
+          </article>
+        </div>
+        <h3>Interrupted-pair decision model</h3>
+        <p>
+          The unit of recovery is one pair: the rendered HTML and
+          <code>run-state.yaml</code>. Before promotion, the prior pair remains
+          the only visible pair. The journal records the intended digests for
+          both new members, the prior pair’s digests or absence, and the two
+          common-nonce temporary names.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>What recovery finds</th>
+              <th>Required decision</th>
+              <th>What may be exposed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Prior HTML and state; no journal.</td>
+              <td>No promotion is pending.</td>
+              <td>The prior complete pair.</td>
+            </tr>
+            <tr>
+              <td>
+                Journal present, with complete temps and intent digests; backups
+                or renames may be partial.
+              </td>
+              <td>
+                Do not infer success from rename order. Compare both
+                destinations with the intended digests.
+              </td>
+              <td>Nothing while the journal remains.</td>
+            </tr>
+            <tr>
+              <td>
+                Both destinations exactly match the new HTML and state digests.
+              </td>
+              <td>Complete recovery by removing journal, backups and temps.</td>
+              <td>The new pair, only after cleanup.</td>
+            </tr>
+            <tr>
+              <td>Either destination does not match the intended digest.</td>
+              <td>
+                Restore each prior member from backup, or remove it if it did
+                not previously exist.
+              </td>
+              <td>Nothing until the prior pair is intact.</td>
+            </tr>
+            <tr>
+              <td>
+                A required backup is absent and its destination does not match
+                the recorded prior digest; or journal schema, names, nonce or
+                metadata are unsafe.
+              </td>
+              <td>
+                Refuse automatic recovery and preserve suspicious artifacts for
+                manual intervention.
+              </td>
+              <td>Nothing.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="intro">
+          Promotion writes temporary files, makes the journal durable, backs up
+          the old HTML and state, installs the new state first and the new HTML
+          second, then cleans up. A future promotion of a reviewed exact
+          candidate atomically makes <code>brief_phase: rendered</code> and
+          <code>current_phase: rendered_decision_review_pending</code>. Recovery
+          runs before any later promotion. Therefore the sole exposure point for
+          a new brief is a complete digest-validated pair with no pending
+          journal.
+        </p>
+        <div class="diagram">
+          <svg
+            viewBox="0 0 960 175"
+            width="960"
+            height="175"
+            role="img"
+            aria-label="Closed lifecycle markers and their permitted targets"
+          >
+            <defs>
+              <marker
+                id="arrow"
+                markerWidth="8"
+                markerHeight="8"
+                refX="7"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0,0 L8,4 L0,8Z" fill="#146b59" />
+              </marker>
+            </defs>
+            <g font-family="system-ui" fill="#17332e">
+              <rect
+                x="20"
+                y="45"
+                width="170"
+                height="76"
+                rx="12"
+                fill="#e7f2ee"
+                stroke="#146b59"
+              />
+              <text x="37" y="74" font-weight="700">brief-phase</text>
+              <text x="37" y="98" font-size="13">html data attribute</text>
+              <rect
+                x="265"
+                y="45"
+                width="170"
+                height="76"
+                rx="12"
+                fill="#e7f2ee"
+                stroke="#146b59"
+              />
+              <text x="280" y="74" font-weight="700">state digest</text>
+              <text x="280" y="98" font-size="13">head meta content</text>
+              <rect
+                x="510"
+                y="45"
+                width="170"
+                height="76"
+                rx="12"
+                fill="#146b59"
+                stroke="#146b59"
+              />
+              <text x="525" y="74" font-weight="700" fill="white">
+                authority markers
+              </text>
+              <text x="525" y="98" font-size="13" fill="white">
+                direct text only
+              </text>
+              <rect
+                x="755"
+                y="45"
+                width="170"
+                height="76"
+                rx="12"
+                fill="#e7f2ee"
+                stroke="#146b59"
+              />
+              <text x="770" y="74" font-weight="700">state provenance</text>
+              <text x="770" y="98" font-size="13">
+                visible state block digest
+              </text>
+              <path
+                d="M195 83H255 M440 83H500 M685 83H745"
+                stroke="#146b59"
+                stroke-width="3"
+                marker-end="url(#arrow)"
+              />
+            </g>
+          </svg>
+        </div>
+        <p class="source">Source anchor: <code>## Approach</code></p>
+      </section>
+
+      <section
+        id="impact"
+        class="impact-evidence"
+        data-source="impact-map.md"
+        data-source-section="risk controls"
+        data-coverage="synthesized"
+        data-source-digest="sha256:d0f151df1cec31ba99281e4def6c8bbf981079fb4ad2e46296d37a84d3bc42bf"
+        data-source-fragment="| Promotion renderer"
+        data-source-fragment-sha256="sha256:3450046c0582267fefa7ef04e94eb258e146b82fa6cf7b96d29c16d6c77510e2"
+      >
+        <h2>Impact, data boundary and risk controls</h2>
+        <p class="intro">
+          The affected system is the Guardian rendering boundary—renderer,
+          state, templates and validation—not a consumer implementation. The
+          material data boundary is canonical lifecycle state and its digest;
+          arbitrary domain prose is explicitly not transformable.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Promotion renderer</h3>
+            <p>
+              <code>| Promotion renderer</code> stages rendered state and
+              allowlisted marker values through journal, backup and recovery
+              before target write.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Provenance</h3>
+            <p>
+              Each material source block identifies its source, section,
+              coverage disposition, whole-file digest, visible fragment and
+              fragment digest. The renderer may refresh only the declared
+              final-state provenance block.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Human Visibility</h3>
+            <p>
+              A distinct rendered-decision review owns the page’s adequacy after
+              promotion. Deterministic checks prove bindings; they do not score
+              quality or materiality.
+            </p>
+          </article>
+        </div>
+        <div
+          class="callout danger"
+          data-source="impact-map.md"
+          data-source-section="IR-022-01"
+          data-coverage="represented"
+          data-source-digest="sha256:d0f151df1cec31ba99281e4def6c8bbf981079fb4ad2e46296d37a84d3bc42bf"
+          data-source-fragment="| IR-022-01"
+          data-source-fragment-sha256="sha256:7e29a3230b417aecc505a943824ebfcc054f398896f56191ade95dc2494bc416"
+        >
+          <strong>Primary failure signal.</strong> <code>| IR-022-01</code> is a
+          rendered HTML/current-state mismatch or surviving journal. The owner’s
+          control is temporary files, journal/backup recovery and regression
+          coverage; an interrupted promotion must repair or safely refuse before
+          a page is exposed.
+        </div>
+        <div class="cards">
+          <article
+            class="card"
+            data-source="impact-map.md"
+            data-source-section="IR-022-02"
+            data-coverage="represented"
+            data-source-digest="sha256:d0f151df1cec31ba99281e4def6c8bbf981079fb4ad2e46296d37a84d3bc42bf"
+            data-source-fragment="| IR-022-02 |"
+            data-source-fragment-sha256="sha256:2ace1528951dfea86ebc5a4978c8314f617d4065134b8a3c2595b16d8c97a005"
+          >
+            <h3>Decision-prose boundary</h3>
+            <p>
+              <code>| IR-022-02 |</code>: signal is domain text changing without
+              source provenance or an unknown/duplicate marker. The control is a
+              closed lifecycle-marker schema and reviewer; V-022-01/04 validates
+              that the transformer cannot edit arbitrary decision prose.
+            </p>
+          </article>
+          <article
+            class="card"
+            data-source="impact-map.md"
+            data-source-section="IR-022-03"
+            data-coverage="represented"
+            data-source-digest="sha256:d0f151df1cec31ba99281e4def6c8bbf981079fb4ad2e46296d37a84d3bc42bf"
+            data-source-fragment="| IR-022-03 |"
+            data-source-fragment-sha256="sha256:e50a8aca4e603638a70092f831dea4574026872498a3138ad935c590673227aa"
+          >
+            <h3>Review-authority boundary</h3>
+            <p>
+              <code>| IR-022-03 |</code>: signal is missing or distorted
+              rendered-review metadata. A distinct reviewer/record, owned by the
+              delivery lead, prevents pre-render approval from being mistaken
+              for post-render authority; V-022-05 is the validation.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section
+        id="execution"
+        data-source="tasks.md"
+        data-source-section="Task ledger"
+        data-coverage="synthesized"
+        data-source-digest="sha256:2db442da876e127698cff93cbb3a6b8415990a6f1917b6c707caa4201cef29a6"
+        data-source-fragment="| ID | Status | Title | Dependency | Risk | Builder | Evaluator | Evidence |
+|---|---|---|---|---|---|---|---|
+| T-001 | done | Implementar o contrato mínimo atômico de lifecycle no promotor | none | high | `spec022_t001_builder` | `spec022_t001_evaluator_r4` | evidence/T-001.md |
+| T-002 | done | Integrar o contrato aos controles e caminhos de regressão | T-001 | high | `spec022_t002_builder` | `spec022_t002_evaluator_r4` | evidence/T-002.md |
+| T-003 | done | Provar recusas e limites não semânticos | T-001/T-002 | high | `spec022_t003_authority_builder`; `spec022_t003_coverage_fix` | `/root/final_reevaluate_spec022_t003` | evidence/T-003.md; evidence/T-003-final-evaluation-d022060.md |
+| T-004 | pending | Revalidar SPEC 021 em nova tentativa completa | T-001–T-003 | high | unassigned | independent | evidence/T-004.md |"
+        data-source-fragment-sha256="sha256:38615f03e6c54fdf54328cf43b70213be04037b1e642cadcbee2cb44dfe0374b"
+      >
+        <h2>Execution, dependencies and evidence</h2>
+        <p class="intro">
+          The authorized bootstrap was deliberately narrow. It restored the
+          promotion contract so this initiative can enter the normal brief
+          workflow; it did not authorize later hardening, baseline progression
+          or a change to blocked SPEC 021 HTML.
+          <span class="source"><code>Task ledger</code></span>
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Status / dependency</th>
+              <th>Increment and proof</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>T-001</code></td>
+              <td>Done / none</td>
+              <td>
+                Closed marker schema, lifecycle-only sync, recoverable
+                transaction and fault fixtures; independently approved in its
+                evidence record.
+              </td>
+            </tr>
+            <tr>
+              <td><code>T-002</code></td>
+              <td>Done / T-001</td>
+              <td>
+                Completes the integration task after T-001; its independent
+                evidence is recorded separately.
+              </td>
+            </tr>
+            <tr>
+              <td><code>T-003</code></td>
+              <td>Done / T-001, T-002</td>
+              <td>
+                Final independent evaluation D-022-060 approves the lifecycle,
+                provenance and recovery boundary; no delivery gate advances.
+              </td>
+            </tr>
+            <tr>
+              <td><code>T-004</code></td>
+              <td>Pending / T-001–T-003</td>
+              <td>
+                Recompose and independently review SPEC 021 through the complete
+                new attempt.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pre class="source">| ID | Status | Title | Dependency | Risk | Builder | Evaluator | Evidence |
+|---|---|---|---|---|---|---|---|
+| T-001 | done | Implementar o contrato mínimo atômico de lifecycle no promotor | none | high | `spec022_t001_builder` | `spec022_t001_evaluator_r4` | evidence/T-001.md |
+| T-002 | done | Integrar o contrato aos controles e caminhos de regressão | T-001 | high | `spec022_t002_builder` | `spec022_t002_evaluator_r4` | evidence/T-002.md |
+| T-003 | done | Provar recusas e limites não semânticos | T-001/T-002 | high | `spec022_t003_authority_builder`; `spec022_t003_coverage_fix` | `/root/final_reevaluate_spec022_t003` | evidence/T-003.md; evidence/T-003-final-evaluation-d022060.md |
+| T-004 | pending | Revalidar SPEC 021 em nova tentativa completa | T-001–T-003 | high | unassigned | independent | evidence/T-004.md |</pre>
+        <div
+          class="callout warning"
+          data-source="plan.md"
+          data-source-section="Bootstrap strictly limited"
+          data-coverage="represented"
+          data-source-digest="sha256:c349ff4d24a8285cb0c0e4e637cbcf88f976fff328d9b5f72756320032d07299"
+          data-source-fragment="## Bootstrap estritamente limitado"
+          data-source-fragment-sha256="sha256:9ded600bee2910da1493077281c9de01d5dbfe1ba9865814a5d1c6902ae1d9ba"
+        >
+          <strong>Authorization limit.</strong>
+          <code>## Bootstrap estritamente limitado</code>: only T-001’s complete
+          minimal repair received the exception. T-002–T-004 continue under
+          ordinary gates, evidence and independent evaluation.
+        </div>
+      </section>
+
+      <section
+        id="validation"
+        data-source="validation-plan.md"
+        data-source-section="validation matrix"
+        data-coverage="synthesized"
+        data-source-digest="sha256:1c8c2c149a44b0bfe02c11bb53e79b29c0996a185abfafbc59468d1c813f74e6"
+        data-source-fragment="| V-022-01 |"
+        data-source-fragment-sha256="sha256:d8804b01377fbc7f0737e2fed9156ea41c0666838ac805c59fa476c29d5f16cb"
+      >
+        <h2>Validation and honest oracle boundary</h2>
+        <p class="intro">
+          The proof plan maps acceptance criteria to deterministic lifecycle
+          checks and, separately, to people who judge the rendered decision
+          page. The machine oracle binds bytes, identity and lifecycle; it
+          cannot decide whether prose is sufficient or material.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>V-022-01 / 02</h3>
+            <p>
+              <code>| V-022-01 |</code> tests the allowlist, current digest and
+              refusal paths; V-022-02 uses an HTML-first reviewer to distinguish
+              completed composition from pending rendered review and false Tasks
+              Ready.
+            </p>
+          </article>
+          <article class="card">
+            <h3>V-022-03 / 04</h3>
+            <p>
+              Inject faults at every transaction boundary, recover or refuse
+              safely, and prove the implementation contains no domain taxonomy,
+              prose score or semantic approval.
+            </p>
+          </article>
+          <article class="card">
+            <h3>V-022-05a / 05b</h3>
+            <p>
+              SPEC 021 requires a fresh, bound composition review and then five
+              distinct post-render lenses, all bound to exact digests; any
+              material revise blocks gates.
+            </p>
+          </article>
+        </div>
+        <p
+          data-source="validation-plan.md"
+          data-source-section="Required regressions"
+          data-coverage="represented"
+          data-source-digest="sha256:1c8c2c149a44b0bfe02c11bb53e79b29c0996a185abfafbc59468d1c813f74e6"
+          data-source-fragment="Required regressions:"
+          data-source-fragment-sha256="sha256:3c0ff442c620d7aab787d6900d6652bc7147008f0df4da9ea3d4b35e52321bde"
+        >
+          <strong>Required regressions:</strong> renderer, source-render
+          isolation, Human Visibility, decision-quality and full bundle checks.
+          Structural PASS is necessary evidence, not stakeholder approval.
+        </p>
+        <div
+          class="callout"
+          data-source="plan.md"
+          data-source-section="Rollback/recovery"
+          data-coverage="represented"
+          data-source-digest="sha256:c349ff4d24a8285cb0c0e4e637cbcf88f976fff328d9b5f72756320032d07299"
+          data-source-fragment="**Rollback/recovery:**"
+          data-source-fragment-sha256="sha256:b621419c3d0ff0058f1d03480a1339ae8cc36919f64907dc17e01202a8d34c29"
+        >
+          <strong>Recovery operation.</strong>
+          <code>**Rollback/recovery:**</code> a commit boundary leaves journal
+          and backup sufficient to restore the old pair or finish only a
+          digest-validated new pair. Historical artifacts require explicit
+          refresh; they are never silently overwritten.
+        </div>
+      </section>
+
+      <section id="evolution" class="decision-register">
+        <div
+          id="decision"
+          class="decision-actions"
+          data-source="decision-log.md"
+          data-source-section="D-022-062"
+          data-coverage="represented"
+          data-source-digest="decision-record-sha256:f5d49f6f427927ce7d58ce524e0213056d8bfa7b5c90cfadbdfe524df7159f23"
+          data-source-fragment="D-022-062"
+          data-source-fragment-sha256="sha256:7318056b7b90d7f3fefaee68ceea44dbb62776d90b2ddde92116a9f032a98e2d"
+        >
+          <h2>Authority, freshness and source coverage</h2>
+          <p><code>D-022-062</code> binds the exact pre-render review for the current recomposition. Prior rendered and pre-render records remain historical evidence, not current authority.</p>
+          <p>Canonical five-source manifest: <code>dfcfcf57d32872fac3206954a3cd7d0500f59821e2ac294772a150cfb3bf909b</code>.</p>
+          <p
+            class="intro"
+            data-lifecycle-marker="rendered-authority"
+            data-lifecycle-source="run-state.yaml"
+            data-lifecycle-projection="lifecycle-authority"
+            data-lifecycle-fragment="decision register lifecycle authority"
+          >Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</p>
+          <p
+            data-lifecycle-marker="rendered-next-safe-step"
+            data-lifecycle-source="run-state.yaml"
+            data-lifecycle-projection="lifecycle-next-safe-step"
+            data-lifecycle-fragment="review next-safe-step lifecycle projection"
+          >Retain the recorded post-render review; any Human Visibility or delivery decision remains separate, and Tasks Ready remains false.</p>
+        </div>
+        <div
+          class="callout warning"
+          data-source="run-state.yaml"
+          data-source-section="initiative identity / provenance"
+          data-coverage="represented"
+          data-source-digest="sha256:2df9044a24b73f6d007d1ab4c98109e1ef3d3db82ff09e771170442bb4375166"
+          data-source-fragment="initiative_id:"
+          data-source-fragment-sha256="sha256:b4d74e936b454da0170f3d10eae73c86106edd3d898871ba9b68af0c8b4a3fe6"
+          data-lifecycle-marker="rendered-state-source-digest"
+          data-lifecycle-source="run-state.yaml"
+          data-lifecycle-fragment="visible state provenance binding"
+        >
+          <strong>Visible run-state provenance.</strong>
+          <code
+            >initiative_id:
+            "022-rendered-brief-lifecycle-freshness-and-authority"</code
+          >
+          binds this page to the current state file. The closed lifecycle-marker
+          set exclusively expresses dynamic phase, authority and final-state
+          digest; the renderer alone may refresh this declared provenance digest
+          during promotion.
+        </div>
+        <div class="cards">
+          <article
+            id="ratchet-status"
+            class="card"
+            data-source="ratchet.md"
+            data-source-section="RATCHET-022-001"
+            data-coverage="represented"
+            data-source-digest="sha256:f423b451f976f3c396c3d2ffb0be1a76192e00e84a4c4629bf74af9ae8eab744"
+            data-source-fragment="| RATCHET-022-001 |"
+            data-source-fragment-sha256="sha256:784a851498e67a387842c3267df241c6ca143568017411b7bae4d90b54e396fb"
+          >
+            <h3>Ratchet status</h3>
+            <p>
+              <code>| RATCHET-022-001 |</code> is proposed. Its trigger is a
+              rendered target retaining authored/candidate lifecycle or
+              pre-render state bytes; prevention is atomic lifecycle
+              synchronization before target write followed by post-render
+              review. It is not implemented until all four task proofs approve,
+              and this page does not assert post-render approval.
+            </p>
+          </article>
+          <article
+            class="card"
+          data-source="progress.md"
+          data-source-section="Next step"
+          data-coverage="represented"
+     data-source-digest="sha256:4f55c290bb8298436e05922ce3c292dce489cdaa934cf1ed32abf6abad5817fc"
+            data-source-fragment="## Next step"
+            data-source-fragment-sha256="sha256:f91987aced515837d4f0410b271487ce2f7d510f8e91fa51df10dddfb3fdc8d9"
+          >
+            <h3>Review requirement</h3>
+            <p
+              data-lifecycle-marker="rendered-authority"
+              data-lifecycle-source="run-state.yaml"
+              data-lifecycle-projection="lifecycle-authority"
+              data-lifecycle-fragment="review lifecycle authority"
+            >Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</p>
+            <p
+              data-lifecycle-marker="rendered-authority"
+              data-lifecycle-source="run-state.yaml"
+              data-lifecycle-projection="lifecycle-authority"
+              data-lifecycle-fragment="next-step lifecycle authority"
+            >Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</p>
+            <p class="source">progress.md / ## Next step</p>
+          </article>
+        </div>
+        <h3 id="coverage" class="coverage-provenance">Coverage register</h3>
+        <table id="coverage-register">
+          <thead>
+            <tr>
+              <th>Source / heading</th>
+              <th>Rendered target</th>
+              <th>Disposition / factual coverage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>spec.md / Problem</td>
+              <td><a href="#source-problem">#source-problem</a></td>
+              <td>
+                synthesized: cause, outcome and non-scope are projected in the
+                real header and scope content.
+              </td>
+            </tr>
+            <tr>
+              <td>impact-map.md / risks and controls</td>
+              <td><a href="#impact">#impact</a></td>
+              <td>
+                synthesized: change surfaces plus IR-022-01, IR-022-02 and
+                IR-022-03 are projected.
+              </td>
+            </tr>
+            <tr>
+              <td>plan.md / Approach and rollback</td>
+              <td><a href="#architecture">#architecture</a></td>
+              <td>
+                synthesized: closed lifecycle architecture, commit/recovery and
+                boundaries are projected.
+              </td>
+            </tr>
+            <tr>
+              <td>tasks.md / Task ledger</td>
+              <td><a href="#execution">#execution</a></td>
+              <td>
+                synthesized: T-001 through T-004 status, dependency and evidence
+                path are projected.
+              </td>
+            </tr>
+            <tr>
+              <td>validation-plan.md / validation matrix</td>
+              <td><a href="#validation">#validation</a></td>
+              <td>
+                synthesized: validation IDs, human oracle boundary and required
+                regressions are projected.
+              </td>
+            </tr>
+            <tr>
+              <td>decision-log.md / D-022-062 (exact pre-render review)</td>
+              <td><a href="#decision">#decision</a></td>
+              <td>
+                represented: the restricted promotion boundary and pending
+                composition status are projected; lifecycle authority and the
+                next safe step are declared separately from this record.
+              </td>
+            </tr>
+            <tr>
+              <td>progress.md / Current phase and next safe step</td>
+              <td><a href="#progress-path">#progress-path</a></td>
+              <td>
+                represented: progress defines the source-first lifecycle
+                boundary; explicit authority and next-safe-step projections
+                state the active gate and exact action.
+              </td>
+            </tr>
+            <tr>
+              <td>run-state.yaml / initiative identity</td>
+              <td><a href="#state-identity">#state-identity</a></td>
+              <td>
+                represented: stable initiative identity and lifecycle provenance
+                boundary are projected.
+              </td>
+            </tr>
+            <tr>
+              <td>ratchet.md / RATCHET-022-001</td>
+              <td><a href="#ratchet-status">#ratchet-status</a></td>
+              <td>
+                represented: proposed status, trigger and prevention are
+                projected without severity inference.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p
+          data-lifecycle-marker="rendered-authority"
+          data-lifecycle-source="run-state.yaml"
+          data-lifecycle-projection="lifecycle-authority"
+          data-lifecycle-fragment="coverage lifecycle authority"
+        >Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</p>
+        <div
+          class="cards"
+          aria-label="Operational proof and handoff coverage dispositions"
+        >
+          <article
+            class="card"
+            data-source="spec.md"
+            data-source-section="Origin"
+            data-coverage="not_applicable"
+            data-coverage-reason="evidence/T-000-spec021-rendered-review.md is operational complementary proof, not the canonical source of the displayed origin or problem decision."
+            data-source-digest="sha256:db8882d34e44b62abad3958099b5a75802209d00923ff81dc6179b562d1e93ef"
+            data-source-fragment="**Origin:** SPEC 021 rendered-decision"
+            data-source-fragment-sha256="sha256:4bfa1763b5dc39e9c672e8cad41ff48f73ab2897ee26c06974f43ba908fd1271"
+          >
+            <h3>Reproduction evidence — N/A as authority</h3>
+            <p>
+              <code>evidence/T-000-spec021-rendered-review.md</code> is retained
+              as operational complementary proof. The displayed origin is
+              canonically sourced from
+              <code>**Origin:** SPEC 021 rendered-decision</code>; this brief
+              makes no separate evidence-only claim.
+            </p>
+          </article>
+          <article
+            class="card"
+            data-source="plan.md"
+            data-source-section="Bootstrap strictly limited"
+            data-coverage="not_applicable"
+            data-coverage-reason="evidence/T-000-source-package-review.md is operational complementary proof, not the canonical source of the displayed bootstrap authorization boundary."
+            data-source-digest="sha256:c349ff4d24a8285cb0c0e4e637cbcf88f976fff328d9b5f72756320032d07299"
+            data-source-fragment="## Bootstrap estritamente limitado"
+            data-source-fragment-sha256="sha256:9ded600bee2910da1493077281c9de01d5dbfe1ba9865814a5d1c6902ae1d9ba"
+          >
+            <h3>Source-package review — N/A as authority</h3>
+            <p>
+              <code>evidence/T-000-source-package-review.md</code> is
+              operational complementary proof. The visible authorization limit
+              comes from <code>## Bootstrap estritamente limitado</code>; no
+              decision is asserted solely from the review evidence.
+            </p>
+          </article>
+          <article
+            class="card"
+            data-source="tasks.md"
+            data-source-section="Task ledger"
+            data-coverage="not_applicable"
+            data-coverage-reason="evidence/T-001.md is operational complementary proof, not the canonical source of the displayed task status; approval scope is recorded by D-022-005 and current task state by the ledger."
+            data-source-digest="sha256:2db442da876e127698cff93cbb3a6b8415990a6f1917b6c707caa4201cef29a6"
+            data-source-fragment="| T-001 |"
+            data-source-fragment-sha256="sha256:44ab802b6c56f4724cb8dac6771f4cdcb20a79b82fa0c875baa04f45f7684abd"
+          >
+            <h3>T-001 evidence — N/A as authority</h3>
+            <p>
+              <code>evidence/T-001.md</code> is operational complementary proof.
+              The displayed task status is sourced from <code>| T-001 |</code>;
+              the approval scope remains the separately projected decision
+              <code>D-022-005</code>, not an evidence-only assertion.
+            </p>
+          </article>
+          <article
+            class="card"
+          data-source="progress.md"
+          data-source-section="Next step"
+          data-coverage="not_applicable"
+            data-coverage-reason="handoffs/latest-handoff.md is operational complementary handoff context, not the canonical source of the displayed next safe step."
+     data-source-digest="sha256:4f55c290bb8298436e05922ce3c292dce489cdaa934cf1ed32abf6abad5817fc"
+            data-source-fragment="## Next step"
+            data-source-fragment-sha256="sha256:f91987aced515837d4f0410b271487ce2f7d510f8e91fa51df10dddfb3fdc8d9"
+          >
+            <h3>Handoff — N/A as authority</h3>
+            <p>
+              <code>handoffs/latest-handoff.md</code> is operational
+              complementary handoff context. The displayed next action comes
+              from <code>## Next step</code>; no separate
+              handoff-only direction is claimed.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <footer
+        data-lifecycle-marker="rendered-authority"
+        data-lifecycle-source="run-state.yaml"
+        data-lifecycle-projection="lifecycle-authority"
+        data-lifecycle-fragment="footer lifecycle authority"
+      >Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</footer>
+    </main>
+    <p
+      class="lifecycle-authority"
+      data-lifecycle-marker="rendered-authority"
+      data-lifecycle-source="run-state.yaml"
+      data-lifecycle-projection="lifecycle-authority"
+      data-lifecycle-fragment="brief_phase: rendered"
+    >Rendered artifact; independent post-render review recorded; not approved/deliverable; Tasks Ready false.</p>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+schema_version: 1
+initiative_id: "011-stakeholder-brief-client-identity-profile"
+initiative_sequence: "011"
+initiative_slug: "stakeholder-brief-client-identity-profile"
+initiative_kind: "feature"
+status: "validation_done"
+summary: "Define an opt-in Pearson visual identity profile for accessible offline stakeholder briefs without contaminating vendor-neutral consumers."
+brief_lineage: "v2"
+current_phase: "validation_done"
+current_task: null
+last_safe_checkpoint: "D-019 synchronized the D-018-approved T-004 terminal state and final Human Visibility baseline."
+updated_at: "2026-08-26"
+updated_by: "platform-engineering"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "platform-engineering"
+  coverage_reviewer: "sandbox_coverage_review"
+  reviewed_at: "2026-08-26"
+  review_record: "decision-log.md#D-008"
+  findings_status: "pass — independent review approved D-008 after D-007 propagation"
+
+execution:
+  builder_id: "platform-engineering"
+  evaluator_id: "t004_release_review"
+  started_at: "2026-08-26"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "T-001 and T-002 are complete with independently approved evidence."
+    - "T-003 is ready after D-011; profile remains opt-in and generic consumers remain asset-free."
+    - "T-003 semantic variants were independently approved in D-014."
+    - "T-004 release evidence was independently approved in D-018 and finalized in D-019."
+  repository_revision: null
+  working_tree_summary: "T-002 foundation, T-003 semantic variants and T-004 render-level validation changes are present and evidenced."
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: true
+  pending: []
+  granted: ["Gated execution authority recorded in decision-log.md#D-006.", "Independent coverage/Human Visibility and Tasks Ready approval recorded in decision-log.md#D-008 for T-001 only.", "T-001 evidence independently approved in decision-log.md#D-009.", "Brand/asset implementation and selected-profile release authority recorded in decision-log.md#D-010."]
+
+risks:
+  level: "medium"
+  open: ["IR-001", "IR-002", "IR-003", "IR-004", "IR-005", "U-002"]
+
+evidence:
+  latest: "evidence/T-004.md"
+  approved: ["evidence/T-001.md", "evidence/T-002.md", "evidence/T-003.md", "evidence/T-004.md"]
+
+next_safe_step: "Initiative validation is complete; preserve the opt-in boundary and rerun the profile/render regressions for future changes."

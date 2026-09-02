@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import platform
+import struct
 import subprocess
 import sys
 import tempfile
@@ -16,9 +17,11 @@ from validate_bundle import stakeholder_brief_errors
 
 ROOT = Path(__file__).resolve().parent.parent
 SCAFFOLDER = ROOT / "scripts" / "new_initiative.py"
+PEARSON_LOGO = ROOT / ".harness" / "assets" / "brand" / "pearson-logo-white.png"
+PEARSON_LOGO_RELATIVE_PATH = Path(".harness/assets/brand/pearson-logo-white.png")
+PEARSON_LOGO_SHA256 = "8EEE1FA799766BF385A307191D38C361677D442457D7CC0F92E5F3FCCC2282F7"
 FEATURE_FILES = (
     "spec.md",
-    "stakeholder-brief.html",
     "impact-map.md",
     "plan.md",
     "validation-plan.md",
@@ -44,7 +47,13 @@ def run(*args: str) -> subprocess.CompletedProcess[str]:
 
 
 def sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return hashlib.sha256(path.read_bytes()).hexdigest().upper()
+
+
+def png_dimensions(path: Path) -> tuple[int, int]:
+    data = path.read_bytes()
+    require(data[:8] == b"\x89PNG\r\n\x1a\n", f"{path} is not a PNG")
+    return struct.unpack(">II", data[16:24])
 
 
 def require(condition: bool, message: str) -> None:
@@ -112,39 +121,31 @@ def main() -> int:
             "bugfix sequence was not rendered",
         )
 
-        feature_brief = (feature_root / "stakeholder-brief.html").read_text(
-            encoding="utf-8"
+        require(
+            not (feature_root / "stakeholder-brief.html").exists(),
+            "a new scaffold must not materialize a stakeholder brief before canonical composition",
         )
-        require('data-harness-brief-design="v2"' in feature_brief, "new scaffold must use v2 brief lineage")
-        for placeholder in ("{{initiative}}", "{{date}}", "{{risk}}", "{{size}}"):
-            require(placeholder not in feature_brief, f"scaffold left v2 template placeholder: {placeholder}")
-        require_exact_errors(
-            stakeholder_brief_errors(feature_brief, rendered=True),
-            [],
-            "rendered stakeholder brief",
-        )
+        consumer_logo = consumer_root / PEARSON_LOGO_RELATIVE_PATH
+        require(not consumer_logo.exists(), "a new scaffold must not provision a brand asset without a rendered brief")
+        require(sha256(PEARSON_LOGO) == PEARSON_LOGO_SHA256, "bundle Pearson logo hash changed")
 
-        missing_id = feature_brief.replace('id="decision-snapshot"', "", 1)
-        require_exact_errors(
-            stakeholder_brief_errors(missing_id, rendered=True),
-            ["missing stakeholder brief section id: decision-snapshot"],
-            "missing stakeholder brief section id",
+        divergent_root = consumer_root / "divergent-asset-consumer"
+        divergent_logo = divergent_root / PEARSON_LOGO_RELATIVE_PATH
+        divergent_logo.parent.mkdir(parents=True)
+        divergent_logo.write_bytes(b"not the official Pearson logo")
+        divergent = run("asset-mismatch", "--consumer-root", str(divergent_root))
+        require(divergent.returncode == 0, "source-only scaffold must not depend on a consumer brand asset")
+        require(
+            divergent_logo.read_bytes() == b"not the official Pearson logo",
+            "source-only scaffold touched a consumer-owned brand asset",
         )
-
-        unresolved_placeholder = feature_brief.replace(
-            date.today().isoformat(), "{{date}}", 1
+        require(
+            (divergent_root / "specs" / "001-asset-mismatch").is_dir(),
+            "source-only scaffold did not create its initiative",
         )
-        require_exact_errors(
-            stakeholder_brief_errors(unresolved_placeholder, rendered=True),
-            ["unresolved stakeholder brief placeholder: {{date}}"],
-            "unresolved stakeholder brief placeholder",
-        )
-
-        missing_lineage = feature_brief.replace('data-harness-brief-design="v2"', "", 1)
-        require_exact_errors(
-            stakeholder_brief_errors(missing_lineage, rendered=True),
-            ['missing stakeholder brief design-lineage marker: data-harness-brief-design="v1" or "v2"'],
-            "missing stakeholder brief design lineage",
+        require(
+            not (divergent_root / "specs" / "001-asset-mismatch" / "stakeholder-brief.html").exists(),
+            "source-only scaffold created a brief in the divergent-asset fixture",
         )
 
     print("RESULT: PASS")

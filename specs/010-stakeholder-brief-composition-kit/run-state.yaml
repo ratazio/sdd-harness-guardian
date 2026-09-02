@@ -1,0 +1,88 @@
+schema_version: 1
+initiative_id: "010-stakeholder-brief-composition-kit"
+initiative_sequence: "010"
+initiative_slug: "stakeholder-brief-composition-kit"
+initiative_kind: "feature"
+status: "validation_done"
+summary: "Define integrated source-aware visual composition and proportional mini-templates for stakeholder briefs."
+brief_lineage: "v2"
+current_phase: "complete"
+current_task: null
+last_safe_checkpoint: "D-014 independently approved T-004; all tasks are done and final validation is complete."
+updated_at: "2026-08-26"
+updated_by: "platform-engineering"
+
+artifacts:
+  spec: "spec.md"
+  stakeholder_brief: "stakeholder-brief.html"
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: "platform-engineering"
+  coverage_reviewer: "sandbox_coverage_review"
+  reviewed_at: "2026-08-26"
+  review_record: "decision-log.md#D-008"
+  findings_status: "pass"
+
+execution:
+  builder_id: "platform-engineering"
+  evaluator_id: "sandbox_coverage_review"
+  started_at: "2026-08-26"
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+    - "T-001–T-003 are independently approved; T-004 parity fixture/check and current brief/baseline are complete and await distinct evaluation."
+  repository_revision: null
+  working_tree_summary: "T-001–T-003 are done; T-004 parity fixtures/check, evidence and current brief/baseline are synchronized and await release evaluation."
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    evidence: "evidence/T-001.md"
+  - id: "T-002"
+    status: "done"
+    evidence: "evidence/T-002.md"
+  - id: "T-003"
+    status: "done"
+    evidence: "evidence/T-003.md"
+  - id: "T-004"
+    status: "done"
+    evidence: "evidence/T-004.md"
+
+approvals:
+  human_required: false
+  pending: []
+  granted: ["Requester authorization recorded in decision-log.md#D-006."]
+
+risks:
+  level: "medium"
+  open: ["IR-001", "IR-002", "IR-003", "IR-004", "IR-005", "U-001", "U-002", "U-003"]
+
+evidence:
+  latest: "evidence/T-004.md"
+  approved: ["evidence/T-001.md", "evidence/T-002.md", "evidence/T-003.md", "evidence/T-004.md"]
+
+next_safe_step: "010 is complete; begin 011 only through its own planning, coverage and task gates."
