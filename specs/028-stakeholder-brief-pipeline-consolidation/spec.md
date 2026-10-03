@@ -1,6 +1,6 @@
 # SPEC 028 — Consolidação do pipeline de stakeholder brief
 
-**Status:** spec_ready  
+**Status:** superseded  
 **Sequência:** 028  
 **Tipo:** bugfix de processo reutilizável  
 **Owner:** Guardian maintainers + responsável pela experiência do brief  

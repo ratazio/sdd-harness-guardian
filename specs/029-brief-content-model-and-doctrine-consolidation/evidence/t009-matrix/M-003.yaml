@@ -1,0 +1,82 @@
+contract_version: "1.0.0"
+profile: minimal
+domain: software
+
+thesis:
+  decision_and_audience: >-
+    Field-operations and mobile-architecture reviewers decide whether the
+    offline-first inspection app is complete enough for the next review.
+  brief_thesis: >-
+    A technician can finish a safety inspection without connectivity and
+    recover sync only when local state, token handling and conflict
+    resolution are visible together.
+
+routes:
+  - id: scope
+    executive_question: Quem recebe valor e o que fica deliberadamente fora?
+    blocks:
+      - id: hero
+        form: prose
+        form_reason: >-
+          A single business thesis needs no diagram; prose is the most
+          direct way to orient the reader on scope/anti-scope.
+        coverage: represented
+        source: spec.md
+        source_section: "1. Outcome, atores e limites"
+        fragment: "backend novo, tela web de supervisão"
+        text: >-
+          A field technician completes an inspection offline and recovers
+          synchronization without losing answers, media or the device data
+          boundary; no new backend or web supervision screen is authorized.
+
+  - id: impact
+    blocks:
+      - id: surface-topology
+        collection: impact.surface
+        form: footprint
+        form_reason: >-
+          Impact is a footprint across surfaces (device, storage, sync,
+          existing API, media); a card list carries owner/exposure/control
+          per surface better than prose.
+        coverage: represented
+        source: impact-map.md
+        source_section: "Topologia e fronteiras"
+        fragment: "WorkManager"
+        text: >-
+          Nothing in this initiative creates or changes the existing
+          backend; the device, secure storage, encrypted local database and
+          camera/location permissions are the trust boundaries.
+
+  - id: decision
+    blocks:
+      - id: D-001
+        form: prose
+        form_reason: >-
+          A single material sandbox decision is better read as short prose
+          than as a matrix.
+        coverage: represented
+        source: decision-log.md
+        source_section: "D-001"
+        fragment: "OAuth 2.1 PKCE"
+        text: >-
+          The stack is fixed to Kotlin, Jetpack Compose, encrypted
+          Room/SQLite, WorkManager, Android 10+ and OAuth 2.1 PKCE; no new
+          system is authorized under this sandbox decision.
+
+  - id: coverage
+    blocks:
+      - id: coverage-table
+        form: matrix
+        form_reason: >-
+          The source-to-target coverage table is inherently tabular; a
+          matrix preserves the per-source reading the coverage review
+          expects.
+        coverage: represented
+        source: plan.md
+        source_section: "9. Brief coverage composition (v2)"
+        fragment: "sem falha recorrente"
+        text: >-
+          Every applicable source locator carries a coverage disposition and
+          a rendered target; ratchet.md is the only not_applicable entry,
+          because no recurrent failure exists yet to record as a material
+          surface.

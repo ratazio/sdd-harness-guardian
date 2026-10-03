@@ -1,6 +1,6 @@
 # Spec: 016-conditional-design-authority-and-adaptive-brief-presentation
 
-**Status:** draft | outcome_ready | spec_ready | superseded  
+**Status:** superseded  
 **Sequence:** 016  
 **Slug:** conditional-design-authority-and-adaptive-brief-presentation  
 **Owner:** <name-or-team>  

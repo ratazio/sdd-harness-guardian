@@ -1,0 +1,83 @@
+contract_version: "1.0.0"
+profile: minimal
+domain: software
+
+thesis:
+  decision_and_audience: >-
+    Sandbox product, architecture and operator reviewers decide whether the
+    proposed controlled-publication news/blog slice is complete enough to
+    allow the next independent review.
+  brief_thesis: >-
+    Public reading stays safe only when session/RBAC, state filtering,
+    conflict controls and their proof remain visible together.
+
+routes:
+  - id: scope
+    executive_question: Who receives value and what is deliberately absent?
+    blocks:
+      - id: hero
+        form: prose
+        form_reason: >-
+          A single business thesis needs no diagram; prose is the most
+          direct way to orient the reader on scope/anti-scope.
+        coverage: represented
+        source: spec.md
+        source_section: "1. Problem, objective and boundary"
+        fragment: "small, reliable public news/blog reading surface"
+        text: >-
+          Visitors read published posts; only admins create, edit and
+          publish, with the admin path deliberately excluded from comments,
+          uploads, rich text, categories, search, analytics and multi-tenant
+          features.
+
+  - id: impact
+    blocks:
+      - id: surface-admin-handlers
+        collection: impact.surface
+        form: footprint
+        form_reason: >-
+          Impact is a footprint across surfaces (frontend, handlers, auth,
+          data); a card list communicates delta/owner/exposure better than
+          running prose.
+        coverage: represented
+        source: impact-map.md
+        source_section: "2. Affected surfaces"
+        fragment: "Route handlers: `/api/v1/admin/posts/*`"
+        text: >-
+          Admin mutation handlers change to create/edit/publish behind a
+          server-side session and role guard, so no UI-only check can
+          escalate a common user into admin.
+
+  - id: decision
+    blocks:
+      - id: D-005
+        form: prose
+        form_reason: >-
+          A single material sandbox decision is better read as short prose
+          than as a matrix.
+        coverage: represented
+        source: decision-log.md
+        source_section: "D-005"
+        fragment: "R2-M001-01"
+        text: >-
+          The R2 correction consolidates the coverage locator onto the one
+          inventory that exists, plan.md section 9, and still requires a new
+          independent reviewer, distinct from the author and the prior
+          reviewer, before any coverage approval.
+
+  - id: coverage
+    blocks:
+      - id: coverage-table
+        form: matrix
+        form_reason: >-
+          The source-to-target coverage table is inherently tabular; a
+          matrix preserves the per-source reading the coverage review
+          expects.
+        coverage: represented
+        source: plan.md
+        source_section: "9. Brief coverage composition (v2; no rendering authorized)"
+        fragment: "no recurrent implemented failure exists"
+        text: >-
+          Every applicable source locator carries a coverage disposition and
+          a rendered target; ratchet.md is the only not_applicable entry,
+          because this sandbox has no recurring implemented failure yet.

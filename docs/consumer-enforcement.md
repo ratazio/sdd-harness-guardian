@@ -1,85 +1,62 @@
 # Consumer Human Visibility enforcement
 
-The bundle supplies a portable validator; each consumer invokes it from its
-own task runner, hook, or CI provider. It is Python-standard-library only and
-never sends project contents anywhere.
+Consumers invoke portable Python-standard-library mechanical validators from
+their own runner/hooks/CI. Validators never upload project contents.
+Brief doctrine and lineage dispatch live in
+`.harness/rules/brief-contract.md` BC-001–BC-025.
 
-Run it from the consumer root:
+## Contract 3 operational entrypoint
+
+Use `.harness/templates/README.md` and BC-009: composition, content repair,
+visual repair, report. Executor/identity records follow BC-010/BC-025.
+Do not install a pre-render model review or another semantic review after B.
+Task readiness and owner authority follow BC-018; concluded HTML is not task
+or evidence approval. Source inputs are read-only during this operation.
+
+## Mechanical validation
+
+Optional local structural/integrity check, or consumer CI mirror:
 
 ```bash
 python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/004-example
 ```
 
-Before task breakdown or implementation, the command must pass and an
-independent reviewer must perform the short semantic/rendered brief review. A
-pass checks stable structure, design lineage/shell, and declared state only; it is not approval of
-prose, stakeholder usefulness, or visual legibility.
+This checks declared lineage/structure/state, never stakeholder meaning or
+visual usefulness. A CI mirror may enforce proportional mechanics before
+implementation, but cannot create a third semantic stage in v3 or require
+legacy review fields for it. New briefs declare `data-brief-contract="3"`;
+historical 1/2 and shell metadata follow BC-002 without silent regeneration.
 
-The independent rendered review is loss-aware: record product,
-architecture/operations and delivery as `recoverable`, `superficial`, `absent`
-or justified `N/A`. A material finding states canonical source → lost fact →
-source correction, then answers which material decision remains impossible
-without Markdown. This remains qualitative review; do not add a score, prose
-parser or automatic semantic gate.
+For historical v2 only, retain the two independent passes BC-009, loopback
+BC-016, model/provenance BC-005/BC-008 and decision propagation BC-018.
+Its semantic outcome is distinct from deterministic PASS. Pinned v1 keeps
+its concise-brief-before-tasks path without new gates.
 
-## Design-contract validation and compatibility
+## Freshness and baselines
 
-New non-trivial initiatives scaffolded by the current bundle use
-`data-harness-brief-design="v2"`, expanded source freshness, local provenance,
-the coverage register and distinct review metadata. Historical/pinned v1
-briefs remain accepted under their four-source v1 contract; do not silently
-rewrite them. A material v1 refresh must follow the validator's migration
-diagnostic or record a reviewed legacy exception.
-
-Both lineages retain the canonical shell hooks. The validator reports missing
-lineage or hooks as deterministic design-contract failures; it does not score
-rendered quality. A material custom layout needs a reviewed exception in the
-initiative `decision-log.md`, stating rationale, owner and retained decision
-surfaces; do not create a layout-exception sidecar.
-
-## V2 order and post-meeting propagation
-
-For v2, preliminary tasks are meeting input only. The required order is:
-
-```txt
-task draft -> coverage composition -> distinct coverage review -> final brief
--> meeting -> decision-log append -> affected canonical-source updates
--> revalidation/coverage refresh -> regenerated brief -> Tasks Ready
-```
-
-Do not set `tasks_ready` or begin implementation from an HTML-only decision or
-transcript. The consumer owns extraction, source edits and brief regeneration;
-the bundle supplies the contract and validator, not a meeting integration.
-
-## Freshness
-
-In CI, compare the current change to the provider's existing base ref:
+Optional CI diff comparison:
 
 ```bash
 python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/004-example --base-ref origin/main
 ```
 
-If a tracked source changed in that diff but `stakeholder-brief.html` did
-not, validation fails. If Git or that ref is unavailable, the command reports
-the limitation and falls back to the local hash baseline; it fails only when
-that fallback cannot validate freshness. The validator does not require a
-particular CI system; the local wrapper supplies the appropriate base ref.
-
-For offline or archive use, write the inspectable local hash baseline only
-after the structural/gate check and independent review are complete. V2 writes
-schema v2 in the same baseline file; pinned v1 remains schema v1:
+For existing legacy validator baselines:
 
 ```bash
 python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/004-example --write-baseline
 ```
 
-Later runs without `--base-ref` compare those hashes. A baseline is evidence
-of a refresh point, never a replacement for independent review.
+These are mechanical utilities, not required post-B commands. Historical v1
+uses its schema-v1 baseline; v2 uses schema-v2 after its own review gates.
+Contract 3 records source snapshot/final artifact in existing `brief_repair`
+state; integrity/freshness does not prove meaning. Unsupported Git/base ref
+uses the validator's stated local baseline fallback/limitation. Do not invent
+hashes or approval to satisfy a check.
 
 ## Explicit exceptions
 
-Use `human-visibility-exception.yaml` only for `not_applicable` work or a
-reviewed non-material freshness change. It must be local to the initiative:
+Legacy `human-visibility-exception.yaml` is consumer-local, for
+not_applicable work or reviewed non-material freshness change:
 
 ```yaml
 scope: freshness # or not_applicable
@@ -88,48 +65,42 @@ owner: named reviewer or role
 human_visibility_status: reviewed
 ```
 
-The validator prints accepted exceptions as limitations. Missing fields or a
-status other than `reviewed` fail; an exception cannot silently disable the
-protected gate.
-
-## Local bridge pattern
+It never silently disables protected task/evidence gates. v3 honest source
+limitations use BC-015/BC-025, not a new reviewed-exception approval queue.
 
 ## Risk-based assurance adoption
 
-New initiatives resolve `assurance_profile` to A1, A2 or A3 before Plan Ready.
-A1 records a concise validation disposition. A2 is used for high/unknown risk,
-public contracts, migrations, trust boundaries or material UI and records a
-task assurance contract. A3 escalates to named local authority; it is not
-Guardian certification. Existing pinned initiatives without profile metadata
-remain readable and are not silently migrated.
+Resolve assurance_profile A1/A2/A3 before Plan Ready. A1 records concise
+validation disposition; A2 applies to high/unknown risk, public contracts,
+migrations, trust boundaries or material UI with task assurance contract.
+A3 escalates to named local authority, not Guardian certification. Pinned
+initiatives without metadata remain readable.
 
-The local `validate_assurance_contract.py` mirror checks only declared profile
-structure, rationale and A2/A3 source links. It never infers risk or semantic
-adequacy; independent evaluation remains mandatory.
+`validate_assurance_contract.py` checks declared structure/rationale/source
+links only; independent implementation evaluation remains mandatory.
 
-Place this contract in the consumer root `AGENTS.md`, adapting the command
-name to its task runner:
+## Local bridge pattern
+
+Consumer-root instruction example:
 
 ```md
-Before task breakdown or implementation for a non-trivial initiative, run
-`python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/NNN-slug [--base-ref <CI base ref>]`.
-Do not claim Human Visibility Ready until it passes and an independent reviewer
-has completed the short semantic/rendered brief review.
+Dispatch Human Visibility by brief-contract BC-002. New generation follows
+BC-009 contract 3 and ends with the repair report BC-025; historical 1/2
+retains its recorded branch. Any local mechanical CI mirror checks only
+structure/integrity. Do not add a semantic review after B.
+Require source/owner task authorization and independent implementation
+evaluation; brief completion never approves implementation.
 ```
 
-A generic wrapper can expose the command as `check:human-visibility` and call
-it from a pre-task step or CI job. The wrapper is consumer-owned and must
-return the validator's non-zero result before work proceeds.
+A consumer-owned wrapper may expose `check:human-visibility` in CI and
+return nonzero mechanical failure; it must respect version dispatch.
 
 ## Factory scaffold contract
 
-A Factory template can make the adoption reproducible with a root instruction
-bridge, `scripts/check_human_visibility.py`, a CI invocation point, and a
-`guardian-lock.json`. The lock contains the bundle repository and an immutable
-40-character commit. Its local `scripts/install_guardian.py` clones with
-`--no-checkout`, checks out that commit detached, and verifies `HEAD` before
-the wrapper runs. The template fixture under
-`scripts/fixtures/factory-guardian-consumer/` is executable evidence of this
-contract; Factory replaces its two lock placeholders with its selected URL and
-commit when generating a consumer repository. The executable fixture proves
-both historical v1 validation and a v2 source/review/propagation record.
+Factory adoption may use root instruction bridge, wrapper/CI and
+`guardian-lock.json` with immutable 40-character bundle commit.
+`scripts/install_guardian.py` clones --no-checkout, checks that commit
+detached and verifies HEAD. The historical fixture in
+`scripts/fixtures/factory-guardian-consumer/` proves v1/v2 behavior;
+it is not proof of contract-3 runtime acceptance or an instruction to migrate
+existing consumers. Factory replaces its lock placeholders when generating.

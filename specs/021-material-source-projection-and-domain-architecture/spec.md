@@ -1,6 +1,7 @@
 # SPEC 021 — Projeção de fontes materiais e arquitetura por domínio
 
-**Status:** draft, source-only corrective initiative. **Owner:** Guardian maintainers.
+**Status:** superseded  
+**Owner:** Guardian maintainers  
 **Risk:** high / A2. **Origin:** SPEC 020 T-004, 2026-08-28.
 
 ## Problem

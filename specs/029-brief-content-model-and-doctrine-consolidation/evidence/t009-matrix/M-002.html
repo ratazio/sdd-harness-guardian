@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en" data-brief-contract="2" data-harness-template-kind="composed" data-brief-phase="composed" data-brief-model-schema-version="1.0.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>software brief</title>
+    <style data-harness-brief-shell data-brief-base-stylesheet="v1">
+      :root {
+        --navy: #0b004a;
+        --violet: #4c30a5;
+        --lavender: #c1bffa;
+        --canvas: #edecf5;
+        --paper: #fff;
+        --ink: #0b004a;
+        --muted: #475061;
+        --aqua: #7fdfe0;
+        --green: #007a53;
+        --amber: #8a6800;
+        --danger: #b42318;
+        --line: #c1bffa;
+        --r: 22px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        background: var(--canvas);
+        font-family: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
+        color: var(--ink);
+      }
+      body {
+        margin: 0;
+        line-height: 1.55;
+        background: linear-gradient(180deg, #fff 0 17rem, var(--canvas) 17rem);
+      }
+      a {
+        color: inherit;
+        text-underline-offset: 0.2em;
+      }
+      a:focus-visible,
+      [role="tab"]:focus-visible {
+        outline: 3px solid var(--violet);
+        outline-offset: 3px;
+      }
+      .brief-shell {
+        min-width: 0;
+      }
+      .brief-no-script {
+        width: min(calc(100% - 64px), 1440px);
+        margin: 24px auto 0;
+        padding: 18px 22px;
+        border: 1px solid var(--line);
+        border-left: 6px solid var(--violet);
+        border-radius: 14px;
+        background: var(--lavender);
+        color: var(--navy);
+      }
+      .shell {
+        width: min(calc(100% - 64px), 1440px);
+        margin: auto;
+        padding-bottom: 96px;
+      }
+      .topbar {
+        min-height: 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .tag {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: #fff;
+        font-weight: 700;
+      }
+      .brief-header {
+        position: relative;
+        overflow: hidden;
+        min-height: 360px;
+        padding: 60px 64px;
+        border-radius: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .brief-header:after {
+        content: "";
+        position: absolute;
+        width: 470px;
+        height: 470px;
+        right: -90px;
+        bottom: -185px;
+        border: 72px solid var(--aqua);
+        border-radius: 50%;
+        opacity: 0.9;
+      }
+      .brief-header > * {
+        position: relative;
+        z-index: 1;
+      }
+      .eyebrow,
+      .label {
+        margin: 0 0 13px;
+        color: var(--aqua);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .brief-header h1 {
+        max-width: 17ch;
+        margin: 0;
+        font-size: clamp(40px, 4.6vw, 68px);
+        font-weight: 600;
+        line-height: 1.06;
+        letter-spacing: -0.04em;
+      }
+      .lede {
+        max-width: 62ch;
+        margin: 22px 0 0;
+        color: #eeeefe;
+        font-size: 20px;
+      }
+      .header-call {
+        position: absolute;
+        right: 64px;
+        bottom: 38px;
+        width: min(320px, 29%);
+        padding: 20px;
+        border: 1px solid rgb(255 255 255 / 0.35);
+        border-radius: 18px;
+        background: rgb(11 0 74 / 0.35);
+      }
+      .header-call p {
+        margin: 6px 0 0;
+      }
+      .route-nav {
+        position: sticky;
+        top: 0;
+        z-index: 9;
+        display: flex;
+        gap: 9px;
+        overflow: auto;
+        margin: 28px 0 38px;
+        padding: 14px 0;
+        background: linear-gradient(90deg, #fff 84%, transparent);
+      }
+      .route-nav a {
+        flex: 0 0 auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 10px 14px;
+        color: var(--navy);
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .route-nav [role="tab"][aria-selected="true"] {
+        border-color: var(--violet);
+        background: var(--violet);
+        color: #fff;
+      }
+      .brief-route {
+        display: grid;
+        gap: 28px;
+        min-height: 620px;
+        outline: none;
+      }
+      .route-hero {
+        display: grid;
+        grid-template-columns: 1.35fr 0.65fr;
+        gap: 28px;
+        padding: 42px 48px;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: #f3f2fe;
+      }
+      .route-hero h1 {
+        max-width: 22ch;
+        margin: 0;
+        font-size: 48px;
+        line-height: 1.1;
+        letter-spacing: -0.035em;
+        font-weight: 600;
+      }
+      .intro {
+        max-width: 62ch;
+        margin: 16px 0 0;
+        font-size: 18px;
+      }
+      .question {
+        align-self: end;
+        padding: 24px;
+        border-radius: 18px;
+        background: #fff;
+        border-left: 6px solid var(--violet);
+      }
+      .question b {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--violet);
+        font-size: 13px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+      .question p {
+        margin: 0;
+      }
+      .snapshot,
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+      .snapshot {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .metric,
+      .card,
+      .brief-task-card,
+      .brief-proof-card,
+      .brief-architecture-cut,
+      .brief-impact-footprint > *,
+      .brief-risk-chain > *,
+      .brief-coverage-group > *,
+      .diagram,
+      .timeline,
+      .gateboard,
+      .matrix {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+      }
+      .metric {
+        padding: 20px;
+      }
+      .metric h2 {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .metric p,
+      .card p {
+        margin: 0;
+      }
+      .card {
+        padding: 28px;
+      }
+      .card h2,
+      .card h3 {
+        margin: 8px 0 12px;
+        line-height: 1.2;
+      }
+      .card h2 {
+        font-size: 26px;
+      }
+      .card h3 {
+        font-size: 20px;
+      }
+      .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 28px;
+      }
+      .heading h2 {
+        margin: 0;
+        font-size: 38px;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+      }
+      .heading p {
+        max-width: 64ch;
+        margin: 0;
+        color: var(--muted);
+      }
+      .slot {
+        position: relative;
+      }
+      html[data-harness-template-kind='scaffold'] .slot:after,
+      html[data-harness-template-kind='skeleton'] .slot:after {
+        content: "a preencher a partir das fontes canônicas";
+        display: block;
+        margin-top: 17px;
+        color: var(--violet);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .placeholder {
+        margin: 0;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .diagram {
+        overflow: auto;
+        padding: 30px;
+      }
+      .diagram h2 {
+        margin: 0;
+        font-size: 28px;
+      }
+      .topology {
+        display: grid;
+        grid-template-columns: 1fr 48px 1fr 48px 1fr;
+        align-items: center;
+        min-width: 840px;
+        margin-top: 20px;
+        padding: 28px;
+        border-radius: 18px;
+        background: #f3f2fe;
+      }
+      .node {
+        min-height: 118px;
+        padding: 20px;
+        border: 2px dashed var(--violet);
+        border-radius: 16px;
+        background: #fff;
+      }
+      .node strong {
+        display: block;
+        font-size: 19px;
+      }
+      .node span {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+      }
+      .arrow {
+        color: var(--violet);
+        font-size: 34px;
+        text-align: center;
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 13px;
+        margin-top: 18px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .legend span:before {
+        content: "";
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        margin-right: 6px;
+        border-radius: 50%;
+        background: var(--violet);
+      }
+      .legend .preserved:before {
+        background: var(--green);
+      }
+      .legend .boundary:before {
+        background: #fff;
+        border: 2px dashed var(--amber);
+      }
+      .brief-architecture-cut {
+        padding: 26px;
+        border-top: 7px solid var(--violet);
+      }
+      .brief-architecture-cut h3 {
+        margin: 8px 0;
+        font-size: 23px;
+      }
+      .fields {
+        display: grid;
+        grid-template-columns: 132px 1fr;
+        gap: 10px 16px;
+        margin: 20px 0 0;
+        font-size: 14px;
+      }
+      .fields dt {
+        font-weight: 700;
+      }
+      .fields dd {
+        margin: 0;
+        color: var(--muted);
+      }
+      .assurance {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+      }
+      .assurance article {
+        padding: 30px;
+      }
+      .assurance article:first-child {
+        border-right: 1px solid var(--line);
+        background: #f3f2fe;
+      }
+      .assurance article:last-child {
+        background: #fff6ff;
+      }
+      .assurance h2 {
+        margin: 0 0 10px;
+        font-size: 28px;
+      }
+      .brief-impact-footprint,
+      .brief-risk-chain,
+      .brief-coverage-group {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .brief-impact-footprint > *,
+      .brief-risk-chain > *,
+      .brief-coverage-group > * {
+        padding: 24px;
+      }
+      .brief-impact-footprint > * {
+        border-top: 7px solid var(--violet);
+      }
+      .brief-risk-chain > * {
+        border-top: 7px solid var(--danger);
+      }
+      .brief-coverage-group > * {
+        border-top: 7px solid var(--green);
+      }
+      .brief-impact-footprint h3,
+      .brief-risk-chain h3,
+      .brief-coverage-group h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+      }
+      .epics,
+      .validation-flow {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .epic,
+      .validation-flow article {
+        position: relative;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .epic:not(:last-child):after {
+        content: "→";
+        position: absolute;
+        right: -19px;
+        top: 42%;
+        z-index: 2;
+        color: var(--violet);
+        font-size: 30px;
+      }
+      .epic b {
+        display: block;
+        color: var(--violet);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+      }
+      .epic h3 {
+        margin: 8px 0;
+        font-size: 23px;
+      }
+      .brief-task-card {
+        padding: 30px;
+        border-top: 7px solid var(--violet);
+      }
+      .task-dossiers,
+      .validation-dossiers {
+        display: grid;
+        gap: 22px;
+      }
+      .brief-task-card h3 {
+        margin: 8px 0;
+        font-size: 28px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chips span {
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: #f3f2fe;
+        color: var(--violet);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .validation-flow {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .validation-flow article:not(:last-child):after {
+        content: "→";
+        position: absolute;
+        right: -17px;
+        top: 40%;
+        z-index: 2;
+        color: var(--violet);
+        font-size: 27px;
+      }
+      .validation-flow h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+      .brief-proof-card {
+        padding: 28px;
+        border-top: 7px solid var(--green);
+      }
+      .brief-proof-card h3 {
+        margin: 8px 0;
+        font-size: 24px;
+      }
+      .matrix {
+        overflow: auto;
+      }
+      .matrix table,
+      .audience,
+      .coverage {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .matrix th,
+      .matrix td,
+      .audience th,
+      .audience td,
+      .coverage th,
+      .coverage td {
+        padding: 16px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid #e0def8;
+      }
+      .matrix th,
+      .coverage th {
+        background: #f3f2fe;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .timeline {
+        padding: 32px;
+      }
+      .timeline article {
+        position: relative;
+        padding: 0 0 28px 28px;
+        border-left: 2px solid var(--lavender);
+      }
+      .timeline article:last-child {
+        padding-bottom: 0;
+      }
+      .timeline article:before {
+        content: "";
+        position: absolute;
+        left: -9px;
+        top: 4px;
+        width: 16px;
+        height: 16px;
+        border: 4px solid var(--canvas);
+        border-radius: 50%;
+        background: var(--violet);
+      }
+      .timeline h3 {
+        margin: 0 0 8px;
+        font-size: 21px;
+      }
+      .gateboard {
+        padding: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .gateboard h2 {
+        margin: 0 0 20px;
+        font-size: 30px;
+      }
+      .gates {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .gate {
+        padding: 16px;
+        border: 1px solid rgb(255 255 255 / 0.35);
+        border-radius: 14px;
+      }
+      .gate b {
+        display: block;
+        font-size: 13px;
+      }
+      .gate span {
+        color: var(--aqua);
+        font-weight: 700;
+      }
+      .brief-decision-call {
+        padding: 34px;
+        border-left: 7px solid var(--violet);
+      }
+      .brief-decision-call h2 {
+        margin: 0 0 12px;
+        font-size: 32px;
+      }
+      .audience {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .audience th {
+        background: var(--navy);
+        color: #fff;
+        font-size: 13px;
+      }
+      .coverage-wrap {
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .absence {
+        padding: 18px;
+        border-left: 5px solid var(--amber);
+        border-radius: 0 14px 14px 0;
+        background: #fff9e7;
+      }
+      .footer {
+        margin-top: 60px;
+        padding: 44px 54px;
+        border-radius: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .footer p {
+        max-width: 78ch;
+        margin: 10px 0 0;
+        color: #e5e2f5;
+      }
+      .footer .label {
+        color: var(--aqua);
+      }
+      .brief-route[hidden],
+      .route[hidden] {
+        display: none;
+      }
+      @media (max-width: 900px) {
+        .shell {
+          width: min(calc(100% - 32px), 1440px);
+        }
+        .brief-header {
+          padding: 40px;
+        }
+        .header-call {
+          position: static;
+          width: auto;
+          margin-top: 26px;
+        }
+        .route-hero {
+          grid-template-columns: 1fr;
+          padding: 32px;
+        }
+        .snapshot,
+        .three,
+        .brief-impact-footprint,
+        .brief-risk-chain,
+        .brief-coverage-group {
+          grid-template-columns: 1fr 1fr;
+        }
+        .epics,
+        .validation-flow {
+          grid-template-columns: 1fr;
+        }
+        .epic:not(:last-child):after,
+        .validation-flow article:not(:last-child):after {
+          content: "↓";
+          right: auto;
+          left: 48%;
+          top: auto;
+          bottom: -27px;
+        }
+        .two,
+        .assurance {
+          grid-template-columns: 1fr;
+        }
+        .assurance article:first-child {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+      }
+      @media (max-width: 560px) {
+        .shell {
+          width: min(calc(100% - 24px), 1440px);
+        }
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 10px 0;
+        }
+        .brief-header {
+          padding: 30px 24px;
+        }
+        .brief-header h1 {
+          font-size: 40px;
+        }
+        .route-hero {
+          padding: 26px 22px;
+        }
+        .route-hero h1 {
+          font-size: 38px;
+        }
+        .snapshot,
+        .three,
+        .brief-impact-footprint,
+        .brief-risk-chain,
+        .brief-coverage-group {
+          grid-template-columns: 1fr;
+        }
+        .heading {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .fields {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+        .fields dd {
+          margin-bottom: 12px;
+        }
+        .route-nav {
+          position: static;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .topbar,
+        .route-nav,
+        .footer {
+          display: none;
+        }
+        .shell {
+          width: 100%;
+          padding: 0;
+        }
+        .tab-panel[hidden] {
+          display: block !important;
+        }
+        .brief-route,
+        .route[hidden] {
+          display: grid !important;
+          break-after: page;
+        }
+        .brief-header {
+          min-height: 0;
+          border: 1px solid var(--line);
+          background: #fff;
+          color: var(--navy);
+        }
+        .brief-header:after {
+          display: none;
+        }
+        .lede {
+          color: var(--muted);
+        }
+      }
+    </style>
+  </head>
+  <body class="brief-shell" data-tab-enhancement="fallback">
+    <noscript>
+      <aside class="brief-no-script" data-noscript-fallback="continuous-reading" role="status">
+        <strong>Navegação por subpáginas indisponível.</strong> Este brief requer JavaScript para alternar as abas e recuperar a URL de cada visão. Abaixo está somente a alternativa de leitura contínua; ela não equivale à experiência de subpáginas.
+      </aside>
+    </noscript>
+    <main class="shell">
+      <div class="topbar"><span class="tag">software &middot; minimal</span></div>
+      <header class="brief-header">
+        <p class="eyebrow">Decision brief</p>
+        <h1>Money can be reconciled without rounding, duplicating or erasing history only when idempotent ingestion, deterministic matching and auditable recovery are visible together.</h1>
+        <p class="lede">Financial operations and engineering reviewers decide whether the settlement reconciliation API is safe to move past pre-skeleton review.</p>
+      </header>
+      <nav class="route-nav" aria-label="Brief decision views" role="tablist">
+        <a id="tab-scope" role="tab" href="?view=scope" aria-controls="scope" aria-selected="true" tabindex="0">Value &amp; scope</a><a id="tab-impact" role="tab" href="?view=impact" aria-controls="impact" aria-selected="false" tabindex="-1">Impact</a><a id="tab-decision" role="tab" href="?view=decision" aria-controls="decision" aria-selected="false" tabindex="-1">Decision</a><a id="tab-coverage" role="tab" href="?view=coverage" aria-controls="coverage" aria-selected="false" tabindex="-1">Coverage</a><a id="tab-coverage" role="tab" href="?view=coverage" aria-controls="coverage" aria-selected="false" tabindex="-1">Coverage</a>
+      </nav>
+      <section id="scope" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-scope" tabindex="0">
+        <h2 class="route-title">Value &amp; scope</h2>
+<article class="card" id="hero" data-source="spec.md" data-source-section="Outcome e fronteira" data-coverage="represented" data-source-digest="sha256:027cf6c0e5bb35eee360491616b1a87ec4d7e8c30dbbadc96417b1612ef03e88" data-source-fragment="POST /api/v1/settlement-batches" data-source-fragment-sha256="sha256:1ec2dd723ec9ea09f42479c23275eba8fde8ce2f18f2fd30364978e306bf176c" data-block-form="prose">
+          <p>Operators reconcile daily divergences between simulated acquirer CSVs and platform orders, with a REST API, jobs and a minimal admin screen; no consumer UI, real acquirer or new backend.</p>
+          <p class="source"><cite>spec.md &middot; Outcome e fronteira</cite> &mdash; &ldquo;POST /api/v1/settlement-batches&rdquo;</p>
+        </article>
+      </section><section id="impact" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-impact" tabindex="0">
+        <h2 class="route-title">Impact</h2>
+<div class="brief-impact-footprint">
+          <article id="surface-topology" data-source="impact-map.md" data-source-section="Topologia e fronteiras" data-coverage="represented" data-source-digest="sha256:40f5fed8bf8d8031f90a4f82618eebf83d19ed616eac9a7545376ec1f9132ff7" data-source-fragment="S3 compatível (original)" data-source-fragment-sha256="sha256:8b7d6bbc25623a3d83ec45151a881bc80435319071f19cf5b89953f14e26ba59" data-block-form="footprint">
+            <h3>surface-topology</h3>
+            <p>Every simulated boundary (file, preserved object, message, operator endpoint, webhook destination) has its own control; no real component is called.</p>
+            <p class="source"><cite>impact-map.md &middot; Topologia e fronteiras</cite> &mdash; &ldquo;S3 compatível (original)&rdquo;</p>
+          </article>
+        </div>
+      </section><section id="decision" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-decision" tabindex="0">
+        <h2 class="route-title">Decision</h2>
+<article class="card" id="D-005" data-source="decision-log.md" data-source-section="D-005" data-coverage="represented" data-source-digest="sha256:1046bdfa973db673754d38f4f57f8ce11b4c5f581520bdaad9c7cd1931f4b816" data-source-fragment="R2-M002-01" data-source-fragment-sha256="sha256:d5d99cddaa471dd66c71a5ed8ba08aa1dc7d2b656c0aa0aa8822b626326d3584" data-block-form="prose">
+          <p>The two concurrent construction-record versions were consolidated into the single plan.md section 9.1, preserving the SFTP/CSV to S3 to queue/worker to PostgreSQL topology; a new independent reviewer, distinct from the author and the prior reviewer, must still record APPROVE or REVISE before any skeleton.</p>
+          <p class="source"><cite>decision-log.md &middot; D-005</cite> &mdash; &ldquo;R2-M002-01&rdquo;</p>
+        </article>
+      </section><section id="coverage" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0">
+        <h2 class="route-title">Coverage</h2>
+<article class="card" id="coverage-table" data-source="plan.md" data-source-section="9. Brief coverage composition (v2)" data-coverage="represented" data-source-digest="sha256:8e4ef8d4a0e19a03cb44cc9cc7768fd146d268a70480dbce0d4cdc01d94ee163" data-source-fragment="sem falha recorrente" data-source-fragment-sha256="sha256:5c9103b9624cd481ee2782a9777b3468b74658b9738d4ae868d4edba56c3b648" data-block-form="matrix">
+          <p>Every applicable source locator carries a coverage disposition and a rendered target; ratchet.md is the only not_applicable entry, because there is no recurrent failure to record yet.</p>
+          <p class="source"><cite>plan.md &middot; 9. Brief coverage composition (v2)</cite> &mdash; &ldquo;sem falha recorrente&rdquo;</p>
+        </article>
+      </section><section id="coverage" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0">
+        <h2 class="route-title">Coverage</h2>
+        <div class="coverage-wrap"><table class="coverage"><thead><tr><th>Route</th><th>Block</th><th>Source</th><th>Section</th><th>Coverage</th><th>Fragment</th></tr></thead><tbody><tr><td>scope</td><td>hero</td><td>spec.md</td><td>Outcome e fronteira</td><td>represented</td><td>POST /api/v1/settlement-batches</td></tr><tr><td>impact</td><td>surface-topology</td><td>impact-map.md</td><td>Topologia e fronteiras</td><td>represented</td><td>S3 compatível (original)</td></tr><tr><td>decision</td><td>D-005</td><td>decision-log.md</td><td>D-005</td><td>represented</td><td>R2-M002-01</td></tr><tr><td>coverage</td><td>coverage-table</td><td>plan.md</td><td>9. Brief coverage composition (v2)</td><td>represented</td><td>sem falha recorrente</td></tr></tbody></table></div>
+      </section>
+    </main>
+    <script data-brief-base-behavior="v1">
+      (() => {
+        const details = [
+          ...document.querySelectorAll("details[data-progressive]"),
+        ];
+        function initializeTablist(tablist) {
+          const tabs = [...tablist.querySelectorAll('[role="tab"]')];
+          const panels = tabs.map((tab) =>
+            document.getElementById(tab.getAttribute("aria-controls")),
+          );
+          if (!tabs.length || !panels.every(Boolean)) return;
+          const tabForRoute = () => {
+            const view = new URL(location.href).searchParams.get("view");
+            return tabs.find((tab) => tab.dataset.view === view) || tabs[0];
+          };
+          const routeFor = (tab) => tab.dataset.view;
+          let active = tabs[0];
+          tabs.forEach((tab) => {
+            tab.dataset.view =
+              new URL(tab.href, location.href).searchParams.get("view") ||
+              tab.getAttribute("aria-controls");
+          });
+          const activate = (
+            tab,
+            { focusPanel = false, writeRoute = false } = {},
+          ) => {
+            active = tab;
+            tabs.forEach((candidate, index) => {
+              const selected = candidate === tab;
+              candidate.setAttribute("aria-selected", String(selected));
+              candidate.setAttribute(
+                "aria-current",
+                selected ? "page" : "false",
+              );
+              candidate.tabIndex = selected ? 0 : -1;
+              panels[index].hidden = !selected;
+            });
+            if (writeRoute) {
+              const url = new URL(location.href);
+              url.searchParams.set("view", routeFor(tab));
+              url.hash = "";
+              history.pushState({ briefView: routeFor(tab) }, "", url);
+            }
+            if (focusPanel) panels[tabs.indexOf(tab)].focus();
+          };
+          const revealForPrint = () =>
+            panels.forEach((panel) => (panel.hidden = false));
+          const restoreAfterPrint = () => activate(active);
+          document.body.dataset.tabEnhancement = "active";
+          activate(tabForRoute());
+          tabs.forEach((tab, index) => {
+            tab.addEventListener("click", (event) => {
+              event.preventDefault();
+              activate(tab, { focusPanel: true, writeRoute: true });
+            });
+            tab.addEventListener("keydown", (event) => {
+              let next = null;
+              if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+              if (event.key === "ArrowLeft")
+                next = (index - 1 + tabs.length) % tabs.length;
+              if (event.key === "Home") next = 0;
+              if (event.key === "End") next = tabs.length - 1;
+              if (next !== null) {
+                event.preventDefault();
+                tabs[next].focus();
+                activate(tabs[next], { writeRoute: true });
+              }
+              if (event.key === " " || event.key === "Enter") {
+                event.preventDefault();
+                activate(tab, { focusPanel: true, writeRoute: true });
+              }
+            });
+          });
+          window.addEventListener("popstate", () => activate(tabForRoute()));
+          window.addEventListener("beforeprint", revealForPrint);
+          window.addEventListener("afterprint", restoreAfterPrint);
+        }
+        document
+          .querySelectorAll('[role="tablist"]')
+          .forEach(initializeTablist);
+        details.forEach((detail) => (detail.open = false));
+      })();
+    </script>
+  </body>
+</html>

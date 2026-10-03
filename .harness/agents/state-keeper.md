@@ -13,10 +13,13 @@ Garantir que o trabalho sobreviva a interrupções, troca de agente, troca de se
 - registrar decisões em `decision-log.md`;
 - registrar evidence em `evidence/`;
 - manter status de tasks;
-- registrar `tasks_drafted`, `brief_coverage_ready`, author/reviewer de coverage
-  e a referência ao registro de review sem criar sidecar;
-- depois da reunião, conferir decisão append-only, propagação nas fontes,
-  coverage/freshness e brief regenerado antes de `tasks_ready`;
+- despachar estado do brief conforme `brief-contract.md` BC-002;
+- para v3, registrar `brief_repair` segundo BC-025 e o contrato de
+  `templates/run-state.yaml.md`, sem próprio approve ou gates legados;
+- somente para v2 histórico, registrar `tasks_drafted`,
+  `brief_coverage_ready` e author/reviewer da cadeia BC-009;
+- conferir autorização/propagação de decisão antes de `tasks_ready` segundo
+  BC-018; a operação de reparo 3 mantém fontes read-only (BC-001);
 - apontar próximo passo seguro.
 
 ## Não responsabilidades
@@ -71,3 +74,7 @@ Atualize `tasks.md`, `run-state.yaml` e `progress.md` de forma convergente.
 Para v2, não trate `tasks_drafted` como status de task terminal nem permita
 `ready -> in_progress` sem `tasks_ready`. Registre a baseline/change metadata
 quando o validador versionado existir; não invente hash ou aprovação sem prova.
+
+Para v3, conclusão/limites e esforço efetivo vêm do registro BC-025.
+Nunca usar `brief_review` para falsificar avaliação independente de bytes
+que B editou; conclusão do HTML não autoriza execução nem task done (BC-010).

@@ -3,7 +3,7 @@ initiative_id: "028-stakeholder-brief-pipeline-consolidation"
 initiative_sequence: "028"
 initiative_slug: "stakeholder-brief-pipeline-consolidation"
 initiative_kind: "bugfix"
-status: "completed"
+status: "superseded"
 summary: "Consolidar lifecycle resiliente, proveniência e revisão final autônoma do stakeholder brief."
 brief_lineage: null
 brief_phase: "not_rendered"

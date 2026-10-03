@@ -1,6 +1,6 @@
 # Spec: 017-capability-sensitive-spec-discovery-guidance
 
-**Status:** draft | outcome_ready | spec_ready | superseded  
+**Status:** superseded  
 **Sequence:** 017  
 **Slug:** capability-sensitive-spec-discovery-guidance  
 **Owner:** <name-or-team>  

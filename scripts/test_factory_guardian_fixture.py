@@ -35,7 +35,14 @@ def text(root: Path, relative: str) -> str:
 def create_guardian_repository(root: Path) -> tuple[Path, str]:
     guardian = root / "guardian-source"
     (guardian / "scripts").mkdir(parents=True)
-    for script in ("validate_human_visibility.py", "brief_review.py", "brief_v2_sources.py"):
+    # A vendored validator installs its real standard-library dependency
+    # closure, including the explicit historical renderer and v3 helpers.
+    for script in (
+        "validate_human_visibility.py", "brief_review.py", "brief_v2_sources.py",
+        "render_stakeholder_brief.py", "new_initiative.py", "validate_bundle.py",
+        "validate_pearson_brief_policy.py", "architecture_visual_contract.py",
+        "editorial_exceptions.py", "brief_v3_contract.py",
+    ):
         shutil.copy2(ROOT / "scripts" / script, guardian / "scripts" / script)
     run("git", "init", str(guardian))
     run("git", "-C", str(guardian), "config", "user.email", "fixture@example.test")

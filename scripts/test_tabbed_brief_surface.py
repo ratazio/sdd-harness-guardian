@@ -12,10 +12,12 @@ from html.parser import HTMLParser
 from pathlib import Path
 import re
 
+from validate_bundle import brief_contract_lineage
+
 
 ROOT = Path(__file__).resolve().parent.parent
 TARGETS = (
-    ".harness/templates/stakeholder-brief.html",
+    "scripts/fixtures/tabbed-brief-surface/template-v2.html",
     "scripts/fixtures/tabbed-brief-surface/reference-v2.html",
 )
 TAB_IDS = (
@@ -75,7 +77,10 @@ def errors_for(relative: str, text_override: str | None = None) -> list[str]:
     parser.feed(text)
     errors: list[str] = []
 
-    if 'data-harness-brief-design="v2"' not in text:
+    # BC-002: the unified `data-brief-contract` axis or the legacy
+    # `data-harness-brief-design="v2"` marker; a historical fixture keeps the
+    # legacy marker unchanged (NG-004).
+    if brief_contract_lineage(text) != "v2":
         errors.append("missing v2 lineage marker")
     if len(parser.tabs) != 8:
         errors.append(f"expected 8 tabs, found {len(parser.tabs)}")

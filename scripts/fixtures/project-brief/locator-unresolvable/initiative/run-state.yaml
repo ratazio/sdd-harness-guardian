@@ -1,0 +1,3 @@
+quality_gates:
+  human_visibility_ready: false
+  tasks_ready: false

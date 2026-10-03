@@ -1,0 +1,138 @@
+schema_version: 1
+initiative_id: 031-tabbed-brief-template-and-two-skill-repair
+initiative_sequence: '031'
+initiative_slug: tabbed-brief-template-and-two-skill-repair
+initiative_kind: refactor
+status: complete
+summary: Template HTML unico com oito abas e duas skills corretivas high/xhigh, com MD read-only.
+brief_lineage: null
+brief_phase: not_rendered
+current_phase: validation_done
+current_task: null
+last_safe_checkpoint: '2026-10-02: T-001..005 done, evidências aprovadas por /root. Oito briefs
+  executados, fidelidade/experiência aceitas, 23 históricos/72 originais/64 MD copiados/8 estados
+  de produto preservados; D-016.'
+updated_at: '2026-10-02'
+updated_by: Codex /root, evaluator e state keeper
+artifacts:
+  spec: spec.md
+  stakeholder_brief: null
+  impact_map: impact-map.md
+  plan: plan.md
+  validation_plan: validation-plan.md
+  tasks: tasks.md
+  progress: progress.md
+  decision_log: decision-log.md
+  ratchet: ratchet.md
+  evidence_directory: evidence
+  latest_handoff: handoffs/latest-handoff.md
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  brief_coverage_ready: false
+  human_visibility_ready: false
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+brief_review:
+  author: null
+  coverage_reviewer: null
+  reviewed_at: null
+  review_record: null
+  findings_status: not_started
+  quality_review_required: false
+  quality_review_record: null
+  quality_review_status: not_started
+  quality_review_reviewer: null
+  quality_review_inputs: null
+execution:
+  builder_id: /root/presentation031
+  evaluator_id: /root
+  started_at: '2026-10-02'
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint:
+  - T-001..005 aceitas por evaluator distinto; D-012..016.
+  - 319 checks do bundle, 89 pytest e 27 standalones aceitos em T-004; produção não mudou em
+    T-005.
+  - Oito casos A -> B conteúdo/high -> mesmo B visual/high -> relato; native dispatch 6.1-sol
+    confirmado.
+  - 'Aceite único da implementação: leitura material/visual, 256 seleções nativas e correções
+    pontuais de coverage/provenance.'
+  - 'Integridade independente: 23 históricos, 72 originais, 64 MD copiados e todos os campos
+    de produto dos 8 YAML iguais.'
+  - Encerramento D-016 sem HTML031, instalação global ou execução de produto; publicação Git
+    autorizada posteriormente em D-017.
+  repository_revision: ec13aafb5c80bfdf91fdfb23a86cab0fec1c02ac
+  working_tree_summary: Conjunto canônico 029/030/031 preparado para publicação autorizada
+    em D-017; tmp e laboratórios ignorados permanecem locais. Checkpoint pré-commit.
+task_ledger:
+- id: T-001
+  status: done
+  evidence: evidence/T-001.md
+  builder_id: /root/contract031
+  evaluator_id: /root
+  last_transition_at: '2026-10-02'
+  evaluation: approve by /root; evidence/T-001.md
+- id: T-002
+  status: done
+  evidence: evidence/T-002.md
+  builder_id: /root/presentation031
+  evaluator_id: /root
+  last_transition_at: '2026-10-02'
+  evaluation: approve by /root; evidence/T-002.md
+- id: T-003
+  status: done
+  evidence: evidence/T-003.md
+  builder_id: /root/presentation031
+  evaluator_id: /root
+  last_transition_at: '2026-10-02'
+  evaluation: approve by /root; evidence/T-003.md
+- id: T-004
+  status: done
+  evidence: evidence/T-004.md
+  builder_id: /root/integration031
+  evaluator_id: /root
+  last_transition_at: '2026-10-02'
+  evaluation: approve by /root; evidence/T-004.md
+- id: T-005
+  status: done
+  evidence: evidence/T-005.md
+  builder_id: /root/presentation031
+  repair_actor: /root/contract031
+  repair_actor_by_case:
+    M003-M004: /root/repair_offline031
+    other_six_cases: /root/contract031
+  evaluator_id: /root
+  last_transition_at: '2026-10-02'
+  evaluation: approve by /root; evidence/T-005.md
+approvals:
+  human_required: true
+  pending: []
+  granted:
+  - 'D-001: foco HTML e fontes MD read-only, pedido do owner em 2026-10-02.'
+  - 'D-002: entrega de planejamento sem HTML031; desenvolvimento reservado para OK posterior.'
+  - 'D-004: duas skills corretivas high/xhigh sem terceira validacao do brief.'
+  - 'D-010: owner autoriza execucao integral em 2026-10-02; dispensa HTML031 mantida.'
+  - 'D-017: owner autoriza commit e push do trabalho em 2026-10-02.'
+risks:
+  level: high
+  open: []
+  disposition: R-001..006 controlados e aceitos; limitações de fonte/ambiente e ausência de
+    métricas de custo estão em evidence/T-005.md.
+evidence:
+  latest: evidence/T-005.md
+  approved:
+  - evidence/T-001.md
+  - evidence/T-002.md
+  - evidence/T-003.md
+  - evidence/T-004.md
+  - evidence/T-005.md
+next_safe_step: Nenhuma task pendente da SPEC031. Publicar o conjunto canônico autorizado em
+  D-017 e confirmar que HEAD e origin/main coincidem; não repetir os oito ensaios.

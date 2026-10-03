@@ -1,0 +1,20 @@
+contract_version: "1.0.0"
+profile: minimal
+domain: software
+
+thesis:
+  decision_and_audience: "Product and eng approve the widget scope freeze."
+  brief_thesis: "Reconcile totals exactly, then freeze scope."
+
+routes:
+  - id: scope
+    blocks:
+      - id: hero
+        form: prose
+        form_reason: "A single absence is a sentence, not a table."
+        coverage: not_applicable
+        source: spec.md
+        source_section: "Escopo"
+        absence:
+          kind: not_applicable
+          reason: "Esta secao nao existe mais nesta fonte."

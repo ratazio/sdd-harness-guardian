@@ -1,0 +1,47 @@
+contract_version: "1.0.0"
+profile: minimal
+domain: software
+
+thesis:
+  decision_and_audience: "Fixture for the duplicate-topology detector (FR-004)."
+  brief_thesis: "Two relation graphs with identical node/edge sets must be reported."
+
+routes:
+  - id: architecture
+    blocks:
+      - id: zoom-a
+        form: topology
+        form_reason: "Fixture block; the point under test is the duplicate detector, not this diagram."
+        coverage: represented
+        source: spec.md
+        source_section: "Architecture"
+        fragment: "The checkout service calls the payment gateway directly; a retry queue sits between them once this change lands."
+        text: "Zoom A."
+        relation_ref: graph-a
+
+relations:
+  - id: graph-a
+    label: "Zoom A"
+    nodes:
+      - id: x
+        label: "X"
+      - id: y
+        label: "Y"
+    edges:
+      - from: x
+        to: y
+        label: "calls"
+        state: proposed
+
+  - id: graph-b
+    label: "Zoom B (same content under a different id)"
+    nodes:
+      - id: x
+        label: "X"
+      - id: y
+        label: "Y"
+    edges:
+      - from: x
+        to: y
+        label: "calls"
+        state: proposed

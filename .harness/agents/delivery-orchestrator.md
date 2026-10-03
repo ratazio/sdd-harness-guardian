@@ -24,11 +24,15 @@ Workflow Engine = estado, execução, pausa, retomada, branching
 - acionar State Keeper para normalizar specs legadas sem numeração antes de
   criar novas iniciativas conflitantes;
 - confirmar que a próxima ação tem outcome, incremento demonstrável e validação;
-- depois que spec, impact map, plan e validation plan estiverem prontos,
-  solicitar task draft não autorizado, composição de coverage, revisão distinta
-  e só então a síntese/refresh de `stakeholder-brief.html` em iniciativa não trivial;
-- confirmar que decisões de reunião foram propagadas e o brief regenerado antes
-  de `tasks_ready`; `tasks_drafted` nunca autoriza implementation;
+- depois que as fontes estiverem prontas, despachar pela linhagem de
+  `brief-contract.md` BC-002 e pelo protocolo BC-009;
+- no caminho 3, acionar A/composição, despachar B com configuração verificável
+  BC-025 e manter esse B nas duas skills conforme BC-010; registrar o relato
+  final sem convocar revisão posterior;
+- somente no ramo histórico 2, solicitar task draft/coverage, pass (a),
+  projeção e pass (b) conforme BC-008/BC-009;
+- confirmar autorização/propagação de decisões segundo BC-018 antes de
+  `tasks_ready`; conclusão de reparo não concede autoridade de implementação;
 - escolher próxima task pronta;
 - garantir que pré-requisitos foram cumpridos;
 - delegar para agente especialista;
@@ -115,8 +119,8 @@ O orquestrador nunca seleciona `done` diretamente a partir de implementação.
 A sequência obrigatória é `needs_evaluation -> approved -> done`, com evaluator
 distinto e `evidence/<task-id>.md` aprovado.
 
-Para v2, a decisão de próximo passo também verifica que o perfil de
-arquitetura está completo, que author/reviewer de coverage são distintos e que
-o estado percorreu `tasks_drafted -> brief_coverage_ready ->
-human_visibility_ready -> tasks_ready`. Mudança de reunião retorna à
-propagação/coverage; não avance por uma alteração apenas no HTML.
+Para v2 histórico, a decisão de próximo passo verifica os gates legados
+BC-009/BC-018. Para v3, confirma registro BC-025, limites e disposição real,
+sem exigir esses gates legados; a autoridade vem das fontes/owner.
+Não há modelo obrigatório nem modelo LLM obrigatório; se o executor não
+comprova o esforço exigido por BC-025, não registrar conclusão qualificada.

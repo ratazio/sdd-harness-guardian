@@ -1,0 +1,83 @@
+contract_version: "1.0.0"
+profile: minimal
+domain: software
+
+thesis:
+  decision_and_audience: >-
+    Financial operations and engineering reviewers decide whether the
+    settlement reconciliation API is safe to move past pre-skeleton review.
+  brief_thesis: >-
+    Money can be reconciled without rounding, duplicating or erasing history
+    only when idempotent ingestion, deterministic matching and auditable
+    recovery are visible together.
+
+routes:
+  - id: scope
+    executive_question: Qual valor sem ampliar a plataforma para decisao financeira?
+    blocks:
+      - id: hero
+        form: prose
+        form_reason: >-
+          A single business thesis needs no diagram; prose is the most
+          direct way to orient the reader on scope/anti-scope.
+        coverage: represented
+        source: spec.md
+        source_section: "Outcome e fronteira"
+        fragment: "POST /api/v1/settlement-batches"
+        text: >-
+          Operators reconcile daily divergences between simulated acquirer
+          CSVs and platform orders, with a REST API, jobs and a minimal
+          admin screen; no consumer UI, real acquirer or new backend.
+
+  - id: impact
+    blocks:
+      - id: surface-topology
+        collection: impact.surface
+        form: footprint
+        form_reason: >-
+          Impact is a footprint across surfaces (SFTP/CSV, S3, queue/worker,
+          PostgreSQL, API/webhook); a card list carries exposure and
+          control per surface better than prose.
+        coverage: represented
+        source: impact-map.md
+        source_section: "Topologia e fronteiras"
+        fragment: "S3 compatível (original)"
+        text: >-
+          Every simulated boundary (file, preserved object, message,
+          operator endpoint, webhook destination) has its own control; no
+          real component is called.
+
+  - id: decision
+    blocks:
+      - id: D-005
+        form: prose
+        form_reason: >-
+          A single material sandbox decision is better read as short prose
+          than as a matrix.
+        coverage: represented
+        source: decision-log.md
+        source_section: "D-005"
+        fragment: "R2-M002-01"
+        text: >-
+          The two concurrent construction-record versions were consolidated
+          into the single plan.md section 9.1, preserving the
+          SFTP/CSV to S3 to queue/worker to PostgreSQL topology; a new
+          independent reviewer, distinct from the author and the prior
+          reviewer, must still record APPROVE or REVISE before any skeleton.
+
+  - id: coverage
+    blocks:
+      - id: coverage-table
+        form: matrix
+        form_reason: >-
+          The source-to-target coverage table is inherently tabular; a
+          matrix preserves the per-source reading the coverage review
+          expects.
+        coverage: represented
+        source: plan.md
+        source_section: "9. Brief coverage composition (v2)"
+        fragment: "sem falha recorrente"
+        text: >-
+          Every applicable source locator carries a coverage disposition and
+          a rendered target; ratchet.md is the only not_applicable entry,
+          because there is no recurrent failure to record yet.

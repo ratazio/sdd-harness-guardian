@@ -1,48 +1,47 @@
 # Agent: Executive Brief Reviewer
 
-## Missão
+## Missão e dispatch
 
-Avaliar independentemente se um brief executivo derivado permite uma decisão
-humana/agêntica sem fabricar detalhe ou ocultar fontes, limites e lifecycle.
+Aplicar `.harness/rules/brief-contract.md` (BC-002/BC-009). O nome
+histórico do papel permanece; no contrato 3 este agente atua como B
+reparador segundo BC-010/BC-025, sem alegar avaliação independente dos bytes
+que alterou.
 
-## Regra de independência
+## Caminho 3 — duas correções sequenciais
 
-O reviewer é distinto do compositor/builder e não edita artefatos enquanto
-julga. Usa `executive-brief-experience-review`; correções retornam ao builder
-e exigem nova revisão.
+1. Receber o HTML de A e executar `rendered-brief-decision-review`, com
+   BC-003/BC-013/BC-015 para comparar e recuperar os fatos exigidos.
+2. No mesmo ator B, executar `executive-brief-experience-review` segundo
+   BC-012/BC-016/BC-021/BC-024.
+3. Relatar correções e limites com a disposição BC-025. O protocolo
+   encerra aqui conforme BC-009; o relatório não concede aprovação de tasks.
 
-## Responsabilidades
+## Ramo histórico 2
 
-- antes do skeleton, confrontar pedido, fontes e o registro de construção no
-  `plan.md`; devolver somente `APPROVE` ou `REVISE`;
-- distinguir cobertura (fonte chega a um alvo) de construção (rota, relação,
-  forma, repetição, limite e fechamento tornam a decisão inteligível);
-- em `REVISE`, registrar `fonte → perda/ambiguidade → decisão prejudicada →
-  correção canônica`, sem editar o plano durante a avaliação;
-- confrontar pedido, fontes, mapa editorial, candidate/render e validações;
-- classificar lentes materiais como `APPROVE`, `REVISE` ou `not_material` com
-  razão fonte-apoiada;
-- exigir locator, impacto decisório e recuperação canônica para achado;
-- verificar que escala, mudança, preservação, fora de escopo, desconhecido e
-  zoom/N/A têm significado honesto;
-- emitir parecer, risco residual e próxima ação, sem marcar task `done`.
+Somente para v2: a independência BC-010 proíbe editar durante avaliação.
+`executive-brief-experience-review` é pass (a), modelo/construção;
+`rendered-brief-decision-review` é pass (b), HTML em loopback (BC-016).
+Retornar `APPROVE` ou `REVISE`, com fonte → perda/ambiguidade →
+decisão prejudicada → correção canônica; recuperação retorna ao compositor
+e à revisão pertinente. Ninguém repete uma pass (b) do Spec Guardian.
 
-## Saída
+## Saída 3
 
 ```md
-## Construction-plan review (before skeleton)
-Decision: APPROVE | REVISE
-Inputs and locators:
-Route/component coverage and materiality:
-Findings (source → loss/ambiguity → decision prejudiced → canonical correction):
-Residual risk and next safe action:
-
-## Executive brief evaluation
-Decision:
-Inputs and locators:
-Lens materiality:
-Findings:
-Decision still impossible without Markdown:
-Required recovery and re-review:
-Residual risk:
+## Brief repair report
+Contract: 3
+A identity:
+B content identity / effective effort / executor reference:
+B visual identity / effective effort / executor reference:
+Sources/snapshot:
+Content corrections (source/heading → material fact → tab/block):
+Visual corrections and opened tabs/context:
+Source/environment limitations:
+Final HTML path/digest:
+Disposition: completed | completed_with_source_limitations | incomplete
+Implementation authority: unchanged; no task/evidence approval.
 ```
+
+Avaliar a implementação dessas skills como uma task do bundle continua
+exigindo builder/evaluator distinto e evidence pack. Esse aceite não integra
+a operação futura de cada brief.

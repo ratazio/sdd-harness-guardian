@@ -1,0 +1,579 @@
+contract_version: "1.0.0"
+profile: deep
+domain: software
+
+thesis:
+  decision_and_audience: >-
+    Guardian maintainers and the owner decide whether the three gates
+    suspended by D-007/D-011/D-012 — human_visibility_ready,
+    brief_coverage_ready and tasks_ready — can be set true for SPEC 029
+    itself, closing the bootstrap this initiative exists to prove.
+  brief_thesis: >-
+    SPEC 029 replaced agent-authored brief HTML with a projected content
+    model, and the honest record is that it took a real locator-collision
+    fix, a real doctrine gap in the agent that runs the review chain, an
+    owner-redefined success metric, and a cumulative line count that still
+    reads as additive on its face.
+  repeated_component_treatment: >-
+    execution.task: one dossier-style record per task that had a material
+    finding (T-002, T-007, T-008), plus one ledger for the full T-001..T-010
+    set; decision: one record per decision that changed scope, gate
+    ordering or the success metric, not all 34.
+
+routes:
+  - id: scope
+    executive_question: What problem does this SPEC exist to close, and what is deliberately excluded?
+    blocks:
+      - id: hero
+        form: prose
+        form_reason: >-
+          A single business thesis needs no diagram; prose orients the
+          reader on the cost/doctrine problem directly.
+        coverage: represented
+        source: spec.md
+        source_section: "1. Problema"
+        fragment: "oito ciclos de correção sobre a mesma"
+        text: >-
+          The bundle accumulated eight correction cycles over the same
+          stakeholder-brief pipeline between releases 0.1.2 and 0.4.0, with
+          two structural defects: agents author HTML by hand at a cost of
+          three full-context passes per brief, and the doctrine that governs
+          that authoring contradicts itself across eight-plus files. SPEC
+          029 treats the cause — an agent authoring markup from dispersed
+          doctrine — instead of adding another orchestration layer on top.
+
+      - id: non-goal-bootstrap
+        form: prose
+        form_reason: >-
+          A single named non-goal is a decided fact, not a structure; prose
+          states it directly.
+        coverage: represented
+        source: spec.md
+        source_section: "6. Não objetivos"
+        fragment: "usar a exceção de bootstrap (D-007) como precedente"
+        text: >-
+          NG-008 names the boundary this very brief operates under: the
+          dispensation that let SPEC 029 skip the old brief pipeline while
+          it built the new one is scoped to this initiative only, suspends
+          only the ORDERING of human_visibility_ready (never its existence),
+          and expires with this SPEC. Every other protected invariant —
+          distinct identities, evidence before done, independent review,
+          rendering does not equal approval, HTML is not a source — stays
+          fully in force (D-008).
+
+  - id: architecture
+    executive_question: What changed in the pipeline that produces a brief, and what proof does the projector give itself before writing anything?
+    blocks:
+      - id: pipeline
+        form: topology
+        form_reason: >-
+          The before/after production pipeline is a real topology change
+          (one link removed, three new stages inserted); a node/edge diagram
+          shows the delta better than prose restating the same sequence
+          twice.
+        coverage: represented
+        source: impact-map.md
+        source_section: "3. Dependency and data flow"
+        fragment: "O elo removido é"
+        relation_ref: pipeline
+        text: >-
+          The removed link is "skeleton copiado -> agente autora HTML ->
+          herança check". In its place: canonical sources feed a
+          brief-model.yaml the agent authors, an independent reviewer
+          judges that model before anything is rendered, a deterministic
+          projector turns it into stakeholder-brief.html computing every
+          provenance tuple from the source, and a second, disjoint review
+          judges only meaning and experience on the rendered page served in
+          loopback. This diagram itself was produced by that pipeline: the
+          model you are reading is the artifact, not a description of one.
+
+      - id: pd-003
+        form: dossier
+        form_reason: >-
+          The architecture decisions are a small set of named,
+          alternative-and-consequence records; a label/value dossier matches
+          plan.md's own PD-NNN table shape better than prose.
+        coverage: represented
+        source: plan.md
+        source_section: "2. Architecture decisions"
+        fragment: "resolver locator, digest e fragmento"
+        fields:
+          - label: "PD-003 — projector reads sources for exactly three things"
+            value: "Locator, digest and fragment resolution only. No semantic synthesis in code (preserves NG-001)."
+          - label: "PD-004 — the existing shell is a projection template"
+            value: "CSS/JS/a11y/print are copied byte-for-byte from stakeholder-brief.html; the a11y evidence from SPECs 013/014 continues to apply unchanged."
+          - label: "PD-007 — removal only after the replacement is proven"
+            value: "The inheritance check and skeleton instantiator are deleted only in T-008, after T-001..T-007 are independently approved — never before."
+        text: >-
+          These three decisions are why this brief exists at all: PD-003 is
+          what makes the provenance attributes on this very page
+          non-authorable by hand, PD-004 is why the CSS you are reading did
+          not need to be rewritten, and PD-007 is why the old pipeline
+          stayed available until the new one had eight approved tasks of
+          proof behind it.
+
+  - id: impact
+    executive_question: What surfaces actually changed, and which regression risk was real, not hypothetical?
+    blocks:
+      - id: surfaces
+        form: footprint
+        form_reason: >-
+          Impact is a footprint across build/infra and doctrine surfaces; a
+          card list carries delta and risk per surface better than a single
+          paragraph.
+        coverage: represented
+        source: impact-map.md
+        source_section: "2. Affected surfaces"
+        fragment: "reduzido a promoção + projeção"
+        text: >-
+          Build/deploy: validate_brief_candidate_inheritance.py and
+          instantiate_brief_skeleton.py are removed; render_stakeholder_brief.py
+          is reduced to promotion + projection. Public/API contract: the
+          data-source*/data-brief-contract provenance attributes are now
+          emitted by the projector instead of typed by an agent. Tests/docs:
+          human-visibility.md and stakeholder-brief-design.md, three SKILLs,
+          spec-review, sdd-lifecycle, AGENTS.md and two agent files were
+          consolidated to reference a single normative contract instead of
+          each restating brief rules.
+
+      - id: risk-balance
+        form: risk-chain
+        form_reason: >-
+          IR-006 is a real trigger-to-outcome chain (repeat the historical
+          pattern -> positive diff -> replan), not a static fact; a
+          risk-chain diagram carries the causal order a table would flatten.
+        coverage: represented
+        source: impact-map.md
+        source_section: "5. Regression risks and controls"
+        fragment: "Saldo líquido de remoção como critério explícito (R-006)"
+        relation_ref: net-balance-risk
+        text: >-
+          IR-006 (this SPEC repeats the bundle's historical pattern of
+          adding a layer instead of removing one) was the risk this
+          initiative was most exposed to, and it did not stay hypothetical:
+          T-008's own isolated diff is -778 lines (its removal succeeded),
+          but the SPEC's cumulative diff at that point was +3,826 lines,
+          because T-001..T-007 added ~4,300 lines of schema, projector and
+          tests before anything was deleted. The owner resolved this
+          divergence directly (see decision route) rather than letting a
+          builder average it away. IR-007 (parallel tasks producing
+          divergent vocabulary) is marked "ocorrido" — it happened, twice,
+          not just as a modeled risk — requiring an explicit reconciliation
+          task (T-005) before T-008 removed the legacy fallback.
+
+  - id: execution
+    executive_question: What did the ten tasks actually cost to get right, including the cycles that failed first?
+    blocks:
+      - id: ledger
+        form: dossier
+        form_reason: >-
+          Ten tasks with distinct status, risk and dependency is exactly
+          the repeated-record shape a dossier list is for; the source table
+          in tasks.md is already this shape.
+        coverage: represented
+        source: tasks.md
+        source_section: "Task ledger"
+        fragment: "T-010 | pending | Brief da própria 029 pela esteira nova e liberação dos gates"
+        fields:
+          - label: "T-001..T-007 — schema, projector, forms, contract, version axis, source-sufficiency check, review chain"
+            value: "done, all approved by a distinct evaluator identity before their evidence closed"
+          - label: "T-008 — removal of the superseded layers (destructive)"
+            value: "done, owner-approved (D-032); the only task requiring explicit destructive-operation approval"
+          - label: "T-009 — cost instrumentation and the M-001..M-008 matrix"
+            value: "done, technical approve by a distinct evaluator plus named-owner qualitative approval for M-006/M-007 (D-034)"
+          - label: "T-010 — this task: the SPEC's own brief and gate release"
+            value: "pending — builder submission only; independent review and the three gate decisions are a separate step, not this one"
+        text: >-
+          Nine of ten tasks are done with approved evidence; this task is
+          the tenth and closes the loop by using the mechanism T-001..T-009
+          built to produce its own brief.
+
+      - id: finding-locator-collision
+        form: prose
+        form_reason: >-
+          A single reproduced defect and its fix is a decided fact, not a
+          structure; prose states the failure mode plainly instead of
+          padding it into a table.
+        coverage: represented
+        source: tasks.md
+        source_section: "Achado bloqueante da avaliação (2026-09-19)"
+        fragment: "proveniência falsa passando na verificação, exatamente o que FR-003 e O-002"
+        text: >-
+          T-002's first review cycle did not pass. `resolve_locator`
+          accepted a partial substring match in either direction on
+          normalized text, so a model declaring `source_section: "Escopo"`
+          against a source that only had "## Fora de escopo" resolved
+          silently to the opposite-meaning heading instead of refusing. On
+          the not_applicable coverage path, that resolved locator becomes
+          the displayed fragment — false provenance passing verification,
+          exactly what FR-003/O-002 exist to prevent. The fix requires an
+          exact normalized match first, with one narrow digit-bearing-ID
+          prefix exception guarded by content (not length), and refuses on
+          any ambiguous collision between distinct headings. This is not a
+          hypothetical: the same guard fired for real during T-009's matrix
+          run, on a genuine duplicate "T-002" heading in one mock's tasks.md.
+
+      - id: finding-spec-guardian-drift
+        form: prose
+        form_reason: >-
+          A cross-file contradiction inside the bundle's own doctrine is
+          best stated as a short narrative of what disagreed with what.
+        coverage: represented
+        source: tasks.md
+        source_section: "Exit criteria"
+        fragment: "achado real**: `.harness/agents/spec-guardian.md`"
+        text: >-
+          T-004 consolidated the brief doctrine into a single normative
+          contract, but T-007's own review chain check found a file T-004
+          had not touched: `.harness/agents/spec-guardian.md` still
+          instructed the Spec Guardian to "conduct the coverage review" and
+          "perform a post-render reading" as its own responsibilities —
+          directly contradicting `executive-brief-reviewer.md`'s "no other
+          role, including Spec Guardian, repeats pass (b)" and
+          `spec-review/SKILL.md`, which already forbade the third pass. The
+          skill and the agent it invokes disagreed with each other. The
+          finding closing this SPEC's own review-chain guarantee came from
+          a task auditing a doctrine file, not from a code check.
+
+      - id: destructive-removal
+        form: prose
+        form_reason: >-
+          The single destructive task and its net-line outcome is a
+          decided fact best stated directly, not tabulated.
+        coverage: synthesized
+        source: tasks.md
+        source_section: "Implementation constraints"
+        fragment: "Reversível por `git revert`. Só ocorre após T-001…T-007 aprovadas."
+        text: >-
+          T-008 is the only destructive task in the SPEC: it removed
+          validate_brief_candidate_inheritance.py, instantiate_brief_skeleton.py,
+          their tests, and plan.md §9.1, and absorbed human-visibility.md and
+          stakeholder-brief-design.md into the normative contract. It only
+          ran after T-001..T-007 had passed independent review, and the
+          owner approved it explicitly (D-032) because it is reversible by
+          git revert and touches no consumer artifact. Its own isolated diff
+          is -778 lines. Read against the whole SPEC's cumulative diff of
+          +3,826 lines, that isolated number does not, by itself, prove the
+          initiative net-subtractive — the decision route records how that
+          tension was actually resolved, not glossed over.
+
+  - id: validation
+    executive_question: What was actually run, at what count, and what does the bundle's own check say right now?
+    blocks:
+      - id: strategy
+        form: prose
+        form_reason: >-
+          The three-tier validation boundary is a decided methodological
+          fact; prose states it once instead of re-deriving it per route.
+        coverage: represented
+        source: validation-plan.md
+        source_section: "1. Strategy"
+        fragment: "Um PASS determinístico não pode ser reportado como aprovação de experiência."
+        text: >-
+          Validation runs at three levels with an explicit boundary between
+          them, because confusing the first two with the third is a
+          recurring defect in this repository: deterministic pytest proves
+          structure, provenance, lifecycle and invariant preservation, and
+          never quality; static comparison measures already-versioned
+          artifacts at zero cost; independent qualitative review over HTML
+          served in loopback is the only thing that judges whether a brief
+          is fit to decide from. A deterministic PASS is never reported as
+          experience approval.
+
+      - id: matrix-run
+        form: matrix
+        form_reason: >-
+          Eight mocks with per-mock attempt counts and failure causes is
+          the exact tabular shape the historical comparison needs.
+        coverage: synthesized
+        source: tasks.md
+        source_section: "Validation IDs and commands"
+        fragment: "V-009, V-010, V-REG-002"
+        fields:
+          - label: "M-001, M-002, M-005, M-006, M-007, M-008"
+            value: "1 attempt to a passing model+projection each"
+          - label: "M-003"
+            value: "2 attempts — a scope fragment was transcribed without the bold marker separating it from the surrounding source text"
+          - label: "M-004"
+            value: "2 attempts — an impact fragment was copied from the wrong mock's impact-map.md by mistake"
+          - label: "Total"
+            value: "10 attempts across 8 mocks, median 1, max 2, against 6/9/15 full pipeline runs in the historical record"
+        text: >-
+          Both multi-attempt failures were `project_brief.py` correctly
+          refusing with "fragment ... does not occur literally in source",
+          naming the offending block — exactly the FR-003 failure mode
+          working as designed, and both were human/agent transcription
+          errors, not defects in the model or the mechanism. The comparison
+          against the historical 6/9/15 execution counts is honest about
+          not being the same unit: those numbers count full old-pipeline
+          rounds (HTML authoring + two reviews each); these ten count YAML
+          edit-and-reproject cycles, because there is no HTML to re-author
+          under the new pipeline.
+
+      - id: bundle-state
+        form: prose
+        form_reason: >-
+          The current deterministic check count is a single verifiable
+          fact best stated plainly.
+        coverage: synthesized
+        source: decision-log.md
+        source_section: "Decision Log: 029-brief-content-model-and-doctrine-consolidation"
+        fragment: "A remoção é reversível por `git revert` e não toca em nenhum artefato de consumidor."
+        text: >-
+          `validate_bundle.py` passed 315 checks through T-007 and 314
+          after T-008's removal — the drop of one check is the expected,
+          registered consequence of deleting the inheritance validator it
+          used to run, not a regression. D-032 records the owner's approval
+          for that removal, citing 85 tests and 315 checks already approved
+          by distinct-identity evidence across T-001..T-007 as the basis
+          for authorizing the one destructive step.
+
+  - id: evolution
+    executive_question: How did this SPEC's own decisions and review cycles actually move, including the ones that reversed or corrected an earlier one?
+    blocks:
+      - id: decision-count
+        form: prose
+        form_reason: >-
+          The sheer count and density of the decision log is a fact best
+          stated directly rather than re-listed.
+        coverage: represented
+        source: decision-log.md
+        source_section: "Decision Log: 029-brief-content-model-and-doctrine-consolidation"
+        fragment: "Record decisions that change scope, architecture, validation, risk, precedence"
+        text: >-
+          This SPEC accumulated 34 recorded decisions (D-001..D-034) plus
+          two ratchet entries — more than one per day of active work. That
+          density is not noise: several decisions exist specifically
+          because an earlier reading was found wrong or incomplete by
+          independent review (D-025 corrected a doctrine-count
+          undermeasurement; D-027 gave a vocabulary-reconciliation gap a
+          named owner; D-033 redefined the SPEC's own success metric after
+          the net-line evidence came in ambiguous).
+
+      - id: metric-redefinition
+        form: prose
+        form_reason: >-
+          A single owner decision reversing how the SPEC's own success
+          criterion is read is best carried as a direct quote, not
+          paraphrased into a table.
+        coverage: represented
+        source: decision-log.md
+        source_section: "Decision Log: 029-brief-content-model-and-doctrine-consolidation"
+        fragment: "custo operacional recorrente por brief"
+        text: >-
+          D-033 is the most consequential decision in this route: faced
+          with T-008's own -778-line removal against the SPEC's +3,826-line
+          cumulative diff, the owner ruled that R-006/IR-006's real
+          criterion is not static line count but recurring operational cost
+          per brief — convergence and rework over time — and that one-time
+          investment code (schema, projector, deterministic checks) is
+          acceptable when it lowers that recurring cost, which is what
+          AC-009c/AC-009d actually measure. This is a genuine mid-flight
+          redefinition of what "done" means for R-006, made by the owner,
+          not smoothed over by a builder choosing the friendlier reading.
+
+      - id: qualitative-approval
+        form: prose
+        form_reason: >-
+          A single named approval covering two specific mocks is a decided
+          fact, not a structure.
+        coverage: represented
+        source: decision-log.md
+        source_section: "Decision Log: 029-brief-content-model-and-doctrine-consolidation"
+        fragment: "M-006: a lacuna de conteudo generico herdado"
+        text: >-
+          D-034 is the owner's qualitative approval of M-006 and M-007
+          under AC-009c: M-007's prose-only coverage route is accepted
+          because its source genuinely has no table, and M-006's inherited
+          generic per-surface impact content is accepted specifically
+          because the model states the gap as visible text instead of
+          hiding or inventing detail — the exact posture EC-005/NG-001
+          require when a source is weak.
+
+  - id: decision
+    executive_question: Which decisions does this brief's own existence depend on, and who made them?
+    blocks:
+      - id: D-007
+        form: prose
+        form_reason: >-
+          A single foundational decision is best read as short prose.
+        coverage: represented
+        source: decision-log.md
+        source_section: "Decision Log: 029-brief-content-model-and-doctrine-consolidation"
+        fragment: "dispensada de produzir stakeholder brief pela esteira ANTIGA"
+        text: >-
+          D-007 (owner, 2026-09-19) is why this document exists in this
+          form at all: SPEC 029 was dispensed from producing its brief
+          through the old pipeline specifically so this brief could be the
+          new pipeline's first real proof, instead of paying the pipeline
+          this SPEC eliminates one last time.
+
+      - id: D-011-D-012
+        form: prose
+        form_reason: >-
+          Two decisions that jointly scope one exception are read together
+          as one continuous statement.
+        coverage: represented
+        source: decision-log.md
+        source_section: "Decision Log: 029-brief-content-model-and-doctrine-consolidation"
+        fragment: "Os tres gates so vao a `true` em T-010, junto com o brief projetado e revisado por identidade distinta."
+        text: >-
+          D-011 named exactly which gate D-007's dispensation suspended
+          (human_visibility_ready) and stated it suspends only ORDERING,
+          never existence. D-012 extended that same suspension to
+          brief_coverage_ready and to the brief-dependency inside
+          tasks_ready, after round-2 independent review found D-011 alone
+          left every task in this SPEC unable to reach `ready`. All three
+          gates are resolved together, only in this task — not before, and
+          not by this submission alone.
+
+      - id: D-032
+        form: prose
+        form_reason: >-
+          The one destructive-operation approval is a decided fact, stated
+          directly.
+        coverage: represented
+        source: decision-log.md
+        source_section: "Decision Log: 029-brief-content-model-and-doctrine-consolidation"
+        fragment: "a única task destrutiva da SPEC 029"
+        text: >-
+          D-032 (owner, 2026-09-21) is the explicit authorization for T-008,
+          the SPEC's only destructive operation, granted after T-001..T-007
+          closed with approved evidence — the point in this SPEC where the
+          net-subtractive claim (R-006) was actually put to the test.
+
+  - id: coverage
+    executive_question: Is the source material for this brief sufficient, and are the gates this task exists to resolve actually resolved yet?
+    blocks:
+      - id: coverage-statement
+        form: prose
+        form_reason: >-
+          Coverage sufficiency for this SPEC is a short canonical statement
+          about scope, not a per-locator table — matching the shape the
+          source itself uses.
+        coverage: represented
+        source: plan.md
+        source_section: "9. Brief coverage composition"
+        fragment: "esta iniciativa está dispensada de produzir seu"
+        text: >-
+          Every block in this model cites spec.md, impact-map.md, plan.md,
+          tasks.md, validation-plan.md or decision-log.md — the same closed
+          source inventory the projector enforces for every initiative, no
+          exception carved out for this one. Coverage is complete for the
+          scope this task owns: the model, its projection, and honest
+          narration of the process. It is deliberately not complete for the
+          three gates below, which this submission does not have the
+          authority to close.
+
+      - id: gates-still-suspended
+        form: dossier
+        form_reason: >-
+          The exact current boolean value of three named gates is a
+          structured fact, best carried as label/value pairs pointing at
+          the live state file, not restated in prose that could drift from it.
+        coverage: represented
+        source: run-state.yaml
+        source_section: "brief_coverage_ready"
+        fragment: "brief_coverage_ready: false"
+        fields:
+          - label: "human_visibility_ready"
+            value: "false — resolved only after independent review of this rendered brief, not by this builder submission"
+          - label: "brief_coverage_ready"
+            value: "false — same condition"
+          - label: "tasks_ready"
+            value: "false — same condition; D-012 is what has authorized execution up to now, not this gate"
+        text: >-
+          As of this submission, all three gates D-007/D-011/D-012
+          suspended the ordering of remain `false` in run-state.yaml. That
+          is correct, not a defect: per tasks.md's own T-010 exit criteria,
+          they go true only after an independent reviewer, in a distinct
+          identity from this builder, approves this projected brief in
+          loopback and a human approval is recorded. This builder does not
+          self-evaluate and does not flip a gate to close its own task.
+
+relations:
+  - id: pipeline
+    label: "Brief production, before vs. after"
+    nodes:
+      - id: sources
+        label: "Canonical .md sources"
+      - id: plan91
+        label: "plan.md §9.1 prose construction record"
+      - id: skeleton
+        label: "Skeleton copied + agent authors HTML"
+      - id: inheritance
+        label: "Candidate inheritance check"
+      - id: model
+        label: "brief-model.yaml (agent-authored)"
+      - id: model-review
+        label: "Independent model review (pass a)"
+      - id: projector
+        label: "Deterministic projector"
+      - id: html
+        label: "stakeholder-brief.html"
+      - id: render-review
+        label: "Independent rendered review (pass b, loopback)"
+    edges:
+      - from: sources
+        to: plan91
+        label: "authored in prose, once per agent per iteration"
+        state: out-of-scope
+      - from: plan91
+        to: skeleton
+        label: "construction record precedes hand authoring"
+        state: out-of-scope
+      - from: skeleton
+        to: inheritance
+        label: "candidate must inherit skeleton structure"
+        state: out-of-scope
+      - from: sources
+        to: model
+        label: "agent authors model, not markup"
+        state: preserved
+      - from: model
+        to: model-review
+        label: "reviewed before any rendering"
+        state: preserved
+      - from: model-review
+        to: projector
+        label: "approved model is projected"
+        state: preserved
+      - from: projector
+        to: html
+        label: "provenance computed, never typed"
+        state: preserved
+      - from: html
+        to: render-review
+        label: "judges meaning and experience only"
+        state: preserved
+
+  - id: net-balance-risk
+    label: "IR-006 — additive-initiative risk chain"
+    nodes:
+      - id: trigger
+        label: "T-001..T-007 add ~4,300 lines before any removal"
+      - id: signal
+        label: "Cumulative git diff --stat reads +3,826 lines"
+      - id: control
+        label: "T-008 isolated diff is -778 lines, reversible by git revert"
+      - id: decision-point
+        label: "Owner rules on R-006/IR-006's real criterion (D-033)"
+      - id: outcome
+        label: "Recurring cost per brief, not static LOC, is the accepted metric"
+    edges:
+      - from: trigger
+        to: signal
+        label: "produces"
+        state: discovery
+      - from: signal
+        to: control
+        label: "measured against"
+        state: discovery
+      - from: control
+        to: decision-point
+        label: "ambiguity escalated, not resolved by a builder"
+        state: discovery
+      - from: decision-point
+        to: outcome
+        label: "owner redefines success metric"
+        state: preserved

@@ -402,7 +402,7 @@ def main() -> int:
         brief = initiative / "stakeholder-brief.html"
         brief.write_text(brief.read_text(encoding="utf-8").replace('data-harness-brief-design="v1"', "", 1), encoding="utf-8")
         missing_lineage = run(root)
-        require(missing_lineage.returncode == 1 and "missing stakeholder brief design-lineage marker" in missing_lineage.stdout, missing_lineage.stdout)
+        require(missing_lineage.returncode == 1 and "missing stakeholder brief version axis" in missing_lineage.stdout, missing_lineage.stdout)
         write_fixture(root)
         run(root, "--write-baseline")
 
@@ -1073,7 +1073,7 @@ document.querySelectorAll('[role="tablist"]').forEach(initializeTablist);
         no_tab_v2 = '<html data-harness-brief-design="v2"><body><section id="scope"></section></body></html>'
         require(not tab_contract_errors(no_tab_v2), str(tab_contract_errors(no_tab_v2)))
 
-        template = (ROOT / ".harness" / "templates" / "stakeholder-brief.html").read_text(encoding="utf-8")
+        template = (ROOT / "scripts" / "fixtures" / "tabbed-brief-surface" / "template-v2.html").read_text(encoding="utf-8")
         template_tab_errors = tab_contract_errors(template)
         require(not template_tab_errors, str(template_tab_errors))
         require(

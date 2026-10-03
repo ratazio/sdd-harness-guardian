@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Promote a reviewed, source-backed candidate into a stakeholder brief.
+"""Materialize a direct-authored v3 brief or promote a historical candidate.
 
 This command intentionally does not invent content from Markdown. Rich decision
 communication remains authored from canonical sources and reviewed by people.
@@ -22,11 +22,11 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 from new_initiative import provision_pearson_logo
-from validate_bundle import stakeholder_brief_errors
-from validate_brief_candidate_inheritance import errors as candidate_inheritance_errors
+from validate_bundle import stakeholder_brief_errors, brief_contract_lineage
 from validate_pearson_brief_policy import policy_errors
 from brief_v2_sources import V2_REQUIRED_SOURCES
 from brief_review import REVIEW_FINDING_OUTCOMES, review_finding_outcome, yaml_review_finding_outcome
+from brief_v3_contract import materialized_state as v3_materialized_state
 from editorial_exceptions import composition_editorial_findings, reviewed_editorial_exception_error
 
 
@@ -336,7 +336,7 @@ class LifecycleParser(HTMLParser):
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("initiative", type=Path, help="initiative directory under specs/NNN-slug")
-    parser.add_argument("--candidate", type=Path, help="reviewed candidate HTML outside the initiative delivery path")
+    parser.add_argument("--candidate", type=Path, help="direct-authored contract 3 or historical reviewed HTML outside the delivery path")
     parser.add_argument(
         "--render-unapproved",
         action="store_true",
@@ -987,25 +987,6 @@ def root_attribute(html: str, name: str) -> str | None:
         root.group(1),
     )
     return value.group(1) if value else None
-
-
-def candidate_skeleton_inheritance_error(initiative: Path, candidate: Path, candidate_html: str) -> str | None:
-    """Require v3 promotion inputs to retain their initiative-local skeleton.
-
-    Legacy/v2 material remains on its documented lifecycle path.  A v3
-    candidate, however, explicitly promises the immutable shell contract; the
-    renderer is its delivery boundary and must verify that promise for normal
-    and autonomous-recovery promotion alike.
-    """
-    if root_attribute(candidate_html, "data-brief-shell-contract") != "v1":
-        return None
-    skeleton = initiative / "brief-candidates" / "stakeholder-brief.skeleton.html"
-    if not skeleton.is_file():
-        return "v3 candidate requires initiative-local brief-candidates/stakeholder-brief.skeleton.html"
-    findings = candidate_inheritance_errors(candidate, skeleton, initiative)
-    if findings:
-        return "candidate does not retain the initiative-local skeleton: " + "; ".join(findings)
-    return None
 
 
 def pre_render_review_error(
@@ -2008,6 +1989,8 @@ def main() -> int:
             return fail("--finalize-post-review does not accept --candidate or --render-unapproved")
         if not target.is_file():
             return fail("stakeholder-brief.html must exist before recording post-render review")
+        if root_attribute(target.read_text(encoding="utf-8"), "data-brief-contract") == "3":
+            return fail("--finalize-post-review is historical contract 1/2 only; contract 3 ends with the two repairs and report")
         try:
             finalize_post_render_review(initiative, target, state_path, fault_at=args.fault_at)
         except (OSError, ValueError, RuntimeError) as error:
@@ -2026,9 +2009,28 @@ def main() -> int:
         return fail("stakeholder-brief.html already exists; historical artifacts require --refresh and a newly reviewed replacement")
     state = state_path.read_text(encoding="utf-8")
     candidate_html = candidate.read_text(encoding="utf-8")
-    inheritance_error = candidate_skeleton_inheritance_error(initiative, candidate, candidate_html)
-    if inheritance_error:
-        return fail(inheritance_error)
+    if brief_contract_lineage(candidate_html) is None:
+        return fail("candidate requires recognized contract 1/2/3; no legacy review protocol can supply missing lineage")
+    if root_attribute(candidate_html, "data-brief-contract") == "3":
+        # Keep raw newlines: source/HTML hashes bind actual bytes, and unrelated
+        # consumer YAML must not acquire newline changes during materialization.
+        candidate_html = candidate.read_bytes().decode("utf-8")
+        state = state_path.read_bytes().decode("utf-8")
+        if args.render_unapproved or args.allow_reviewed_editorial_exceptions:
+            return fail("legacy review/editorial flags do not apply to contract 3")
+        errors = stakeholder_brief_errors(candidate_html, rendered=True)
+        if errors:
+            return fail("candidate fails contract 3 mechanical structure: " + "; ".join(errors))
+        try:
+            rendered_state = v3_materialized_state(initiative, state, candidate_html)
+            # No source transformations, prose adjudication or approval gates.
+            # The existing recoverable unit remains exactly HTML + run-state.
+            promote_pair(target, state_path, candidate_html, rendered_state, args.fault_at)
+        except (OSError, ValueError, RuntimeError) as error:
+            return fail(f"contract 3 materialization interrupted; rerun to recover: {error}")
+        print(f"Materialized contract 3 stakeholder brief: {target}")
+        print("Continue the recorded content and visual repairs in this same HTML, then report; no approval is granted.")
+        return 0
     if args.render_unapproved:
         try:
             candidate_html = with_unapproved_lifecycle_surface(candidate_html)

@@ -1,0 +1,210 @@
+# Valid fixture for scripts/test_brief_model_authoring.py.
+# Loosely modeled on testes/mock-runs/20260902-spec028-matrix-r1/m002-reconciliation
+# (backend reconciliation), trimmed to one representative block per route.
+
+contract_version: "1.0.0"
+profile: standard
+domain: software
+
+thesis:
+  decision_and_audience: >-
+    Produto, arquitetura e operacao devem aprovar a cobertura antes de HTML.
+  brief_thesis: >-
+    Conciliar lotes SFTP simulados com pedidos e expor divergencias
+    auditaveis, sem ocultar erro monetario, duplicidade e exposicao de
+    identificadores.
+  repeated_component_treatment: >-
+    Um dossie por task e uma prova por criterio de validacao; nunca um
+    cartao de titulo.
+
+relations:
+  - id: architecture-global-flow
+    label: Fluxo material do lote
+    nodes:
+      - id: ingest
+        label: Arquivo chega com identidade
+      - id: worker
+        label: Worker normaliza e concilia
+      - id: recovery
+        label: Falha recupera ou vai a DLQ
+    edges:
+      - from: ingest
+        to: worker
+        label: hash acquirer/data decide idempotencia
+        state: proposed
+      - from: worker
+        to: recovery
+        label: checkpoint por linha
+        state: preserved
+
+routes:
+  - id: scope
+    executive_question: Qual valor sem ampliar a plataforma para decisao financeira?
+    blocks:
+      - id: hero
+        form: prose
+        form_reason: >-
+          Uma tese unica de negocio nao precisa de diagrama; prosa e a forma
+          mais direta para orientar o leitor.
+        coverage: represented
+        source: spec.md
+        source_section: Functional requirements
+        fragment: "FR-001 upload idempotent by acquirer/date/hash"
+        text: >-
+          Conciliar dinheiro sem arredondar, duplicar ou apagar o historico.
+
+  - id: architecture
+    executive_question: Onde o lote muda de estado e onde a decisao segue deterministica?
+    blocks:
+      - id: architecture-global-flow
+        collection: architecture.global
+        form: topology
+        form_reason: >-
+          Cada fronteira de protocolo/estado e material; uma topologia
+          nomeada torna a fronteira auditavel em vez de descritiva.
+        coverage: represented
+        source: impact-map.md
+        source_section: topology
+        fragment: "SFTP simulado -> armazenamento S3 -> RabbitMQ"
+        text: >-
+          O lote percorre identidade, processamento e recuperacao sem perder
+          evidencia.
+        relation_ref: architecture-global-flow
+      - id: zoom-ledger
+        collection: architecture.global
+        form: dossier
+        form_reason: >-
+          O zoom de dominio tem campos fixos e repetidos (papel, alteracao,
+          preservado, contrato, tasks, recuperacao); um dossie evita prosa
+          redundante entre zooms.
+        coverage: represented
+        source: plan.md
+        source_section: "Architecture decisions"
+        fragment: "Node 22, TypeScript strict, PostgreSQL 16, RabbitMQ"
+        text: Modelo financeiro e migracoes.
+        fields:
+          - label: Papel
+            value: Batch, line, order, match, discrepancy e audit record formam o ledger.
+          - label: Alteracao
+            value: Criar schema/migracao e invariantes de cents/UTC.
+          - label: Preservado
+            value: Nao ha mutacao destrutiva de original.
+          - label: Tasks
+            value: T-001
+
+  - id: impact
+    blocks:
+      - id: surface-ingestao
+        collection: impact.surface
+        form: footprint
+        form_reason: >-
+          O impacto e uma pegada por superficie (ingestao, worker, api); uma
+          lista de cartoes com delta/dono/exposicao comunica melhor que prosa
+          corrida.
+        coverage: represented
+        source: impact-map.md
+        source_section: impact
+        fragment: "Ingestao e original"
+        text: >-
+          Integracao retem CSV e valida esquema/hash; duplicata retorna
+          batch existente sem chamar adquirente real.
+
+  - id: execution
+    blocks:
+      - id: T-001
+        collection: execution.task
+        form: dossier
+        form_reason: >-
+          Cada task e um dossie completo (resultado, limite, prova, por-que-
+          agora); um cartao de titulo nao seria recuperavel pelo revisor.
+        coverage: represented
+        source: tasks.md
+        source_section: "T-001"
+        fragment: "T-001 · ledger e migracao"
+        text: Ledger e entrada confiavel.
+        fields:
+          - label: Resultado
+            value: Modelo monetario, migracoes e invariantes de cents/UTC.
+          - label: Limite
+            value: Nao concede publicacao automatica.
+          - label: Prova
+            value: V-001 demonstra que entrada reprovada nunca chega ao parser.
+
+  - id: validation
+    blocks:
+      - id: V-001
+        collection: validation.proof
+        form: dossier
+        form_reason: >-
+          Uma prova precisa de metodo, oraculo, evidencia e limite lado a
+          lado; dossie evita que o revisor precise caçar cada campo em prosa.
+        coverage: represented
+        source: validation-plan.md
+        source_section: "V-001"
+        fragment: "V-001 · portao de entrada"
+        text: Portao de entrada.
+        fields:
+          - label: Metodo
+            value: Envia arquivo malicioso, macro, link, tipo e tamanho invalidos ao upload.
+          - label: Oraculo
+            value: Parser nao recebe qualquer entrada reprovada.
+
+  - id: evolution
+    blocks:
+      - id: gate-status
+        form: prose
+        form_reason: >-
+          Um unico estado de gate e um fato, nao uma estrutura; prosa basta.
+        coverage: represented
+        source: run-state.yaml
+        source_section: quality_gates
+        fragment: "human_visibility_ready: false"
+        text: >-
+          Human Visibility e Tasks Ready permanecem falsos ate a revisao
+          independente aprovar a cobertura.
+      - id: retention-window
+        form: prose
+        form_reason: >-
+          A ausencia e uma frase, nao uma tabela; prosa e suficiente para uma
+          discovery unica.
+        coverage: not_applicable
+        source: decision-log.md
+        source_section: "Q-001"
+        absence:
+          kind: discovery
+          missing_fact: Prazo de retencao de arquivos originais.
+          decision_impact: >-
+            Sem o prazo, o dimensionamento de armazenamento e a politica de
+            expurgo nao podem ser aprovados antes de T-001.
+          owner: financeiro
+
+  - id: decision
+    blocks:
+      - id: D-004
+        form: prose
+        form_reason: >-
+          Um registro de decisao unico e melhor lido como prosa curta do que
+          como matriz, quando ha apenas uma decisao material nesta rota.
+        coverage: represented
+        source: decision-log.md
+        source_section: "D-004"
+        fragment: "D-004"
+        text: >-
+          A revisao independente de construcao permanece REVISE ate a
+          topologia corrigida ser aprovada.
+
+  - id: coverage
+    blocks:
+      - id: coverage-table
+        form: matrix
+        form_reason: >-
+          A tabela fonte-para-destino e inerentemente tabular; uma matriz
+          preserva a leitura de linha por fonte que a revisao de cobertura
+          espera.
+        coverage: represented
+        source: plan.md
+        source_section: "Brief coverage composition (v2)"
+        fragment: "spec.md#outcome..authorization"
+        text: >-
+          Todo elemento material da jornada tem uma fonte e um destino de
+          leitura.

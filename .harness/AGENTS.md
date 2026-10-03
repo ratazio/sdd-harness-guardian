@@ -47,7 +47,8 @@ artefatos de iniciativa são relativos à raiz do projeto consumidor.
   demonstrável declarados;
 - iniciativa não trivial mantém `stakeholder-brief.html` legível e sincronizado
   com os artefatos fonte depois de `brief_phase: rendered`; antes disso, a
-  ausência do HTML é obrigatória e não deve ser apresentada como entrega;
+  ausência do HTML é obrigatória e não deve ser apresentada como entrega
+  (regras detalhadas: `.harness/rules/brief-contract.md`, BC-001);
 - mudança não trivial exige `impact-map.md`;
 - todo critério de aceite tem validação rastreável;
 - nenhuma task chega a `done` sem evidence pack aprovado;
@@ -88,8 +89,8 @@ invariantes protegidas. Conflitos devem ser registrados no
 | Ratchet Maintainer | converter falhas em prevenção permanente | exigir regression check |
 | Harness Auditor | auditar SDD, harness, grafo e evidência | não confundir existência com uso |
 | Harness Graph Mapper | mapear artefatos e referências alcançáveis | não inferir edges sem prova |
-| Brief Experience Composer | preencher o candidate v3 a partir do skeleton e fontes canônicas | não aprovar a própria composição |
-| Executive Brief Reviewer | avaliar construção e HTML renderizado para decisão executiva | não editar durante a avaliação |
+| Brief Experience Composer | compor HTML conforme a linhagem (BC-002/BC-008) | não aprovar a própria composição |
+| Executive Brief Reviewer | B reparador no contrato 3; reviewer no histórico 2 (BC-009/BC-010) | não confundir reparo com aprovação independente |
 
 As definições completas estão em `.harness/agents/`.
 
@@ -102,10 +103,13 @@ As definições completas estão em `.harness/agents/`.
 4. Impact Map
 5. Technical Plan -> Gate: Plan Ready
 6. Validation Plan -> Gate: Validation Ready
-7. v2 only: Preliminary Task Draft -> Gate: Tasks Drafted (not authorized)
-8. v2 only: Coverage Composition + distinct review -> Gate: Brief Coverage Ready
-9. Stakeholder Brief -> Gate: Human Visibility Ready
-10. v2 only: Meeting decision propagation + refreshed brief -> Gate: Tasks Ready
+7. Select brief lineage -> BC-002; new generation defaults to contract 3
+8. v3: A authors template -> B content repair -> same B visual repair -> report
+   (BC-008/BC-009/BC-010/BC-025)
+9. v1/v2 historical only: retain the BC-002/BC-009 historical gates;
+   v2 Tasks Drafted and Brief Coverage Ready never gate contract 3
+10. Record actual visibility disposition and owner/source-authoring task
+    authorization separately (BC-018); no post-B review or own approve
 11. Implementation of one ready task
 12. Evidence draft
 13. Independent Evaluation
@@ -161,11 +165,11 @@ houver risco.
 Bugfixes também usam `reproduction.md`. Os templates canônicos estão em
 `.harness/templates/`.
 
-O scaffolder cria somente fontes canônicas. Para materializar um brief, o autor
-prepara um candidato após cobertura revisada, define `brief_phase:
-ready_to_render` e usa `scripts/render_stakeholder_brief.py`; o promotor recusa
-casca, placeholders, estado incorreto e logo divergente. Renderizar não é
-aprovar ou entregar: a revisão independente do HTML continua obrigatória.
+O scaffolder cria somente fontes canônicas. A materialização segue o ramo
+BC-002: no contrato 3, compositor e reparador usam BC-008/BC-009; promoção
+técnica não introduz aprovação prévia nem validação semântica adicional.
+Somente no histórico 2, candidato/modelo e revisões seguem os gates legados
+BC-009. Renderizar e concluir reparo não aprovam implementação (BC-010).
 
 ## Gates de bloqueio
 
@@ -181,12 +185,13 @@ Bloqueie avanço quando:
   humana de coverage;
 - cobertura v2 usa `link_only` para heading material de fonte core, ou autor e
   reviewer de coverage não são identidades distintas;
-- tarefa preliminar é tratada como `ready`, ou Tasks Ready ocorre antes de
-  propagação de decisões de reunião e refresh de coverage/brief;
+- tarefa preliminar é tratada como `ready`, ou autorização de implementação
+  é inferida da conclusão do brief (BC-010/BC-018);
 - perfil de arquitetura S/M/L/high/unknown não está sustentado por fontes, ou
   informação ausente não foi bloqueada/transformada em discovery;
-- brief v1 histórico/pinned é forçado pelos gates v2 antes de refresh material
-  ou migração explícita.
+- brief histórico/pinned 1/2 recebe gates 3 sem migração explícita, ou o ramo 3
+  exige modelo/pré-review/reaprovação legados (BC-002/BC-009);
+- conclusão do reparo 3 não tem ator/esforço efetivo exigido em BC-010/BC-025;
 - a próxima task não explica por que é o próximo passo seguro rumo ao outcome;
 - critérios de aceite não são testáveis ou não têm validation mapping;
 - impacto de mudança não trivial não foi mapeado;

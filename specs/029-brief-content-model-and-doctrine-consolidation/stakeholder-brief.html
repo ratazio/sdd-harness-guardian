@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="en" data-brief-contract="2" data-harness-template-kind="composed" data-brief-phase="composed" data-brief-model-schema-version="1.0.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>software brief</title>
+    <style data-harness-brief-shell data-brief-base-stylesheet="v1">
+      :root {
+        --navy: #0b004a;
+        --violet: #4c30a5;
+        --lavender: #c1bffa;
+        --canvas: #edecf5;
+        --paper: #fff;
+        --ink: #0b004a;
+        --muted: #475061;
+        --aqua: #7fdfe0;
+        --green: #007a53;
+        --amber: #8a6800;
+        --danger: #b42318;
+        --line: #c1bffa;
+        --r: 22px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        background: var(--canvas);
+        font-family: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
+        color: var(--ink);
+      }
+      body {
+        margin: 0;
+        line-height: 1.55;
+        background: linear-gradient(180deg, #fff 0 17rem, var(--canvas) 17rem);
+      }
+      a {
+        color: inherit;
+        text-underline-offset: 0.2em;
+      }
+      a:focus-visible,
+      [role="tab"]:focus-visible {
+        outline: 3px solid var(--violet);
+        outline-offset: 3px;
+      }
+      .brief-shell {
+        min-width: 0;
+      }
+      .brief-no-script {
+        width: min(calc(100% - 64px), 1440px);
+        margin: 24px auto 0;
+        padding: 18px 22px;
+        border: 1px solid var(--line);
+        border-left: 6px solid var(--violet);
+        border-radius: 14px;
+        background: var(--lavender);
+        color: var(--navy);
+      }
+      .shell {
+        width: min(calc(100% - 64px), 1440px);
+        margin: auto;
+        padding-bottom: 96px;
+      }
+      .topbar {
+        min-height: 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .tag {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: #fff;
+        font-weight: 700;
+      }
+      .brief-header {
+        position: relative;
+        overflow: hidden;
+        min-height: 360px;
+        padding: 60px 64px;
+        border-radius: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .brief-header:after {
+        content: "";
+        position: absolute;
+        width: 470px;
+        height: 470px;
+        right: -90px;
+        bottom: -185px;
+        border: 72px solid var(--aqua);
+        border-radius: 50%;
+        opacity: 0.9;
+      }
+      .brief-header > * {
+        position: relative;
+        z-index: 1;
+      }
+      .eyebrow,
+      .label {
+        margin: 0 0 13px;
+        color: var(--aqua);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .brief-header h1 {
+        max-width: 17ch;
+        margin: 0;
+        font-size: clamp(40px, 4.6vw, 68px);
+        font-weight: 600;
+        line-height: 1.06;
+        letter-spacing: -0.04em;
+      }
+      .lede {
+        max-width: 62ch;
+        margin: 22px 0 0;
+        color: #eeeefe;
+        font-size: 20px;
+      }
+      .header-call {
+        position: absolute;
+        right: 64px;
+        bottom: 38px;
+        width: min(320px, 29%);
+        padding: 20px;
+        border: 1px solid rgb(255 255 255 / 0.35);
+        border-radius: 18px;
+        background: rgb(11 0 74 / 0.35);
+      }
+      .header-call p {
+        margin: 6px 0 0;
+      }
+      .route-nav {
+        position: sticky;
+        top: 0;
+        z-index: 9;
+        display: flex;
+        gap: 9px;
+        overflow: auto;
+        margin: 28px 0 38px;
+        padding: 14px 0;
+        background: linear-gradient(90deg, #fff 84%, transparent);
+      }
+      .route-nav a {
+        flex: 0 0 auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 10px 14px;
+        color: var(--navy);
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .route-nav [role="tab"][aria-selected="true"] {
+        border-color: var(--violet);
+        background: var(--violet);
+        color: #fff;
+      }
+      .brief-route {
+        display: grid;
+        gap: 28px;
+        min-height: 620px;
+        outline: none;
+      }
+      .route-hero {
+        display: grid;
+        grid-template-columns: 1.35fr 0.65fr;
+        gap: 28px;
+        padding: 42px 48px;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: #f3f2fe;
+      }
+      .route-hero h1 {
+        max-width: 22ch;
+        margin: 0;
+        font-size: 48px;
+        line-height: 1.1;
+        letter-spacing: -0.035em;
+        font-weight: 600;
+      }
+      .intro {
+        max-width: 62ch;
+        margin: 16px 0 0;
+        font-size: 18px;
+      }
+      .question {
+        align-self: end;
+        padding: 24px;
+        border-radius: 18px;
+        background: #fff;
+        border-left: 6px solid var(--violet);
+      }
+      .question b {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--violet);
+        font-size: 13px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+      .question p {
+        margin: 0;
+      }
+      .snapshot,
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+      .snapshot {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .metric,
+      .card,
+      .brief-task-card,
+      .brief-proof-card,
+      .brief-architecture-cut,
+      .brief-impact-footprint > *,
+      .brief-risk-chain > *,
+      .brief-coverage-group > *,
+      .diagram,
+      .timeline,
+      .gateboard,
+      .matrix {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+      }
+      .metric {
+        padding: 20px;
+      }
+      .metric h2 {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .metric p,
+      .card p {
+        margin: 0;
+      }
+      .card {
+        padding: 28px;
+      }
+      .card h2,
+      .card h3 {
+        margin: 8px 0 12px;
+        line-height: 1.2;
+      }
+      .card h2 {
+        font-size: 26px;
+      }
+      .card h3 {
+        font-size: 20px;
+      }
+      .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 28px;
+      }
+      .heading h2 {
+        margin: 0;
+        font-size: 38px;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+      }
+      .heading p {
+        max-width: 64ch;
+        margin: 0;
+        color: var(--muted);
+      }
+      .slot {
+        position: relative;
+      }
+      html[data-harness-template-kind='scaffold'] .slot:after,
+      html[data-harness-template-kind='skeleton'] .slot:after {
+        content: "a preencher a partir das fontes canônicas";
+        display: block;
+        margin-top: 17px;
+        color: var(--violet);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .placeholder {
+        margin: 0;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .diagram {
+        overflow: auto;
+        padding: 30px;
+      }
+      .diagram h2 {
+        margin: 0;
+        font-size: 28px;
+      }
+      .topology {
+        display: grid;
+        grid-template-columns: 1fr 48px 1fr 48px 1fr;
+        align-items: center;
+        min-width: 840px;
+        margin-top: 20px;
+        padding: 28px;
+        border-radius: 18px;
+        background: #f3f2fe;
+      }
+      .node {
+        min-height: 118px;
+        padding: 20px;
+        border: 2px dashed var(--violet);
+        border-radius: 16px;
+        background: #fff;
+      }
+      .node strong {
+        display: block;
+        font-size: 19px;
+      }
+      .node span {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+      }
+      .arrow {
+        color: var(--violet);
+        font-size: 34px;
+        text-align: center;
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 13px;
+        margin-top: 18px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .legend span:before {
+        content: "";
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        margin-right: 6px;
+        border-radius: 50%;
+        background: var(--violet);
+      }
+      .legend .preserved:before {
+        background: var(--green);
+      }
+      .legend .boundary:before {
+        background: #fff;
+        border: 2px dashed var(--amber);
+      }
+      .brief-architecture-cut {
+        padding: 26px;
+        border-top: 7px solid var(--violet);
+      }
+      .brief-architecture-cut h3 {
+        margin: 8px 0;
+        font-size: 23px;
+      }
+      .fields {
+        display: grid;
+        grid-template-columns: 132px 1fr;
+        gap: 10px 16px;
+        margin: 20px 0 0;
+        font-size: 14px;
+      }
+      .fields dt {
+        font-weight: 700;
+      }
+      .fields dd {
+        margin: 0;
+        color: var(--muted);
+      }
+      .assurance {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+      }
+      .assurance article {
+        padding: 30px;
+      }
+      .assurance article:first-child {
+        border-right: 1px solid var(--line);
+        background: #f3f2fe;
+      }
+      .assurance article:last-child {
+        background: #fff6ff;
+      }
+      .assurance h2 {
+        margin: 0 0 10px;
+        font-size: 28px;
+      }
+      .brief-impact-footprint,
+      .brief-risk-chain,
+      .brief-coverage-group {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .brief-impact-footprint > *,
+      .brief-risk-chain > *,
+      .brief-coverage-group > * {
+        padding: 24px;
+      }
+      .brief-impact-footprint > * {
+        border-top: 7px solid var(--violet);
+      }
+      .brief-risk-chain > * {
+        border-top: 7px solid var(--danger);
+      }
+      .brief-coverage-group > * {
+        border-top: 7px solid var(--green);
+      }
+      .brief-impact-footprint h3,
+      .brief-risk-chain h3,
+      .brief-coverage-group h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+      }
+      .epics,
+      .validation-flow {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .epic,
+      .validation-flow article {
+        position: relative;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .epic:not(:last-child):after {
+        content: "→";
+        position: absolute;
+        right: -19px;
+        top: 42%;
+        z-index: 2;
+        color: var(--violet);
+        font-size: 30px;
+      }
+      .epic b {
+        display: block;
+        color: var(--violet);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+      }
+      .epic h3 {
+        margin: 8px 0;
+        font-size: 23px;
+      }
+      .brief-task-card {
+        padding: 30px;
+        border-top: 7px solid var(--violet);
+      }
+      .task-dossiers,
+      .validation-dossiers {
+        display: grid;
+        gap: 22px;
+      }
+      .brief-task-card h3 {
+        margin: 8px 0;
+        font-size: 28px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chips span {
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: #f3f2fe;
+        color: var(--violet);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .validation-flow {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .validation-flow article:not(:last-child):after {
+        content: "→";
+        position: absolute;
+        right: -17px;
+        top: 40%;
+        z-index: 2;
+        color: var(--violet);
+        font-size: 27px;
+      }
+      .validation-flow h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+      .brief-proof-card {
+        padding: 28px;
+        border-top: 7px solid var(--green);
+      }
+      .brief-proof-card h3 {
+        margin: 8px 0;
+        font-size: 24px;
+      }
+      .matrix {
+        overflow: auto;
+      }
+      .matrix table,
+      .audience,
+      .coverage {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .matrix th,
+      .matrix td,
+      .audience th,
+      .audience td,
+      .coverage th,
+      .coverage td {
+        padding: 16px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid #e0def8;
+      }
+      .matrix th,
+      .coverage th {
+        background: #f3f2fe;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .timeline {
+        padding: 32px;
+      }
+      .timeline article {
+        position: relative;
+        padding: 0 0 28px 28px;
+        border-left: 2px solid var(--lavender);
+      }
+      .timeline article:last-child {
+        padding-bottom: 0;
+      }
+      .timeline article:before {
+        content: "";
+        position: absolute;
+        left: -9px;
+        top: 4px;
+        width: 16px;
+        height: 16px;
+        border: 4px solid var(--canvas);
+        border-radius: 50%;
+        background: var(--violet);
+      }
+      .timeline h3 {
+        margin: 0 0 8px;
+        font-size: 21px;
+      }
+      .gateboard {
+        padding: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .gateboard h2 {
+        margin: 0 0 20px;
+        font-size: 30px;
+      }
+      .gates {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .gate {
+        padding: 16px;
+        border: 1px solid rgb(255 255 255 / 0.35);
+        border-radius: 14px;
+      }
+      .gate b {
+        display: block;
+        font-size: 13px;
+      }
+      .gate span {
+        color: var(--aqua);
+        font-weight: 700;
+      }
+      .brief-decision-call {
+        padding: 34px;
+        border-left: 7px solid var(--violet);
+      }
+      .brief-decision-call h2 {
+        margin: 0 0 12px;
+        font-size: 32px;
+      }
+      .audience {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .audience th {
+        background: var(--navy);
+        color: #fff;
+        font-size: 13px;
+      }
+      .coverage-wrap {
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+      }
+      .absence {
+        padding: 18px;
+        border-left: 5px solid var(--amber);
+        border-radius: 0 14px 14px 0;
+        background: #fff9e7;
+      }
+      .footer {
+        margin-top: 60px;
+        padding: 44px 54px;
+        border-radius: 30px;
+        background: var(--navy);
+        color: #fff;
+      }
+      .footer p {
+        max-width: 78ch;
+        margin: 10px 0 0;
+        color: #e5e2f5;
+      }
+      .footer .label {
+        color: var(--aqua);
+      }
+      .brief-route[hidden],
+      .route[hidden] {
+        display: none;
+      }
+      @media (max-width: 900px) {
+        .shell {
+          width: min(calc(100% - 32px), 1440px);
+        }
+        .brief-header {
+          padding: 40px;
+        }
+        .header-call {
+          position: static;
+          width: auto;
+          margin-top: 26px;
+        }
+        .route-hero {
+          grid-template-columns: 1fr;
+          padding: 32px;
+        }
+        .snapshot,
+        .three,
+        .brief-impact-footprint,
+        .brief-risk-chain,
+        .brief-coverage-group {
+          grid-template-columns: 1fr 1fr;
+        }
+        .epics,
+        .validation-flow {
+          grid-template-columns: 1fr;
+        }
+        .epic:not(:last-child):after,
+        .validation-flow article:not(:last-child):after {
+          content: "↓";
+          right: auto;
+          left: 48%;
+          top: auto;
+          bottom: -27px;
+        }
+        .two,
+        .assurance {
+          grid-template-columns: 1fr;
+        }
+        .assurance article:first-child {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+      }
+      @media (max-width: 560px) {
+        .shell {
+          width: min(calc(100% - 24px), 1440px);
+        }
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 10px 0;
+        }
+        .brief-header {
+          padding: 30px 24px;
+        }
+        .brief-header h1 {
+          font-size: 40px;
+        }
+        .route-hero {
+          padding: 26px 22px;
+        }
+        .route-hero h1 {
+          font-size: 38px;
+        }
+        .snapshot,
+        .three,
+        .brief-impact-footprint,
+        .brief-risk-chain,
+        .brief-coverage-group {
+          grid-template-columns: 1fr;
+        }
+        .heading {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .fields {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+        .fields dd {
+          margin-bottom: 12px;
+        }
+        .route-nav {
+          position: static;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .topbar,
+        .route-nav,
+        .footer {
+          display: none;
+        }
+        .shell {
+          width: 100%;
+          padding: 0;
+        }
+        .tab-panel[hidden] {
+          display: block !important;
+        }
+        .brief-route,
+        .route[hidden] {
+          display: grid !important;
+          break-after: page;
+        }
+        .brief-header {
+          min-height: 0;
+          border: 1px solid var(--line);
+          background: #fff;
+          color: var(--navy);
+        }
+        .brief-header:after {
+          display: none;
+        }
+        .lede {
+          color: var(--muted);
+        }
+      }
+    </style>
+  </head>
+  <body class="brief-shell" data-tab-enhancement="fallback">
+    <noscript>
+      <aside class="brief-no-script" data-noscript-fallback="continuous-reading" role="status">
+        <strong>Navegação por subpáginas indisponível.</strong> Este brief requer JavaScript para alternar as abas e recuperar a URL de cada visão. Abaixo está somente a alternativa de leitura contínua; ela não equivale à experiência de subpáginas.
+      </aside>
+    </noscript>
+    <main class="shell">
+      <div class="topbar"><span class="tag">software &middot; deep</span></div>
+      <header class="brief-header">
+        <p class="eyebrow">Decision brief</p>
+        <h1>SPEC 029 replaced agent-authored brief HTML with a projected content model, and the honest record is that it took a real locator-collision fix, a real doctrine gap in the agent that runs the review chain, an owner-redefined success metric, and a cumulative line count that still reads as additive on its face.</h1>
+        <p class="lede">Guardian maintainers and the owner decide whether the three gates suspended by D-007/D-011/D-012 — human_visibility_ready, brief_coverage_ready and tasks_ready — can be set true for SPEC 029 itself, closing the bootstrap this initiative exists to prove.</p>
+      </header>
+      <nav class="route-nav" aria-label="Brief decision views" role="tablist">
+        <a id="tab-scope" role="tab" href="?view=scope" aria-controls="scope" aria-selected="true" tabindex="0">Value &amp; scope</a><a id="tab-architecture" role="tab" href="?view=architecture" aria-controls="architecture" aria-selected="false" tabindex="-1">Architecture</a><a id="tab-impact" role="tab" href="?view=impact" aria-controls="impact" aria-selected="false" tabindex="-1">Impact</a><a id="tab-execution" role="tab" href="?view=execution" aria-controls="execution" aria-selected="false" tabindex="-1">Execution</a><a id="tab-validation" role="tab" href="?view=validation" aria-controls="validation" aria-selected="false" tabindex="-1">Validation</a><a id="tab-evolution" role="tab" href="?view=evolution" aria-controls="evolution" aria-selected="false" tabindex="-1">Evolution</a><a id="tab-decision" role="tab" href="?view=decision" aria-controls="decision" aria-selected="false" tabindex="-1">Decision</a><a id="tab-coverage" role="tab" href="?view=coverage" aria-controls="coverage" aria-selected="false" tabindex="-1">Coverage</a><a id="tab-coverage" role="tab" href="?view=coverage" aria-controls="coverage" aria-selected="false" tabindex="-1">Coverage</a>
+      </nav>
+      <section id="scope" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-scope" tabindex="0">
+        <h2 class="route-title">Value &amp; scope</h2>
+<article class="card" id="hero" data-source="spec.md" data-source-section="1. Problema" data-coverage="represented" data-source-digest="sha256:1586e1b061e79c5af3cad05d400b2b39a860ca0078d2a83a7ed81fb1a87e9d8d" data-source-fragment="oito ciclos de correção sobre a mesma" data-source-fragment-sha256="sha256:23303b0a629fdd9d2c52a9740c4e2d6af705d9cbf2676218a2a502e48e62e635" data-block-form="prose">
+          <p>The bundle accumulated eight correction cycles over the same stakeholder-brief pipeline between releases 0.1.2 and 0.4.0, with two structural defects: agents author HTML by hand at a cost of three full-context passes per brief, and the doctrine that governs that authoring contradicts itself across eight-plus files. SPEC 029 treats the cause — an agent authoring markup from dispersed doctrine — instead of adding another orchestration layer on top.</p>
+          <p class="source"><cite>spec.md &middot; 1. Problema</cite> &mdash; &ldquo;oito ciclos de correção sobre a mesma&rdquo;</p>
+        </article>
+        <article class="card" id="non-goal-bootstrap" data-source="spec.md" data-source-section="6. Não objetivos" data-coverage="represented" data-source-digest="sha256:1586e1b061e79c5af3cad05d400b2b39a860ca0078d2a83a7ed81fb1a87e9d8d" data-source-fragment="usar a exceção de bootstrap (D-007) como precedente" data-source-fragment-sha256="sha256:73619d5bc685317789225e4b3eb76e8c17b9deda77ab45180b61257be146cda2" data-block-form="prose">
+          <p>NG-008 names the boundary this very brief operates under: the dispensation that let SPEC 029 skip the old brief pipeline while it built the new one is scoped to this initiative only, suspends only the ORDERING of human_visibility_ready (never its existence), and expires with this SPEC. Every other protected invariant — distinct identities, evidence before done, independent review, rendering does not equal approval, HTML is not a source — stays fully in force (D-008).</p>
+          <p class="source"><cite>spec.md &middot; 6. Não objetivos</cite> &mdash; &ldquo;usar a exceção de bootstrap (D-007) como precedente&rdquo;</p>
+        </article>
+      </section><section id="architecture" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-architecture" tabindex="0">
+        <h2 class="route-title">Architecture</h2>
+<article class="card" id="pipeline" data-source="impact-map.md" data-source-section="3. Dependency and data flow" data-coverage="represented" data-source-digest="sha256:77ae9e1882e6fd3de128534fe35bf96c0e6b4cf8119952ba00b0e478a8a51994" data-source-fragment="O elo removido é" data-source-fragment-sha256="sha256:f0b761dc625687a91f5ba1f1a4f4a58db293af172e7b3782d1cccca44e548905" data-block-form="topology">
+          <div class="diagram" data-relation-ref="pipeline" data-architecture-text-equivalent="Nodes: sources (Canonical .md sources); plan91 (plan.md §9.1 prose construction record); skeleton (Skeleton copied + agent authors HTML); inheritance (Candidate inheritance check); model (brief-model.yaml (agent-authored)); model-review (Independent model review (pass a)); projector (Deterministic projector); html (stakeholder-brief.html); render-review (Independent rendered review (pass b, loopback)). Relations: sources -&gt; plan91: authored in prose, once per agent per iteration [out-of-scope]; plan91 -&gt; skeleton: construction record precedes hand authoring [out-of-scope]; skeleton -&gt; inheritance: candidate must inherit skeleton structure [out-of-scope]; sources -&gt; model: agent authors model, not markup [preserved]; model -&gt; model-review: reviewed before any rendering [preserved]; model-review -&gt; projector: approved model is projected [preserved]; projector -&gt; html: provenance computed, never typed [preserved]; html -&gt; render-review: judges meaning and experience only [preserved]."><svg role="img" viewBox="0 0 2130 152" xmlns="http://www.w3.org/2000/svg" aria-label="Brief production, before vs. after" focusable="false"><title>Brief production, before vs. after</title><defs><marker id="brief-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)" /></marker></defs><line x1="190" y1="56" x2="260" y2="56" stroke="var(--amber)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="225" y="48" font-size="11" text-anchor="middle">authored in prose, once per agent per iteration (out-of-scope)</text><line x1="430" y1="56" x2="500" y2="56" stroke="var(--amber)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="465" y="48" font-size="11" text-anchor="middle">construction record precedes hand authoring (out-of-scope)</text><line x1="670" y1="56" x2="740" y2="56" stroke="var(--amber)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="705" y="48" font-size="11" text-anchor="middle">candidate must inherit skeleton structure (out-of-scope)</text><line x1="190" y1="56" x2="980" y2="56" stroke="var(--green)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="585" y="48" font-size="11" text-anchor="middle">agent authors model, not markup (preserved)</text><line x1="1150" y1="56" x2="1220" y2="56" stroke="var(--green)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="1185" y="48" font-size="11" text-anchor="middle">reviewed before any rendering (preserved)</text><line x1="1390" y1="56" x2="1460" y2="56" stroke="var(--green)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="1425" y="48" font-size="11" text-anchor="middle">approved model is projected (preserved)</text><line x1="1630" y1="56" x2="1700" y2="56" stroke="var(--green)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="1665" y="48" font-size="11" text-anchor="middle">provenance computed, never typed (preserved)</text><line x1="1870" y1="56" x2="1940" y2="56" stroke="var(--green)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="1905" y="48" font-size="11" text-anchor="middle">judges meaning and experience only (preserved)</text><rect x="20" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="105" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">Canonical .md sources</text><rect x="260" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="345" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">plan.md §9.1 prose construction record</text><rect x="500" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="585" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">Skeleton copied + agent authors HTML</text><rect x="740" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="825" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">Candidate inheritance check</text><rect x="980" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="1065" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">brief-model.yaml (agent-authored)</text><rect x="1220" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="1305" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">Independent model review (pass a)</text><rect x="1460" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="1545" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">Deterministic projector</text><rect x="1700" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="1785" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">stakeholder-brief.html</text><rect x="1940" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="2025" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">Independent rendered review (pass b, loopback)</text></svg><p class="brief-relation-text-equivalent">Nodes: sources (Canonical .md sources); plan91 (plan.md §9.1 prose construction record); skeleton (Skeleton copied + agent authors HTML); inheritance (Candidate inheritance check); model (brief-model.yaml (agent-authored)); model-review (Independent model review (pass a)); projector (Deterministic projector); html (stakeholder-brief.html); render-review (Independent rendered review (pass b, loopback)). Relations: sources -&gt; plan91: authored in prose, once per agent per iteration [out-of-scope]; plan91 -&gt; skeleton: construction record precedes hand authoring [out-of-scope]; skeleton -&gt; inheritance: candidate must inherit skeleton structure [out-of-scope]; sources -&gt; model: agent authors model, not markup [preserved]; model -&gt; model-review: reviewed before any rendering [preserved]; model-review -&gt; projector: approved model is projected [preserved]; projector -&gt; html: provenance computed, never typed [preserved]; html -&gt; render-review: judges meaning and experience only [preserved].</p><p class="brief-relation-state-legend">States: proposed; preserved; out-of-scope; discovery</p></div>
+          <p>The removed link is &quot;skeleton copiado -&gt; agente autora HTML -&gt; herança check&quot;. In its place: canonical sources feed a brief-model.yaml the agent authors, an independent reviewer judges that model before anything is rendered, a deterministic projector turns it into stakeholder-brief.html computing every provenance tuple from the source, and a second, disjoint review judges only meaning and experience on the rendered page served in loopback. This diagram itself was produced by that pipeline: the model you are reading is the artifact, not a description of one.</p>
+          <p class="source"><cite>impact-map.md &middot; 3. Dependency and data flow</cite> &mdash; &ldquo;O elo removido é&rdquo;</p>
+        </article>
+        <article class="brief-task-card" id="pd-003" data-source="plan.md" data-source-section="2. Architecture decisions" data-coverage="represented" data-source-digest="sha256:2e7175837ad48c89a66f6934ab9bd292df47d52e3597a9c9acb1aec4d5b09e20" data-source-fragment="resolver locator, digest e fragmento" data-source-fragment-sha256="sha256:29bd6825f068e49b2e8e5f1361b2af430958cb969540f78fcdde968c5f773ff1" data-block-form="dossier">
+          <h3>pd-003</h3>
+          <p>These three decisions are why this brief exists at all: PD-003 is what makes the provenance attributes on this very page non-authorable by hand, PD-004 is why the CSS you are reading did not need to be rewritten, and PD-007 is why the old pipeline stayed available until the new one had eight approved tasks of proof behind it.</p>
+          <dl class="fields">
+            <dt>PD-003 — projector reads sources for exactly three things</dt><dd>Locator, digest and fragment resolution only. No semantic synthesis in code (preserves NG-001).</dd>
+            <dt>PD-004 — the existing shell is a projection template</dt><dd>CSS/JS/a11y/print are copied byte-for-byte from stakeholder-brief.html; the a11y evidence from SPECs 013/014 continues to apply unchanged.</dd>
+            <dt>PD-007 — removal only after the replacement is proven</dt><dd>The inheritance check and skeleton instantiator are deleted only in T-008, after T-001..T-007 are independently approved — never before.</dd>
+          </dl>
+          <p class="source"><cite>plan.md &middot; 2. Architecture decisions</cite> &mdash; &ldquo;resolver locator, digest e fragmento&rdquo;</p>
+        </article>
+      </section><section id="impact" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-impact" tabindex="0">
+        <h2 class="route-title">Impact</h2>
+<div class="brief-impact-footprint">
+          <article id="surfaces" data-source="impact-map.md" data-source-section="2. Affected surfaces" data-coverage="represented" data-source-digest="sha256:77ae9e1882e6fd3de128534fe35bf96c0e6b4cf8119952ba00b0e478a8a51994" data-source-fragment="reduzido a promoção + projeção" data-source-fragment-sha256="sha256:7e5fd18c5f9de7d0cf5302558bd13a2a0a2dba8d47cdc354221c292e9d032ef0" data-block-form="footprint">
+            <h3>surfaces</h3>
+            <p>Build/deploy: validate_brief_candidate_inheritance.py and instantiate_brief_skeleton.py are removed; render_stakeholder_brief.py is reduced to promotion + projection. Public/API contract: the data-source*/data-brief-contract provenance attributes are now emitted by the projector instead of typed by an agent. Tests/docs: human-visibility.md and stakeholder-brief-design.md, three SKILLs, spec-review, sdd-lifecycle, AGENTS.md and two agent files were consolidated to reference a single normative contract instead of each restating brief rules.</p>
+            <p class="source"><cite>impact-map.md &middot; 2. Affected surfaces</cite> &mdash; &ldquo;reduzido a promoção + projeção&rdquo;</p>
+          </article>
+        </div>
+        <div class="brief-risk-chain">
+          <article id="risk-balance" data-source="impact-map.md" data-source-section="5. Regression risks and controls" data-coverage="represented" data-source-digest="sha256:77ae9e1882e6fd3de128534fe35bf96c0e6b4cf8119952ba00b0e478a8a51994" data-source-fragment="Saldo líquido de remoção como critério explícito (R-006)" data-source-fragment-sha256="sha256:9d1b1ebbe7d1c233316478fe84995323c49fdba047bc39a315932c53be888638" data-block-form="risk-chain">
+            <h3>risk-balance</h3>
+            <div class="diagram" data-relation-ref="net-balance-risk" data-architecture-text-equivalent="Nodes: trigger (T-001..T-007 add ~4,300 lines before any removal); signal (Cumulative git diff --stat reads +3,826 lines); control (T-008 isolated diff is -778 lines, reversible by git revert); decision-point (Owner rules on R-006/IR-006&#x27;s real criterion (D-033)); outcome (Recurring cost per brief, not static LOC, is the accepted metric). Relations: trigger -&gt; signal: produces [discovery]; signal -&gt; control: measured against [discovery]; control -&gt; decision-point: ambiguity escalated, not resolved by a builder [discovery]; decision-point -&gt; outcome: owner redefines success metric [preserved]."><svg role="img" viewBox="0 0 1170 152" xmlns="http://www.w3.org/2000/svg" aria-label="IR-006 — additive-initiative risk chain" focusable="false"><title>IR-006 — additive-initiative risk chain</title><defs><marker id="brief-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)" /></marker></defs><line x1="190" y1="56" x2="260" y2="56" stroke="var(--danger)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="225" y="48" font-size="11" text-anchor="middle">produces (discovery)</text><line x1="430" y1="56" x2="500" y2="56" stroke="var(--danger)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="465" y="48" font-size="11" text-anchor="middle">measured against (discovery)</text><line x1="670" y1="56" x2="740" y2="56" stroke="var(--danger)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="705" y="48" font-size="11" text-anchor="middle">ambiguity escalated, not resolved by a builder (discovery)</text><line x1="910" y1="56" x2="980" y2="56" stroke="var(--green)" stroke-width="2" marker-end="url(#brief-arrow)" /><text x="945" y="48" font-size="11" text-anchor="middle">owner redefines success metric (preserved)</text><rect x="20" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="105" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">T-001..T-007 add ~4,300 lines before any removal</text><rect x="260" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="345" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">Cumulative git diff --stat reads +3,826 lines</text><rect x="500" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="585" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">T-008 isolated diff is -778 lines, reversible by git revert</text><rect x="740" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="825" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">Owner rules on R-006/IR-006&#x27;s real criterion (D-033)</text><rect x="980" y="24" width="170" height="64" rx="10" fill="#fff" stroke="var(--violet)" stroke-width="2" /><text x="1065" y="56" font-size="13" text-anchor="middle" dominant-baseline="middle">Recurring cost per brief, not static LOC, is the accepted metric</text></svg><p class="brief-relation-text-equivalent">Nodes: trigger (T-001..T-007 add ~4,300 lines before any removal); signal (Cumulative git diff --stat reads +3,826 lines); control (T-008 isolated diff is -778 lines, reversible by git revert); decision-point (Owner rules on R-006/IR-006&#x27;s real criterion (D-033)); outcome (Recurring cost per brief, not static LOC, is the accepted metric). Relations: trigger -&gt; signal: produces [discovery]; signal -&gt; control: measured against [discovery]; control -&gt; decision-point: ambiguity escalated, not resolved by a builder [discovery]; decision-point -&gt; outcome: owner redefines success metric [preserved].</p><p class="brief-relation-state-legend">States: proposed; preserved; out-of-scope; discovery</p></div>
+            <p>IR-006 (this SPEC repeats the bundle&#x27;s historical pattern of adding a layer instead of removing one) was the risk this initiative was most exposed to, and it did not stay hypothetical: T-008&#x27;s own isolated diff is -778 lines (its removal succeeded), but the SPEC&#x27;s cumulative diff at that point was +3,826 lines, because T-001..T-007 added ~4,300 lines of schema, projector and tests before anything was deleted. The owner resolved this divergence directly (see decision route) rather than letting a builder average it away. IR-007 (parallel tasks producing divergent vocabulary) is marked &quot;ocorrido&quot; — it happened, twice, not just as a modeled risk — requiring an explicit reconciliation task (T-005) before T-008 removed the legacy fallback.</p>
+            <p class="source"><cite>impact-map.md &middot; 5. Regression risks and controls</cite> &mdash; &ldquo;Saldo líquido de remoção como critério explícito (R-006)&rdquo;</p>
+          </article>
+        </div>
+      </section><section id="execution" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-execution" tabindex="0">
+        <h2 class="route-title">Execution</h2>
+<article class="brief-task-card" id="ledger" data-source="tasks.md" data-source-section="Task ledger" data-coverage="represented" data-source-digest="sha256:69519f3a450f62bd5511adbd0ce572dfcd4e7e49decb03132b3c0d114b581ca8" data-source-fragment="T-010 | pending | Brief da própria 029 pela esteira nova e liberação dos gates" data-source-fragment-sha256="sha256:a0a3cd562d09cc63fae693c39e69e185ec80842ec7ed1035567a71d33866b32a" data-block-form="dossier">
+          <h3>ledger</h3>
+          <p>Nine of ten tasks are done with approved evidence; this task is the tenth and closes the loop by using the mechanism T-001..T-009 built to produce its own brief.</p>
+          <dl class="fields">
+            <dt>T-001..T-007 — schema, projector, forms, contract, version axis, source-sufficiency check, review chain</dt><dd>done, all approved by a distinct evaluator identity before their evidence closed</dd>
+            <dt>T-008 — removal of the superseded layers (destructive)</dt><dd>done, owner-approved (D-032); the only task requiring explicit destructive-operation approval</dd>
+            <dt>T-009 — cost instrumentation and the M-001..M-008 matrix</dt><dd>done, technical approve by a distinct evaluator plus named-owner qualitative approval for M-006/M-007 (D-034)</dd>
+            <dt>T-010 — this task: the SPEC&#x27;s own brief and gate release</dt><dd>pending — builder submission only; independent review and the three gate decisions are a separate step, not this one</dd>
+          </dl>
+          <p class="source"><cite>tasks.md &middot; Task ledger</cite> &mdash; &ldquo;T-010 | pending | Brief da própria 029 pela esteira nova e liberação dos gates&rdquo;</p>
+        </article>
+        <article class="card" id="finding-locator-collision" data-source="tasks.md" data-source-section="Achado bloqueante da avaliação (2026-09-19)" data-coverage="represented" data-source-digest="sha256:69519f3a450f62bd5511adbd0ce572dfcd4e7e49decb03132b3c0d114b581ca8" data-source-fragment="proveniência falsa passando na verificação, exatamente o que FR-003 e O-002" data-source-fragment-sha256="sha256:84e57a940dc54c8a8f07be9384d7fedc861834a54ac3ce3d00ef0511277b2e7b" data-block-form="prose">
+          <p>T-002&#x27;s first review cycle did not pass. `resolve_locator` accepted a partial substring match in either direction on normalized text, so a model declaring `source_section: &quot;Escopo&quot;` against a source that only had &quot;## Fora de escopo&quot; resolved silently to the opposite-meaning heading instead of refusing. On the not_applicable coverage path, that resolved locator becomes the displayed fragment — false provenance passing verification, exactly what FR-003/O-002 exist to prevent. The fix requires an exact normalized match first, with one narrow digit-bearing-ID prefix exception guarded by content (not length), and refuses on any ambiguous collision between distinct headings. This is not a hypothetical: the same guard fired for real during T-009&#x27;s matrix run, on a genuine duplicate &quot;T-002&quot; heading in one mock&#x27;s tasks.md.</p>
+          <p class="source"><cite>tasks.md &middot; Achado bloqueante da avaliação (2026-09-19)</cite> &mdash; &ldquo;proveniência falsa passando na verificação, exatamente o que FR-003 e O-002&rdquo;</p>
+        </article>
+        <article class="card" id="finding-spec-guardian-drift" data-source="tasks.md" data-source-section="Exit criteria" data-coverage="represented" data-source-digest="sha256:69519f3a450f62bd5511adbd0ce572dfcd4e7e49decb03132b3c0d114b581ca8" data-source-fragment="achado real**: `.harness/agents/spec-guardian.md`" data-source-fragment-sha256="sha256:d28e355e2b6386ecba2003ebddb01bebe7db14c383b1a17da461ad16a3bb3246" data-block-form="prose">
+          <p>T-004 consolidated the brief doctrine into a single normative contract, but T-007&#x27;s own review chain check found a file T-004 had not touched: `.harness/agents/spec-guardian.md` still instructed the Spec Guardian to &quot;conduct the coverage review&quot; and &quot;perform a post-render reading&quot; as its own responsibilities — directly contradicting `executive-brief-reviewer.md`&#x27;s &quot;no other role, including Spec Guardian, repeats pass (b)&quot; and `spec-review/SKILL.md`, which already forbade the third pass. The skill and the agent it invokes disagreed with each other. The finding closing this SPEC&#x27;s own review-chain guarantee came from a task auditing a doctrine file, not from a code check.</p>
+          <p class="source"><cite>tasks.md &middot; Exit criteria</cite> &mdash; &ldquo;achado real**: `.harness/agents/spec-guardian.md`&rdquo;</p>
+        </article>
+        <article class="card" id="destructive-removal" data-source="tasks.md" data-source-section="Implementation constraints" data-coverage="synthesized" data-source-digest="sha256:69519f3a450f62bd5511adbd0ce572dfcd4e7e49decb03132b3c0d114b581ca8" data-source-fragment="Reversível por `git revert`. Só ocorre após T-001…T-007 aprovadas." data-source-fragment-sha256="sha256:7f8d19ca61875d8942a1a7bf7fe996dc046be69948aaec3d52f75c9727dcb479" data-block-form="prose">
+          <p>T-008 is the only destructive task in the SPEC: it removed validate_brief_candidate_inheritance.py, instantiate_brief_skeleton.py, their tests, and plan.md §9.1, and absorbed human-visibility.md and stakeholder-brief-design.md into the normative contract. It only ran after T-001..T-007 had passed independent review, and the owner approved it explicitly (D-032) because it is reversible by git revert and touches no consumer artifact. Its own isolated diff is -778 lines. Read against the whole SPEC&#x27;s cumulative diff of +3,826 lines, that isolated number does not, by itself, prove the initiative net-subtractive — the decision route records how that tension was actually resolved, not glossed over.</p>
+          <p class="source"><cite>tasks.md &middot; Implementation constraints</cite> &mdash; &ldquo;Reversível por `git revert`. Só ocorre após T-001…T-007 aprovadas.&rdquo;</p>
+        </article>
+      </section><section id="validation" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-validation" tabindex="0">
+        <h2 class="route-title">Validation</h2>
+<article class="card" id="strategy" data-source="validation-plan.md" data-source-section="1. Strategy" data-coverage="represented" data-source-digest="sha256:e6eca6c3510cc673d93af83eb48560c1e1d710b534238fce99862070735fa439" data-source-fragment="Um PASS determinístico não pode ser reportado como aprovação de experiência." data-source-fragment-sha256="sha256:8f49b57e20fd6dc17e1d9c8b7bf58c78a6645b0549f79b3f2c6b3a6fc65f4c73" data-block-form="prose">
+          <p>Validation runs at three levels with an explicit boundary between them, because confusing the first two with the third is a recurring defect in this repository: deterministic pytest proves structure, provenance, lifecycle and invariant preservation, and never quality; static comparison measures already-versioned artifacts at zero cost; independent qualitative review over HTML served in loopback is the only thing that judges whether a brief is fit to decide from. A deterministic PASS is never reported as experience approval.</p>
+          <p class="source"><cite>validation-plan.md &middot; 1. Strategy</cite> &mdash; &ldquo;Um PASS determinístico não pode ser reportado como aprovação de experiência.&rdquo;</p>
+        </article>
+        <article class="card" id="matrix-run" data-source="tasks.md" data-source-section="Validation IDs and commands" data-coverage="synthesized" data-source-digest="sha256:69519f3a450f62bd5511adbd0ce572dfcd4e7e49decb03132b3c0d114b581ca8" data-source-fragment="V-009, V-010, V-REG-002" data-source-fragment-sha256="sha256:da3a1df226c370c72b35f93f9ef05ae3770c1dd72eb845eacd4f218079dde687" data-block-form="matrix">
+          <div class="matrix"><table><thead><tr><th>Element</th><th>Value</th></tr></thead><tbody><tr><td>M-001, M-002, M-005, M-006, M-007, M-008</td><td>1 attempt to a passing model+projection each</td></tr><tr><td>M-003</td><td>2 attempts — a scope fragment was transcribed without the bold marker separating it from the surrounding source text</td></tr><tr><td>M-004</td><td>2 attempts — an impact fragment was copied from the wrong mock&#x27;s impact-map.md by mistake</td></tr><tr><td>Total</td><td>10 attempts across 8 mocks, median 1, max 2, against 6/9/15 full pipeline runs in the historical record</td></tr></tbody></table></div>
+          <p>Both multi-attempt failures were `project_brief.py` correctly refusing with &quot;fragment ... does not occur literally in source&quot;, naming the offending block — exactly the FR-003 failure mode working as designed, and both were human/agent transcription errors, not defects in the model or the mechanism. The comparison against the historical 6/9/15 execution counts is honest about not being the same unit: those numbers count full old-pipeline rounds (HTML authoring + two reviews each); these ten count YAML edit-and-reproject cycles, because there is no HTML to re-author under the new pipeline.</p>
+          <p class="source"><cite>tasks.md &middot; Validation IDs and commands</cite> &mdash; &ldquo;V-009, V-010, V-REG-002&rdquo;</p>
+        </article>
+        <article class="card" id="bundle-state" data-source="decision-log.md" data-source-section="Decision Log: 029-brief-content-model-and-doctrine-consolidation" data-coverage="synthesized" data-source-digest="sha256:fcb54cd3037fb872e45e3b65c6c929fa89861f912a97f3818b42bc8517e7fa13" data-source-fragment="A remoção é reversível por `git revert` e não toca em nenhum artefato de consumidor." data-source-fragment-sha256="sha256:f566cd0cf6deb300c99704821306b07294e6d902250b90c1303a9421bc21d779" data-block-form="prose">
+          <p>`validate_bundle.py` passed 315 checks through T-007 and 314 after T-008&#x27;s removal — the drop of one check is the expected, registered consequence of deleting the inheritance validator it used to run, not a regression. D-032 records the owner&#x27;s approval for that removal, citing 85 tests and 315 checks already approved by distinct-identity evidence across T-001..T-007 as the basis for authorizing the one destructive step.</p>
+          <p class="source"><cite>decision-log.md &middot; Decision Log: 029-brief-content-model-and-doctrine-consolidation</cite> &mdash; &ldquo;A remoção é reversível por `git revert` e não toca em nenhum artefato de consumidor.&rdquo;</p>
+        </article>
+      </section><section id="evolution" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-evolution" tabindex="0">
+        <h2 class="route-title">Evolution</h2>
+<article class="card" id="decision-count" data-source="decision-log.md" data-source-section="Decision Log: 029-brief-content-model-and-doctrine-consolidation" data-coverage="represented" data-source-digest="sha256:fcb54cd3037fb872e45e3b65c6c929fa89861f912a97f3818b42bc8517e7fa13" data-source-fragment="Record decisions that change scope, architecture, validation, risk, precedence" data-source-fragment-sha256="sha256:2ddd887caaacfaee91c51410d3c16e2858d0b3baa91eb6b184eec43d267def84" data-block-form="prose">
+          <p>This SPEC accumulated 34 recorded decisions (D-001..D-034) plus two ratchet entries — more than one per day of active work. That density is not noise: several decisions exist specifically because an earlier reading was found wrong or incomplete by independent review (D-025 corrected a doctrine-count undermeasurement; D-027 gave a vocabulary-reconciliation gap a named owner; D-033 redefined the SPEC&#x27;s own success metric after the net-line evidence came in ambiguous).</p>
+          <p class="source"><cite>decision-log.md &middot; Decision Log: 029-brief-content-model-and-doctrine-consolidation</cite> &mdash; &ldquo;Record decisions that change scope, architecture, validation, risk, precedence&rdquo;</p>
+        </article>
+        <article class="card" id="metric-redefinition" data-source="decision-log.md" data-source-section="Decision Log: 029-brief-content-model-and-doctrine-consolidation" data-coverage="represented" data-source-digest="sha256:fcb54cd3037fb872e45e3b65c6c929fa89861f912a97f3818b42bc8517e7fa13" data-source-fragment="custo operacional recorrente por brief" data-source-fragment-sha256="sha256:b3fcc0a83d191f309208f8b9e2ae2bf9956ec3d1b562cb1e42353bda74946485" data-block-form="prose">
+          <p>D-033 is the most consequential decision in this route: faced with T-008&#x27;s own -778-line removal against the SPEC&#x27;s +3,826-line cumulative diff, the owner ruled that R-006/IR-006&#x27;s real criterion is not static line count but recurring operational cost per brief — convergence and rework over time — and that one-time investment code (schema, projector, deterministic checks) is acceptable when it lowers that recurring cost, which is what AC-009c/AC-009d actually measure. This is a genuine mid-flight redefinition of what &quot;done&quot; means for R-006, made by the owner, not smoothed over by a builder choosing the friendlier reading.</p>
+          <p class="source"><cite>decision-log.md &middot; Decision Log: 029-brief-content-model-and-doctrine-consolidation</cite> &mdash; &ldquo;custo operacional recorrente por brief&rdquo;</p>
+        </article>
+        <article class="card" id="qualitative-approval" data-source="decision-log.md" data-source-section="Decision Log: 029-brief-content-model-and-doctrine-consolidation" data-coverage="represented" data-source-digest="sha256:fcb54cd3037fb872e45e3b65c6c929fa89861f912a97f3818b42bc8517e7fa13" data-source-fragment="M-006: a lacuna de conteudo generico herdado" data-source-fragment-sha256="sha256:cc7170a08c2e94c7c99f586f795af34151da0dc7eea0a09ae551fd8fc087e721" data-block-form="prose">
+          <p>D-034 is the owner&#x27;s qualitative approval of M-006 and M-007 under AC-009c: M-007&#x27;s prose-only coverage route is accepted because its source genuinely has no table, and M-006&#x27;s inherited generic per-surface impact content is accepted specifically because the model states the gap as visible text instead of hiding or inventing detail — the exact posture EC-005/NG-001 require when a source is weak.</p>
+          <p class="source"><cite>decision-log.md &middot; Decision Log: 029-brief-content-model-and-doctrine-consolidation</cite> &mdash; &ldquo;M-006: a lacuna de conteudo generico herdado&rdquo;</p>
+        </article>
+      </section><section id="decision" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-decision" tabindex="0">
+        <h2 class="route-title">Decision</h2>
+<article class="card" id="D-007" data-source="decision-log.md" data-source-section="Decision Log: 029-brief-content-model-and-doctrine-consolidation" data-coverage="represented" data-source-digest="sha256:fcb54cd3037fb872e45e3b65c6c929fa89861f912a97f3818b42bc8517e7fa13" data-source-fragment="dispensada de produzir stakeholder brief pela esteira ANTIGA" data-source-fragment-sha256="sha256:e06483d64ecf672c900515a74cfc4b912fa0b0437cb3671e3834eed7564a6430" data-block-form="prose">
+          <p>D-007 (owner, 2026-09-19) is why this document exists in this form at all: SPEC 029 was dispensed from producing its brief through the old pipeline specifically so this brief could be the new pipeline&#x27;s first real proof, instead of paying the pipeline this SPEC eliminates one last time.</p>
+          <p class="source"><cite>decision-log.md &middot; Decision Log: 029-brief-content-model-and-doctrine-consolidation</cite> &mdash; &ldquo;dispensada de produzir stakeholder brief pela esteira ANTIGA&rdquo;</p>
+        </article>
+        <article class="card" id="D-011-D-012" data-source="decision-log.md" data-source-section="Decision Log: 029-brief-content-model-and-doctrine-consolidation" data-coverage="represented" data-source-digest="sha256:fcb54cd3037fb872e45e3b65c6c929fa89861f912a97f3818b42bc8517e7fa13" data-source-fragment="Os tres gates so vao a `true` em T-010, junto com o brief projetado e revisado por identidade distinta." data-source-fragment-sha256="sha256:f3b062cc4337b30ebb9c24cd24439e77258650b08cf5accb88ef52707cf65f56" data-block-form="prose">
+          <p>D-011 named exactly which gate D-007&#x27;s dispensation suspended (human_visibility_ready) and stated it suspends only ORDERING, never existence. D-012 extended that same suspension to brief_coverage_ready and to the brief-dependency inside tasks_ready, after round-2 independent review found D-011 alone left every task in this SPEC unable to reach `ready`. All three gates are resolved together, only in this task — not before, and not by this submission alone.</p>
+          <p class="source"><cite>decision-log.md &middot; Decision Log: 029-brief-content-model-and-doctrine-consolidation</cite> &mdash; &ldquo;Os tres gates so vao a `true` em T-010, junto com o brief projetado e revisado por identidade distinta.&rdquo;</p>
+        </article>
+        <article class="card" id="D-032" data-source="decision-log.md" data-source-section="Decision Log: 029-brief-content-model-and-doctrine-consolidation" data-coverage="represented" data-source-digest="sha256:fcb54cd3037fb872e45e3b65c6c929fa89861f912a97f3818b42bc8517e7fa13" data-source-fragment="a única task destrutiva da SPEC 029" data-source-fragment-sha256="sha256:d0dc31bd0c1361653caf1b230c89ba6b786119f1332280c27dd4ee2aa7920b5b" data-block-form="prose">
+          <p>D-032 (owner, 2026-09-21) is the explicit authorization for T-008, the SPEC&#x27;s only destructive operation, granted after T-001..T-007 closed with approved evidence — the point in this SPEC where the net-subtractive claim (R-006) was actually put to the test.</p>
+          <p class="source"><cite>decision-log.md &middot; Decision Log: 029-brief-content-model-and-doctrine-consolidation</cite> &mdash; &ldquo;a única task destrutiva da SPEC 029&rdquo;</p>
+        </article>
+      </section><section id="coverage" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0">
+        <h2 class="route-title">Coverage</h2>
+<article class="card" id="coverage-statement" data-source="plan.md" data-source-section="9. Brief coverage composition" data-coverage="represented" data-source-digest="sha256:2e7175837ad48c89a66f6934ab9bd292df47d52e3597a9c9acb1aec4d5b09e20" data-source-fragment="esta iniciativa está dispensada de produzir seu" data-source-fragment-sha256="sha256:2eb3cd7bfdea2ea61baa0302a6b66a7dda597bc13a894aaa9c9f19ebbc9405b2" data-block-form="prose">
+          <p>Every block in this model cites spec.md, impact-map.md, plan.md, tasks.md, validation-plan.md or decision-log.md — the same closed source inventory the projector enforces for every initiative, no exception carved out for this one. Coverage is complete for the scope this task owns: the model, its projection, and honest narration of the process. It is deliberately not complete for the three gates below, which this submission does not have the authority to close.</p>
+          <p class="source"><cite>plan.md &middot; 9. Brief coverage composition</cite> &mdash; &ldquo;esta iniciativa está dispensada de produzir seu&rdquo;</p>
+        </article>
+        <article class="brief-task-card" id="gates-still-suspended" data-source="run-state.yaml" data-source-section="brief_coverage_ready" data-coverage="represented" data-source-digest="sha256:5b9cd0778ac17c0da9038001d8613a373839349398ba600a1c33868933ff6f9c" data-source-fragment="brief_coverage_ready: false" data-source-fragment-sha256="sha256:aa1ea79cd7a8939c02fd236b127315df321b6cb361f6ec89564c7ca145cab52a" data-block-form="dossier">
+          <h3>gates-still-suspended</h3>
+          <p>As of this submission, all three gates D-007/D-011/D-012 suspended the ordering of remain `false` in run-state.yaml. That is correct, not a defect: per tasks.md&#x27;s own T-010 exit criteria, they go true only after an independent reviewer, in a distinct identity from this builder, approves this projected brief in loopback and a human approval is recorded. This builder does not self-evaluate and does not flip a gate to close its own task.</p>
+          <dl class="fields">
+            <dt>human_visibility_ready</dt><dd>false — resolved only after independent review of this rendered brief, not by this builder submission</dd>
+            <dt>brief_coverage_ready</dt><dd>false — same condition</dd>
+            <dt>tasks_ready</dt><dd>false — same condition; D-012 is what has authorized execution up to now, not this gate</dd>
+          </dl>
+          <p class="source"><cite>run-state.yaml &middot; brief_coverage_ready</cite> &mdash; &ldquo;brief_coverage_ready: false&rdquo;</p>
+        </article>
+      </section><section id="coverage" class="tab-panel brief-route" role="tabpanel" aria-labelledby="tab-coverage" tabindex="0">
+        <h2 class="route-title">Coverage</h2>
+        <div class="coverage-wrap"><table class="coverage"><thead><tr><th>Route</th><th>Block</th><th>Source</th><th>Section</th><th>Coverage</th><th>Fragment</th></tr></thead><tbody><tr><td>scope</td><td>hero</td><td>spec.md</td><td>1. Problema</td><td>represented</td><td>oito ciclos de correção sobre a mesma</td></tr><tr><td>scope</td><td>non-goal-bootstrap</td><td>spec.md</td><td>6. Não objetivos</td><td>represented</td><td>usar a exceção de bootstrap (D-007) como precedente</td></tr><tr><td>architecture</td><td>pipeline</td><td>impact-map.md</td><td>3. Dependency and data flow</td><td>represented</td><td>O elo removido é</td></tr><tr><td>architecture</td><td>pd-003</td><td>plan.md</td><td>2. Architecture decisions</td><td>represented</td><td>resolver locator, digest e fragmento</td></tr><tr><td>impact</td><td>surfaces</td><td>impact-map.md</td><td>2. Affected surfaces</td><td>represented</td><td>reduzido a promoção + projeção</td></tr><tr><td>impact</td><td>risk-balance</td><td>impact-map.md</td><td>5. Regression risks and controls</td><td>represented</td><td>Saldo líquido de remoção como critério explícito (R-006)</td></tr><tr><td>execution</td><td>ledger</td><td>tasks.md</td><td>Task ledger</td><td>represented</td><td>T-010 | pending | Brief da própria 029 pela esteira nova e liberação dos gates</td></tr><tr><td>execution</td><td>finding-locator-collision</td><td>tasks.md</td><td>Achado bloqueante da avaliação (2026-09-19)</td><td>represented</td><td>proveniência falsa passando na verificação, exatamente o que FR-003 e O-002</td></tr><tr><td>execution</td><td>finding-spec-guardian-drift</td><td>tasks.md</td><td>Exit criteria</td><td>represented</td><td>achado real**: `.harness/agents/spec-guardian.md`</td></tr><tr><td>execution</td><td>destructive-removal</td><td>tasks.md</td><td>Implementation constraints</td><td>synthesized</td><td>Reversível por `git revert`. Só ocorre após T-001…T-007 aprovadas.</td></tr><tr><td>validation</td><td>strategy</td><td>validation-plan.md</td><td>1. Strategy</td><td>represented</td><td>Um PASS determinístico não pode ser reportado como aprovação de experiência.</td></tr><tr><td>validation</td><td>matrix-run</td><td>tasks.md</td><td>Validation IDs and commands</td><td>synthesized</td><td>V-009, V-010, V-REG-002</td></tr><tr><td>validation</td><td>bundle-state</td><td>decision-log.md</td><td>Decision Log: 029-brief-content-model-and-doctrine-consolidation</td><td>synthesized</td><td>A remoção é reversível por `git revert` e não toca em nenhum artefato de consumidor.</td></tr><tr><td>evolution</td><td>decision-count</td><td>decision-log.md</td><td>Decision Log: 029-brief-content-model-and-doctrine-consolidation</td><td>represented</td><td>Record decisions that change scope, architecture, validation, risk, precedence</td></tr><tr><td>evolution</td><td>metric-redefinition</td><td>decision-log.md</td><td>Decision Log: 029-brief-content-model-and-doctrine-consolidation</td><td>represented</td><td>custo operacional recorrente por brief</td></tr><tr><td>evolution</td><td>qualitative-approval</td><td>decision-log.md</td><td>Decision Log: 029-brief-content-model-and-doctrine-consolidation</td><td>represented</td><td>M-006: a lacuna de conteudo generico herdado</td></tr><tr><td>decision</td><td>D-007</td><td>decision-log.md</td><td>Decision Log: 029-brief-content-model-and-doctrine-consolidation</td><td>represented</td><td>dispensada de produzir stakeholder brief pela esteira ANTIGA</td></tr><tr><td>decision</td><td>D-011-D-012</td><td>decision-log.md</td><td>Decision Log: 029-brief-content-model-and-doctrine-consolidation</td><td>represented</td><td>Os tres gates so vao a `true` em T-010, junto com o brief projetado e revisado por identidade distinta.</td></tr><tr><td>decision</td><td>D-032</td><td>decision-log.md</td><td>Decision Log: 029-brief-content-model-and-doctrine-consolidation</td><td>represented</td><td>a única task destrutiva da SPEC 029</td></tr><tr><td>coverage</td><td>coverage-statement</td><td>plan.md</td><td>9. Brief coverage composition</td><td>represented</td><td>esta iniciativa está dispensada de produzir seu</td></tr><tr><td>coverage</td><td>gates-still-suspended</td><td>run-state.yaml</td><td>brief_coverage_ready</td><td>represented</td><td>brief_coverage_ready: false</td></tr></tbody></table></div>
+      </section>
+    </main>
+    <script data-brief-base-behavior="v1">
+      (() => {
+        const details = [
+          ...document.querySelectorAll("details[data-progressive]"),
+        ];
+        function initializeTablist(tablist) {
+          const tabs = [...tablist.querySelectorAll('[role="tab"]')];
+          const panels = tabs.map((tab) =>
+            document.getElementById(tab.getAttribute("aria-controls")),
+          );
+          if (!tabs.length || !panels.every(Boolean)) return;
+          const tabForRoute = () => {
+            const view = new URL(location.href).searchParams.get("view");
+            return tabs.find((tab) => tab.dataset.view === view) || tabs[0];
+          };
+          const routeFor = (tab) => tab.dataset.view;
+          let active = tabs[0];
+          tabs.forEach((tab) => {
+            tab.dataset.view =
+              new URL(tab.href, location.href).searchParams.get("view") ||
+              tab.getAttribute("aria-controls");
+          });
+          const activate = (
+            tab,
+            { focusPanel = false, writeRoute = false } = {},
+          ) => {
+            active = tab;
+            tabs.forEach((candidate, index) => {
+              const selected = candidate === tab;
+              candidate.setAttribute("aria-selected", String(selected));
+              candidate.setAttribute(
+                "aria-current",
+                selected ? "page" : "false",
+              );
+              candidate.tabIndex = selected ? 0 : -1;
+              panels[index].hidden = !selected;
+            });
+            if (writeRoute) {
+              const url = new URL(location.href);
+              url.searchParams.set("view", routeFor(tab));
+              url.hash = "";
+              history.pushState({ briefView: routeFor(tab) }, "", url);
+            }
+            if (focusPanel) panels[tabs.indexOf(tab)].focus();
+          };
+          const revealForPrint = () =>
+            panels.forEach((panel) => (panel.hidden = false));
+          const restoreAfterPrint = () => activate(active);
+          document.body.dataset.tabEnhancement = "active";
+          activate(tabForRoute());
+          tabs.forEach((tab, index) => {
+            tab.addEventListener("click", (event) => {
+              event.preventDefault();
+              activate(tab, { focusPanel: true, writeRoute: true });
+            });
+            tab.addEventListener("keydown", (event) => {
+              let next = null;
+              if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+              if (event.key === "ArrowLeft")
+                next = (index - 1 + tabs.length) % tabs.length;
+              if (event.key === "Home") next = 0;
+              if (event.key === "End") next = tabs.length - 1;
+              if (next !== null) {
+                event.preventDefault();
+                tabs[next].focus();
+                activate(tabs[next], { writeRoute: true });
+              }
+              if (event.key === " " || event.key === "Enter") {
+                event.preventDefault();
+                activate(tab, { focusPanel: true, writeRoute: true });
+              }
+            });
+          });
+          window.addEventListener("popstate", () => activate(tabForRoute()));
+          window.addEventListener("beforeprint", revealForPrint);
+          window.addEventListener("afterprint", restoreAfterPrint);
+        }
+        document
+          .querySelectorAll('[role="tablist"]')
+          .forEach(initializeTablist);
+        details.forEach((detail) => (detail.open = false));
+      })();
+    </script>
+  </body>
+</html>

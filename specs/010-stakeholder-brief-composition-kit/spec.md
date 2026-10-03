@@ -1,6 +1,6 @@
 # Spec: 010-stakeholder-brief-composition-kit
 
-**Status:** approved for gated execution — 2026-08-26 user authorization recorded in D-006  
+**Status:** superseded  
 **Sequence:** 010  
 **Owner:** platform-engineering  
 **Created / updated:** 2026-08-26  

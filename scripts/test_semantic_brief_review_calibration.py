@@ -40,9 +40,21 @@ def assert_review_contract(review: str) -> None:
 
 
 def main() -> int:
+    # Post-T-004: spec-review cites brief-contract.md (BC-009) instead of
+    # restating pass (b)'s recoverable/superficial/absent classification and
+    # the "no automatic semantic gate" rule; the rendered-review skill still
+    # carries the finding-format phrase verbatim.
     guidance = read(ROOT / ".harness" / "skills" / "spec-review" / "SKILL.md")
-    for token in ("recoverable", "superficial", "absent", "lost/weakened fact", "automatic semantic gate"):
+    for token in ("**v3:**", "**v2 historical:**", "BC-009", "do not run another rendered review"):
         assert token in guidance, f"spec-review guidance lacks calibration contract: {token}"
+    rendered_review = read(ROOT / ".harness" / "skills" / "rendered-brief-decision-review" / "SKILL.md")
+    legacy_review = rendered_review.split("## Histórico 1/2", 1)[1]
+    for token in ("recoverable", "superficial", "absent", "APPROVE", "REVISE", "re-review"):
+        assert token in legacy_review, "legacy rendered-review skill lacks calibration contract: " + token
+    contract = read(ROOT / ".harness" / "rules" / "brief-contract.md")
+    assert "qualitative, not a semantic score" in contract, (
+        "brief-contract.md lacks the no-automatic-semantic-gate rule"
+    )
 
     read(FIXTURES / "README.md")
     for case, source_files in CASES.items():

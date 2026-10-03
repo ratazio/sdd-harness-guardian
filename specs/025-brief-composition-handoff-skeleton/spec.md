@@ -1,6 +1,6 @@
 # SPEC 025 — Handoff de composição e esqueleto do stakeholder brief
 
-**Status:** spec ready; implementação ainda não autorizada pelo lifecycle.  
+**Status:** superseded  
 **Owner:** Guardian maintainers + brief experience owner.  
 **Created / updated:** 2026-09-01.  
 **Risk / assurance:** high / A2-elevated.  

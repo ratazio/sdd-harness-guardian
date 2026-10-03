@@ -24,7 +24,7 @@ from brief_v2_sources import V2_REQUIRED_SOURCES
 ROOT = Path(__file__).resolve().parent.parent
 SCAFFOLDER = ROOT / "scripts" / "new_initiative.py"
 RENDERER = ROOT / "scripts" / "render_stakeholder_brief.py"
-SHELL = ROOT / ".harness" / "templates" / "stakeholder-brief.html"
+SHELL = ROOT / "scripts" / "fixtures" / "tabbed-brief-surface" / "template-v2.html"
 RICH_CANDIDATE = ROOT / "specs" / "019-rendered-brief-decision-quality-gate" / "stakeholder-brief.html"
 SPEC_022_CANDIDATE = ROOT / "specs" / "022-rendered-brief-lifecycle-freshness-and-authority" / "evidence" / "T-000-stakeholder-brief.candidate.html"
 SPEC_022_INITIATIVE = SPEC_022_CANDIDATE.parent.parent
@@ -948,6 +948,14 @@ def main() -> int:
         source_first_spec_022_state = re.sub(
             r'(?m)^current_phase: "(?:rendered_decision_review_pending|rendered_decision_review_recorded|render_pending)"$',
             'current_phase: "render_pending"', source_first_spec_022_state, count=1,
+        )
+        # The subject of this test is lifecycle rendering behaviour, not SPEC 022's
+        # current status.  Pin the status the scenario needs instead of inheriting a
+        # live initiative's mutable state: SPEC 022 was closed as `superseded`
+        # (SPEC 029, D-003) and the renderer requires `executing` before rendering.
+        source_first_spec_022_state = re.sub(
+            r'(?m)^status: ".*?"$', 'status: "executing"',
+            source_first_spec_022_state, count=1,
         )
         for field, value in (
             ("author", "null"), ("coverage_reviewer", "null"),

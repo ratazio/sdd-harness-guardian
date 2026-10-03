@@ -1,0 +1,42 @@
+contract_version: "1.0.0"
+profile: minimal
+domain: software
+
+thesis:
+  decision_and_audience: "Product and eng approve the widget scope freeze."
+  brief_thesis: "Reconcile totals exactly, then freeze scope."
+
+routes:
+  - id: scope
+    blocks:
+      - id: hero
+        form: prose
+        form_reason: "A single business thesis needs no diagram."
+        coverage: represented
+        source: spec.md
+        source_section: "Functional requirements"
+        fragment: "FR-001: the widget must reconcile totals without rounding."
+        text: "Reconcile totals exactly, without rounding or duplication."
+
+  - id: decision
+    blocks:
+      - id: D-001
+        form: prose
+        form_reason: "A single decision record reads best as prose."
+        coverage: represented
+        source: decision-log.md
+        source_section: "D-001"
+        fragment: "The scope freezes at the widget boundary"
+        text: "The scope freezes at the widget boundary; nothing downstream changes."
+
+  - id: evolution
+    blocks:
+      - id: retention-window
+        form: prose
+        form_reason: "A single absence is a sentence, not a table."
+        coverage: not_applicable
+        source: run-state.yaml
+        source_section: "quality_gates"
+        absence:
+          kind: not_applicable
+          reason: "Quality gates are not yet material to this fixture."

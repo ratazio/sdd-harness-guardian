@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdd-harness-guardian/schemas/brief-model.schema.json",
+  "title": "Brief content model (brief-model.yaml)",
+  "description": "The single editorial artifact an agent authors for a stakeholder brief (SPEC 029, T-001). A deterministic projector (T-002) turns this into HTML; the agent never writes markup, digests or SHA-256 here — those are computed by the projector from the canonical source at projection time.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "profile", "domain", "thesis", "routes"],
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "description": "Version of THIS schema/contract that the model was authored against (not a brief-shell/design axis — FR-010 unifies those elsewhere). Semantic version.",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "profile": {
+      "type": "string",
+      "description": "Depth of coverage the agent commits to. Selects, together with domain, which routes exist (FR-005).",
+      "enum": ["minimal", "standard", "deep"]
+    },
+    "domain": {
+      "type": "string",
+      "description": "Material domain of the initiative. Selects, together with profile, which routes exist (FR-005).",
+      "enum": ["software", "ops", "docs", "policy", "research"]
+    },
+    "thesis": {
+      "type": "object",
+      "description": "Brief thesis and global choices (plan.md §9.1, 'Brief thesis and global choices' table), carried once at the top of the model instead of once per agent per iteration.",
+      "additionalProperties": false,
+      "required": ["decision_and_audience", "brief_thesis"],
+      "properties": {
+        "decision_and_audience": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The decision this brief exists to support, and who reads it to make it."
+        },
+        "brief_thesis": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The single sentence a reader must leave with."
+        },
+        "repeated_component_treatment": {
+          "type": "string",
+          "description": "Which source-defined collections need one record per item, and why (plan.md §9.1)."
+        }
+      }
+    },
+    "routes": {
+      "type": "array",
+      "description": "The routes SELECTED for this profile×domain pair (FR-005). A route not selected is simply absent from this list — it does not need an N/A disposition (NG-002/EC-003).",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/route" }
+    },
+    "relations": {
+      "type": "array",
+      "description": "Material relationships (FR-004), declared as node/edge graphs. A block whose form is topology/sequence/risk-chain references one of these graphs via relation_ref instead of re-describing structure in prose.",
+      "items": { "$ref": "#/$defs/relationGraph" }
+    }
+  },
+  "$defs": {
+    "routeId": {
+      "type": "string",
+      "description": "Canonical route ids, exactly as enforced by scripts/validate_brief_candidate_inheritance.py:19. Note: the executive-brief-composition SKILL still says 'architecture.global' — that is contradiction A-02; this model uses the validator's vocabulary, 'architecture'.",
+      "enum": ["scope", "architecture", "impact", "execution", "validation", "evolution", "decision", "coverage"]
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "blocks"],
+      "properties": {
+        "id": { "$ref": "#/$defs/routeId" },
+        "executive_question": {
+          "type": "string",
+          "description": "The executive question this route answers for its reader (plan.md §9.1 column 2). Optional: not every route needs a restated question beyond its blocks."
+        },
+        "blocks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/block" }
+        }
+      }
+    },
+    "block": {
+      "type": "object",
+      "description": "One route entry or one repeated-component record (e.g. one architecture zoom, one task dossier, one validation proof). Carries authored text, its provenance, and its declared visual form.",
+      "additionalProperties": false,
+      "required": ["id", "form", "form_reason", "coverage", "source", "source_section"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable id within the route, e.g. 'hero', 'T-001', 'zoom-ingestion', 'V-004'."
+        },
+        "collection": {
+          "type": "string",
+          "description": "Canonical id of the repeated source-defined collection this block belongs to, when it is a repeated component, e.g. 'execution.task', 'impact.surface', 'validation.proof' (plan.md §9.1)."
+        },
+        "text": {
+          "type": "string",
+          "description": "Authored editorial content: narrative, hero copy, decision call, absence explanation, etc. Required for all coverage values except a bare not_applicable/discovery whose reason/discovery fields already carry the statement."
+        },
+        "narrative_arc": {
+          "type": "string",
+          "description": "Optional narrative arc label carried from plan.md §9.1 (e.g. 'delta → exposure → control → action')."
+        },
+        "form": {
+          "type": "string",
+          "description": "Enumerated visual form (FR-006). The projector has its own implementation of each; 'prose' is always available as the escape hatch (R-002 mitigation).",
+          "enum": ["topology", "sequence", "matrix", "footprint", "risk-chain", "dossier", "prose"]
+        },
+        "form_reason": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Why this form was chosen for this block. Required for every block, including 'prose' — 'prose' still needs a reason (e.g. 'projector has no implementation for this shape yet' or 'a single decided fact needs no diagram')."
+        },
+        "fields": {
+          "type": "array",
+          "description": "Structured dossier fields as ordered label/value pairs (form: dossier, matrix, footprint, risk-chain). Real briefs use different field sets per domain (e.g. task dossiers: Resultado/Limite/Prova/Por-que-agora in one initiative, Escopo/Dependência/Risco-controle/Validação-evidência/Saída-agora in another) — the schema does not fix a fieldset, only the shape.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "value"],
+            "properties": {
+              "label": { "type": "string", "minLength": 1 },
+              "value": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "relation_ref": {
+          "type": "string",
+          "description": "Id of an entry in the top-level relations[] this block renders (used with form topology/sequence/risk-chain)."
+        },
+        "coverage": {
+          "type": "string",
+          "enum": ["represented", "synthesized", "not_applicable", "link_only"]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Canonical relative path of the source this block is grounded in, e.g. 'spec.md', 'tasks.md', 'decision-log.md'. Even a not_applicable/discovery block cites the source that establishes the absence (plan.md §9.1: 'record a source-backed entry or an explicit N/A/discovery')."
+        },
+        "source_section": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Heading locator inside the source, e.g. 'Functional requirements', '#T-001', 'D-004'."
+        },
+        "fragment": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Literal snippet that must occur verbatim in the source AND in the rendered block (FR-003). The agent copies it from the source; the projector computes and verifies its digest/SHA-256 — this model never carries a digest field. Required unless coverage is not_applicable (an absence has no positive fragment to lift)."
+        },
+        "absence": { "$ref": "#/$defs/absence" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "coverage": { "const": "not_applicable" } } },
+          "then": { "required": ["absence"] },
+          "else": { "required": ["fragment", "text"] }
+        }
+      ]
+    },
+    "absence": {
+      "type": "object",
+      "description": "A source-backed disposition for a route/component that is not populated with positive content (plan.md §9.1: 'An inapplicable component requires a visible, source-backed absence card with reason and decision impact. A missing material fact becomes an owned discovery').",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "required": ["kind", "reason"],
+          "properties": {
+            "kind": { "const": "not_applicable" },
+            "reason": { "type": "string", "minLength": 1, "description": "Why this route/component genuinely does not apply, grounded in the cited source." }
+          }
+        },
+        {
+          "additionalProperties": false,
+          "required": ["kind", "missing_fact", "decision_impact"],
+          "properties": {
+            "kind": { "const": "discovery" },
+            "missing_fact": { "type": "string", "minLength": 1, "description": "The specific fact the canonical sources do not provide." },
+            "decision_impact": { "type": "string", "minLength": 1, "description": "What decision cannot be made, or is at risk, without this fact." },
+            "owner": { "type": "string", "minLength": 1, "description": "Only when the source itself names an owner — never invented." },
+            "path": { "type": "string", "minLength": 1, "description": "Only when the source itself names a resolution path — never invented." }
+          }
+        }
+      ]
+    },
+    "relationGraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "nodes"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string" },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "label": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["from", "to", "label", "state"],
+            "properties": {
+              "from": { "type": "string", "minLength": 1 },
+              "to": { "type": "string", "minLength": 1 },
+              "label": { "type": "string", "minLength": 1 },
+              "state": {
+                "type": "string",
+                "enum": ["proposed", "preserved", "out-of-scope", "discovery"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

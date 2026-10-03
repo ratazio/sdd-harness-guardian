@@ -1,0 +1,19 @@
+contract_version: "1.0.0"
+profile: minimal
+domain: software
+
+thesis:
+  decision_and_audience: "Product and eng approve the widget scope freeze."
+  brief_thesis: "Reconcile totals exactly, then freeze scope."
+
+routes:
+  - id: scope
+    blocks:
+      - id: hero
+        form: prose
+        form_reason: "A single business thesis needs no diagram."
+        coverage: represented
+        source: spec.md
+        source_section: "Escopo"
+        fragment: "Nada relacionado a autenticacao entra nesta iniciativa."
+        text: "O escopo esta definido."

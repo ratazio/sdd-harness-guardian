@@ -19,12 +19,14 @@ specs/NNN-slug/
   handoffs/latest-handoff.md
 ```
 
-For v2 Human Visibility, keep the coverage composition in the existing plan,
-the independent review record in the existing decision log, and the
-author/reviewer/reference fields in `run-state.yaml`. Do not add a coverage
-sidecar, permanent agent state or duplicate JSON index. `tasks_drafted` and
-`brief_coverage_ready` are explicit quality gates; they are not task terminal
-statuses and do not permit implementation.
+Dispatch Human Visibility through `brief-contract.md` BC-002. For v3 keep
+repair records in existing state/evidence under BC-025 (see
+`templates/run-state.yaml.md`); never encode own `approve` in legacy reviewer
+fields. Source snapshots cover read-only Markdown separately from mutable
+operational state. Historical v2 keeps model/reviews under BC-008/BC-009
+with existing author/reviewer/reference fields. `tasks_drafted` and
+`brief_coverage_ready` remain v2 gates, never terminal statuses or v3
+prerequisites. BC-010 protects implementation authority.
 
 ## Session start order
 
@@ -43,8 +45,10 @@ Reconcile discrepancies before changing files.
 When a direct stakeholder instruction changes authorization from planning to
 execution, append the decision and synchronize `run-state.yaml`, `progress.md`
 and `handoffs/latest-handoff.md` before the first implementation artifact is
-changed. Refresh the stakeholder brief whenever that state is material to the
-decision surface. If work is discovered before that checkpoint, stop, record
+changed. Refresh the stakeholder brief under its lineage when that state is
+material, honoring explicit owner dispensation. The v3 repair operation keeps
+source inputs read-only (BC-001/BC-018). If work is discovered before that
+checkpoint, stop, record
 the divergence and move affected tasks to `needs_evaluation`; never infer a
 terminal approval from the completed diff.
 

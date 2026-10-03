@@ -1,6 +1,6 @@
 # Spec: 018-derived-brief-completeness-and-delivery-integrity
 
-**Status:** spec_ready  
+**Status:** superseded  
 **Sequence:** 018  
 **Slug:** derived-brief-completeness-and-delivery-integrity  
 **Owner:** Harness maintainer  

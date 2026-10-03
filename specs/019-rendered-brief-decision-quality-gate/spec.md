@@ -1,6 +1,6 @@
 # Spec: 019-rendered-brief-decision-quality-gate
 
-**Status:** draft  
+**Status:** superseded  
 **Sequence:** 019  
 **Owner:** platform engineering  
 **Created:** 2026-08-27  

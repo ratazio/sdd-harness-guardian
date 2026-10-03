@@ -1,0 +1,141 @@
+schema_version: 1
+initiative_id: "029-brief-content-model-and-doctrine-consolidation"
+initiative_sequence: "029"
+initiative_slug: "brief-content-model-and-doctrine-consolidation"
+initiative_kind: "refactor"
+status: "validation_done"
+summary: "Modelo de conteudo do brief projetado deterministicamente + consolidacao da doutrina em contrato normativo unico."
+brief_lineage: null
+brief_phase: "not_rendered"
+current_phase: "complete"
+current_task: null  # T-010 approve tecnico. Falta decisao final do owner: 3 gates suspensos + 2 achados de escopo futuro (escape HTML em T-002; decision-log sem headings em T-001/T-002).
+last_safe_checkpoint: "2026-09-19: Spec Ready, Plan Ready e Validation Ready aprovados por revisores independentes. T-001 e T-004 autorizadas a iniciar sob D-012."
+updated_at: "2026-09-19"
+updated_by: "Guardian maintainers"
+
+artifacts:
+  spec: "spec.md"
+  # D-007/D-011/D-012: o brief e projetado pela esteira nova em T-010.
+  # A dispensa suspende a ORDENACAO de human_visibility_ready, brief_coverage_ready
+  # e da dependencia de brief em tasks_ready — nunca a existencia dos gates.
+  stakeholder_brief: null
+  impact_map: "impact-map.md"
+  plan: "plan.md"
+  validation_plan: "validation-plan.md"
+  tasks: "tasks.md"
+  progress: "progress.md"
+  decision_log: "decision-log.md"
+  ratchet: "ratchet.md"
+  evidence_directory: "evidence"
+  latest_handoff: "handoffs/latest-handoff.md"
+
+quality_gates:
+  outcome_ready: true
+  spec_ready: true
+  impact_mapped: true
+  plan_ready: true
+  validation_ready: true
+  tasks_drafted: true
+  # D-035: owner confirmou em 2026-09-21. Gate suspenso resolvido.
+  brief_coverage_ready: true
+  human_visibility_ready: true
+  # D-012: ate T-010, a autorizacao de execucao vem da decisao registrada.
+  tasks_ready: true
+  implementation_done: true
+  independent_evaluation_done: true
+  evidence_pack_ready: true
+  validation_done: true
+
+brief_review:
+  author: null
+  coverage_reviewer: null
+  reviewed_at: null
+  review_record: null
+  findings_status: "not_started"
+  # D-008 mantem a revisao independente integral; so a ordenacao muda.
+  quality_review_required: true
+  quality_review_record: null
+  quality_review_status: "not_started"
+  quality_review_reviewer: null
+  quality_review_inputs: null
+
+execution:
+  builder_id: null
+  evaluator_id: null
+  started_at: null
+  interrupted: false
+  resume_required: false
+  work_since_checkpoint: []
+  repository_revision: null
+  working_tree_summary: null
+
+task_ledger:
+  - id: "T-001"
+    status: "done"
+    title: "Schema do modelo de conteudo"
+  - id: "T-002"
+    status: "done"
+    title: "Projetor modelo -> HTML"
+  - id: "T-003"
+    status: "done"
+    title: "Formas de apresentacao e selecao por perfil"
+  - id: "T-004"
+    status: "done"
+    title: "Contrato normativo unico e disposicao do Anexo A"
+  - id: "T-005"
+    status: "done"
+    title: "Eixo unico de versao"
+  - id: "T-006"
+    status: "done"
+    title: "Check de suficiencia de fontes"
+  - id: "T-007"
+    status: "done"
+    title: "Cadeia de duas revisoes com mandatos disjuntos"
+  - id: "T-008"
+    status: "done"
+    title: "Remocao das camadas substituidas (destrutiva)"
+  - id: "T-009"
+    status: "done"
+    title: "Instrumentacao de custo e matriz M-001..M-008"
+  - id: "T-010"
+    status: "done"
+    title: "Brief da propria 029 e liberacao dos gates suspensos"
+
+approvals:
+  human_required: true
+  pending:
+    - "T-010 — aprovacao humana (resolve os tres gates suspensos)"
+  granted:
+    - "D-002, D-003, D-004, D-005, D-007, D-008, D-009 — decisoes do owner em 2026-09-19"
+    - "D-031 — confirmacao de AC-012 pelo owner em 2026-09-21, fechando T-004"
+    - "D-032 — autorizacao explicita do owner para T-008 (destrutiva) em 2026-09-21"
+    - "D-033 — owner redefine a metrica de R-006/IR-006 para custo operacional recorrente, nao LOC; T-008 aprovada em 2026-09-21"
+    - "D-034 — owner aprova qualitativamente M-006/M-007 (T-009) em 2026-09-21"
+    - "D-035 — owner confirma fechamento dos tres gates suspensos em 2026-09-21; SPEC 029 completa"
+
+risks:
+  level: "high"
+  open:
+    - "R-001 — projecao uniformiza demais (aceito e rebaixado por D-004)"
+    - "R-002 — schema vira camisa de forca para dominio nao previsto"
+    - "R-003 — consolidacao remove invariante protegida"
+    - "R-004 — esforco de migracao excede o ganho"
+    - "R-005 — indicadores estaticos sao proxies (aceito e declarado)"
+    - "R-006 — iniciativa vira aditiva e repete o padrao historico"
+    - "IR-001 — remocao de invariante sem perceber"
+    - "IR-002 — projetor perde garantia do pipeline antigo"
+    - "IR-003 — modelo rigido quebra fora de software (ABERTO: os 8 mocks sao todos software; fechamento empirico em T-003 via fixture sintetica)"
+    - "IR-004 — HTML autorado a mao reaparece"
+    - "IR-005 — eixo unico quebra brief historico"
+    - "IR-006 — saldo de remocao nao alcancado"
+
+evidence:
+  latest: "evidence/T-010.md"
+  approved:
+    - \"T-010 — approve tecnico por evaluator distinto em 2026-09-21; autoprova de honestidade confirmada (colisao de locator, achado do Spec Guardian, ambiguidade D-033 e os tres gates 'false' todos narrados sem suavizar)\"
+    - "T-001 — approve por evaluator distinto em 2026-09-19; verificacao independente incluiu amostra extra (m005-local-ai) nao coberta pelo builder"
+    - "T-002 — approve por evaluator distinto em 2026-09-19, apos um ciclo request_revision que corrigiu colisao de locator (proveniencia falsa no caminho not_applicable)"
+    - "T-004 — escalate_to_human por evaluator distinto em 2026-09-19; AC-012 confirmado pelo owner em 2026-09-21 (D-031)"
+    - "T-003 — approve por evaluator distinto em 2026-09-19, apos tres ciclos request_revision: A-17 (contradicao interna do contrato), IR-003 reaberto como reduzido-nao-fechado, e correcao de medicao de ganho evitado vs realizado"
+
+next_safe_step: "SPEC completa. Proximo trabalho, se houver: (1) commit do estado; (2) achados de escopo futuro registrados nao bloqueiam — bug de escape HTML em _verify_fragment_visible (T-002) e fixture de decision-log sem headings (T-001/T-002); (3) renegociacao de AC-009b (D-025) com o numero final medido."

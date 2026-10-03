@@ -53,6 +53,28 @@ brief_review:
   quality_review_reviewer: null
   quality_review_inputs: null
 
+# Contract 3 operational repair record (BC-009/BC-025); no own approve.
+# brief_review above remains for explicitly historical contract 2.
+brief_repair:
+  contract: 3
+  author: null
+  status: "incomplete"
+  source_snapshot: {}
+  content:
+    actor: null
+    effective_effort: null
+    execution_ref: null
+    completed_at: null
+    status: "incomplete"
+  visual:
+    actor: null
+    effective_effort: null
+    execution_ref: null
+    completed_at: null
+    status: "incomplete"
+  rendered_sha256: null
+  report: null
+
 execution:
   builder_id: null
   evaluator_id: null

@@ -60,11 +60,18 @@ def assert_explicit_discovery_absence(case: str, forbidden: tuple[str, ...]) -> 
 
 
 def assert_discovery_disposition_contract() -> None:
-    """The reusable contract allows only source-supported or explicit-absence ownership."""
+    """The reusable contract allows only source-supported or explicit-absence ownership.
+
+    Post-T-004: the rule lives once in brief-contract.md (BC-015); the
+    composition/reviewer skills cite it by ID instead of restating it.
+    """
+    contract = read(ROOT / ".harness" / "rules" / "brief-contract.md")
     composition = read(ROOT / ".harness" / "skills" / "executive-brief-composition" / "SKILL.md")
     reviewer = read(ROOT / ".harness" / "skills" / "executive-brief-experience-review" / "SKILL.md")
-    require(composition, "If the source supports a discovery", "owner/path are not", "established")
-    require(reviewer, "source supports a discovery owner/path", "owner/path are not", "established")
+    missing_facts = contract.split("## BC-015", 1)[1].split("## BC-016", 1)[0]
+    require(missing_facts, "**v3:**", "exact source absence", "if absent, say so", "**v1/v2 source workflow:**", "never attributed by inference")
+    require(composition, "BC-015")
+    require(reviewer, "BC-015")
 
 
 def main() -> int:

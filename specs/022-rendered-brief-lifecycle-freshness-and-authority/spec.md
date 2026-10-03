@@ -1,8 +1,8 @@
 # SPEC 022 — Lifecycle, freshness e autoridade do brief renderizado
 
-**Status:** draft, source-only corrective initiative. **Owner:** Guardian
-maintainers. **Risk:** high / A2. **Origin:** SPEC 021 rendered-decision
-review, 2026-08-28.
+**Status:** superseded  
+**Owner:** Guardian maintainers  
+**Risk:** high / A2. **Origin:** SPEC 021 rendered-decision review, 2026-08-28.
 
 ## Problem
 

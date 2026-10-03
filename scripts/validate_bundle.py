@@ -9,6 +9,7 @@ from pathlib import Path
 
 from validate_pearson_brief_policy import canonical_template_errors
 from architecture_visual_contract import architecture_visual_errors
+from brief_v3_contract import structural_errors as v3_structural_errors
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -42,6 +43,42 @@ V1_REQUIRED_BRIEF_SOURCES = (
 V1_BRIEF_TEMPLATE_PLACEHOLDERS = ("<initiative>", "<YYYY-MM-DD>")
 V2_BRIEF_TEMPLATE_PLACEHOLDERS = ("{{initiative}}", "{{date}}", "{{risk}}", "{{size}}")
 REQUIRED_BRIEF_SHELL_HOOKS = ("brief-shell", "brief-header", "decision-register", "impact-evidence", "decision-actions")
+
+# BC-002 — unified version axis, with the historical-value mapping table.
+#
+# A brief written from this point on declares exactly one axis,
+# `data-brief-contract="N"`. A brief rendered before T-005 keeps declaring the
+# three legacy axes it was rendered with (NG-004: no historical byte is
+# rewritten), so lineage detection stays version-aware: try the unified axis
+# first, then fall back to the legacy `data-harness-brief-design` marker.
+#
+# | data-brief-contract | Legacy axis combination it replaces                                          | Lineage |
+# |----------------------|-------------------------------------------------------------------------------|---------|
+# | "1"                  | data-harness-brief-design="v1" (data-harness-brief-structure /                | v1      |
+# |                      | data-brief-shell-contract absent)                                             |         |
+# | "2"                  | data-harness-brief-design="v2", optionally alongside                          | v2      |
+# |                      | data-harness-brief-structure="executive-brief-v3" and/or                     |         |
+# |                      | data-brief-shell-contract="v1" (both were shell/skeleton metadata, not a      |         |
+# |                      | second lineage signal — every historical "v2" brief, with or without them,   |         |
+# |                      | is contract "2")                                                              |         |
+CONTRACT_AXIS_TO_LINEAGE = {"1": "v1", "2": "v2", "3": "v3"}
+LEGACY_BRIEF_DESIGN_PATTERN = r'\bdata-harness-brief-design\s*=\s*["\'](v1|v2)["\']'
+BRIEF_CONTRACT_AXIS_PATTERN = r'\bdata-brief-contract\s*=\s*["\'](\d+)["\']'
+
+
+def brief_contract_lineage(html: str) -> str | None:
+    """Return v1/v2/v3 lineage from the unified or historical axis (BC-002).
+
+    Reads `data-brief-contract` first (the axis every brief declares from
+    T-005 on); falls back to the legacy `data-harness-brief-design` marker so
+    a historical brief's already-rendered bytes keep validating unchanged
+    (NG-004, FR-015, AC-011).
+    """
+    contract_marker = re.search(BRIEF_CONTRACT_AXIS_PATTERN, html)
+    if contract_marker:
+        return CONTRACT_AXIS_TO_LINEAGE.get(contract_marker.group(1))
+    legacy_marker = re.search(LEGACY_BRIEF_DESIGN_PATTERN, html)
+    return legacy_marker.group(1) if legacy_marker else None
 
 
 def check(condition: bool, message: str) -> None:
@@ -87,10 +124,14 @@ def manifest_mapping(manifest: str, key: str) -> dict[str, str]:
 def stakeholder_brief_errors(html: str, *, rendered: bool) -> list[str]:
     """Return stable structural contract failures for a stakeholder brief."""
     errors: list[str] = []
-    marker = re.search(r'\bdata-harness-brief-design\s*=\s*["\'](v1|v2)["\']', html)
-    if not marker:
-        return ["missing stakeholder brief design-lineage marker: data-harness-brief-design=\"v1\" or \"v2\""]
-    lineage = marker.group(1)
+    lineage = brief_contract_lineage(html)
+    if lineage == "v3":
+        return v3_structural_errors(html, rendered=rendered)
+    if not lineage:
+        return [
+            "missing stakeholder brief version axis: data-brief-contract=\"1\"|\"2\"|\"3\" "
+            "or legacy data-harness-brief-design=\"v1\"|\"v2\""
+        ]
     for section_id in (V2_REQUIRED_BRIEF_IDS if lineage == "v2" else V1_REQUIRED_BRIEF_IDS):
         pattern = rf'\bid\s*=\s*["\']{re.escape(section_id)}["\']'
         if not re.search(pattern, html):
@@ -158,7 +199,6 @@ def main() -> int:
         "scripts/render_stakeholder_brief.py",
         "scripts/smoke_test_scaffolder.py",
         "scripts/test_render_stakeholder_brief.py",
-        "scripts/test_renderer_skeleton_boundary.py",
         "scripts/test_spec028_autonomous_composition_contract.py",
         "scripts/test_unapproved_brief_render.py",
         "scripts/test_source_render_isolation.py",

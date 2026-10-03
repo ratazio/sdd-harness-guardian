@@ -4,6 +4,7 @@
 import hashlib
 import struct
 from pathlib import Path
+from brief_v3_contract import structural_errors
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,7 +22,12 @@ def main() -> int:
     failures: list[str] = []
     plan_template = ROOT / ".harness" / "templates" / "plan.md"
     readme = ROOT / ".harness" / "templates" / "README.md"
-    design = ROOT / ".harness" / "templates" / "stakeholder-brief-design.md"
+    # T-008: stakeholder-brief-design.md's normative content was absorbed.
+    # The universal opt-in rule moved to brief-contract.md (BC-011); the
+    # Pearson asset mechanics and breakpoint baseline are compositor-role
+    # detail and moved to the compositor's own skill instead, so only that
+    # role's corpus grows (AC-009b) — check it there.
+    design = ROOT / ".harness" / "skills" / "executive-brief-composition" / "SKILL.md"
     brief_template = ROOT / ".harness" / "templates" / "stakeholder-brief.html"
     logo = ROOT / ".harness" / "assets" / "brand" / "pearson-logo-white.png"
 
@@ -38,19 +44,18 @@ def main() -> int:
         (
             readme,
             [
-                "vendor-neutral by default",
-                PROFILE,
-                "Opt-in Pearson visual profile",
-                "does not copy or reference the Pearson asset",
+                "Contract 3 entrypoint",
+                "v3 single-file embedding follows BC-024",
+                "Selected legacy Pearson assets retain the local hash/no-overwrite boundary",
             ],
         ),
         (
             design,
             [
-                PROFILE,
-                "explicit opt-in",
-                "official local white logo is an actual image inside a named native link",
-                "320px/768px/1024px/1440px",
+                "default vendor-neutral dispensa logo",
+                "CSS, SVG e eventual JS/asset escolhido são inline",
+                "No ramo 2, o perfil Pearson explícito",
+                "320/768/1024/1440",
             ],
         ),
         (
@@ -64,7 +69,7 @@ def main() -> int:
                 ".brief-risk-chain",
                 ".brief-proof-card",
                 ".brief-decision-call",
-                ".brief-coverage-group",
+                ".coverage-wrap",
             ],
         ),
     ):
@@ -83,8 +88,8 @@ def main() -> int:
             failures.append("official local Pearson logo dimensions are not 175x53")
 
     template_text = brief_template.read_text(encoding="utf-8")
-    if "http://" in template_text or "https://" in template_text:
-        failures.append("canonical vendor-neutral template must not hotlink assets or fonts")
+    # SVG's xmlns URL is a vocabulary identifier, not a fetched asset.
+    failures.extend(structural_errors(template_text, rendered=False))
     for pearson_reference in (
         PROFILE,
         LOGO_PATH,

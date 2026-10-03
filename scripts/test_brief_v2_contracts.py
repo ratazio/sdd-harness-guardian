@@ -129,29 +129,43 @@ def test_architecture_fixtures() -> None:
 
 
 def test_repository_contract() -> None:
+    # Post-T-004: human-visibility.md cites brief-contract.md by BC-NNN ID
+    # instead of restating the provenance/coverage rules (AC-007). Verify the
+    # citation, not the literal restated text.
+    contract = read(".harness/rules/brief-contract.md")
+    assert_contains(
+        contract,
+        "## BC-002",
+        "## BC-004",
+        "## BC-005",
+        "## BC-006",
+        "## BC-008",
+        "not_applicable",
+        "human-readable register",
+        "Core material",
+        "**v2:**",
+        "**v3:**",
+    )
+    # T-008: human-visibility.md's normative content was absorbed into the
+    # contract (AC-009b); the file itself is now a pointer, not a consumer
+    # restating BC-002..BC-006. Verify it points, not restates.
     visibility = read(".harness/rules/human-visibility.md")
     assert_contains(
         visibility,
-        '`data-harness-brief-design="v2"`',
-        "Historical or pinned v1 briefs keep",
-        "`data-source`, `data-source-section`",
-        "`data-coverage`",
-        "human-readable coverage table",
-        "embedded JSON and a separate coverage sidecar are not",
-        "Material headings from `spec.md`",
+        "brief-contract.md",
+        "BC-001",
+        "single",
     )
 
     lifecycle = read(".harness/workflows/sdd-lifecycle.md")
-    assert_contains(lifecycle, "historical/pinned", "brief retains the legacy", "sequence: source artifacts ready", "validation_ready → tasks_drafted (v2)", "validation_ready → human_visibility_ready (v1)")
-    ordered = [
-        "**Preliminary Task Draft**", "**Coverage Composition**", "**Independent Coverage Review**",
-        "**Stakeholder Brief**", "**Decision Meeting and Propagation**", "**Tasks Ready**", "**Implementation**",
-    ]
-    positions = [lifecycle.index(token) for token in ordered]
+    assert_contains(lifecycle, "Contract 3", "Contract 2 — historical/pinned only", "Contract 1 — historical/pinned only", "validation_ready → human_visibility_ready (v1)")
+    legacy = lifecycle.split("### Contract 2", 1)[1].split("### Contract 1", 1)[0]
+    ordered = ["Coverage Composition/model", "pass (a)", "pass (b)", "Tasks Ready"]
+    positions = [legacy.index(token) for token in ordered]
     assert positions == sorted(positions), "v2 lifecycle order regressed"
 
     plan = read(".harness/templates/plan.md")
-    assert_contains(plan, "## 4. Architecture readiness and proportionality", "System context", "Data ownership/lifecycle", "Failure behavior", "Rollout/rollback", "## 9. Brief coverage composition (v2 when applicable)")
+    assert_contains(plan, "## 4. Architecture readiness and proportionality", "System context", "Data ownership/lifecycle", "Failure behavior", "Rollout/rollback", "## 9. Brief branch (BC-002)")
 
     state = read(".harness/templates/run-state.yaml")
     assert_contains(state, "brief_lineage: null", "tasks_drafted: false", "brief_coverage_ready: false", "brief_review:", "coverage_reviewer: null")

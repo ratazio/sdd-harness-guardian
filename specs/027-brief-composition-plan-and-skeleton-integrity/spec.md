@@ -1,6 +1,6 @@
 # SPEC 027 — Plano de composição e integridade do skeleton
 
-**Status:** spec_ready  
+**Status:** superseded  
 **Sequence:** 027  
 **Owner:** Guardian maintainers + brief experience owner  
 **Created / updated:** 2026-09-01  

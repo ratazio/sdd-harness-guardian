@@ -2,43 +2,45 @@
 
 ## Missão
 
-Criar a camada editorial adicional de um stakeholder brief a partir de fontes
-canônicas: mapa de rotas, sínteses rastreáveis, limites e propostas visuais
-proporcionais. Não altera a autoridade dos Markdown nem substitui os papéis
-Guardian existentes.
+Compor o brief derivado das fontes canônicas conforme
+`.harness/rules/brief-contract.md` (BC-001/BC-002). Este papel é A no
+caminho 3; consulta BC-003/BC-013 e opera `executive-brief-composition`.
 
 ## Responsabilidades
 
-- usar `executive-brief-composition` e o contrato da task pronta;
-- localizar fatos antes de compor tese, pilar, relação, escala ou zoom;
-- registrar descoberta com fato faltante e impacto decisório; registrar dono e
-  caminho somente quando a fonte os sustenta, ou declarar explicitamente sua
-  ausência quando não os sustenta;
-- entregar candidate/mapa/fixtures para revisor de experiência distinto;
-- escrever diretamente o HTML/CSS/JS do candidate a partir do mapa revisado e
-  das fontes; o esqueleto define componentes vazios, mas não escreve a solução
-  final por um gerador determinístico;
-- criar evidence draft factual e transicionar somente até `needs_evaluation`.
+- despachar pela linhagem; nova geração usa BC-008/BC-024;
+- localizar os fatos e recuperar conteúdo material, com proveniência
+  BC-005/BC-006 e relações visuais BC-012/BC-014;
+- tratar faltas segundo BC-015, sem extrapolar a autoridade BC-010;
+- entregar o HTML a B identificado segundo BC-009/BC-025;
+- se a composição faz parte de uma task de implementação do bundle, registrar
+  evidence draft para evaluator distinto; o handoff do brief não aprova task.
 
-## Não responsabilidades
+## Ramo histórico 2
 
-- não aprovar a própria composição ou evidência;
-- não converter HTML em fonte canônica;
-- não inferir arquitetura, frontend, quantidade ou materialidade por heurística;
-- não delegar a Python ou outro script a leitura dos Markdown para sintetizar,
-  escolher visual ou gerar os blocos finais do brief;
-- não alterar skills Guardian existentes.
+Somente para operação explicitamente mantida em v2: preencher
+`brief-model.yaml`, submeter modelo/construção à pass (a), projetar por
+`scripts/project_brief.py` e entregar à pass (b) de BC-009. Utilitários
+legados permanecem disponíveis; este ramo não é pré-requisito de v3.
+
+## Limites
+
+Não aprovar a própria composição/evidência, converter HTML em fonte
+canônica, inventar arquitetura/materialidade nem usar script para decidir
+síntese/forma no lugar da autoria agêntica. BC-008 define o local do registro
+por versão; não criar mapa editorial paralelo.
 
 ## Saída
 
 ```md
 ## Brief composition handoff
-Task:
-Sources and locators:
-Editorial map:
-Supported architecture relationship:
-Unknowns/discoveries:
-Files changed:
-Validation evidence:
-Requested distinct reviewer:
+Contract/lineage:
+A identity:
+HTML path:
+Sources/snapshot and locators:
+Material facts and supported relationships:
+Source limitations:
+Changed files:
+B identity and executor configuration reference:
+Next step: BC-009 content repair.
 ```

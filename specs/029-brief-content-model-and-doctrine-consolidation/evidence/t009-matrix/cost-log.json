@@ -1,0 +1,210 @@
+[
+  {
+    "step": "validate",
+    "argv": [
+      "scripts/validate_brief_model.py",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-001.yaml"
+    ],
+    "elapsed_seconds": 0.438,
+    "exit_code": 0,
+    "stdout_tail": "VALID\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "project",
+    "argv": [
+      "scripts/project_brief.py",
+      "testes/mock-runs/20260921-spec029-t009-m001/initiative",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-001.yaml",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-001.html"
+    ],
+    "elapsed_seconds": 0.469,
+    "exit_code": 0,
+    "stdout_tail": "WROTE specs\\029-brief-content-model-and-doctrine-consolidation\\evidence\\t009-matrix\\M-001.html\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "validate",
+    "argv": [
+      "scripts/validate_brief_model.py",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-002.yaml"
+    ],
+    "elapsed_seconds": 0.422,
+    "exit_code": 0,
+    "stdout_tail": "VALID\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "project",
+    "argv": [
+      "scripts/project_brief.py",
+      "testes/mock-runs/20260921-spec029-t009-m002/initiative",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-002.yaml",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-002.html"
+    ],
+    "elapsed_seconds": 0.422,
+    "exit_code": 0,
+    "stdout_tail": "WROTE specs\\029-brief-content-model-and-doctrine-consolidation\\evidence\\t009-matrix\\M-002.html\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "validate",
+    "argv": [
+      "scripts/validate_brief_model.py",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-003.yaml"
+    ],
+    "elapsed_seconds": 0.422,
+    "exit_code": 0,
+    "stdout_tail": "VALID\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "project",
+    "argv": [
+      "scripts/project_brief.py",
+      "testes/mock-runs/20260921-spec029-t009-m003/initiative",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-003.yaml",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-003.html"
+    ],
+    "elapsed_seconds": 0.453,
+    "exit_code": 0,
+    "stdout_tail": "WROTE specs\\029-brief-content-model-and-doctrine-consolidation\\evidence\\t009-matrix\\M-003.html\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "validate",
+    "argv": [
+      "scripts/validate_brief_model.py",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-004.yaml"
+    ],
+    "elapsed_seconds": 0.438,
+    "exit_code": 0,
+    "stdout_tail": "VALID\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "project",
+    "argv": [
+      "scripts/project_brief.py",
+      "testes/mock-runs/20260921-spec029-t009-m004/initiative",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-004.yaml",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-004.html"
+    ],
+    "elapsed_seconds": 0.454,
+    "exit_code": 0,
+    "stdout_tail": "WROTE specs\\029-brief-content-model-and-doctrine-consolidation\\evidence\\t009-matrix\\M-004.html\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "validate",
+    "argv": [
+      "scripts/validate_brief_model.py",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-005.yaml"
+    ],
+    "elapsed_seconds": 0.406,
+    "exit_code": 0,
+    "stdout_tail": "VALID\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "project",
+    "argv": [
+      "scripts/project_brief.py",
+      "testes/mock-runs/20260921-spec029-t009-m005/initiative",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-005.yaml",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-005.html"
+    ],
+    "elapsed_seconds": 0.438,
+    "exit_code": 0,
+    "stdout_tail": "WROTE specs\\029-brief-content-model-and-doctrine-consolidation\\evidence\\t009-matrix\\M-005.html\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "validate",
+    "argv": [
+      "scripts/validate_brief_model.py",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-006.yaml"
+    ],
+    "elapsed_seconds": 0.407,
+    "exit_code": 0,
+    "stdout_tail": "VALID\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "project",
+    "argv": [
+      "scripts/project_brief.py",
+      "testes/mock-runs/20260921-spec029-t009-m006/initiative",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-006.yaml",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-006.html"
+    ],
+    "elapsed_seconds": 0.438,
+    "exit_code": 0,
+    "stdout_tail": "WROTE specs\\029-brief-content-model-and-doctrine-consolidation\\evidence\\t009-matrix\\M-006.html\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "validate",
+    "argv": [
+      "scripts/validate_brief_model.py",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-007.yaml"
+    ],
+    "elapsed_seconds": 0.421,
+    "exit_code": 0,
+    "stdout_tail": "VALID\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "project",
+    "argv": [
+      "scripts/project_brief.py",
+      "testes/mock-runs/20260921-spec029-t009-m007/initiative",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-007.yaml",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-007.html"
+    ],
+    "elapsed_seconds": 0.453,
+    "exit_code": 0,
+    "stdout_tail": "WROTE specs\\029-brief-content-model-and-doctrine-consolidation\\evidence\\t009-matrix\\M-007.html\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "validate",
+    "argv": [
+      "scripts/validate_brief_model.py",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-008.yaml"
+    ],
+    "elapsed_seconds": 0.39,
+    "exit_code": 0,
+    "stdout_tail": "VALID\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  },
+  {
+    "step": "project",
+    "argv": [
+      "scripts/project_brief.py",
+      "testes/mock-runs/20260921-spec029-t009-m008/initiative",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-008.yaml",
+      "specs/029-brief-content-model-and-doctrine-consolidation/evidence/t009-matrix/M-008.html"
+    ],
+    "elapsed_seconds": 0.453,
+    "exit_code": 0,
+    "stdout_tail": "WROTE specs\\029-brief-content-model-and-doctrine-consolidation\\evidence\\t009-matrix\\M-008.html\n",
+    "stderr_tail": "",
+    "measurement_note": "wall_clock is a REAL measured value (time.monotonic around the subprocess). Iteration/call count is counted by the invoking agent, one unit per attempted check, not estimated. Token/LLM cost is NOT measured by this script -- no meter is available in this context; do not treat its absence as zero cost."
+  }
+]

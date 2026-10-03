@@ -16,11 +16,11 @@ non-goals. Behavior change requires a feature/bugfix spec instead.
 ## Flow
 
 1. Capture regression baseline before modification.
-2. Select the brief lineage. Historical/pinned v1 retains the legacy
-   brief-before-task sequence; v2 executes Common SDD Lifecycle gates 1–12.
-3. For v2, draft small reversible tasks for coverage/meeting review; only
-   post-meeting `tasks_ready` permits a task to become ready. V1 uses the
-   legacy task breakdown after Human Visibility.
+2. Select `brief-contract.md` BC-002 lineage and the Common SDD Lifecycle
+   brief branch: contract 3 repairs BC-009; historical v1/v2 retain gates.
+3. Draft small reversible tasks; source/owner readiness under BC-018 permits
+   execution. Only historical v2 uses its coverage/meeting review ordering;
+   v1 keeps task breakdown after Human Visibility. v3 adds no post-B review.
 4. Implement one task and rerun the relevant baseline.
 5. Draft `evidence/<task-id>.md` and set `needs_evaluation`.
 6. A distinct Evaluator compares baseline, contracts, diff and evidence.

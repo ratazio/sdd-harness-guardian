@@ -1,7 +1,7 @@
 ---
 name: rendered-brief-decision-review
-description: Review a generated stakeholder brief against its request and canonical sources when a decision-ready rendered HTML claim needs independent evidence; do not use for formatting-only checks.
-version: "0.1.0"
+description: Compare o stakeholder brief HTML às fontes canônicas e recupere diretamente fatos materiais omitidos, contraditos ou inventados no contrato 3; use como primeiro mandato do reparador distinto da autoria e preserve o review histórico quando 1/2 estiver explicitamente selecionado.
+version: "0.3.0"
 owner: platform-engineering
 maturity: stable
 risk_level: medium
@@ -9,77 +9,101 @@ risk_level: medium
 
 # Rendered Brief Decision Review
 
-## Purpose
+## Selecionar a versão e o mandato
 
-Determine whether the rendered HTML preserves the material decisions of the
-request and canonical artifacts. This is an independent qualitative review;
-structural, provenance and freshness validators remain useful but do not decide
-meaning, architecture fitness or visual quality.
+Leia `.harness/rules/brief-contract.md` e aplique o dispatch de BC-002.
+No contrato 3, esta skill é B/conteúdo: comparar e reparar o próprio HTML
+composto por A. Não é aprovação dos bytes editados por B. O procedimento
+histórico ao final aplica-se somente a 1/2 explícito.
 
-## Inputs and independence
+Antes de concluir um mandato 3, confirme `A_id != B_id`, o path/digest do
+candidato e a configuração efetiva `high`/`xhigh` (ou superior suportado)
+fornecida pelo executor. Registre a referência da configuração/traço real
+por BC-025. Texto de prompt, frontmatter ou esforço declarado pelo próprio
+HTML não provam configuração efetiva. `medium`, esforço desconhecido ou
+reparador qualificado indisponível resultam em `incomplete`; não os relate
+como execução qualificada. Use o modelo/capacidade disponível, sem inventar
+API universal ou exigir provider específico.
 
-Collect locators and SHA-256 digests for: the originating request, applicable
-canonical sources, and the exact rendered HTML. Record the artifact locator,
-reviewer identity, timestamp and preview environment. For an `APPROVE` that
-will be recorded as a post-render review, the evidence must name the exact
-`http://127.0.0.1[:port]/...` URL used to inspect the final route surface; a
-file-path-only or screenshot-only reading cannot support that claim. Do not
-copy request bodies, secrets or PII into review evidence.
+## Contrato 3 — comparação e reparo factual
 
-Reviewer identities are distinct from the source author and current builder.
-Choose only the review lenses that are proportionate to the initiative's
-material decisions, risk and domain. A chosen lens may be `not_material` only
-with a source-backed reason; `insufficient` or material `REVISE` blocks quality
-approval.
+Receba o handoff de A com solicitação, HTML exato, autoria, fontes/locators,
+snapshot SHA-256 e limites. Leia integralmente as fontes aplicáveis de
+BC-003 e suas revisões/supersessões. MD fornecido é correto por premissa e
+somente leitura. YAML é metadado operacional; atualizar `brief_repair` não
+autoriza alterar gates, tasks ou aprovação.
 
-## Review method
+Confronte o snapshot antes de editar. Se um MD mudou desde o handoff,
+interrompa o reparo desse snapshot e relate paths/digests afetados como
+`incomplete`; não estabilize editando fontes nem conclua freshness falsa.
+Quando o handoff não registra snapshot, capture os hashes dos MD lidos
+antes do reparo e confirme os mesmos bytes ao fechá-lo.
 
-1. Read the request and canonical artifacts before opening the page. Identify
-   the decision that each chosen lens must make without Markdown.
-2. Serve and open the rendered HTML through `127.0.0.1` in an appropriate
-   available viewer. Check visible content, progressive retrieval,
-   keyboard/focus behavior where navigation exists, reduced-motion and print
-   fallback where applicable.
-3. For each material lens record `APPROVE` or `REVISE`, materiality, source and
-   HTML locators, decision impact, and the answer to: “what remains impossible
-   without opening Markdown?”
-4. For material relationships, require a connected accessible model when
-   components, data, trust, state or failure behavior affect the decision. A
-   labelled relationship table, semantic flow or accessible SVG can qualify;
-   typographic arrows alone cannot. For a concise non-software or low-relation
-   case, record why prose or a short ordered handoff is proportional.
-5. For material execution, recover workfront, dependency/order, increment,
-   risk/authority, validation/evidence and next safe step from the HTML. Do
-   not demand a task-card format.
+Parta do inventário esperado nas fontes, não somente dos blocos que A
+emitiu. Para cada heading/FR/AC/task/decisão/risco material, identifique
+o fato, onde deveria ser recuperável e a diferença no HTML. Aplique os
+contratos de aba BC-013 e os slots do kit de composição. Recupere objetivo,
+beneficiário, benefício/critério, contratos/dados, responsabilidades,
+relações/falhas, controles, ordem/exit/provas e autoridade efetivamente
+fornecidos. Leia detalhes expansíveis também; link para MD não substitui
+fato core no HTML. Nenhuma quota de palavras/cards decide completude.
 
-## Repair and disposition
+Localize cada omissão, contradição ou invenção com fonte/heading/fato e
+aba/bloco, explique seu efeito na decisão e corrija o mesmo arquivo HTML.
+Restaure o fato existente, substitua afirmação contraditória e remova
+invenção com o limite correspondente. Preserve oito abas, identidade,
+componentes, SVG e proveniência BC-005/006; expanda unidades/detalhes quando
+necessário. Não retorne a A para regeneração rotineira e não encerre com
+lista de findings corrigíveis esperando autorização do usuário.
 
-Every material finding names: finding ID; request/source/HTML locators; lost or
-weakened fact; decision impact; canonical source recovery action; and the
-originating-reviewer re-review required after rerender. When the required fact
-already exists in canonical sources, dispatch that correction to the composer,
-regenerate the HTML and serve it again in the same run; do not stop to ask the
-user for routine approval. Ask externally only for genuinely new authority,
-scope, or an absent material fact. Never close a finding by editing HTML alone.
+Distinga omissão de composição de ausência real da fonte. Ausência recebe
+no HTML fato exato, locator, impacto e owner/caminho somente se fornecidos
+(BC-015); owner/caminho ausentes ficam explícitos. N/A exige fundamento.
+Não invente baseline, capacidade, SLA, métrica, topologia ou aprovação.
+Contradição histórica continua visível como limite de fonte, sem reabrir
+gates de planejamento ou exigir que o MD seja reescrito.
 
-Only a genuinely editorial finding may be promoted under a reviewed editorial
-exception. The append-only decision record and its visible HTML projection must
-state its ID, finding, source → rendered target, decision impact, residual
-risk, accountable owner, decision to proceed, expiry and next action. Preserve
-in that record the exact pre-render candidate SHA-256 and composition-manifest
-SHA-256 binding; the exception cannot waive integrity, provenance, lifecycle or
-security findings. It permits only the named finding to be shown for review and
-does not make Human Visibility or Tasks Ready true. Correction, rerender and
-originating-reviewer re-review remain the next path; otherwise the finding is
-blocking.
+Repare também coverage: fonte/heading → fato esperado → aba/bloco e
+disposição honesta. Uma linha `represented` não encobre fato que ainda
+falta. Corrija locators/targets e mantenha limitações reais qualificadas.
+Não acrescente modelo, projeção determinística, suficiência prévia ou mapa
+narrativo paralelo como pré-requisito 3.
 
-## Output
+Faça a inspeção necessária para terminar os próprios reparos e confirmar
+os bytes de fonte. Essa inspeção integra o mandato; não abre aprovação ou
+re-review. Registre fatos recuperados e digest do HTML que segue para
+`executive-brief-experience-review`, executada pelo mesmo B com esforço
+efetivo qualificado. Não imponha rerun desta primeira skill após o visual.
 
-Write the review record inside the initiative `evidence/` directory. State
-`Preview URL:` and `Preview environment:` alongside the reviewer and exact
-rendered digest. Keep its
-metadata compatible with the opt-in `brief_review.quality_review_*` fields.
-State separately: deterministic checks PASS/FAIL, qualitative decision review
-APPROVE/REVISE, findings, automatic recovery attempted, and the next safe step.
-Do not report a deterministic PASS as stakeholder approval, and do not report a
-recoverable `REVISE` as a reason no final HTML could be constructed.
+## Registro e handoff para B/visual
+
+Em evidência/estado existente ou no relato, registre autoria A, identidade
+B, configuração efetiva/referência, snapshot, path/digest antes/depois,
+reparos com locators e limites. No `brief_repair` existente, use
+`author`, `source_snapshot` e `content.{actor,effective_effort,execution_ref,
+completed_at,status}`; entregue o digest atual ao mesmo B/visual.
+Não duplique uma narrativa fora do HTML nem copie segredos/PII desnecessários.
+
+Use `completed`, `completed_with_source_limitations` ou `incomplete` conforme
+BC-020/025. A conclusão factual não é `approve`, task done, evidence
+approval, `Tasks Ready` ou autoridade para implementar. O relato final
+vem depois do segundo mandato; nenhum terceiro agente/validador semântico
+ou ciclo de reapproval é requisito do uso normal 3.
+
+## Histórico 1/2 — somente quando selecionado
+
+BC-002 preserva o lifecycle 1. Para 2 explícito, esta skill executa pass
+(b) de BC-009: reviewer distinto do autor/builder lê fontes, construção
+revista e HTML renderizado em loopback BC-016, sem editar durante o review.
+Registre locators/digests, identidade, timestamp, URL exata e ambiente.
+Escolha lentes materiais e registre julgamento qualitativo por aba:
+`recoverable`, `superficial`, `absent` ou N/A fundamentado, e
+`APPROVE`/`REVISE` com perda factual, impacto, recovery na composição e
+re-review de origem. Falha material não recebe aprovação.
+
+No ramo 2, findings retornam ao compositor/modelo/projeção e ao re-review
+previsto; patch apenas no HTML não fecha finding. Exceções editoriais
+seguem BC-017 sem dispensar integridade/lifecycle. Registre checks
+determinísticos separadamente do julgamento qualitativo e do próximo
+passo. Esse mandato de reviewer e suas restrições não se acumulam com o
+reparo direto 3.

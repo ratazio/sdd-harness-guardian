@@ -1,0 +1,141 @@
+contract_version: "1.0.0"
+profile: standard
+domain: software
+
+thesis:
+  decision_and_audience: "Eng leads approve routing checkout payments through an idempotent retry queue."
+  brief_thesis: "One retry, never a double charge."
+
+routes:
+  - id: architecture
+    blocks:
+      - id: zoom-checkout
+        form: topology
+        form_reason: "A material relation between three services needs a real diagram, not prose."
+        coverage: represented
+        source: spec.md
+        source_section: "Architecture"
+        fragment: "The checkout service calls the payment gateway directly; a retry queue sits between them once this change lands."
+        text: "Checkout now routes payment calls through an idempotent retry queue."
+        relation_ref: checkout-topology
+
+      - id: zoom-sequence
+        form: sequence
+        form_reason: "The retry behaviour is a temporal order, not a spatial relation -- sequence over topology."
+        coverage: represented
+        source: spec.md
+        source_section: "Sequence"
+        fragment: "Order submit triggers authorization; a timeout triggers exactly one retry before the order is marked failed."
+        text: "Exactly one retry, then a terminal failure state."
+        relation_ref: retry-sequence
+
+  - id: impact
+    blocks:
+      - id: footprint-surfaces
+        form: footprint
+        form_reason: "Three affected surfaces read best as separate footprint cards, not a paragraph."
+        coverage: represented
+        source: spec.md
+        source_section: "Impact"
+        fragment: "Affected surfaces: checkout-service, payment-gateway-client, order-status-webhook."
+        text: "Three surfaces change; none are removed."
+        fields:
+          - label: checkout-service
+            value: "Adds retry-queue publish call."
+          - label: payment-gateway-client
+            value: "No contract change; called from the queue consumer instead of checkout directly."
+          - label: order-status-webhook
+            value: "Receives one additional terminal state: retried-failed."
+
+      - id: risk-duplicate-charge
+        form: risk-chain
+        form_reason: "A signal-to-control chain for one named risk."
+        coverage: represented
+        source: spec.md
+        source_section: "Risk"
+        fragment: "A duplicate charge risk exists if the retry queue is not idempotent; consequence is a double debit, control is an idempotency key, owner is Payments."
+        text: "Duplicate charge is the one material risk; it is controlled, not merely noted."
+        fields:
+          - label: Signal
+            value: "Retry queue re-delivers a message."
+          - label: Consequence
+            value: "Customer is charged twice."
+          - label: Control
+            value: "Idempotency key per order id + attempt number (D-002)."
+          - label: Owner
+            value: "Payments"
+
+      - id: compliance-matrix
+        form: matrix
+        form_reason: "A scope-boundary table is exactly what a PCI scope call needs -- a matrix, not prose."
+        coverage: represented
+        source: spec.md
+        source_section: "Compliance matrix"
+        fragment: "PCI-DSS scope: checkout-service handles card data; payment-gateway-client is out of PCI scope after tokenization."
+        text: "PCI scope narrows with this change; it does not widen."
+        fields:
+          - label: checkout-service
+            value: "In PCI scope (handles card data)."
+          - label: payment-gateway-client
+            value: "Out of PCI scope (post-tokenization)."
+
+  - id: decision
+    blocks:
+      - id: D-002
+        form: dossier
+        form_reason: "One decision record with several attributes reads as a small dossier, not a sentence."
+        coverage: represented
+        source: decision-log.md
+        source_section: "D-002"
+        fragment: "The retry queue keys every attempt by order id plus attempt number, so a duplicate publish cannot cause a duplicate charge."
+        text: "Idempotency is structural, not a runtime check."
+        fields:
+          - label: Decision
+            value: "Key every retry attempt by order id + attempt number."
+          - label: Owner
+            value: "Payments"
+
+relations:
+  - id: checkout-topology
+    label: "Checkout payment call path"
+    nodes:
+      - id: checkout
+        label: "checkout-service"
+      - id: queue
+        label: "retry queue"
+      - id: gateway
+        label: "payment-gateway-client"
+    edges:
+      - from: checkout
+        to: queue
+        label: "publishes attempt"
+        state: proposed
+      - from: queue
+        to: gateway
+        label: "authorizes"
+        state: preserved
+
+  - id: retry-sequence
+    label: "Retry timing sequence"
+    nodes:
+      - id: submit
+        label: "order submit"
+      - id: timeout
+        label: "authorization timeout"
+      - id: retry
+        label: "single retry"
+      - id: fail
+        label: "terminal failure"
+    edges:
+      - from: submit
+        to: timeout
+        label: "no response"
+        state: discovery
+      - from: timeout
+        to: retry
+        label: "retries once"
+        state: proposed
+      - from: retry
+        to: fail
+        label: "still fails"
+        state: out-of-scope

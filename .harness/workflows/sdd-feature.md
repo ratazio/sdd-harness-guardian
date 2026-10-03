@@ -12,16 +12,15 @@ Non-trivial features also maintain `stakeholder-brief.html` for human review.
 
 ## Flow
 
-1. Select the lifecycle lineage first. Pinned/historical v1 executes the legacy
-   brief-before-task path; v2 executes `sdd-lifecycle.md` gates 1–12, including
-   the unauthorised preliminary task draft, distinct coverage review and
-   post-meeting propagation.
+1. Select `brief-contract.md` BC-002 lineage and the matching
+   `sdd-lifecycle.md` brief branch. New contract 3 uses BC-009 repairs;
+   historical v1/v2 retain their own gates without imposing them on v3.
 2. Confirm compatibility, migration and rollout impact where relevant.
 3. For each ready task, Builder implements, drafts evidence and sets
    `needs_evaluation`; a distinct Evaluator must `approve` before State Keeper
    records `approved -> done`.
 4. Run feature-level integration/regression checks.
-5. Execute gates 13–15.
+5. Complete Common SDD Lifecycle initiative validation, Ratchet and Close/Handoff.
 
 ## Feature constraints
 

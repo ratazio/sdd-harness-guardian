@@ -25,7 +25,9 @@ ROOT = Path(__file__).resolve().parents[1]
 NEUTRAL_BRIEF = "/specs/001-render-control/stakeholder-brief.html"
 PEARSON_BRIEF = "/pearson-selected.html"
 LOGO = "/.harness/assets/brand/pearson-logo-white.png"
-TEMPLATE = ROOT / ".harness" / "templates" / "stakeholder-brief.html"
+# This test exercises the historical local-asset profile and JS fallback.
+# Contract 3 native/offline behavior is covered separately by SPEC031.
+TEMPLATE = ROOT / "scripts" / "fixtures" / "tabbed-brief-surface" / "template-v2.html"
 VIEWPORTS = ((320, 700), (390, 844), (768, 900), (1024, 900), (1440, 960))
 
 
@@ -96,8 +98,8 @@ def rendered_pearson_html() -> str:
         1,
     )
     return html.replace(
-        "</div>\n<header class=\"brief-header\"",
-        "</div><a class=\"brief-client-logo\" href=\"#decision\" aria-label=\"Pearson — decisão da iniciativa\">"
+        '<header class="brief-header"',
+        "<a class=\"brief-client-logo\" href=\"#decision\" aria-label=\"Pearson — decisão da iniciativa\">"
         "<img src=\"../../.harness/assets/brand/pearson-logo-white.png\" width=\"175\" height=\"53\" alt=\"\"></a>"
         "\n<header class=\"brief-header\"",
         1,

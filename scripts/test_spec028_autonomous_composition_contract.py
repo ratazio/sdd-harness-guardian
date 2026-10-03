@@ -24,25 +24,27 @@ def require(path: str, *phrases: str) -> None:
 def main() -> int:
     require(
         ".harness/skills/executive-brief-composition/SKILL.md",
-        "## Autonomous completion rule",
-        "## Whole-brief authorship check",
-        "not a reason to leave a\nsource-backed brief half-built",
-        "Only `approved`/Human\nVisibility claims wait",
+        "## Handoff direto A → B",
+        "relato final encerra",
+        "Não execute produto",
     )
     require(
         ".harness/skills/executive-brief-experience-review/SKILL.md",
-        "visit each of its eight route URLs",
-        "untouched scaffold prose",
+        "Visite as oito abas",
+        "Repare diretamente no mesmo HTML",
+        "Não confunda esse reviewer histórico com o reparador 3",
     )
     require(
         ".harness/skills/rendered-brief-decision-review/SKILL.md",
-        "do not stop to ask the\nuser for routine approval",
-        "automatic recovery attempted",
+        "conclusão factual não é `approve`",
+        "nenhum terceiro agente/validador semântico",
+        "reparo direto 3",
     )
     require(
         ".harness/workflows/sdd-lifecycle.md",
-        "does not\n   wait for routine requester approval",
-        "must not become a passive reason to stop\n   authoring",
+        "then the same B",
+        "Do not add another semantic gate",
+        "Relevant legacy re-review remains confined to this branch",
     )
     print("SPEC 028 autonomous composition-recovery instruction contract passed.")
     return 0

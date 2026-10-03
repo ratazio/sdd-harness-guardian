@@ -1,0 +1,150 @@
+# T-003 fixture closing IR-003: all eight `testes/mock-runs/` mocks are
+# domain "software"; nothing in the existing corpus exercises the schema or
+# projector against a non-software domain. This model is a synthetic
+# `domain: docs` / `profile: minimal` initiative (a support knowledge-base
+# taxonomy migration -- no code, no service, no deploy) and doubles as the
+# AC-005 fixture: `minimal` + `docs` selects a subset of routes (`scope`,
+# `impact`, `decision`, plus the always-present `coverage`) with no
+# `not_applicable` disposition required for the four routes it does not
+# select (`architecture`, `execution`, `validation`, `evolution`).
+#
+# What this fixture found (see evidence/T-003.md for the full writeup):
+#   - `ALLOWED_BLOCK_SOURCES` in project_brief.py is a fixed, SDD-shaped
+#     filename list (spec.md/decision-log.md/run-state.yaml/...). A docs
+#     initiative that isn't itself governed by this harness would have to
+#     invent a `run-state.yaml` it has no other use for just to ground a
+#     `not_applicable` block. That friction is real and is NOT fixed here
+#     (T-003 scope is forms/selection, not the source inventory) -- it is
+#     recorded as a finding for a future task.
+#   - `topology` genuinely does not apply here: nothing in a taxonomy
+#     migration is a spatial/structural relation. `sequence` DOES apply (the
+#     redirect lifecycle is a real node/edge relation) and the same SVG
+#     renderer built for architecture zooms works unchanged for it -- the
+#     schema's relation model generalizes past "architecture diagram".
+contract_version: "1.0.0"
+profile: minimal
+domain: docs
+
+thesis:
+  decision_and_audience: "Docs and support leads approve retiring the flat KB wiki for a three-tier taxonomy."
+  brief_thesis: "Reorganize, redirect, never rewrite -- six months of overlap before the old URLs die."
+
+routes:
+  - id: scope
+    blocks:
+      - id: hero
+        form: prose
+        form_reason: "A single scope thesis needs no diagram."
+        coverage: represented
+        source: spec.md
+        source_section: "Scope"
+        fragment: "The support knowledge base moves from a flat wiki of 240 articles to a three-tier taxonomy; article content is reorganized and re-linked, not rewritten."
+        text: "This is a re-organization, not a rewrite: no article content changes."
+
+  - id: impact
+    blocks:
+      - id: footprint-audiences
+        form: footprint
+        form_reason: "Three distinct audiences read best as separate cards."
+        coverage: represented
+        source: spec.md
+        source_section: "Impact"
+        fragment: "Affected audiences: support agents who link articles in tickets, self-serve customers who search the KB directly, and docs maintainers who own the article backlog."
+        text: "Every audience keeps working during the migration; none are blocked."
+        fields:
+          - label: Support agents
+            value: "Ticket links keep resolving via redirect."
+          - label: Self-serve customers
+            value: "Search results repoint to the new taxonomy page."
+          - label: Docs maintainers
+            value: "Own the article backlog move, category by category."
+
+      - id: redirect-sequence
+        form: sequence
+        form_reason: "A redirect lifecycle is a temporal order, not a spatial structure -- and it is a genuine material relation even though this domain has no architecture."
+        coverage: represented
+        source: spec.md
+        source_section: "Migration sequence"
+        fragment: "An old URL resolves through a 301 redirect to its new taxonomy page for six months before the redirect table is retired."
+        text: "Six months of overlap, then the redirect table is retired."
+        relation_ref: redirect-flow
+
+      - id: broken-link-risk
+        form: risk-chain
+        form_reason: "One named risk with a signal-to-control chain."
+        coverage: represented
+        source: spec.md
+        source_section: "Risk"
+        fragment: "A broken inbound link from a third-party integration or a search engine result loses a customer mid-task; the control is a permanent redirect table checked before every publish."
+        text: "The one material risk is controlled by process, not by luck."
+        fields:
+          - label: Signal
+            value: "Inbound link 404s after migration."
+          - label: Consequence
+            value: "Customer abandons task mid-flow."
+          - label: Control
+            value: "Redirect table checked before every publish."
+          - label: Owner
+            value: "Docs maintainers"
+
+      - id: content-inventory
+        form: matrix
+        form_reason: "A crosswalk from old grouping to new category is a matrix, not prose."
+        coverage: represented
+        source: spec.md
+        source_section: "Content inventory"
+        fragment: "Getting-started articles move to the Onboarding category; billing articles move to the Billing category; the remaining long tail moves to a single Reference category pending a second pass."
+        text: "Three categories absorb 240 articles; the long tail gets one more pass later."
+        fields:
+          - label: Getting-started articles
+            value: "Onboarding category"
+          - label: Billing articles
+            value: "Billing category"
+          - label: Long tail
+            value: "Reference category (pending second pass)"
+
+      - id: compliance-notapplicable
+        form: prose
+        form_reason: "A single absence sentence needs no diagram."
+        coverage: not_applicable
+        source: run-state.yaml
+        source_section: "quality_gates"
+        absence:
+          kind: not_applicable
+          reason: "No compliance-scoped data moves with this migration; standard docs review is sufficient."
+
+  - id: decision
+    blocks:
+      - id: D-001
+        form: dossier
+        form_reason: "One decision record with owner/scope attributes reads as a small dossier."
+        coverage: represented
+        source: decision-log.md
+        source_section: "D-001"
+        fragment: "The three-tier taxonomy (Onboarding, Billing, Reference) is frozen before any article moves, so no article is re-categorized twice."
+        text: "Freeze first, then move -- nothing gets categorized twice."
+        fields:
+          - label: Decision
+            value: "Freeze the three-tier taxonomy before moving any article."
+          - label: Owner
+            value: "Docs maintainers"
+
+relations:
+  - id: redirect-flow
+    label: "Old URL to new taxonomy page"
+    nodes:
+      - id: old
+        label: "Old wiki URL"
+      - id: redirect
+        label: "301 redirect (6 months)"
+      - id: new
+        label: "New taxonomy page"
+    edges:
+      - from: old
+        to: redirect
+        label: "still resolves"
+        state: preserved
+      - from: redirect
+        to: new
+        label: "routes to"
+        state: proposed

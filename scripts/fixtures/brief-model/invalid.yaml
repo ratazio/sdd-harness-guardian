@@ -1,0 +1,45 @@
+# Invalid fixture for scripts/test_brief_model_authoring.py.
+# Deliberately violates several rules at once:
+#   - routes[0].id uses the old SKILL vocabulary "architecture.global"
+#     (contradiction A-02) instead of the canonical "architecture".
+#   - routes[0].blocks[0] declares a form without a form_reason.
+#   - routes[0].blocks[1] has coverage "represented" but no fragment.
+#   - relations[0].edges[0] points "to" a node id that does not exist.
+
+contract_version: "1.0.0"
+profile: standard
+domain: software
+
+thesis:
+  decision_and_audience: Produto e arquitetura aprovam antes de HTML.
+  brief_thesis: Conciliar lotes sem perder auditabilidade.
+
+relations:
+  - id: architecture-global-flow
+    nodes:
+      - id: ingest
+        label: Arquivo chega com identidade
+    edges:
+      - from: ingest
+        to: nonexistent-node
+        label: hash decide idempotencia
+        state: proposed
+
+routes:
+  - id: architecture.global
+    blocks:
+      - id: architecture-global-flow
+        form: topology
+        coverage: represented
+        source: impact-map.md
+        source_section: topology
+        fragment: "SFTP simulado -> armazenamento S3"
+        text: O lote percorre identidade e recuperacao.
+        relation_ref: architecture-global-flow
+      - id: zoom-ledger
+        form: dossier
+        form_reason: Campos fixos e repetidos por zoom.
+        coverage: represented
+        source: plan.md
+        source_section: "Architecture decisions"
+        text: Modelo financeiro e migracoes.

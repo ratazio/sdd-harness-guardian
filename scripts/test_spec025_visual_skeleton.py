@@ -14,7 +14,7 @@ import re
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TEMPLATE = ROOT / ".harness" / "templates" / "stakeholder-brief.html"
+TEMPLATE = ROOT / "scripts" / "fixtures" / "tabbed-brief-surface" / "template-v2.html"
 SKELETON = ROOT / "specs" / "025-brief-composition-handoff-skeleton" / "brief-candidates" / "stakeholder-brief.skeleton.html"
 ROUTES = ("scope", "architecture", "impact", "execution", "validation", "evolution", "decision", "coverage")
 SKELETON_IDS = (
@@ -59,7 +59,10 @@ def main() -> int:
     skeleton_surface = Surface()
     skeleton_surface.feed(skeleton)
 
-    require('data-harness-brief-structure="executive-brief-v3"' in template, "template structure version missing")
+    # BC-002: the live template declares the unified `data-brief-contract`
+    # axis; the pinned 025 skeleton predates T-005 and keeps its legacy
+    # literal unchanged (NG-004).
+    require('data-brief-contract="2"' in template, "template structure version missing")
     require('data-harness-brief-structure="executive-brief-v3"' in skeleton, "skeleton does not declare template structure version")
     for token in (
         "route-hero", "topology", "brief-architecture-cut", "brief-impact-footprint",

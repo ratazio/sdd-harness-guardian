@@ -83,6 +83,7 @@ workflows:
   - sdd-harness-audit
 
 rules:
+  - brief-contract
   - human-visibility
   - outcome-readiness
   - sdd-quality
@@ -126,7 +127,18 @@ consumer_contract:
   task_terminal_status: done
   scaffold_command: python vendor/sdd-harness-guardian/scripts/new_initiative.py <initiative>
   human_visibility_validate_command: python vendor/sdd-harness-guardian/scripts/validate_human_visibility.py --consumer-root . --initiative specs/NNN-slug
-  new_non_trivial_brief_lineage: v2
+  new_non_trivial_brief_lineage: v3
+  brief_contract_attribute: data-brief-contract
+  brief_contract_version: 3
+  brief_entrypoint: .harness/templates/README.md
+  brief_protocol: author_then_content_repair_then_same_actor_visual_repair_then_report
+  brief_author_skill: executive-brief-composition
+  brief_content_repair_skill: rendered-brief-decision-review
+  brief_visual_repair_skill: executive-brief-experience-review
+  brief_repair_state: brief_repair
+  brief_repair_effort: high_or_xhigh_or_explicitly_supported_higher
+  brief_source_policy: canonical_markdown_read_only
+  pinned_v2_policy: preserve_explicit_historical_model_and_two_review_passes
   pinned_v1_policy: preserve_until_material_refresh_migration_or_reviewed_legacy_exception
   v2_post_meeting_order: decision_log_append_then_canonical_source_propagation_then_revalidation_then_brief_regeneration_then_tasks_ready
 

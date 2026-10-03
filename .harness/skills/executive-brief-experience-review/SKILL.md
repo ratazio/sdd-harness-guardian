@@ -1,7 +1,7 @@
 ---
 name: executive-brief-experience-review
-description: Independently assess whether an executive stakeholder brief and its architecture explanation are source-grounded, decision-ready and visually proportional; use after a distinct composer has produced a candidate.
-version: "0.1.0"
+description: Abra todas as oito abas do stakeholder brief e repare explicação, SVG, hierarquia, cards, títulos e navegação no próprio HTML após o reparo factual pelo mesmo B qualificado; preserve o review de construção histórico somente para contrato 1/2 explícito.
+version: "0.3.0"
 owner: platform-engineering
 maturity: stable
 risk_level: medium
@@ -9,86 +9,113 @@ risk_level: medium
 
 # Executive Brief Experience Review
 
-## Purpose
+## Selecionar a versão e confirmar o reparador
 
-Judge a composed executive brief as a separate evaluator. This is a
-source-and-experience reading, not a semantic scoring program and not a
-license to repair the candidate during review.
+Leia `.harness/rules/brief-contract.md` e aplique BC-002. No contrato 3,
+esta skill é o segundo mandato, B/visual, depois de
+`rendered-brief-decision-review`. Confirme o HTML/digest de saída factual,
+`A_id != B_content_id` e `B_visual_id == B_content_id`. Confirme novamente
+o esforço efetivo `high`/`xhigh` ou superior suportado a partir da
+configuração/traço nativo do executor por BC-025, com referência registrada.
+Não trate promessa no prompt ou metadata do candidato como prova real.
+`medium`, configuração desconhecida ou identidade incompatível são
+`incomplete`, sem conclusão qualificada. Não imponha modelo/provider.
 
-## Pre-skeleton construction-plan review
+MD é somente leitura e correto por premissa. Confronte o snapshot factual
+antes/depois: uma fonte alterada interrompe esse snapshot, com paths e
+digests no relato; não edite MD, reabra planejamento ou declare sincronismo
+falso. YAML operacional pode receber o registro, sem alterar autorização.
 
-When no candidate exists, review the construction record in the existing
-`plan.md` before skeleton instantiation. Read requester intent and canonical
-sources, then confirm that coverage is not being used as a substitute for
-storytelling/visual decisions: the thesis/audience, each of the eight routes,
-material relationships, selected form with reason, repeated components,
-limits/discoveries and closing actions are all either source-grounded or
-explicitly N/A.
+## Contrato 3 — abrir, explicar e reparar
 
-Return `APPROVE` or `REVISE`. For every `REVISE` finding, write **source → loss
-or ambiguity → decision prejudiced → canonical correction**. Do not require
-any fixed number of cards, diagrams, SVGs, views or words, and do not edit the
-plan during this assessment. `APPROVE` authorizes skeleton instantiation only;
-it is not an approval of the future candidate or a shortcut around the later
-desktop review.
+Abra o próprio HTML em browser no contexto suportado, por arquivo/preview
+ou loopback. Registre URL/contexto, viewport e JS ligado/desligado quando
+suportado. Visite as oito abas, inclusive coverage; faça leitura visual e
+operação, não somente snapshot de DOM ou uma landing page. Se não existe
+browser capaz de abrir todas, o mandato visual fica `incomplete`. Contexto
+específico não suportado é limite explícito BC-016, sem fingir teste.
 
-## Required comparison
+Se o executor B não expõe browser, mas um operador/orquestrador dispõe de
+ferramenta nativa, B pode solicitar abertura, interação e capturas reais.
+B interpreta todas as oito abas, decide e edita por conta; o operador
+somente executa os passos mecânicos, sem julgamento/aprovação ou terceira
+skill. Registre operador, backend/contexto real e limite da sessão B.
+Sem imagens/interações reais de browser capaz, permanece `incomplete`.
 
-Read the requester intent, applicable canonical sources, reviewed construction
-record, candidate/rendered artifact and task validation plan. Record hashes and
-locators for the reviewed artifacts when they are evidence. The reviewer must
-not be the composer or builder.
+Leia as fontes/locators necessários para explicar o que B/conteúdo
+recuperou. Repare diretamente no mesmo HTML os defeitos encontrados:
 
-## Review lenses
+- Título e abertura respondem à pergunta da aba com transformação,
+  benefício/critério e ação específicos; elimine preâmbulo genérico e
+  placeholders visíveis, preservando o fato e o limite real.
+- Hierarquia e densidade tornam unidades comparáveis: cards com campos,
+  tabelas para matrizes/contratos e detalhes progressivos para material
+  extenso. Encurte redundância, sem apagar contratos, riscos, tasks, provas
+  ou fatos recuperados para caber no layout.
+- Arquitetura material usa SVG inline conectado de BC-012/014. Repare nós,
+  arestas dirigidas, nomes, labels de dados/contratos, fronteiras, estados
+  textuais, `role="img"`/nome/descrição e equivalente legível. Faça o desenho
+  explicar relações sustentadas pela fonte, sem inventar topologia,
+  capacidade ou detalhe operacional. Cartões ou setas tipográficas sozinhos
+  não substituem o SVG material; uma ausência real recebe BC-015.
+- Preserve identidade selecionada e tokens do template, fonte de sistema,
+  CSS/JS/SVG/asset autorizado inline e título `h1` único. Corrija hero
+  desproporcional, título/chrome competindo com o conteúdo, alinhamento e
+  contraste conforme a leitura disponível. Nenhuma quantidade fixa de
+  cards, desenhos ou palavras prova qualidade.
+- Preserve as oito abas e um painel principal por vez em tela, também sem
+  JS. Radios nativos permanecem focáveis, labels mostram seleção/foco,
+  teclado e alvos de coverage funcionam, hash abre o painel correto com
+  JS e targets mostram aba/bloco em texto sem JS. Print pode exibir todas.
+- Observe desktop 1280×800 e mobile 390×844, foco/teclado, redução de movimento
+  e impressão no ambiente suportado. Cards se reorganizam; tabelas/SVG
+  largos rolam localmente, sem overflow horizontal do documento. Faça o
+  cabeçalho permitir acesso ao conteúdo na tela inicial.
 
-Use only the lenses material to the case, and name why each is material or not:
+Inspecione enquanto corrige e restaure os fatos se um ajuste visual os
+enfraqueceu. Se encontrar nova omissão disponível na fonte durante este
+mandato, recupere-a no mesmo HTML e atualize coverage; não transforme isso
+em rerun obrigatório de B/conteúdo, retorno a A ou terceira validação.
+Confirme a relação entre desenho, texto e dados recuperados; não declare
+qualidade só porque o DOM é estruturalmente válido.
 
-- executive decision: purpose, perimeter, trade-off and next action are
-  recoverable without reopening Markdown;
-- narrative: thesis and pillars are a faithful synthesis rather than a generic
-  route preamble;
-- architecture/operations: topology, surface status, quantity and zoom (or a
-  proportional N/A/discovery) do not manufacture detail;
-- visual and access experience: the chosen route presentation helps the
-  decision and does not make colour, a diagram or a polished shell its only
-  carrier;
-- trust: source, locator, limitation and lifecycle remain visible enough to
-  challenge a claim.
+Ausência real mantém locator, efeito na decisão e owner/caminho fornecidos
+por BC-015. Limite de ambiente informa a observação não feita. Não remova
+uma aba para esconder dúvida nem invente autoridade, origem, baseline ou
+evidence. A inspeção para terminar reparos pertence a esta skill e não é
+uma aprovação dos próprios bytes.
 
-For a rendered desktop brief, visit each of its eight route URLs rather than
-reviewing source order or a single landing view. Treat untouched scaffold prose
-as a material `REVISE` finding when it remains stakeholder-visible: a polished
-architecture or task dossier does not compensate for generic impact,
-validation, evolution, decision or coverage content. The finding is about the
-lost source-specific decision surface, never a rule that every route needs a
-fixed visual form or amount of copy.
+## Relato final e fechamento
 
-Apply that test to editorial claims, explanations and diagrams—not to stable
-interaction/lifecycle chrome. Repeated tab names, accessibility affordances,
-fixed provenance marks and an honest common gate-false status are permitted
-when they make no initiative-specific claim. Their adjacent explanatory copy
-must still let a stakeholder understand the consequence in this initiative.
+Registre em evidência/estado existente ou relato: A/B, referência e esforço
+efetivo por mandato, snapshot intacto, contexto de browser/abas abertas,
+reparos visuais e fatos preservados/recuperados, limites, HTML/path/digest
+final. Complete `brief_repair.visual.{actor,effective_effort,execution_ref,
+completed_at,status}` e `rendered_sha256` quando esse bloco existir.
 
-For every material finding, provide request/source/map/artifact locators, the
-lost or invented fact, decision impact, canonical recovery action and the
-originating reviewer needed after repair. `APPROVE` and `REVISE` are human/
-agentic evidence, never a deterministic program conclusion.
+Encerre com `completed`, `completed_with_source_limitations` ou `incomplete`
+(BC-020/025). Depois de B/conteúdo → B/visual, o relato termina a operação:
+sem reapproval, mandatório rerun factual ou terceiro avaliador/skill de
+validação. Conclusão não é `approve`, task done, aprovação de evidência,
+`Tasks Ready` ou autorização de produto. Mantenha o evaluator da mudança
+de implementação distinto dos bytes que ele julga.
 
-## Boundaries
+## Histórico 1/2 — somente quando selecionado
 
-- Do not edit HTML, Markdown, fixtures, CSS or scripts during the assessment.
-- Do not demand a universal SVG, card grid, quantity, frontend view or prose
-  length.
-- A structurally valid artifact can still receive `REVISE` for shallow,
-  misleading or unsupported explanation.
-- A missing material fact must state the missing fact and decision impact. When
-  the source supports a discovery owner/path, require both; when it does not,
-  require the artifact to say explicitly that owner/path are not established.
-  “To be confirmed” without this distinction is insufficient.
+BC-002 preserva o lifecycle 1. Em 2 explícito, esta skill executa pass (a)
+de BC-009, review de modelo/construção antes da projeção. Reviewer distinto
+do compositor/builder lê solicitação, fontes, `brief-model.yaml` e plano
+de validação; não edita modelo/HTML/CSS durante essa avaliação.
 
-## Output
+Examine tese/audiência, rotas selecionadas BC-007/022, relações materiais,
+forma e razão, componentes, limitações e fechamento. Lentes proporcionais
+incluem decisão, narrativa, arquitetura/operação, experiência e confiança.
+Registre locators/digests, materialidade, finding/perda/invenção, impacto,
+recovery canônico e reviewer de origem. `APPROVE` permite somente projeção;
+`REVISE` retorna à composição/re-review. Pass (b) posterior é o rendered
+review de BC-009, com rotas selecionadas em loopback BC-016 e sem editar
+durante avaliação; untouched scaffold material exige `REVISE`.
 
-Write an evaluation report with reviewer identity, reviewed inputs/locators,
-lens materiality, findings, verdict, residual risk and next safe action. An
-approval permits the State Keeper to move the task through its normal evidence
-gate; it never lets the reviewer mark it done.
+Não confunda esse reviewer histórico com o reparador 3 ou com aprovação de
+task/evidence. BC-015/017 preservam limites/exceções históricos e nenhum
+verdict permite ao reviewer marcar a própria task done.

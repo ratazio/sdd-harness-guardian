@@ -2,8 +2,8 @@
 """Validate the deterministic part of a consumer stakeholder-brief contract.
 
 This script deliberately does not score prose, render screenshots, or decide
-whether a stakeholder brief is useful.  Those remain independent human review
-responsibilities at the Human Visibility gate.
+whether a stakeholder brief is useful. Contract 3 performs qualitative work
+inside its two repair skills; historical contracts retain independent review.
 """
 
 from __future__ import annotations
@@ -21,8 +21,14 @@ from pathlib import Path
 from brief_v2_sources import V2_EVIDENCE_REFERENCE_SOURCES, V2_REQUIRED_SOURCES, V2_SUPPORT_SOURCES
 from brief_review import yaml_review_finding_outcome
 from render_stakeholder_brief import lifecycle_error
+from validate_bundle import brief_contract_lineage
 from architecture_visual_contract import architecture_visual_errors
 from editorial_exceptions import composition_editorial_findings, reviewed_editorial_exception_error
+from brief_v3_contract import (
+    structural_errors as v3_structural_errors, repair_metadata,
+    snapshot_errors as v3_snapshot_errors, completion_errors as v3_completion_errors,
+    CORE_MD as V3_REQUIRED_SOURCES,
+)
 
 V1_REQUIRED_SOURCES = ("spec.md", "impact-map.md", "plan.md", "validation-plan.md")
 V1_REQUIRED_SECTION_IDS = ("decision-snapshot", "scope", "validation", "decision")
@@ -223,11 +229,19 @@ class BriefParser(HTMLParser):
 
 
 def brief_lineage(html: str) -> str | None:
-    marker = re.search(r'\bdata-harness-brief-design\s*=\s*["\'](v1|v2)["\']', html)
-    return marker.group(1) if marker else None
+    """Version-aware v1/v2/v3 lineage read (BC-002).
+
+    Delegates to `validate_bundle.brief_contract_lineage`, the single place
+    that knows both the unified `data-brief-contract` axis and the legacy
+    three-axis combination it replaces, so a historical brief's bytes keep
+    reading correctly under its own recorded contract (NG-004, FR-015).
+    """
+    return brief_contract_lineage(html)
 
 
 def required_sources(lineage: str) -> tuple[str, ...]:
+    if lineage == "v3":
+        return V3_REQUIRED_SOURCES
     return V2_REQUIRED_SOURCES if lineage == "v2" else V1_REQUIRED_SOURCES
 
 
@@ -1290,8 +1304,14 @@ def check_brief(initiative: Path, report: Report, not_applicable: bool) -> str |
         )
     html = brief.read_text(encoding="utf-8")
     lineage = brief_lineage(html)
+    if lineage == "v3":
+        report.structural.extend(v3_structural_errors(html, rendered=True))
+        return lineage
     if lineage is None:
-        report.structural.append("missing stakeholder brief design-lineage marker: data-harness-brief-design=\"v1\" or \"v2\"")
+        report.structural.append(
+            "missing stakeholder brief version axis: data-brief-contract=\"1\"|\"2\"|\"3\" "
+            "or legacy data-harness-brief-design=\"v1\"|\"v2\""
+        )
         return None
     for section_id in (V2_REQUIRED_SECTION_IDS if lineage == "v2" else V1_REQUIRED_SECTION_IDS):
         if not re.search(rf'\bid\s*=\s*["\']{re.escape(section_id)}["\']', html):
@@ -1473,6 +1493,8 @@ def write_baseline(initiative: Path, root: Path) -> None:
     lineage = brief_lineage(brief.read_text(encoding="utf-8"))
     if lineage is None:
         raise ValueError("cannot write freshness baseline; missing stakeholder brief design-lineage marker")
+    if lineage == "v3":
+        raise ValueError("--write-baseline is historical contract 1/2 only; contract 3 keeps Markdown snapshots in brief_repair")
     sources = required_sources(lineage)
     missing = [name for name in sources if not (initiative / name).is_file()]
     if missing:
@@ -1500,6 +1522,32 @@ def validate(initiative: Path, root: Path, base_ref: str | None, *, skip_freshne
     report = Report()
     if not initiative.is_dir():
         report.structural.append(f"initiative path does not exist: {initiative}")
+        return report
+    brief = initiative / "stakeholder-brief.html"
+    if brief.is_file() and brief_lineage(brief.read_text(encoding="utf-8")) == "v3":
+        # Contract 3 has already performed its qualitative work inside B's two
+        # repair skills. This optional utility checks recorded facts only;
+        # legacy Human Visibility, model, review and evidence gates do not run.
+        report.human_review = [
+            "Contract 3 ends with content repair, visual repair and report; this mechanical utility adds no review or approval.",
+            "Execution references record executor evidence; populated strings do not verify native configuration or semantic completeness.",
+        ]
+        html = brief.read_bytes().decode("utf-8")
+        report.structural.extend(v3_structural_errors(html, rendered=True))
+        state_path = initiative / "run-state.yaml"
+        if not state_path.is_file():
+            report.structural.append("contract 3 requires run-state.yaml operational metadata")
+            return report
+        state = state_path.read_bytes().decode("utf-8")
+        if yaml_scalar(state, "brief_phase", indent=0) != "rendered" or yaml_scalar(state, "brief_lineage", indent=0) != "v3":
+            report.structural.append("contract 3 requires rendered brief_phase and v3 brief_lineage")
+        try:
+            metadata = repair_metadata(state)
+            report.gate.extend(v3_completion_errors(metadata, html))
+            if not skip_freshness:
+                report.freshness.extend(v3_snapshot_errors(initiative, metadata, html))
+        except (OSError, ValueError) as error:
+            report.structural.append(str(error))
         return report
     exception_scope = approved_exception(initiative, report)
     check_gate_state(initiative, report)
@@ -1547,7 +1595,11 @@ def main() -> int:
     if report.failures:
         print(f"\nRESULT: FAIL ({len(report.failures)} deterministic failure(s))")
         return 1
-    print("\nRESULT: PASS (deterministic design/structure contract only; independent review still required)")
+    lineage = brief_lineage((initiative / "stakeholder-brief.html").read_text(encoding="utf-8")) if (initiative / "stakeholder-brief.html").is_file() else None
+    if lineage == "v3":
+        print("\nRESULT: PASS (contract 3 mechanical consistency only; no additional semantic review or approval)")
+    else:
+        print("\nRESULT: PASS (deterministic design/structure contract only; independent review still required)")
     return 0
 
 
